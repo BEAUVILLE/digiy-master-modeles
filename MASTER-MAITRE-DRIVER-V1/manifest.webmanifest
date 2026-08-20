@@ -1,0 +1,14 @@
+{
+  "name": "DIGIY DRIVER · MASTER MAÎTRE",
+  "short_name": "DIGIY DRIVER",
+  "description": "Master universel DIGIYLYFE pour chauffeurs privés, transferts et transport sur réservation.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07140f",
+  "theme_color": "#07140f",
+  "icons": [
+    {"src":"./icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
