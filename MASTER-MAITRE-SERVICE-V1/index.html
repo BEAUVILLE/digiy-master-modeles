@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DIGIY SERVICE · MASTER MAÎTRE UNIVERSAL</title>
+<meta name="description" content="MASTER MAÎTRE DIGIY SERVICE · modèle universel pour prestations, beauté, bien-être et services sur rendez-vous.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#4d365c">
+<meta name="digiy-master" content="SERVICE-UNIVERSAL-V1-20260820">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<style>
+:root{
+  --accent:#4d365c;--accent2:#76568b;--gold:#d8ad46;--cream:#f7f3ec;--paper:#fffefa;
+  --ink:#35293b;--muted:#7b6f80;--line:#e7dfe9;--soft:#f1eaf4;
+  --shadow:0 12px 28px rgba(77,54,92,.10)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--cream);color:var(--ink)}
+a{text-decoration:none;color:inherit}button{font:inherit}
+.wrap{width:min(1040px,calc(100% - 24px));margin:auto}
+header{background:var(--accent);color:#fff;border-bottom:4px solid var(--gold);padding:16px 0 18px}
+.headtop{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.brandmark{font-size:30px}.brand{font-weight:1000;font-size:24px}.sub{font-size:11px;color:#efe5c2;margin-top:4px}
+.master{border:1px solid var(--gold);border-radius:999px;padding:8px 11px;color:#f2d77e;font-size:10px;font-weight:1000;text-align:center;white-space:nowrap}
+.nav,.langs{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.nav a,.langs button{border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;border-radius:999px;padding:7px 10px;font-size:9px;font-weight:900;cursor:pointer}
+.langs button{background:#fffefa;color:var(--accent);border-color:#e7dfe9}.langs button.active{background:var(--gold);border-color:var(--gold)}
+.join{margin-top:11px;display:flex;justify-content:space-between;gap:12px;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(216,173,70,.55);border-radius:14px;padding:10px 11px}
+.join div{display:flex;flex-direction:column;gap:2px}.join strong{font-size:11px}.join span{font-size:9px;color:#eee7d4}
+.join a{background:var(--gold);color:var(--accent);border-radius:999px;padding:9px 12px;font-size:9px;font-weight:1000;text-align:center}.disabled{opacity:.5;pointer-events:none}
+main{padding:18px 0 42px}
+.hero{display:flex;align-items:center;gap:11px;margin-bottom:11px}.hero .ico{width:42px;height:42px;background:var(--soft);border-radius:50%;display:grid;place-items:center;font-size:20px}
+.hero h1{font-size:21px;margin:0}.hero p{font-size:11px;color:var(--muted);margin:3px 0 0}
+.doctrine{background:#fff8df;border:1px solid #ead28a;border-left:4px solid var(--gold);border-radius:12px;padding:11px 12px;font-size:10px;line-height:1.45;color:#5e5124;margin-bottom:12px}
+.doctrine strong{display:block;color:var(--accent);font-size:11px;margin-bottom:4px}
+.master-note{background:var(--ink);color:#fff;border-radius:13px;padding:10px 12px;margin-bottom:12px;font-size:10px;line-height:1.45}.master-note b{color:#f2d77e}
+.empty{padding:28px;border:2px dashed #cdbfd2;border-radius:16px;text-align:center;color:var(--muted);background:#fffefa;font-weight:800}
+.listing{display:grid;grid-template-columns:34% 66%;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:12px 0;box-shadow:var(--shadow)}
+.visual{position:relative;display:block;min-height:430px;background:linear-gradient(145deg,#eee6f0,#d8c7df);overflow:hidden}
+.visual img{width:100%;height:100%;object-fit:cover;display:block}.visual-placeholder{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;font-weight:1000;color:var(--accent);background:linear-gradient(145deg,#f4eef6,#e5d9ea)}
+.visual-hint{position:absolute;bottom:8px;left:7px;right:7px;background:rgba(77,54,92,.92);color:#fff;border-radius:999px;padding:7px 6px;text-align:center;font-size:8px;font-weight:1000}
+.info{padding:13px 12px}.eyebrow{color:var(--gold);font-size:8px;font-weight:1000;letter-spacing:.8px;margin:0 0 4px}
+h2{font-size:19px;margin:0;color:var(--accent);line-height:1.08}.activity{font-size:10px;color:var(--muted);margin:4px 0}
+.area{display:inline-block;background:var(--soft);border-radius:999px;padding:5px 7px;font-size:8px;font-weight:900}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 6px}.chip{font-size:8px;background:#f5f0f6;border:1px solid var(--line);border-radius:999px;padding:5px 6px;font-weight:800}
+.desc,.rule{font-size:9px;line-height:1.4;color:var(--muted);margin:6px 0}.rule{border-left:2px solid var(--gold);padding-left:7px}
+.pricegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:9px 0}
+.pricebox{border:1px solid var(--line);border-radius:10px;padding:7px;background:#fbf8fc}.pricebox small{display:block;color:var(--muted);font-size:7px;font-weight:800}.pricebox strong{display:block;color:var(--accent);font-size:9px;margin-top:2px}
+.media-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:8px 0}
+.media-card{aspect-ratio:1/1;border-radius:9px;overflow:hidden;background:var(--soft);position:relative;border:1px solid var(--line)}
+.media-card img{width:100%;height:100%;object-fit:cover}.media-placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:4px;font-size:7px;font-weight:900;color:var(--accent)}
+.qrrow{display:flex;gap:8px;align-items:center;background:#f3edf5;border-radius:10px;padding:8px}.qr{width:58px;height:58px;background:white;border-radius:6px;object-fit:contain}
+.qr-placeholder{width:58px;height:58px;background:#fff;border:2px dashed #cbbdd0;border-radius:6px;display:grid;place-items:center;font-size:8px;font-weight:1000;color:var(--muted);text-align:center}
+.qrrow div:last-child{display:flex;flex-direction:column;gap:3px}.qrrow strong{font-size:9px}.qrrow span{font-size:8px;color:var(--muted);line-height:1.25}
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}.btn{border-radius:999px;padding:9px 8px;text-align:center;font-size:9px;font-weight:1000}
+.primary{background:var(--accent);color:#fff}.secondary{border:1px solid var(--accent2);color:var(--accent2);background:#fff}.whatsapp{border:1px solid #1d8b57;color:#1d8b57;background:#fff}
+.footer{text-align:center;color:var(--muted);font-size:9px;padding:20px 5px 4px;line-height:1.5}.footer b{color:var(--accent)}
+html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .doctrine{border-left:1px solid #ead28a;border-right:4px solid var(--gold)}html[dir="rtl"] .rule{border-left:0;border-right:2px solid var(--gold);padding-left:0;padding-right:7px}
+@media(min-width:651px){
+  main{padding-top:24px}.listing{border-radius:20px}.visual{min-height:470px}.info{padding:19px}h2{font-size:26px}.activity{font-size:13px}.area{font-size:11px}.chip{font-size:11px;padding:6px 9px}.desc,.rule{font-size:12px}
+  .pricebox small{font-size:9px}.pricebox strong{font-size:12px}.qr,.qr-placeholder{width:76px;height:76px}.qrrow strong{font-size:12px}.qrrow span{font-size:11px}.btn{font-size:11px;padding:11px}.doctrine,.master-note{font-size:11px}.hero h1{font-size:24px}.hero p{font-size:13px}
+}
+@media(max-width:600px){
+  .master{font-size:8px;padding:7px 8px}.join{align-items:flex-start;flex-direction:column}.join a{width:100%}.listing{grid-template-columns:35% 65%}.visual{min-height:430px}.info{padding:9px 8px}.actions{grid-template-columns:1fr}.brand{font-size:21px}.langs{gap:5px}.langs button{padding:6px 8px}.wrap{width:min(100% - 16px,1040px)}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+  <div class="headtop">
+    <div><div class="brandmark">✨</div><div class="brand" id="brand">DIGIY SERVICE</div><div class="sub" data-i18n="sub">Prestations · rendez-vous · contact direct</div></div>
+    <div class="master">MASTER MAÎTRE<br>NE PAS PUBLIER TEL QUEL</div>
+  </div>
+  <div class="nav"><a id="hubLink" href="#" class="disabled">🌍 DIGIYLYFE</a><a href="#professionals">✨ SERVICE</a></div>
+  <div class="langs" id="langs"></div>
+  <div class="join"><div><strong data-i18n="joinq">Vous proposez un service ?</strong><span data-i18n="jointext">Rejoignez DIGIYLYFE et préparez votre présence numérique.</span></div><a id="joinLink" href="#" class="disabled" data-i18n="join">DEMANDE D’ADHÉSION</a></div>
+</div>
+</header>
+
+<main class="wrap">
+  <section class="hero"><div class="ico">🤝</div><div><h1 data-i18n="title">DIGIY SERVICE · ADHÉRENTS</h1><p id="territoryLine" data-i18n="subtitle">Services locaux · Rendez-vous direct · Paiement direct</p></div></section>
+  <div class="doctrine"><strong>🛡️ <span data-i18n="role">RÔLE DE DIGIYLYFE</span></strong><span data-i18n="doctrine">DIGIYLYFE publie la présence numérique de ses adhérents. Chaque professionnel reste responsable de son activité, de ses obligations, de ses disponibilités, de ses tarifs, de ses produits, de ses précautions et de la prestation qu’il accepte. DIGIYLYFE ne réalise pas la prestation, ne certifie pas le professionnel et ne perçoit pas le paiement de la prestation.</span></div>
+  <div class="master-note"><b>MASTER UNIVERSAL :</b> <span data-i18n="masterNote">le pays, la ville, la devise, les couleurs et les professionnels sont des paramètres. Les blocs médias, produits et tarifs sont optionnels.</span></div>
+  <section id="professionals"></section>
+  <footer class="footer"><b>DIGIYLYFE · MASTER MAÎTRE SERVICE</b><br><span data-i18n="footer">Présence directe · 0 % commission · Le savoir-faire pour le savoir-être.</span></footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+const CFG = {
+  brand: "DIGIY SERVICE",
+  territory: "[VILLE · RÉGION · PAYS]",
+  currency: "[DEVISE]",
+  accent: "#4d365c",
+  accent2: "#76568b",
+  hubUrl: "",
+  joinUrl: "",
+  showLanguages: true,
+  professionals: [
+    {
+      name: "[NOM DU PROFESSIONNEL / ÉTABLISSEMENT]",
+      activity: "[ACTIVITÉ · EX. BEAUTÉ / COIFFURE / PHOTO / BIEN-ÊTRE]",
+      area: "[ZONE / ADRESSE GÉNÉRALE]",
+      tags: ["[SERVICE 1]","[SERVICE 2]","[SERVICE 3]","[SERVICE 4]"],
+      description: "[DESCRIPTION COURTE DU SAVOIR-FAIRE, DE L’ACCUEIL ET DES PRESTATIONS]",
+      rule: "Disponibilité, rendez-vous, durée, précautions, produits utilisés et montant final : accord direct avec le professionnel, sous sa responsabilité.",
+      phoneDisplay: "[TÉLÉPHONE]",
+      whatsapp: "",
+      bookingMessage: "Bonjour, je souhaite prendre rendez-vous.",
+      cardUrl: "",
+      image: "",
+      qrImage: "",
+      prices: [
+        {label:"[PRESTATION 1]", value:"[PRIX / SUR DEMANDE]"},
+        {label:"[PRESTATION 2]", value:"[PRIX / SUR DEMANDE]"}
+      ],
+      media: [
+        {image:"", label:"[RÉALISATION / PHOTO 1]"},
+        {image:"", label:"[RÉALISATION / PHOTO 2]"},
+        {image:"", label:"[RÉALISATION / PHOTO 3]"}
+      ]
+    }
+  ]
+};
+
+const I18N = {
+fr:{sub:"Prestations · rendez-vous · contact direct",joinq:"Vous proposez un service ?",jointext:"Rejoignez DIGIYLYFE et préparez votre présence numérique.",join:"DEMANDE D’ADHÉSION",title:"DIGIY SERVICE · ADHÉRENTS",subtitle:"Services locaux · Rendez-vous direct · Paiement direct",role:"RÔLE DE DIGIYLYFE",doctrine:"DIGIYLYFE publie la présence numérique de ses adhérents. Chaque professionnel reste responsable de son activité, de ses obligations, de ses disponibilités, de ses tarifs, de ses produits, de ses précautions et de la prestation qu’il accepte. DIGIYLYFE ne réalise pas la prestation, ne certifie pas le professionnel et ne perçoit pas le paiement de la prestation.",masterNote:"le pays, la ville, la devise, les couleurs et les professionnels sont des paramètres. Les blocs médias, produits et tarifs sont optionnels.",member:"ADHÉRENT DIGIYLYFE",card:"VOIR LA CARTE",call:"APPELER",book:"RENDEZ-VOUS WHATSAPP",qr:"QR · CARTE DIGIYLYFE",qrText:"Scannez pour ouvrir et conserver cette présence DIGIYLYFE.",prices:"TARIFS INDICATIFS",media:"RÉALISATIONS",footer:"Présence directe · 0 % commission · Le savoir-faire pour le savoir-être.",empty:"Ajoutez les professionnels dans CFG.professionals."},
+en:{sub:"Services · appointments · direct contact",joinq:"Do you provide a service?",jointext:"Join DIGIYLYFE and prepare your digital presence.",join:"MEMBERSHIP REQUEST",title:"DIGIY SERVICE · MEMBERS",subtitle:"Local services · Direct appointments · Direct payment",role:"DIGIYLYFE ROLE",doctrine:"DIGIYLYFE publishes the digital presence of its members. Each professional remains responsible for their activity, obligations, availability, prices, products, precautions and accepted service. DIGIYLYFE does not perform the service, certify the professional or collect payment for the service.",masterNote:"country, city, currency, colours and professionals are parameters. Media, product and price blocks are optional.",member:"DIGIYLYFE MEMBER",card:"VIEW CARD",call:"CALL",book:"BOOK ON WHATSAPP",qr:"QR · DIGIYLYFE CARD",qrText:"Scan to open and keep this DIGIYLYFE presence.",prices:"INDICATIVE PRICES",media:"WORK",footer:"Direct presence · 0% commission · Know-how for a better way of being.",empty:"Add professionals in CFG.professionals."},
+es:{sub:"Servicios · citas · contacto directo",joinq:"¿Ofreces un servicio?",jointext:"Únete a DIGIYLYFE y prepara tu presencia digital.",join:"SOLICITUD DE ADHESIÓN",title:"DIGIY SERVICE · MIEMBROS",subtitle:"Servicios locales · Citas directas · Pago directo",role:"PAPEL DE DIGIYLYFE",doctrine:"DIGIYLYFE publica la presencia digital de sus miembros. Cada profesional sigue siendo responsable de su actividad, obligaciones, disponibilidad, precios, productos, precauciones y servicio aceptado. DIGIYLYFE no presta el servicio, no certifica al profesional ni cobra el pago del servicio.",masterNote:"país, ciudad, moneda, colores y profesionales son parámetros. Los bloques de medios, productos y precios son opcionales.",member:"MIEMBRO DIGIYLYFE",card:"VER TARJETA",call:"LLAMAR",book:"CITA POR WHATSAPP",qr:"QR · TARJETA DIGIYLYFE",qrText:"Escanea para abrir y guardar esta presencia DIGIYLYFE.",prices:"PRECIOS INDICATIVOS",media:"TRABAJOS",footer:"Presencia directa · 0% comisión · El saber hacer para el saber ser.",empty:"Añade profesionales en CFG.professionals."},
+pt:{sub:"Serviços · marcações · contacto direto",joinq:"Presta um serviço?",jointext:"Adira à DIGIYLYFE e prepare a sua presença digital.",join:"PEDIDO DE ADESÃO",title:"DIGIY SERVICE · MEMBROS",subtitle:"Serviços locais · Marcações diretas · Pagamento direto",role:"PAPEL DA DIGIYLYFE",doctrine:"A DIGIYLYFE publica a presença digital dos seus membros. Cada profissional continua responsável pela sua atividade, obrigações, disponibilidade, preços, produtos, precauções e serviço aceite. A DIGIYLYFE não presta o serviço, não certifica o profissional nem recebe o pagamento do serviço.",masterNote:"país, cidade, moeda, cores e profissionais são parâmetros. Os blocos de média, produtos e preços são opcionais.",member:"MEMBRO DIGIYLYFE",card:"VER CARTÃO",call:"LIGAR",book:"MARCAR NO WHATSAPP",qr:"QR · CARTÃO DIGIYLYFE",qrText:"Digitalize para abrir e guardar esta presença DIGIYLYFE.",prices:"PREÇOS INDICATIVOS",media:"TRABALHOS",footer:"Presença direta · 0% comissão · Saber fazer para saber ser.",empty:"Adicione profissionais em CFG.professionals."},
+it:{sub:"Servizi · appuntamenti · contatto diretto",joinq:"Offri un servizio?",jointext:"Aderisci a DIGIYLYFE e prepara la tua presenza digitale.",join:"RICHIESTA DI ADESIONE",title:"DIGIY SERVICE · MEMBRI",subtitle:"Servizi locali · Appuntamenti diretti · Pagamento diretto",role:"RUOLO DI DIGIYLYFE",doctrine:"DIGIYLYFE pubblica la presenza digitale dei suoi membri. Ogni professionista resta responsabile della propria attività, obblighi, disponibilità, prezzi, prodotti, precauzioni e servizio accettato. DIGIYLYFE non esegue il servizio, non certifica il professionista e non incassa il pagamento del servizio.",masterNote:"paese, città, valuta, colori e professionisti sono parametri. I blocchi media, prodotti e prezzi sono opzionali.",member:"MEMBRO DIGIYLYFE",card:"VEDI CARTA",call:"CHIAMA",book:"APPUNTAMENTO WHATSAPP",qr:"QR · CARTA DIGIYLYFE",qrText:"Scansiona per aprire e conservare questa presenza DIGIYLYFE.",prices:"PREZZI INDICATIVI",media:"LAVORI",footer:"Presenza diretta · 0% commissione · Il saper fare per il saper essere.",empty:"Aggiungi professionisti in CFG.professionals."},
+de:{sub:"Dienstleistungen · Termine · direkter Kontakt",joinq:"Bieten Sie eine Dienstleistung an?",jointext:"Werden Sie Mitglied bei DIGIYLYFE und bereiten Sie Ihre digitale Präsenz vor.",join:"MITGLIEDSANTRAG",title:"DIGIY SERVICE · MITGLIEDER",subtitle:"Lokale Dienste · Direkte Termine · Direkte Zahlung",role:"ROLLE VON DIGIYLYFE",doctrine:"DIGIYLYFE veröffentlicht die digitale Präsenz seiner Mitglieder. Jeder Anbieter bleibt für Tätigkeit, Pflichten, Verfügbarkeit, Preise, Produkte, Vorsichtsmaßnahmen und angenommene Leistung verantwortlich. DIGIYLYFE erbringt die Leistung nicht, zertifiziert den Anbieter nicht und nimmt keine Zahlung für die Leistung entgegen.",masterNote:"Land, Stadt, Währung, Farben und Anbieter sind Parameter. Medien-, Produkt- und Preisblöcke sind optional.",member:"DIGIYLYFE MITGLIED",card:"KARTE ANSEHEN",call:"ANRUFEN",book:"TERMIN PER WHATSAPP",qr:"QR · DIGIYLYFE KARTE",qrText:"Scannen, um diese DIGIYLYFE Präsenz zu öffnen und zu speichern.",prices:"RICHTPREISE",media:"ARBEITEN",footer:"Direkte Präsenz · 0% Provision · Können für ein gutes Miteinander.",empty:"Fügen Sie Anbieter in CFG.professionals hinzu."},
+nl:{sub:"Diensten · afspraken · direct contact",joinq:"Biedt u een dienst aan?",jointext:"Word lid van DIGIYLYFE en bouw uw digitale aanwezigheid.",join:"LIDMAATSCHAPSAANVRAAG",title:"DIGIY SERVICE · LEDEN",subtitle:"Lokale diensten · Directe afspraken · Directe betaling",role:"ROL VAN DIGIYLYFE",doctrine:"DIGIYLYFE publiceert de digitale aanwezigheid van zijn leden. Elke professional blijft verantwoordelijk voor activiteit, verplichtingen, beschikbaarheid, prijzen, producten, voorzorgsmaatregelen en aanvaarde dienst. DIGIYLYFE voert de dienst niet uit, certificeert de professional niet en ontvangt geen betaling voor de dienst.",masterNote:"land, stad, valuta, kleuren en professionals zijn parameters. Media-, product- en prijsblokken zijn optioneel.",member:"DIGIYLYFE LID",card:"BEKIJK KAART",call:"BELLEN",book:"AFSPRAAK VIA WHATSAPP",qr:"QR · DIGIYLYFE KAART",qrText:"Scan om deze DIGIYLYFE aanwezigheid te openen en bewaren.",prices:"INDICATIEVE PRIJZEN",media:"WERK",footer:"Directe aanwezigheid · 0% commissie · Vakmanschap voor menselijkheid.",empty:"Voeg professionals toe in CFG.professionals."},
+ar:{sub:"خدمات · مواعيد · تواصل مباشر",joinq:"هل تقدم خدمة؟",jointext:"انضم إلى DIGIYLYFE وجهّز حضورك الرقمي.",join:"طلب الانضمام",title:"DIGIY SERVICE · الأعضاء",subtitle:"خدمات محلية · مواعيد مباشرة · دفع مباشر",role:"دور DIGIYLYFE",doctrine:"تنشر DIGIYLYFE الحضور الرقمي لأعضائها. يبقى كل مهني مسؤولاً عن نشاطه والتزاماته وتوفره وأسعاره ومنتجاته واحتياطاته والخدمة التي يقبلها. لا تنفذ DIGIYLYFE الخدمة ولا تصادق على المهني ولا تستلم ثمن الخدمة.",masterNote:"الدولة والمدينة والعملة والألوان والمهنيون إعدادات قابلة للتغيير. أقسام الوسائط والمنتجات والأسعار اختيارية.",member:"عضو DIGIYLYFE",card:"عرض البطاقة",call:"اتصال",book:"موعد عبر واتساب",qr:"QR · بطاقة DIGIYLYFE",qrText:"امسح لفتح وحفظ حضور DIGIYLYFE.",prices:"أسعار إرشادية",media:"الأعمال",footer:"حضور مباشر · 0% عمولة · الخبرة لخدمة الإنسان.",empty:"أضف المهنيين في CFG.professionals."}
+};
+
+const langOrder=["fr","en","es","pt","it","de","nl","ar"];
+let lang="fr";
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+const onlyDigits=s=>String(s||"").replace(/\D/g,"");
+
+function applyTheme(){
+  document.documentElement.style.setProperty("--accent",CFG.accent||"#4d365c");
+  document.documentElement.style.setProperty("--accent2",CFG.accent2||"#76568b");
+}
+function linkState(el,url){
+  if(!el)return;
+  if(url){el.href=url;el.classList.remove("disabled")} else {el.href="#";el.classList.add("disabled")}
+}
+function renderLangs(){
+  const box=document.getElementById("langs");
+  box.innerHTML="";
+  if(!CFG.showLanguages){box.hidden=true;return}
+  langOrder.forEach(code=>{
+    const b=document.createElement("button");
+    b.type="button"; b.textContent=code.toUpperCase(); b.dataset.lang=code;
+    if(code===lang)b.classList.add("active");
+    b.addEventListener("click",()=>setLang(code));
+    box.appendChild(b);
+  });
+}
+function t(key){return (I18N[lang]&&I18N[lang][key])||I18N.fr[key]||key}
+function setLang(code){
+  lang=I18N[code]?code:"fr";
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(t(k))el.textContent=t(k)});
+  document.querySelectorAll(".langs button").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang));
+  document.getElementById("territoryLine").textContent=t("subtitle")+" · "+CFG.territory;
+  renderProfessionals();
+}
+function mediaHTML(items){
+  if(!Array.isArray(items)||!items.length)return "";
+  return `<div class="eyebrow">${esc(t("media"))}</div><div class="media-strip">${items.slice(0,3).map(m=>`
+    <div class="media-card">${m.image?`<img src="${esc(m.image)}" alt="${esc(m.label||"")}">`:`<div class="media-placeholder">${esc(m.label||"[MÉDIA]")}</div>`}</div>`).join("")}</div>`;
+}
+function pricesHTML(items){
+  if(!Array.isArray(items)||!items.length)return "";
+  return `<div class="eyebrow">${esc(t("prices"))}</div><div class="pricegrid">${items.slice(0,4).map(p=>`
+    <div class="pricebox"><small>${esc(p.label)}</small><strong>${esc(p.value)}</strong></div>`).join("")}</div>`;
+}
+function renderProfessionals(){
+  const box=document.getElementById("professionals");
+  const pros=Array.isArray(CFG.professionals)?CFG.professionals:[];
+  if(!pros.length){box.innerHTML=`<div class="empty">${esc(t("empty"))}</div>`;return}
+  box.innerHTML=pros.map(p=>{
+    const phone=onlyDigits(p.phoneDisplay);
+    const wa=onlyDigits(p.whatsapp);
+    const waUrl=wa?`https://wa.me/${wa}?text=${encodeURIComponent(p.bookingMessage||"Bonjour, je souhaite prendre rendez-vous.")}`:"#";
+    return `<article class="listing">
+      <div class="visual">
+        ${p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}">`:`<div class="visual-placeholder">PHOTO / VISUEL<br>${esc(p.name)}</div>`}
+        <div class="visual-hint">${esc(p.activity)}</div>
+      </div>
+      <div class="info">
+        <div class="eyebrow">${esc(t("member"))}</div>
+        <h2>${esc(p.name)}</h2>
+        <div class="activity">${esc(p.activity)}</div>
+        <span class="area">${esc(p.area)}</span>
+        <div class="chips">${(p.tags||[]).map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>
+        <p class="desc">${esc(p.description)}</p>
+        <p class="rule">${esc(p.rule)}</p>
+        ${pricesHTML(p.prices)}
+        ${mediaHTML(p.media)}
+        <div class="qrrow">
+          ${p.qrImage?`<img class="qr" src="${esc(p.qrImage)}" alt="QR ${esc(p.name)}">`:`<div class="qr-placeholder">QR<br>DIGIY</div>`}
+          <div><strong>${esc(t("qr"))}</strong><span>${esc(t("qrText"))}</span></div>
+        </div>
+        <div class="actions">
+          <a class="btn primary ${p.cardUrl?"":"disabled"}" href="${p.cardUrl?esc(p.cardUrl):"#"}">${esc(t("card"))}</a>
+          <a class="btn secondary ${phone?"":"disabled"}" href="${phone?"tel:+"+phone:"#"}">${esc(t("call"))}</a>
+          <a class="btn whatsapp ${wa?"":"disabled"}" href="${waUrl}" target="_blank" rel="noopener">${esc(t("book"))}</a>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+function init(){
+  applyTheme();
+  document.getElementById("brand").textContent=CFG.brand;
+  linkState(document.getElementById("hubLink"),CFG.hubUrl);
+  linkState(document.getElementById("joinLink"),CFG.joinUrl);
+  renderLangs(); setLang("fr");
+  if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
+}
+init();
+})();
+</script>
+</body>
+</html>
