@@ -53,21 +53,33 @@ C'est le centre de configuration du moule.
 
 Les champs principaux sont :
 
+- `masterMode` : mode atelier ; reste à `true` tant que la déclinaison n'est pas validée ;
 - `name` : nom de l'hébergement ;
-- `type` : chambre, appartement, villa, maison, résidence, etc. ;
 - `city` et `country` ;
-- `tagline` ;
-- `pricePerNight` ;
-- `currency` ;
-- `secondaryPrice` et `secondaryCurrency` si nécessaire ;
+- `accommodationType` : chambre, appartement, villa, maison, résidence, etc. ;
+- `tagline` et `description` ;
+- `locale` ;
+- `currency` et `nightlyRate` ;
+- `secondaryCurrency` et `secondaryNightlyRate` si nécessaire ;
+- `maxGuests` ;
+- `checkIn` / `checkOut` ;
 - `whatsapp` ;
 - `email` ;
 - `address` ;
-- `paymentLabel` et `paymentDetails` ;
-- `maxGuests` ;
-- `checkIn` / `checkOut` ;
-- `photos` ;
-- `blockedDates` / `closedDates`.
+- `paymentTitle`, `paymentText`, `paymentBeneficiary`, `paymentInstruction` ;
+- `horizonDays` : nombre de jours futurs affichables dans le calendrier ;
+- `blockedDates` / `closedDates` ;
+- `features` ;
+- `photos`.
+
+## Calendrier
+
+Le calendrier part automatiquement de la date réelle du jour. **Aucune vieille date n'est affichée par construction.**
+
+- les dates passées sont désactivées automatiquement ;
+- la profondeur future est définie par `horizonDays` ;
+- les dates occupées sont placées dans `blockedDates` ;
+- les dates fermées sont placées dans `closedDates`.
 
 ## Règles absolues
 
@@ -80,6 +92,7 @@ Les champs principaux sont :
 7. Toujours créer une copie avant adaptation client.
 8. Le professionnel reste responsable de ses prix, disponibilités, conditions, obligations et confirmations.
 9. DIGIYLYFE ne perçoit pas le paiement du séjour et ne confirme pas la réservation à la place de l'hébergeur.
+10. Le MASTER reste en `noindex,nofollow` et en `masterMode:true` jusqu'à validation de la déclinaison.
 
 ## Déclinaison Sénégal
 
@@ -103,7 +116,8 @@ Adapter principalement : devise €, téléphone local, IBAN/virement/Sendwave o
 - formulaire ;
 - navigation mobile ;
 - texte 0 % commission ;
-- aucune donnée du client précédent.
+- aucune donnée du client précédent ;
+- retrait du mode atelier uniquement après validation humaine.
 
 ---
 
