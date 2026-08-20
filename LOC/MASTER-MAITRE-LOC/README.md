@@ -1,28 +1,64 @@
-# MASTER MAÎTRE LOC — V2
+# MASTER MAÎTRE LOC — V3 · ARCHITECTURE SARLAT
 
-Moule universel DIGIYLYFE pour hébergements et location directe. Aucun nom client, aucun domaine client, aucun téléphone réel, aucun prix réel et aucune date de disponibilité réelle ne sont conservés dans le MASTER.
+Ce MASTER reprend la logique validée de **SARLAT CHEZ BAPTISTE**.
 
-## Fonctionnement
-- hero et présentation du logement ;
-- galerie ;
-- calendrier **dynamique basé sur la date réelle du jour** ;
-- aucune vieille date codée en dur ;
-- dates occupées/fermées uniquement via `blockedDates` / `closedDates` ;
-- demande directe WhatsApp ou email ;
-- paiement direct au propriétaire/hébergeur ;
-- 0 % commission DIGIYLYFE ;
-- QR de l’instance ;
-- PWA légère.
+## Architecture
 
-## Langues
-FR · EN · ES · PT · IT · DE · NL · AR, avec RTL automatique pour l’arabe.
+### `index.html` — site public
+- vraie vitrine d’hébergement ;
+- galerie et informations ;
+- calendrier dynamique à partir de la date réelle ;
+- lecture publique du suivi Supabase ;
+- **Disponible** = aucune ligne pour le jour ;
+- `occupied` = Occupé ;
+- `closed` = Fermé ;
+- dates passées désactivées ;
+- demande directe au propriétaire ;
+- 0 % commission ;
+- paiement direct ;
+- 8 langues + RTL arabe ;
+- PWA ;
+- un seul bouton **Accès propriétaire** discret ;
+- ce bouton déclenche directement `signInWithOtp` depuis l’index ;
+- l’email envoyé contient le code ou le magic link selon le template Supabase ;
+- `emailRedirectTo` pointe vers `gestion.html`.
 
-## Configuration
-Renseigner `CFG` : identité, ville/pays, type d’hébergement, description, devise et prix si fournis, capacité, horaires, WhatsApp/email, adresse, moyen de paiement, équipements, photos et disponibilités. Les valeurs de prix sont volontairement neutres dans le coffre.
+### `gestion.html` — suivi propriétaire
+- page privée séparée ;
+- Supabase Auth ;
+- `signInWithOtp` avec `shouldCreateUser:false` ;
+- email pouvant fournir un **code OTP ou un magic link** ;
+- session persistée ;
+- le propriétaire ne voit que son site via RLS ;
+- sélection d’une date ou d’une période ;
+- trois états :
+  - 🟢 Disponible → suppression des lignes du calendrier ;
+  - 🔴 Occupé → `status='occupied'` ;
+  - ⚫ Fermé → `status='closed'` ;
+- mise à jour immédiate du calendrier public.
 
-## Règles
-1. `masterMode:true` et `noindex,nofollow` dans le coffre.
-2. Ne jamais inventer prix, disponibilité, moyen de paiement ou condition de séjour.
-3. Le propriétaire/hébergeur confirme lui-même la réservation.
-4. DIGIYLYFE ne perçoit pas le paiement du séjour.
-5. Toujours tester dates, boutons, mobile, 8 langues, RTL et PWA avant publication d’une copie.
+## Tables utilisées
+- `digiy_loc_master_sites`
+- `digiy_loc_master_units`
+- `digiy_loc_master_unit_calendar`
+
+## Déclinaison obligatoire
+Dans `index.html` : identité, ville, pays, type, contacts, prix si fourni, photos, équipements et `masterUnitId`.
+
+Dans `gestion.html` : renseigner `SITE_SLUG`.
+
+Dans Supabase :
+1. le propriétaire existe dans Auth ;
+2. `digiy_loc_master_sites.owner_id` correspond à son `auth.uid()` ;
+3. au moins une unité active existe ;
+4. le redirect URL de `gestion.html` est autorisé dans Supabase Auth.
+
+## Doctrine
+Le calendrier prépare et suit les disponibilités. Le propriétaire confirme la réservation, les conditions et le prix final. DIGIYLYFE ne collecte pas le paiement du séjour et ne prend pas de commission.
+
+## Règle UX publique
+- aucun texte technique sur magic link / Supabase / gestion propriétaire dans le parcours client ;
+- un seul accès propriétaire discret dans le header public ;
+- toute l’explication de gestion reste dans `gestion.html` et la documentation atelier.
+
+Le MASTER reste `noindex,nofollow` et ne doit jamais être publié tel quel.
