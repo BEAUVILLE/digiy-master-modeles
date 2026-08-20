@@ -2,13 +2,21 @@
 
 ## Identification
 
-- ID dossier Supabase :
+- ID dossier Supabase (UUID) :
 - Nom / enseigne :
 - Activité / métier :
 - Zone :
-- Téléphone :
+- Téléphone complet :
 - WhatsApp :
 - Langue source :
+
+### Règle d'identité
+
+Le dossier client est identifié par **Nom / enseigne + téléphone complet + UUID Supabase**.
+
+- Le nom/enseigne sert au classement alphabétique.
+- Le téléphone complet sert à l'identification terrain.
+- L'UUID Supabase sert de référence technique unique et permanente.
 
 ## Offre
 
