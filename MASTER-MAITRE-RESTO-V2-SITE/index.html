@@ -12,47 +12,375 @@
 <link rel="icon" href="./icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <style>
-:root{--bg:#18120d;--paper:#f5efe5;--ink:#241b14;--muted:#746556;--gold:#c79a52;--gold2:#e3bd78;--line:rgba(36,27,20,.14)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif}a{color:inherit;text-decoration:none}button,input{font:inherit}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}
+:root{
+  --bg:#18120d;--bg2:#21180f;--paper:#f5efe5;--ink:#241b14;--muted:#746556;
+  --gold:#c79a52;--gold2:#e3bd78;--cream:#fffaf1;--green:#5f795a;--line:rgba(36,27,20,.14);
+  --darkline:rgba(255,255,255,.14);--shadow:0 22px 60px rgba(0,0,0,.22);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif}
+body.menu-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+img{max-width:100%;display:block}
+.wrap{width:min(1180px,calc(100% - 32px));margin:auto}
+
+/* MASTER WARNING */
 .master-strip{background:#8a1f1f;color:#fff;padding:7px 12px;text-align:center;font:800 11px/1.2 system-ui,sans-serif;letter-spacing:.08em;position:relative;z-index:1000}
-.langbar{position:fixed;top:42px;right:12px;z-index:999;display:flex;gap:4px;flex-wrap:wrap}.langbar button{border:1px solid rgba(255,255,255,.25);background:rgba(24,18,13,.78);color:#fff;border-radius:999px;padding:7px 9px;font:800 10px/1 system-ui,sans-serif}.langbar button.active{background:#fff;color:#241b14}
-.nav{position:fixed;top:28px;left:0;right:0;z-index:900;background:linear-gradient(180deg,rgba(12,9,6,.72),rgba(12,9,6,0))}.nav.scrolled{background:rgba(24,18,13,.94)}.navin{width:min(1180px,calc(100% - 32px));margin:auto;min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#fff}.brand{display:flex;flex-direction:column}.brand strong{font-size:23px;font-weight:500}.brand span{margin-top:6px;font:700 10px/1.2 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#e9dbc7}.navlinks{display:flex;gap:20px;font:800 11px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em}.navcta{border:1px solid rgba(255,255,255,.45);padding:11px 14px;border-radius:999px}.burger{display:none;border:0;background:none;color:#fff;font-size:28px}
-.hero{min-height:100vh;position:relative;display:grid;align-items:end;color:#fff;background:#17110d;overflow:hidden}.hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,10,7,.16),rgba(16,10,7,.60)),radial-gradient(circle at 75% 20%,rgba(199,154,82,.22),transparent 28%),linear-gradient(135deg,#342417,#17110d 60%,#0d0a08)}.hero-bg.has-image{background-position:center;background-size:cover}.hero-content{position:relative;z-index:2;width:min(1180px,calc(100% - 32px));margin:auto;padding:190px 0 72px}.eyebrow{font:900 11px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.24em;color:#f1d9af}.hero h1{margin:14px 0 12px;font-size:clamp(58px,10vw,128px);line-height:.86;font-weight:400;letter-spacing:-.05em}.hero-lead{max-width:670px;font-size:clamp(18px,2vw,25px);line-height:1.45;color:#f6efe6}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{min-height:50px;padding:0 18px;border-radius:999px;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;font:900 11px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.1em}.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#21160c}.btn-ghost{border-color:rgba(255,255,255,.5);color:#fff}.hero-meta{display:flex;gap:26px;flex-wrap:wrap;margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,.22)}.hero-meta b{display:block;font-size:17px;font-weight:500}.hero-meta span{display:block;margin-top:4px;font:700 9px/1.3 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:#e1d6cb}
-.section{padding:92px 0}.section-dark{background:#18120d;color:#fff}.section-soft{background:#eee4d5}.label{font:900 10px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.2em;color:var(--gold)}.title{margin:10px 0 0;font-size:clamp(39px,6vw,72px);line-height:.96;font-weight:400}.title em{color:var(--gold)}.copy{font-size:17px;line-height:1.7;color:var(--muted)}.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
-.about-visual{min-height:640px;position:relative;overflow:hidden;background:linear-gradient(145deg,#2f2117,#130d09)}.about-main{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.about-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#f4e6d4;font-size:70px}.about-badge{position:absolute;left:22px;bottom:22px;background:rgba(24,18,13,.88);color:#fff;padding:16px 18px}.features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:26px}.feature{border-top:1px solid var(--line);padding-top:13px}.feature span{display:block;margin-top:4px;color:var(--muted);font:700 11px/1.45 system-ui,sans-serif}
-.menu-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:32px}.menu-tabs{display:flex;gap:8px;flex-wrap:wrap}.menu-tabs button{border:1px solid rgba(255,255,255,.16);background:transparent;color:#fff;border-radius:999px;padding:9px 12px;font:800 10px/1 system-ui,sans-serif}.menu-tabs button.active{background:var(--gold2);color:#21160c}.menu-panel{display:none}.menu-panel.active{display:block}.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 54px}.menu-item{display:grid;grid-template-columns:1fr auto;gap:10px;border-bottom:1px solid rgba(255,255,255,.14);padding:18px 0}.menu-item h3{margin:0;font-size:19px;font-weight:400}.menu-item p{margin:6px 0 0;color:#c9bcb1;font:650 12px/1.5 system-ui,sans-serif}.price{color:var(--gold2);font-size:18px}.menu-note{margin-top:24px;color:#b6a99e;font:650 11px/1.6 system-ui,sans-serif}
-.gallery{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-auto-rows:250px;gap:10px;margin-top:34px}.gallery figure{margin:0;position:relative;overflow:hidden;background:#d7cab8}.gallery figure:first-child{grid-row:span 2}.gallery img{width:100%;height:100%;object-fit:cover}.gph{position:absolute;inset:0;display:grid;place-items:center;padding:15px;text-align:center;color:#6d5b4b;font:900 12px/1.4 system-ui,sans-serif;background:linear-gradient(135deg,#d9c7ad,#f2e8dc)}.gallery figcaption{position:absolute;left:10px;bottom:10px;background:rgba(24,18,13,.74);color:#fff;padding:7px 9px;font:700 9px/1.2 system-ui,sans-serif}
-.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}.info-card{border-top:1px solid var(--line);padding-top:18px}.info-card h3{font-size:22px;font-weight:400}.info-card p,.info-card li{color:var(--muted);font:650 13px/1.65 system-ui,sans-serif}.hours{list-style:none;margin:0;padding:0}.hours li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(36,27,20,.08)}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid var(--line);border-radius:999px;padding:8px 10px;font:800 10px/1 system-ui,sans-serif;color:#5c4d40}
-.booking{background:linear-gradient(135deg,#18120d,#2f2117);color:#fff;padding:80px 0}.booking-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:54px}.booking-form{background:#fff;color:var(--ink);padding:24px}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:grid;gap:6px}.field label{font:800 10px/1 system-ui,sans-serif;text-transform:uppercase;color:#7c6a59}.field input{width:100%;border:1px solid #d8cabb;padding:13px 12px}.booking-form .btn{width:100%;margin-top:14px;border-radius:0}.booking-note{color:#d8ccc0;font:650 12px/1.6 system-ui,sans-serif}
+
+/* LANG */
+.langbar{position:fixed;top:42px;right:12px;z-index:999;display:flex;gap:4px;flex-wrap:wrap;max-width:min(440px,calc(100% - 24px));justify-content:flex-end}
+.langbar button{border:1px solid rgba(255,255,255,.25);background:rgba(24,18,13,.78);color:#fff;border-radius:999px;padding:7px 9px;font:800 10px/1 system-ui,sans-serif;backdrop-filter:blur(10px);cursor:pointer}
+.langbar button.active{background:#fff;color:#241b14}
+
+/* NAV */
+.nav{position:fixed;top:28px;left:0;right:0;z-index:900;transition:.25s ease;background:linear-gradient(180deg,rgba(12,9,6,.72),rgba(12,9,6,0))}
+.nav.scrolled{background:rgba(24,18,13,.94);box-shadow:0 10px 30px rgba(0,0,0,.18);backdrop-filter:blur(12px)}
+.navin{width:min(1180px,calc(100% - 32px));margin:auto;min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#fff}
+.brand{display:flex;flex-direction:column;line-height:1}.brand strong{font-size:23px;font-weight:500;letter-spacing:.04em}.brand span{margin-top:6px;font:700 10px/1.2 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#e9dbc7}
+.navlinks{display:flex;align-items:center;gap:20px;font:800 11px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em}
+.navlinks a{opacity:.88}.navlinks a:hover{opacity:1;color:var(--gold2)}
+.navcta{border:1px solid rgba(255,255,255,.45);padding:11px 14px;border-radius:999px}
+.burger{display:none;border:0;background:none;color:#fff;font-size:28px;cursor:pointer}
+
+/* HERO */
+.hero{min-height:100vh;position:relative;display:grid;align-items:end;color:#fff;background:#17110d;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:
+ linear-gradient(180deg,rgba(16,10,7,.16),rgba(16,10,7,.60)),
+ radial-gradient(circle at 75% 20%,rgba(199,154,82,.22),transparent 28%),
+ linear-gradient(135deg,#342417,#17110d 60%,#0d0a08)}
+.hero-bg.has-image{background-position:center;background-size:cover}
+.hero-grain{position:absolute;inset:0;opacity:.18;background-image:radial-gradient(rgba(255,255,255,.38) .6px,transparent .6px);background-size:5px 5px}
+.hero-content{position:relative;z-index:2;width:min(1180px,calc(100% - 32px));margin:auto;padding:190px 0 72px}
+.eyebrow{font:900 11px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.24em;color:#f1d9af}
+.hero h1{margin:14px 0 12px;font-size:clamp(58px,10vw,128px);line-height:.78;font-weight:400;letter-spacing:-.06em}.hero h1 em{color:var(--gold2);font-weight:400}
+.hero-lead{max-width:670px;font-size:clamp(18px,2vw,25px);line-height:1.45;color:#f6efe6;margin:0}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{min-height:50px;padding:0 18px;border-radius:999px;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;font:900 11px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.1em;cursor:pointer}
+.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#21160c}
+.btn-ghost{border-color:rgba(255,255,255,.5);color:#fff;background:rgba(255,255,255,.04)}
+.hero-meta{display:flex;gap:26px;flex-wrap:wrap;margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,.22)}
+.hero-meta .m{min-width:150px}.hero-meta b{display:block;font-size:17px;font-weight:500}.hero-meta span{display:block;margin-top:4px;font:700 9px/1.3 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:#e1d6cb}
+
+/* GENERIC SECTIONS */
+.section{padding:92px 0}
+.section-dark{background:var(--bg);color:#fff}
+.section-soft{background:#eee4d5}
+.label{display:inline-block;font:900 10px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.2em;color:var(--gold)}
+.title{margin:10px 0 0;font-size:clamp(39px,6vw,72px);line-height:.96;font-weight:400;letter-spacing:-.04em}.title em{color:var(--gold);font-weight:400}
+.copy{font-size:17px;line-height:1.7;color:var(--muted)}.section-dark .copy{color:#d8ccc0}
+.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+
+/* ABOUT */
+.about-visual{min-height:640px;position:relative;border-radius:2px;overflow:hidden;background:linear-gradient(145deg,#2f2117,#130d09)}
+.about-main{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.about-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#f4e6d4;font-size:70px}
+.about-badge{position:absolute;left:22px;bottom:22px;z-index:2;background:rgba(24,18,13,.88);color:#fff;padding:16px 18px;min-width:170px}.about-badge b{display:block;font-size:22px;font-weight:400}.about-badge span{display:block;margin-top:5px;font:800 9px/1.3 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#e9d2ae}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:26px}.feature{border-top:1px solid var(--line);padding-top:13px}.feature b{display:block;font-size:15px}.feature span{display:block;margin-top:4px;color:var(--muted);font:700 11px/1.45 system-ui,sans-serif}
+
+/* MENU */
+.menu-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:32px}
+.menu-tabs{display:flex;gap:8px;flex-wrap:wrap}.menu-tabs button{border:1px solid rgba(255,255,255,.16);background:transparent;color:#fff;border-radius:999px;padding:9px 12px;font:800 10px/1 system-ui,sans-serif;cursor:pointer}.menu-tabs button.active{background:var(--gold2);color:#21160c;border-color:transparent}
+.menu-panel{display:none}.menu-panel.active{display:block}
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 54px}
+.menu-item{display:grid;grid-template-columns:1fr auto;gap:10px;border-bottom:1px solid rgba(255,255,255,.14);padding:18px 0}
+.menu-item h3{margin:0;font-size:19px;font-weight:400}.menu-item p{margin:6px 0 0;color:#c9bcb1;font:650 12px/1.5 system-ui,sans-serif}.menu-item .price{color:var(--gold2);font-size:18px;white-space:nowrap}
+.menu-note{margin-top:24px;color:#b6a99e;font:650 11px/1.6 system-ui,sans-serif}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-auto-rows:250px;gap:10px;margin-top:34px}
+.gallery figure{margin:0;position:relative;overflow:hidden;background:#d7cab8}.gallery figure:first-child{grid-row:span 2}.gallery img{width:100%;height:100%;object-fit:cover}.gph{position:absolute;inset:0;display:grid;place-items:center;padding:15px;text-align:center;color:#6d5b4b;font:900 12px/1.4 system-ui,sans-serif;background:linear-gradient(135deg,#d9c7ad,#f2e8dc)}
+.gallery figcaption{position:absolute;left:10px;bottom:10px;background:rgba(24,18,13,.74);color:#fff;padding:7px 9px;font:700 9px/1.2 system-ui,sans-serif}
+
+/* INFOS */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}.info-card{border-top:1px solid var(--line);padding-top:18px}.info-card h3{margin:0 0 10px;font-size:22px;font-weight:400}.info-card p,.info-card li{color:var(--muted);font:650 13px/1.65 system-ui,sans-serif}.hours{list-style:none;margin:0;padding:0}.hours li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(36,27,20,.08)}
+.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid var(--line);border-radius:999px;padding:8px 10px;font:800 10px/1 system-ui,sans-serif;color:#5c4d40}
+
+/* BOOKING */
+.booking{background:linear-gradient(135deg,#18120d,#2f2117);color:#fff;padding:80px 0}.booking-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:54px;align-items:start}
+.booking-form{background:#fff;color:var(--ink);padding:24px}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:grid;gap:6px}.field label{font:800 10px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:#7c6a59}.field input{width:100%;border:1px solid #d8cabb;background:#fff;padding:13px 12px;outline:none}.booking-form .btn{width:100%;margin-top:14px;border-radius:0}
+.booking-note{color:#d8ccc0;font:650 12px/1.6 system-ui,sans-serif;margin-top:14px}
+
+/* QR */
 .qr-section{padding:64px 0;background:#efe4d6}.qrbox{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;border:1px solid var(--line);padding:24px}.qrvisual{width:130px;height:130px;background:#fff;padding:8px}.qrvisual img{width:100%;height:100%;object-fit:contain}.qrph{width:100%;height:100%;display:grid;place-items:center;border:2px dashed #9b8c7a;text-align:center;font:900 10px/1.2 system-ui,sans-serif}
-footer{background:#0f0b08;color:#cfc4ba;padding:34px 0 42px}.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:30px}.footer-title{color:#fff;font-size:24px}.footer-small{font:650 11px/1.7 system-ui,sans-serif}.footer-small b{color:#fff}html[dir="rtl"] body{direction:rtl}
-@media(max-width:860px){.navlinks{display:none}.navlinks.mobile-open{display:flex;position:fixed;top:104px;left:10px;right:10px;flex-direction:column;background:rgba(24,18,13,.98);padding:10px}.navlinks.mobile-open a{padding:15px 12px;border-bottom:1px solid rgba(255,255,255,.10)}.burger{display:block}.langbar{top:100px}.two-col,.booking-grid{grid-template-columns:1fr}.menu-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr}.info-grid,.footer-grid{grid-template-columns:1fr}}
-@media(max-width:560px){.wrap,.navin,.hero-content{width:min(100% - 20px,1180px)}.hero h1{font-size:58px}.hero-actions{display:grid}.hero-actions .btn{width:100%}.section{padding:68px 0}.features{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.qrbox{grid-template-columns:1fr}}
+
+/* FOOTER */
+footer{background:#0f0b08;color:#cfc4ba;padding:34px 0 42px}.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:30px}.footer-title{color:#fff;font-size:24px}.footer-small{font:650 11px/1.7 system-ui,sans-serif}.footer-small b{color:#fff}
+
+/* RTL */
+html[dir="rtl"] body{direction:rtl}.navlinks,.hero-actions,.hero-meta,.features,.menu-tabs,.chips{direction:rtl}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+ .navlinks{display:none}.navlinks.mobile-open{display:flex;position:fixed;top:104px;left:10px;right:10px;flex-direction:column;align-items:stretch;gap:0;background:rgba(24,18,13,.98);border:1px solid rgba(255,255,255,.14);padding:10px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+ .navlinks.mobile-open a{padding:15px 12px;border-bottom:1px solid rgba(255,255,255,.10)}
+ .navlinks.mobile-open a:last-child{border-bottom:0}
+ .burger{display:block}.langbar{top:100px}
+ .two-col,.booking-grid{grid-template-columns:1fr}.about-visual{min-height:480px}
+ .menu-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:210px}.gallery figure:first-child{grid-row:span 1;grid-column:span 2}
+ .info-grid,.footer-grid{grid-template-columns:1fr}.hero-content{padding-top:170px}
+}
+@media(max-width:560px){
+ .wrap,.navin,.hero-content{width:min(100% - 20px,1180px)}
+ .master-strip{font-size:9px}.nav{top:25px}.langbar{top:96px;left:8px;right:8px}
+ .hero h1{font-size:58px}.hero-lead{font-size:17px}.hero-actions{display:grid}.hero-actions .btn{width:100%}
+ .section{padding:68px 0}.two-col{gap:32px}.about-visual{min-height:390px}.features{grid-template-columns:1fr}
+ .gallery{grid-template-columns:1fr;grid-auto-rows:220px}.gallery figure:first-child{grid-column:auto}
+ .menu-head{display:grid}.booking{padding:64px 0}.formgrid{grid-template-columns:1fr}.qrbox{grid-template-columns:1fr}.qrvisual{width:110px;height:110px}
+}
 </style>
 </head>
 <body>
 <div class="master-strip">MASTER MAÎTRE RESTO · MODÈLE ATELIER · NE PAS PUBLIER TEL QUEL</div>
-<div class="langbar" id="langs"></div>
-<nav class="nav" id="nav"><div class="navin"><a href="#accueil" class="brand"><strong id="navName">[NOM DU RESTAURANT]</strong><span id="navSub">[TYPE · VILLE]</span></a><div class="navlinks"><a href="#histoire" data-i18n="navAbout">L'adresse</a><a href="#carte" data-i18n="navMenu">La carte</a><a href="#galerie" data-i18n="navGallery">Galerie</a><a href="#infos" data-i18n="navInfo">Infos</a><a href="#reservation" class="navcta" data-i18n="navBook">Réserver</a></div><button class="burger" type="button" onclick="document.querySelector('.navlinks').classList.toggle('mobile-open')">☰</button></div></nav>
-<header class="hero" id="accueil"><div class="hero-bg" id="heroBg"></div><div class="hero-content"><div class="eyebrow" id="heroEyebrow"></div><h1 id="heroTitle"></h1><p class="hero-lead" id="heroLead"></p><div class="hero-actions"><a class="btn btn-gold" href="#reservation" data-i18n="bookTable">Réserver une table</a><a class="btn btn-ghost" href="#carte" data-i18n="seeMenu">Voir la carte</a></div><div class="hero-meta" id="heroMeta"></div></div></header>
-<section class="section" id="histoire"><div class="wrap two-col"><div class="about-visual"><div class="about-fallback" id="aboutFallback">🍽️</div><img class="about-main" id="aboutImage" alt=""><div class="about-badge"><b id="aboutBadgeTitle"></b><span id="aboutBadgeSub"></span></div></div><div><span class="label" data-i18n="storyLabel">Notre histoire</span><h2 class="title" id="aboutTitle"></h2><p class="copy" id="aboutText"></p><div class="features" id="features"></div></div></div></section>
-<section class="section section-dark" id="carte"><div class="wrap"><div class="menu-head"><div><span class="label" data-i18n="menuLabel">À table</span><h2 class="title" data-i18n-html="menuTitle">Découvrez <em>la carte</em></h2></div><div class="menu-tabs" id="menuTabs"></div></div><div id="menuPanels"></div><p class="menu-note" id="menuNote"></p></div></section>
-<section class="section" id="galerie"><div class="wrap"><span class="label" data-i18n="galleryLabel">En images</span><h2 class="title" data-i18n-html="galleryTitle">L'<em>ambiance</em></h2><div class="gallery" id="gallery"></div></div></section>
-<section class="section section-soft" id="infos"><div class="wrap"><span class="label" data-i18n="infoLabel">Informations pratiques</span><h2 class="title" data-i18n-html="infoTitle">Préparez <em>votre visite</em></h2><div class="info-grid"><div class="info-card"><h3 data-i18n="findUs">Nous trouver</h3><p id="address"></p><p><a id="phoneLink" href="#"><strong id="phoneText"></strong></a></p><p id="contactNote"></p></div><div class="info-card"><h3 data-i18n="hours">Horaires</h3><ul class="hours" id="hours"></ul><p id="hoursNote"></p></div><div class="info-card"><h3 data-i18n="services">Services</h3><div class="chips" id="services"></div></div></div></div></section>
-<section class="booking" id="reservation"><div class="wrap booking-grid"><div><span class="label" data-i18n="bookingLabel">Réservation directe</span><h2 class="title" data-i18n-html="bookingTitle">Demandez <em>votre table</em></h2><p class="copy" data-i18n="bookingText"></p><p class="booking-note" data-i18n="bookingDoctrine"></p></div><form class="booking-form" id="bookingForm"><div class="formgrid"><div class="field"><label data-i18n="name">Nom</label><input name="name"></div><div class="field"><label data-i18n="people">Personnes</label><input name="people" inputmode="numeric"></div><div class="field"><label data-i18n="date">Date</label><input name="date"></div><div class="field"><label data-i18n="time">Heure</label><input name="time"></div></div><button class="btn btn-gold" type="submit" data-i18n="sendWhatsApp">Envoyer sur WhatsApp</button></form></div></section>
-<section class="qr-section"><div class="wrap qrbox"><div><span class="label" data-i18n="qrLabel">Accès direct</span><h2 class="title" data-i18n-html="qrTitle">Scannez le <em>QR du site</em></h2><p class="copy" data-i18n="qrText"></p></div><div class="qrvisual" id="qrVisual"><div class="qrph">QR<br>SITE</div></div></div></section>
-<footer><div class="wrap footer-grid"><div><div class="footer-title" id="footerName"></div><p class="footer-small" id="footerTag"></p></div><div class="footer-small"><b data-i18n="direct">Relation directe</b><br><span data-i18n="directText"></span></div><div class="footer-small"><b>DIGIYLYFE</b><br><span data-i18n="footerDoctrine"></span></div></div></footer>
+
+<div class="langbar" id="langs" aria-label="Langues"></div>
+
+<nav class="nav" id="nav">
+  <div class="navin">
+    <a href="#accueil" class="brand">
+      <strong id="navName">[NOM DU RESTAURANT]</strong>
+      <span id="navSub">[TYPE · VILLE]</span>
+    </a>
+    <div class="navlinks">
+      <a href="#histoire" data-i18n="navAbout">L'adresse</a>
+      <a href="#carte" data-i18n="navMenu">La carte</a>
+      <a href="#galerie" data-i18n="navGallery">Galerie</a>
+      <a href="#infos" data-i18n="navInfo">Infos</a>
+      <a href="#reservation" class="navcta" data-i18n="navBook">Réserver</a>
+    </div>
+    <button class="burger" type="button" aria-label="Menu" onclick="document.querySelector('.navlinks').classList.toggle('mobile-open')">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="accueil">
+  <div class="hero-bg" id="heroBg"></div><div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="eyebrow" id="heroEyebrow">[TYPE DE RESTAURANT · RÉGION]</div>
+    <h1 id="heroTitle">[NOM DU<br><em>RESTAURANT</em>]</h1>
+    <p class="hero-lead" id="heroLead">[PROMESSE COURTE · CUISINE · AMBIANCE · EXPÉRIENCE]</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" id="heroBook" href="#reservation" data-i18n="bookTable">Réserver une table</a>
+      <a class="btn btn-ghost" href="#carte" data-i18n="seeMenu">Voir la carte</a>
+    </div>
+    <div class="hero-meta" id="heroMeta"></div>
+  </div>
+</header>
+
+<section class="section" id="histoire">
+  <div class="wrap two-col">
+    <div class="about-visual">
+      <div class="about-fallback" id="aboutFallback">🍽️</div>
+      <img class="about-main" id="aboutImage" alt="">
+      <div class="about-badge"><b id="aboutBadgeTitle">[VILLE]</b><span id="aboutBadgeSub">[ADRESSE / QUARTIER]</span></div>
+    </div>
+    <div>
+      <span class="label" data-i18n="storyLabel">Notre histoire</span>
+      <h2 class="title" id="aboutTitle">Une cuisine <em>qui raconte un lieu</em></h2>
+      <p class="copy" id="aboutText">[HISTOIRE, POSITIONNEMENT, CUISINE, PRODUITS, AMBIANCE, SAVOIR-FAIRE]</p>
+      <div class="features" id="features"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="carte">
+  <div class="wrap">
+    <div class="menu-head">
+      <div><span class="label" data-i18n="menuLabel">À table</span><h2 class="title" data-i18n-html="menuTitle">Découvrez <em>la carte</em></h2></div>
+      <div class="menu-tabs" id="menuTabs"></div>
+    </div>
+    <div id="menuPanels"></div>
+    <p class="menu-note" id="menuNote">[NOTE TARIFS / SAISON / DISPONIBILITÉ / ALLERGÈNES SI FOURNIS PAR LE RESTAURANT]</p>
+  </div>
+</section>
+
+<section class="section" id="galerie">
+  <div class="wrap">
+    <span class="label" data-i18n="galleryLabel">En images</span>
+    <h2 class="title" data-i18n-html="galleryTitle">L'<em>ambiance</em></h2>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<section class="section section-soft" id="infos">
+  <div class="wrap">
+    <span class="label" data-i18n="infoLabel">Informations pratiques</span>
+    <h2 class="title" data-i18n-html="infoTitle">Préparez <em>votre visite</em></h2>
+    <div class="info-grid">
+      <div class="info-card"><h3 data-i18n="findUs">Nous trouver</h3><p id="address"></p><p><a id="phoneLink" href="#"><strong id="phoneText"></strong></a></p><p id="contactNote"></p></div>
+      <div class="info-card"><h3 data-i18n="hours">Horaires</h3><ul class="hours" id="hours"></ul><p id="hoursNote"></p></div>
+      <div class="info-card"><h3 data-i18n="services">Services</h3><div class="chips" id="services"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="reservation">
+  <div class="wrap booking-grid">
+    <div>
+      <span class="label" data-i18n="bookingLabel">Réservation directe</span>
+      <h2 class="title" data-i18n-html="bookingTitle">Demandez <em>votre table</em></h2>
+      <p class="copy" data-i18n="bookingText">Le formulaire prépare un message WhatsApp. Le restaurant garde la main et confirme lui-même la disponibilité.</p>
+      <p class="booking-note" data-i18n="bookingDoctrine">Paiement direct au restaurant · 0 % commission DIGIYLYFE.</p>
+    </div>
+    <form class="booking-form" id="bookingForm">
+      <div class="formgrid">
+        <div class="field"><label data-i18n="name">Nom</label><input name="name" autocomplete="name"></div>
+        <div class="field"><label data-i18n="people">Personnes</label><input name="people" inputmode="numeric"></div>
+        <div class="field"><label data-i18n="date">Date</label><input name="date" autocomplete="off"></div>
+        <div class="field"><label data-i18n="time">Heure</label><input name="time" autocomplete="off"></div>
+      </div>
+      <button class="btn btn-gold" type="submit" data-i18n="sendWhatsApp">Envoyer sur WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<section class="qr-section">
+  <div class="wrap qrbox">
+    <div>
+      <span class="label" data-i18n="qrLabel">Accès direct</span>
+      <h2 class="title" data-i18n-html="qrTitle">Scannez le <em>QR du site</em></h2>
+      <p class="copy" data-i18n="qrText">Le QR permet au client de retrouver ce site complet sur son téléphone.</p>
+    </div>
+    <div class="qrvisual" id="qrVisual"><div class="qrph">QR<br>SITE</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div><div class="footer-title" id="footerName">[NOM DU RESTAURANT]</div><p class="footer-small" id="footerTag">[TYPE · VILLE · CUISINE]</p></div>
+    <div class="footer-small"><b data-i18n="direct">Relation directe</b><br><span data-i18n="directText">Le restaurant confirme lui-même réservations, commandes, tarifs et disponibilités.</span></div>
+    <div class="footer-small"><b>DIGIYLYFE</b><br><span data-i18n="footerDoctrine">Présence numérique · contact direct · paiement direct · 0 % commission.</span></div>
+  </div>
+</footer>
+
 <script>
-(()=>{"use strict";
-const CFG={name:"[NOM DU RESTAURANT]",type:"[BRASSERIE · PIZZERIA · RESTAURANT · TRAITEUR]",city:"[VILLE · RÉGION · PAYS]",address:"[ADRESSE / QUARTIER]",phoneDisplay:"[TÉLÉPHONE]",whatsapp:"",heroImage:"",aboutImage:"",qrImage:"",heroEyebrow:"[TYPE DE RESTAURANT · RÉGION]",heroLead:"[PROMESSE COURTE · CUISINE · AMBIANCE · EXPÉRIENCE]",aboutTitle:"Une cuisine qui raconte un lieu",aboutText:"[HISTOIRE, POSITIONNEMENT, CUISINE, PRODUITS, AMBIANCE, SAVOIR-FAIRE]",contactNote:"[RÉSERVATION / CONTACT / PRÉCISION UTILE]",hoursNote:"[HORAIRES SUSCEPTIBLES DE VARIER · APPELER POUR CONFIRMER]",menuNote:"[PRIX ET DISPONIBILITÉS FOURNIS PAR LE RESTAURANT · INFORMATIONS ALLERGÈNES SUR DEMANDE]",meta:[{value:"[CUISINE]",label:"Spécialité"},{value:"[FAIT MAISON / SIGNATURE]",label:"Savoir-faire"},{value:"[TERRASSE / SALLE / VUE]",label:"Ambiance"},{value:"[SUR PLACE / À EMPORTER]",label:"Service"}],features:[{title:"[PRODUITS / TERROIR]",text:"[SOURCE, SPÉCIALITÉ OU ENGAGEMENT]"},{title:"[CUISINE / FOUR / GRILL]",text:"[MÉTHODE OU SAVOIR-FAIRE]"},{title:"[TERRASSE / SALLE]",text:"[CADRE ET AMBIANCE]"},{title:"[GROUPES / FAMILLES]",text:"[ACCUEIL OU SERVICE]"}],menu:[{label:"[ENTRÉES]",items:[{name:"[ENTRÉE 1]",desc:"[DESCRIPTION]",price:"[PRIX]"},{name:"[ENTRÉE 2]",desc:"[DESCRIPTION]",price:"[PRIX]"}]},{label:"[PLATS]",items:[{name:"[PLAT 1]",desc:"[DESCRIPTION]",price:"[PRIX]"},{name:"[PLAT 2]",desc:"[DESCRIPTION]",price:"[PRIX]"}]},{label:"[DESSERTS]",items:[{name:"[DESSERT 1]",desc:"[DESCRIPTION]",price:"[PRIX]"}]}],gallery:[{image:"",label:"[SALLE / TERRASSE]"},{image:"",label:"[PLAT SIGNATURE]"},{image:"",label:"[AMBIANCE]"},{image:"",label:"[DÉTAIL / PRODUIT]"},{image:"",label:"[ÉQUIPE / SERVICE]"}],hours:[{day:"[LUNDI]",value:"[HORAIRES]"},{day:"[MARDI]",value:"[HORAIRES]"},{day:"[MERCREDI]",value:"[HORAIRES]"},{day:"[JEUDI]",value:"[HORAIRES]"},{day:"[VENDREDI]",value:"[HORAIRES]"},{day:"[SAMEDI]",value:"[HORAIRES]"},{day:"[DIMANCHE]",value:"[HORAIRES]"}],services:["[TERRASSE]","[GROUPES]","[FAMILLES]","[PMR]","[À EMPORTER]"]};
-const I={fr:{navAbout:"L'adresse",navMenu:"La carte",navGallery:"Galerie",navInfo:"Infos",navBook:"Réserver",bookTable:"Réserver une table",seeMenu:"Voir la carte",storyLabel:"Notre histoire",menuLabel:"À table",menuTitle:"Découvrez <em>la carte</em>",galleryLabel:"En images",galleryTitle:"L'<em>ambiance</em>",infoLabel:"Informations pratiques",infoTitle:"Préparez <em>votre visite</em>",findUs:"Nous trouver",hours:"Horaires",services:"Services",bookingLabel:"Réservation directe",bookingTitle:"Demandez <em>votre table</em>",bookingText:"Le formulaire prépare un message WhatsApp. Le restaurant garde la main et confirme lui-même la disponibilité.",bookingDoctrine:"Paiement direct au restaurant · 0 % commission DIGIYLYFE.",name:"Nom",people:"Personnes",date:"Date",time:"Heure",sendWhatsApp:"Envoyer sur WhatsApp",qrLabel:"Accès direct",qrTitle:"Scannez le <em>QR du site</em>",qrText:"Le QR permet au client de retrouver ce site complet sur son téléphone.",direct:"Relation directe",directText:"Le restaurant confirme lui-même réservations, commandes, tarifs et disponibilités.",footerDoctrine:"Présence numérique · contact direct · paiement direct · 0 % commission."},en:{navAbout:"The place",navMenu:"Menu",navGallery:"Gallery",navInfo:"Info",navBook:"Book",bookTable:"Book a table",seeMenu:"View menu",storyLabel:"Our story",menuLabel:"At the table",menuTitle:"Discover <em>the menu</em>",galleryLabel:"In pictures",galleryTitle:"The <em>atmosphere</em>",infoLabel:"Practical information",infoTitle:"Plan <em>your visit</em>",findUs:"Find us",hours:"Opening hours",services:"Services",bookingLabel:"Direct booking",bookingTitle:"Request <em>your table</em>",bookingText:"The form prepares a WhatsApp message. The restaurant stays in control and confirms availability directly.",bookingDoctrine:"Direct payment to the restaurant · 0% DIGIYLYFE commission.",name:"Name",people:"People",date:"Date",time:"Time",sendWhatsApp:"Send on WhatsApp",qrLabel:"Direct access",qrTitle:"Scan the <em>site QR</em>",qrText:"The QR lets customers find this complete website on their phone.",direct:"Direct relationship",directText:"The restaurant confirms bookings, orders, prices and availability itself.",footerDoctrine:"Digital presence · direct contact · direct payment · 0% commission."},es:{navAbout:"El lugar",navMenu:"La carta",navGallery:"Galería",navInfo:"Info",navBook:"Reservar",bookTable:"Reservar una mesa",seeMenu:"Ver la carta",storyLabel:"Nuestra historia",menuLabel:"A la mesa",menuTitle:"Descubre <em>la carta</em>",galleryLabel:"En imágenes",galleryTitle:"El <em>ambiente</em>",infoLabel:"Información práctica",infoTitle:"Prepara <em>tu visita</em>",findUs:"Cómo llegar",hours:"Horarios",services:"Servicios",bookingLabel:"Reserva directa",bookingTitle:"Solicita <em>tu mesa</em>",bookingText:"El formulario prepara un mensaje de WhatsApp. El restaurante mantiene el control y confirma la disponibilidad directamente.",bookingDoctrine:"Pago directo al restaurante · 0% comisión DIGIYLYFE.",name:"Nombre",people:"Personas",date:"Fecha",time:"Hora",sendWhatsApp:"Enviar por WhatsApp",qrLabel:"Acceso directo",qrTitle:"Escanea el <em>QR del sitio</em>",qrText:"El QR permite encontrar este sitio web completo en el teléfono.",direct:"Relación directa",directText:"El restaurante confirma directamente reservas, pedidos, precios y disponibilidad.",footerDoctrine:"Presencia digital · contacto directo · pago directo · 0% comisión."},pt:{navAbout:"O espaço",navMenu:"Menu",navGallery:"Galeria",navInfo:"Info",navBook:"Reservar",bookTable:"Reservar mesa",seeMenu:"Ver menu",storyLabel:"A nossa história",menuLabel:"À mesa",menuTitle:"Descubra <em>o menu</em>",galleryLabel:"Em imagens",galleryTitle:"O <em>ambiente</em>",infoLabel:"Informações práticas",infoTitle:"Prepare <em>a sua visita</em>",findUs:"Como chegar",hours:"Horários",services:"Serviços",bookingLabel:"Reserva direta",bookingTitle:"Peça <em>a sua mesa</em>",bookingText:"O formulário prepara uma mensagem de WhatsApp. O restaurante mantém o controlo e confirma diretamente.",bookingDoctrine:"Pagamento direto ao restaurante · 0% comissão DIGIYLYFE.",name:"Nome",people:"Pessoas",date:"Data",time:"Hora",sendWhatsApp:"Enviar no WhatsApp",qrLabel:"Acesso direto",qrTitle:"Digitalize o <em>QR do site</em>",qrText:"O QR permite encontrar este site completo no telefone.",direct:"Relação direta",directText:"O restaurante confirma reservas, pedidos, preços e disponibilidade.",footerDoctrine:"Presença digital · contacto direto · pagamento direto · 0% comissão."},it:{navAbout:"Il locale",navMenu:"Menu",navGallery:"Galleria",navInfo:"Info",navBook:"Prenota",bookTable:"Prenota un tavolo",seeMenu:"Vedi menu",storyLabel:"La nostra storia",menuLabel:"A tavola",menuTitle:"Scopri <em>il menu</em>",galleryLabel:"In immagini",galleryTitle:"L'<em>atmosfera</em>",infoLabel:"Informazioni pratiche",infoTitle:"Prepara <em>la tua visita</em>",findUs:"Dove siamo",hours:"Orari",services:"Servizi",bookingLabel:"Prenotazione diretta",bookingTitle:"Richiedi <em>il tuo tavolo</em>",bookingText:"Il modulo prepara un messaggio WhatsApp. Il ristorante resta in controllo e conferma direttamente.",bookingDoctrine:"Pagamento diretto al ristorante · 0% commissione DIGIYLYFE.",name:"Nome",people:"Persone",date:"Data",time:"Ora",sendWhatsApp:"Invia su WhatsApp",qrLabel:"Accesso diretto",qrTitle:"Scansiona il <em>QR del sito</em>",qrText:"Il QR permette di ritrovare questo sito completo sul telefono.",direct:"Relazione diretta",directText:"Il ristorante conferma prenotazioni, ordini, prezzi e disponibilità.",footerDoctrine:"Presenza digitale · contatto diretto · pagamento diretto · 0% commissione."},de:{navAbout:"Das Lokal",navMenu:"Speisekarte",navGallery:"Galerie",navInfo:"Info",navBook:"Reservieren",bookTable:"Tisch reservieren",seeMenu:"Speisekarte",storyLabel:"Unsere Geschichte",menuLabel:"Bei Tisch",menuTitle:"Entdecken Sie <em>die Karte</em>",galleryLabel:"In Bildern",galleryTitle:"Die <em>Atmosphäre</em>",infoLabel:"Praktische Informationen",infoTitle:"Planen Sie <em>Ihren Besuch</em>",findUs:"Anfahrt",hours:"Öffnungszeiten",services:"Services",bookingLabel:"Direkte Reservierung",bookingTitle:"Fragen Sie <em>Ihren Tisch</em> an",bookingText:"Das Formular erstellt eine WhatsApp-Nachricht. Das Restaurant bestätigt direkt.",bookingDoctrine:"Direkte Zahlung an das Restaurant · 0% DIGIYLYFE Provision.",name:"Name",people:"Personen",date:"Datum",time:"Uhrzeit",sendWhatsApp:"Per WhatsApp senden",qrLabel:"Direkter Zugang",qrTitle:"Scannen Sie den <em>Site-QR</em>",qrText:"Der QR führt zu dieser vollständigen Website auf dem Telefon.",direct:"Direkte Beziehung",directText:"Das Restaurant bestätigt Reservierungen, Bestellungen, Preise und Verfügbarkeit selbst.",footerDoctrine:"Digitale Präsenz · direkter Kontakt · direkte Zahlung · 0% Provision."},nl:{navAbout:"De zaak",navMenu:"Menu",navGallery:"Galerij",navInfo:"Info",navBook:"Reserveren",bookTable:"Tafel reserveren",seeMenu:"Bekijk menu",storyLabel:"Ons verhaal",menuLabel:"Aan tafel",menuTitle:"Ontdek <em>het menu</em>",galleryLabel:"In beeld",galleryTitle:"De <em>sfeer</em>",infoLabel:"Praktische informatie",infoTitle:"Plan <em>uw bezoek</em>",findUs:"Vind ons",hours:"Openingstijden",services:"Diensten",bookingLabel:"Direct reserveren",bookingTitle:"Vraag <em>uw tafel</em> aan",bookingText:"Het formulier maakt een WhatsApp-bericht. Het restaurant houdt de regie en bevestigt rechtstreeks.",bookingDoctrine:"Directe betaling aan het restaurant · 0% DIGIYLYFE commissie.",name:"Naam",people:"Personen",date:"Datum",time:"Tijd",sendWhatsApp:"Via WhatsApp versturen",qrLabel:"Directe toegang",qrTitle:"Scan de <em>QR van de site</em>",qrText:"De QR brengt de klant naar deze volledige website.",direct:"Directe relatie",directText:"Het restaurant bevestigt reserveringen, bestellingen, prijzen en beschikbaarheid.",footerDoctrine:"Digitale aanwezigheid · direct contact · directe betaling · 0% commissie."},ar:{navAbout:"المكان",navMenu:"القائمة",navGallery:"الصور",navInfo:"معلومات",navBook:"حجز",bookTable:"احجز طاولة",seeMenu:"عرض القائمة",storyLabel:"قصتنا",menuLabel:"على المائدة",menuTitle:"اكتشف <em>القائمة</em>",galleryLabel:"بالصور",galleryTitle:"الأجواء",infoLabel:"معلومات عملية",infoTitle:"حضّر <em>زيارتك</em>",findUs:"الموقع",hours:"الأوقات",services:"الخدمات",bookingLabel:"حجز مباشر",bookingTitle:"اطلب <em>طاولتك</em>",bookingText:"النموذج يجهز رسالة واتساب. المطعم يبقى صاحب القرار ويؤكد التوفر مباشرة.",bookingDoctrine:"الدفع مباشرة للمطعم · 0% عمولة DIGIYLYFE.",name:"الاسم",people:"الأشخاص",date:"التاريخ",time:"الوقت",sendWhatsApp:"إرسال عبر واتساب",qrLabel:"وصول مباشر",qrTitle:"امسح <em>QR الموقع</em>",qrText:"يتيح QR للعميل العثور على هذا الموقع الكامل على هاتفه.",direct:"علاقة مباشرة",directText:"المطعم يؤكد الحجوزات والطلبات والأسعار والتوفر بنفسه.",footerDoctrine:"حضور رقمي · تواصل مباشر · دفع مباشر · 0% عمولة."}};
-let lang="fr";const langs=["fr","en","es","pt","it","de","nl","ar"];const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));const digits=s=>String(s||"").replace(/\D/g,"");const t=k=>(I[lang]&&I[lang][k])||I.fr[k]||k;
-function setLang(c){lang=I[c]?c:"fr";document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";document.querySelectorAll("[data-i18n]").forEach(e=>e.textContent=t(e.dataset.i18n));document.querySelectorAll("[data-i18n-html]").forEach(e=>e.innerHTML=t(e.dataset.i18nHtml));document.querySelectorAll(".langbar button").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang))}
-function renderLangs(){const box=document.getElementById("langs");langs.forEach(c=>{const b=document.createElement("button");b.textContent=c.toUpperCase();b.dataset.lang=c;b.onclick=()=>setLang(c);box.appendChild(b)})}
-function render(){const st=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v||""};st("navName",CFG.name);st("navSub",CFG.type+" · "+CFG.city);st("heroEyebrow",CFG.heroEyebrow);st("heroTitle",CFG.name);st("heroLead",CFG.heroLead);document.getElementById("heroMeta").innerHTML=CFG.meta.map(x=>`<div><b>${esc(x.value)}</b><span>${esc(x.label)}</span></div>`).join("");if(CFG.aboutImage){document.getElementById("aboutImage").src=CFG.aboutImage;document.getElementById("aboutFallback").style.display="none"}else document.getElementById("aboutImage").style.display="none";st("aboutBadgeTitle",CFG.city);st("aboutBadgeSub",CFG.address);st("aboutTitle",CFG.aboutTitle);st("aboutText",CFG.aboutText);document.getElementById("features").innerHTML=CFG.features.map(x=>`<div class="feature"><b>${esc(x.title)}</b><span>${esc(x.text)}</span></div>`).join("");st("menuNote",CFG.menuNote);renderMenu();document.getElementById("gallery").innerHTML=CFG.gallery.map(x=>`<figure>${x.image?`<img src="${esc(x.image)}" alt="${esc(x.label)}">`:`<div class="gph">${esc(x.label)}</div>`}<figcaption>${esc(x.label)}</figcaption></figure>`).join("");st("address",CFG.address);st("phoneText",CFG.phoneDisplay);const p=digits(CFG.phoneDisplay);document.getElementById("phoneLink").href=p?"tel:+"+p:"#";st("contactNote",CFG.contactNote);document.getElementById("hours").innerHTML=CFG.hours.map(x=>`<li><span>${esc(x.day)}</span><strong>${esc(x.value)}</strong></li>`).join("");st("hoursNote",CFG.hoursNote);document.getElementById("services").innerHTML=CFG.services.map(x=>`<span class="chip">${esc(x)}</span>`).join("");st("footerName",CFG.name);st("footerTag",CFG.type+" · "+CFG.city);if(CFG.heroImage){const h=document.getElementById("heroBg");h.classList.add("has-image");h.style.backgroundImage=`linear-gradient(180deg,rgba(16,10,7,.16),rgba(16,10,7,.60)),url("${CFG.heroImage}")`}if(CFG.qrImage)document.getElementById("qrVisual").innerHTML=`<img src="${esc(CFG.qrImage)}" alt="QR">`}
-function renderMenu(){const tabs=document.getElementById("menuTabs"),panels=document.getElementById("menuPanels");CFG.menu.forEach((c,i)=>{const b=document.createElement("button");b.textContent=c.label;b.className=i===0?"active":"";b.onclick=()=>activate(i);tabs.appendChild(b);const p=document.createElement("div");p.className="menu-panel"+(i===0?" active":"");p.innerHTML=`<div class="menu-grid">${c.items.map(x=>`<div class="menu-item"><div><h3>${esc(x.name)}</h3><p>${esc(x.desc)}</p></div><div class="price">${esc(x.price)}</div></div>`).join("")}</div>`;panels.appendChild(p)})}
-function activate(i){document.querySelectorAll(".menu-tabs button").forEach((b,n)=>b.classList.toggle("active",n===i));document.querySelectorAll(".menu-panel").forEach((p,n)=>p.classList.toggle("active",n===i))}
-document.getElementById("bookingForm").addEventListener("submit",e=>{e.preventDefault();const wa=digits(CFG.whatsapp);if(!wa)return;const f=e.currentTarget,msg=`Bonjour ${CFG.name}, je vous contacte depuis votre site DIGIY RESTO.\nNom : ${f.name.value||"—"}\nDate : ${f.date.value||"—"}\nHeure : ${f.time.value||"—"}\nPersonnes : ${f.people.value||"—"}\nPouvez-vous me confirmer directement la disponibilité ?`;window.open("https://wa.me/"+wa+"?text="+encodeURIComponent(msg),"_blank","noopener")});window.addEventListener("scroll",()=>document.getElementById("nav").classList.toggle("scrolled",scrollY>40));renderLangs();render();setLang("fr");if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));})();
+(function(){
+"use strict";
+
+const CFG={
+  name:"[NOM DU RESTAURANT]",
+  type:"[BRASSERIE · PIZZERIA · RESTAURANT · TRAITEUR]",
+  city:"[VILLE · RÉGION · PAYS]",
+  address:"[ADRESSE / QUARTIER]",
+  phoneDisplay:"[TÉLÉPHONE]",
+  whatsapp:"",
+  heroImage:"",
+  aboutImage:"",
+  qrImage:"",
+  heroEyebrow:"[TYPE DE RESTAURANT · RÉGION]",
+  heroLead:"[PROMESSE COURTE · CUISINE · AMBIANCE · EXPÉRIENCE]",
+  aboutTitle:"Une cuisine qui raconte un lieu",
+  aboutText:"[HISTOIRE, POSITIONNEMENT, CUISINE, PRODUITS, AMBIANCE, SAVOIR-FAIRE]",
+  contactNote:"[RÉSERVATION / CONTACT / PRÉCISION UTILE]",
+  hoursNote:"[HORAIRES SUSCEPTIBLES DE VARIER · APPELER POUR CONFIRMER]",
+  menuNote:"[PRIX ET DISPONIBILITÉS FOURNIS PAR LE RESTAURANT · INFORMATIONS ALLERGÈNES SUR DEMANDE]",
+  meta:[
+    {value:"[CUISINE]",label:"Spécialité"},
+    {value:"[FAIT MAISON / SIGNATURE]",label:"Savoir-faire"},
+    {value:"[TERRASSE / SALLE / VUE]",label:"Ambiance"},
+    {value:"[SUR PLACE / À EMPORTER]",label:"Service"}
+  ],
+  features:[
+    {title:"[PRODUITS / TERROIR]",text:"[SOURCE, SPÉCIALITÉ OU ENGAGEMENT]"},
+    {title:"[CUISINE / FOUR / GRILL]",text:"[MÉTHODE OU SAVOIR-FAIRE]"},
+    {title:"[TERRASSE / SALLE]",text:"[CADRE ET AMBIANCE]"},
+    {title:"[GROUPES / FAMILLES]",text:"[ACCUEIL OU SERVICE]"}
+  ],
+  menu:[
+    {id:"entrees",label:"[ENTRÉES]",items:[
+      {name:"[ENTRÉE 1]",desc:"[DESCRIPTION]",price:"[PRIX]"},
+      {name:"[ENTRÉE 2]",desc:"[DESCRIPTION]",price:"[PRIX]"}
+    ]},
+    {id:"plats",label:"[PLATS]",items:[
+      {name:"[PLAT 1]",desc:"[DESCRIPTION]",price:"[PRIX]"},
+      {name:"[PLAT 2]",desc:"[DESCRIPTION]",price:"[PRIX]"},
+      {name:"[PLAT 3]",desc:"[DESCRIPTION]",price:"[PRIX]"}
+    ]},
+    {id:"desserts",label:"[DESSERTS]",items:[
+      {name:"[DESSERT 1]",desc:"[DESCRIPTION]",price:"[PRIX]"},
+      {name:"[DESSERT 2]",desc:"[DESCRIPTION]",price:"[PRIX]"}
+    ]}
+  ],
+  gallery:[
+    {image:"",label:"[SALLE / TERRASSE]"},
+    {image:"",label:"[PLAT SIGNATURE]"},
+    {image:"",label:"[AMBIANCE]"},
+    {image:"",label:"[DÉTAIL / PRODUIT]"},
+    {image:"",label:"[ÉQUIPE / SERVICE]"}
+  ],
+  hours:[
+    {day:"[LUNDI]",value:"[HORAIRES]"},
+    {day:"[MARDI]",value:"[HORAIRES]"},
+    {day:"[MERCREDI]",value:"[HORAIRES]"},
+    {day:"[JEUDI]",value:"[HORAIRES]"},
+    {day:"[VENDREDI]",value:"[HORAIRES]"},
+    {day:"[SAMEDI]",value:"[HORAIRES]"},
+    {day:"[DIMANCHE]",value:"[HORAIRES]"}
+  ],
+  services:["[TERRASSE]","[GROUPES]","[FAMILLES]","[PMR]","[À EMPORTER]","[ANIMAUX SI ACCEPTÉS]"]
+};
+
+const I18N={
+fr:{navAbout:"L'adresse",navMenu:"La carte",navGallery:"Galerie",navInfo:"Infos",navBook:"Réserver",bookTable:"Réserver une table",seeMenu:"Voir la carte",storyLabel:"Notre histoire",menuLabel:"À table",menuTitle:"Découvrez <em>la carte</em>",galleryLabel:"En images",galleryTitle:"L'<em>ambiance</em>",infoLabel:"Informations pratiques",infoTitle:"Préparez <em>votre visite</em>",findUs:"Nous trouver",hours:"Horaires",services:"Services",bookingLabel:"Réservation directe",bookingTitle:"Demandez <em>votre table</em>",bookingText:"Le formulaire prépare un message WhatsApp. Le restaurant garde la main et confirme lui-même la disponibilité.",bookingDoctrine:"Paiement direct au restaurant · 0 % commission DIGIYLYFE.",name:"Nom",people:"Personnes",date:"Date",time:"Heure",sendWhatsApp:"Envoyer sur WhatsApp",qrLabel:"Accès direct",qrTitle:"Scannez le <em>QR du site</em>",qrText:"Le QR permet au client de retrouver ce site complet sur son téléphone.",direct:"Relation directe",directText:"Le restaurant confirme lui-même réservations, commandes, tarifs et disponibilités.",footerDoctrine:"Présence numérique · contact direct · paiement direct · 0 % commission."},
+en:{navAbout:"The place",navMenu:"Menu",navGallery:"Gallery",navInfo:"Info",navBook:"Book",bookTable:"Book a table",seeMenu:"View menu",storyLabel:"Our story",menuLabel:"At the table",menuTitle:"Discover <em>the menu</em>",galleryLabel:"In pictures",galleryTitle:"The <em>atmosphere</em>",infoLabel:"Practical information",infoTitle:"Plan <em>your visit</em>",findUs:"Find us",hours:"Opening hours",services:"Services",bookingLabel:"Direct booking",bookingTitle:"Request <em>your table</em>",bookingText:"The form prepares a WhatsApp message. The restaurant stays in control and confirms availability directly.",bookingDoctrine:"Direct payment to the restaurant · 0% DIGIYLYFE commission.",name:"Name",people:"People",date:"Date",time:"Time",sendWhatsApp:"Send on WhatsApp",qrLabel:"Direct access",qrTitle:"Scan the <em>site QR</em>",qrText:"The QR lets customers find this complete website on their phone.",direct:"Direct relationship",directText:"The restaurant confirms bookings, orders, prices and availability itself.",footerDoctrine:"Digital presence · direct contact · direct payment · 0% commission."},
+es:{navAbout:"El lugar",navMenu:"La carta",navGallery:"Galería",navInfo:"Info",navBook:"Reservar",bookTable:"Reservar una mesa",seeMenu:"Ver la carta",storyLabel:"Nuestra historia",menuLabel:"A la mesa",menuTitle:"Descubre <em>la carta</em>",galleryLabel:"En imágenes",galleryTitle:"El <em>ambiente</em>",infoLabel:"Información práctica",infoTitle:"Prepara <em>tu visita</em>",findUs:"Cómo llegar",hours:"Horarios",services:"Servicios",bookingLabel:"Reserva directa",bookingTitle:"Solicita <em>tu mesa</em>",bookingText:"El formulario prepara un mensaje de WhatsApp. El restaurante mantiene el control y confirma la disponibilidad directamente.",bookingDoctrine:"Pago directo al restaurante · 0% comisión DIGIYLYFE.",name:"Nombre",people:"Personas",date:"Fecha",time:"Hora",sendWhatsApp:"Enviar por WhatsApp",qrLabel:"Acceso directo",qrTitle:"Escanea el <em>QR del sitio</em>",qrText:"El QR permite encontrar este sitio web completo en el teléfono.",direct:"Relación directa",directText:"El restaurante confirma directamente reservas, pedidos, precios y disponibilidad.",footerDoctrine:"Presencia digital · contacto directo · pago directo · 0% comisión."},
+pt:{navAbout:"O espaço",navMenu:"Menu",navGallery:"Galeria",navInfo:"Info",navBook:"Reservar",bookTable:"Reservar mesa",seeMenu:"Ver menu",storyLabel:"A nossa história",menuLabel:"À mesa",menuTitle:"Descubra <em>o menu</em>",galleryLabel:"Em imagens",galleryTitle:"O <em>ambiente</em>",infoLabel:"Informações práticas",infoTitle:"Prepare <em>a sua visita</em>",findUs:"Como chegar",hours:"Horários",services:"Serviços",bookingLabel:"Reserva direta",bookingTitle:"Peça <em>a sua mesa</em>",bookingText:"O formulário prepara uma mensagem de WhatsApp. O restaurante mantém o controlo e confirma diretamente.",bookingDoctrine:"Pagamento direto ao restaurante · 0% comissão DIGIYLYFE.",name:"Nome",people:"Pessoas",date:"Data",time:"Hora",sendWhatsApp:"Enviar no WhatsApp",qrLabel:"Acesso direto",qrTitle:"Digitalize o <em>QR do site</em>",qrText:"O QR permite encontrar este site completo no telefone.",direct:"Relação direta",directText:"O restaurante confirma reservas, pedidos, preços e disponibilidade.",footerDoctrine:"Presença digital · contacto direto · pagamento direto · 0% comissão."},
+it:{navAbout:"Il locale",navMenu:"Menu",navGallery:"Galleria",navInfo:"Info",navBook:"Prenota",bookTable:"Prenota un tavolo",seeMenu:"Vedi menu",storyLabel:"La nostra storia",menuLabel:"A tavola",menuTitle:"Scopri <em>il menu</em>",galleryLabel:"In immagini",galleryTitle:"L'<em>atmosfera</em>",infoLabel:"Informazioni pratiche",infoTitle:"Prepara <em>la tua visita</em>",findUs:"Dove siamo",hours:"Orari",services:"Servizi",bookingLabel:"Prenotazione diretta",bookingTitle:"Richiedi <em>il tuo tavolo</em>",bookingText:"Il modulo prepara un messaggio WhatsApp. Il ristorante resta in controllo e conferma direttamente.",bookingDoctrine:"Pagamento diretto al ristorante · 0% commissione DIGIYLYFE.",name:"Nome",people:"Persone",date:"Data",time:"Ora",sendWhatsApp:"Invia su WhatsApp",qrLabel:"Accesso diretto",qrTitle:"Scansiona il <em>QR del sito</em>",qrText:"Il QR permette di ritrovare questo sito completo sul telefono.",direct:"Relazione diretta",directText:"Il ristorante conferma prenotazioni, ordini, prezzi e disponibilità.",footerDoctrine:"Presenza digitale · contatto diretto · pagamento diretto · 0% commissione."},
+de:{navAbout:"Das Lokal",navMenu:"Speisekarte",navGallery:"Galerie",navInfo:"Info",navBook:"Reservieren",bookTable:"Tisch reservieren",seeMenu:"Speisekarte",storyLabel:"Unsere Geschichte",menuLabel:"Bei Tisch",menuTitle:"Entdecken Sie <em>die Karte</em>",galleryLabel:"In Bildern",galleryTitle:"Die <em>Atmosphäre</em>",infoLabel:"Praktische Informationen",infoTitle:"Planen Sie <em>Ihren Besuch</em>",findUs:"Anfahrt",hours:"Öffnungszeiten",services:"Services",bookingLabel:"Direkte Reservierung",bookingTitle:"Fragen Sie <em>Ihren Tisch</em> an",bookingText:"Das Formular erstellt eine WhatsApp-Nachricht. Das Restaurant bestätigt direkt.",bookingDoctrine:"Direkte Zahlung an das Restaurant · 0% DIGIYLYFE Provision.",name:"Name",people:"Personen",date:"Datum",time:"Uhrzeit",sendWhatsApp:"Per WhatsApp senden",qrLabel:"Direkter Zugang",qrTitle:"Scannen Sie den <em>Site-QR</em>",qrText:"Der QR führt zu dieser vollständigen Website auf dem Telefon.",direct:"Direkte Beziehung",directText:"Das Restaurant bestätigt Reservierungen, Bestellungen, Preise und Verfügbarkeit selbst.",footerDoctrine:"Digitale Präsenz · direkter Kontakt · direkte Zahlung · 0% Provision."},
+nl:{navAbout:"De zaak",navMenu:"Menu",navGallery:"Galerij",navInfo:"Info",navBook:"Reserveren",bookTable:"Tafel reserveren",seeMenu:"Bekijk menu",storyLabel:"Ons verhaal",menuLabel:"Aan tafel",menuTitle:"Ontdek <em>het menu</em>",galleryLabel:"In beeld",galleryTitle:"De <em>sfeer</em>",infoLabel:"Praktische informatie",infoTitle:"Plan <em>uw bezoek</em>",findUs:"Vind ons",hours:"Openingstijden",services:"Diensten",bookingLabel:"Direct reserveren",bookingTitle:"Vraag <em>uw tafel</em> aan",bookingText:"Het formulier maakt een WhatsApp-bericht. Het restaurant houdt de regie en bevestigt rechtstreeks.",bookingDoctrine:"Directe betaling aan het restaurant · 0% DIGIYLYFE commissie.",name:"Naam",people:"Personen",date:"Datum",time:"Tijd",sendWhatsApp:"Via WhatsApp versturen",qrLabel:"Directe toegang",qrTitle:"Scan de <em>QR van de site</em>",qrText:"De QR brengt de klant naar deze volledige website.",direct:"Directe relatie",directText:"Het restaurant bevestigt reserveringen, bestellingen, prijzen en beschikbaarheid.",footerDoctrine:"Digitale aanwezigheid · direct contact · directe betaling · 0% commissie."},
+ar:{navAbout:"المكان",navMenu:"القائمة",navGallery:"الصور",navInfo:"معلومات",navBook:"حجز",bookTable:"احجز طاولة",seeMenu:"عرض القائمة",storyLabel:"قصتنا",menuLabel:"على المائدة",menuTitle:"اكتشف <em>القائمة</em>",galleryLabel:"بالصور",galleryTitle:"الأجواء",infoLabel:"معلومات عملية",infoTitle:"حضّر <em>زيارتك</em>",findUs:"الموقع",hours:"الأوقات",services:"الخدمات",bookingLabel:"حجز مباشر",bookingTitle:"اطلب <em>طاولتك</em>",bookingText:"النموذج يجهز رسالة واتساب. المطعم يبقى صاحب القرار ويؤكد التوفر مباشرة.",bookingDoctrine:"الدفع مباشرة للمطعم · 0% عمولة DIGIYLYFE.",name:"الاسم",people:"الأشخاص",date:"التاريخ",time:"الوقت",sendWhatsApp:"إرسال عبر واتساب",qrLabel:"وصول مباشر",qrTitle:"امسح <em>QR الموقع</em>",qrText:"يتيح QR للعميل العثور على هذا الموقع الكامل على هاتفه.",direct:"علاقة مباشرة",directText:"المطعم يؤكد الحجوزات والطلبات والأسعار والتوفر بنفسه.",footerDoctrine:"حضور رقمي · تواصل مباشر · دفع مباشر · 0% عمولة."}
+};
+
+let lang="fr";
+const langs=["fr","en","es","pt","it","de","nl","ar"];
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+const digits=s=>String(s||"").replace(/\D/g,"");
+const t=k=>(I18N[lang]&&I18N[lang][k])||I18N.fr[k]||k;
+
+function setText(id,val){const el=document.getElementById(id);if(el)el.textContent=val||""}
+function setLang(code){
+ lang=I18N[code]?code:"fr";
+ document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));
+ document.querySelectorAll("[data-i18n-html]").forEach(el=>el.innerHTML=t(el.dataset.i18nHtml));
+ document.querySelectorAll(".langbar button").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang));
+}
+function renderLangs(){
+ const box=document.getElementById("langs"); box.innerHTML="";
+ langs.forEach(c=>{const b=document.createElement("button");b.type="button";b.dataset.lang=c;b.textContent=c.toUpperCase();b.onclick=()=>setLang(c);box.appendChild(b)})
+}
+function render(){
+ setText("navName",CFG.name); setText("navSub",CFG.type+" · "+CFG.city);
+ setText("heroEyebrow",CFG.heroEyebrow); document.getElementById("heroTitle").textContent=CFG.name;
+ setText("heroLead",CFG.heroLead);
+ if(CFG.heroImage){const hb=document.getElementById("heroBg");hb.classList.add("has-image");hb.style.backgroundImage=`linear-gradient(180deg,rgba(16,10,7,.16),rgba(16,10,7,.60)),url("${CFG.heroImage.replace(/"/g,"%22")}")`}
+ document.getElementById("heroMeta").innerHTML=CFG.meta.map(x=>`<div class="m"><b>${esc(x.value)}</b><span>${esc(x.label)}</span></div>`).join("");
+ if(CFG.aboutImage){const a=document.getElementById("aboutImage");a.src=CFG.aboutImage;a.alt=CFG.name;document.getElementById("aboutFallback").style.display="none"}else document.getElementById("aboutImage").style.display="none";
+ setText("aboutBadgeTitle",CFG.city); setText("aboutBadgeSub",CFG.address); document.getElementById("aboutTitle").innerHTML=esc(CFG.aboutTitle); setText("aboutText",CFG.aboutText);
+ document.getElementById("features").innerHTML=CFG.features.map(x=>`<div class="feature"><b>${esc(x.title)}</b><span>${esc(x.text)}</span></div>`).join("");
+ setText("menuNote",CFG.menuNote); renderMenu();
+ document.getElementById("gallery").innerHTML=CFG.gallery.map(x=>`<figure>${x.image?`<img src="${esc(x.image)}" alt="${esc(x.label)}">`:`<div class="gph">${esc(x.label)}</div>`}<figcaption>${esc(x.label)}</figcaption></figure>`).join("");
+ setText("address",CFG.address); const p=digits(CFG.phoneDisplay); setText("phoneText",CFG.phoneDisplay); document.getElementById("phoneLink").href=p?"tel:+"+p:"#";setText("contactNote",CFG.contactNote);
+ document.getElementById("hours").innerHTML=CFG.hours.map(x=>`<li><span>${esc(x.day)}</span><strong>${esc(x.value)}</strong></li>`).join(""); setText("hoursNote",CFG.hoursNote);
+ document.getElementById("services").innerHTML=CFG.services.map(x=>`<span class="chip">${esc(x)}</span>`).join("");
+ setText("footerName",CFG.name); setText("footerTag",CFG.type+" · "+CFG.city);
+ if(CFG.qrImage)document.getElementById("qrVisual").innerHTML=`<img src="${esc(CFG.qrImage)}" alt="QR ${esc(CFG.name)}">`;
+}
+function renderMenu(){
+ const tabs=document.getElementById("menuTabs"), panels=document.getElementById("menuPanels");tabs.innerHTML="";panels.innerHTML="";
+ CFG.menu.forEach((cat,i)=>{
+   const b=document.createElement("button");b.type="button";b.textContent=cat.label;b.className=i===0?"active":"";b.onclick=()=>activateMenu(i);tabs.appendChild(b);
+   const p=document.createElement("div");p.className="menu-panel"+(i===0?" active":"");
+   p.innerHTML=`<div class="menu-grid">${cat.items.map(it=>`<div class="menu-item"><div><h3>${esc(it.name)}</h3><p>${esc(it.desc)}</p></div><div class="price">${esc(it.price)}</div></div>`).join("")}</div>`;
+   panels.appendChild(p);
+ })
+}
+function activateMenu(i){document.querySelectorAll(".menu-tabs button").forEach((b,n)=>b.classList.toggle("active",n===i));document.querySelectorAll(".menu-panel").forEach((p,n)=>p.classList.toggle("active",n===i))}
+function bookingMessage(f){return `Bonjour ${CFG.name}, je vous contacte depuis votre site DIGIY RESTO.\nNom : ${f.name.value||"—"}\nDate : ${f.date.value||"—"}\nHeure : ${f.time.value||"—"}\nPersonnes : ${f.people.value||"—"}\nPouvez-vous me confirmer directement la disponibilité ?`}
+document.getElementById("bookingForm").addEventListener("submit",e=>{e.preventDefault();const wa=digits(CFG.whatsapp);if(!wa)return;window.open("https://wa.me/"+wa+"?text="+encodeURIComponent(bookingMessage(e.currentTarget)),"_blank","noopener")});
+window.addEventListener("scroll",()=>document.getElementById("nav").classList.toggle("scrolled",scrollY>40));
+renderLangs();render();setLang("fr");
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+})();
 </script>
 </body>
 </html>
