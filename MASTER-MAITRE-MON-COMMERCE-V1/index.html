@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MON COMMERCE · MASTER MAÎTRE | DIGIYLYFE</title>
+<meta name="description" content="MASTER MAÎTRE MON COMMERCE DIGIYLYFE : vitrine commerciale locale, produits, catégories, galerie, QR, partage et contact direct.">
+<meta name="theme-color" content="#5b1b49">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="MON COMMERCE">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{
+  --brand:#5b1b49;--brand2:#8d3d72;--ink:#241d21;--muted:#6e6268;
+  --soft:#f8f2f5;--line:#eadfe5;--white:#fff;--shadow:0 14px 42px rgba(75,7,55,.12);
+  --radius:20px;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;padding-bottom:78px}a{color:inherit;text-decoration:none}button,input,select{font:inherit}img{max-width:100%}.wrap{width:min(1100px,calc(100% - 28px));margin:auto}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:10px;font-weight:950;color:var(--brand)}.brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;font-weight:1000}.brand-name{max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.desktop-nav{display:none;gap:18px;font-weight:800;font-size:14px}.top-actions{display:flex;align-items:center;gap:8px}.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}.lang button{border:0;background:#fff;padding:8px 9px;font-weight:900;cursor:pointer}.lang button.active{background:var(--brand);color:#fff}.install{display:none;border:1px solid var(--brand);background:#fff;color:var(--brand);border-radius:999px;padding:8px 11px;font-weight:900;cursor:pointer}.wa-mini{display:none;background:var(--brand);color:#fff;border-radius:999px;padding:9px 13px;font-weight:900}
+.hero{background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.22),transparent 30%),linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}.hero-inner{width:min(1100px,calc(100% - 28px));margin:auto;display:grid;gap:26px;padding:52px 0}.hero-copy{max-width:760px}.eyebrow{display:inline-flex;padding:7px 11px;border:1px solid rgba(255,255,255,.35);border-radius:999px;font-size:12px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(39px,8vw,76px);line-height:.98;margin:16px 0 14px}.hero-sub{font-size:clamp(17px,2.5vw,22px);max-width:720px;opacity:.94}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.hero-actions a,.hero-actions button{min-height:48px;padding:12px 16px;border-radius:13px;font-weight:950;border:0;cursor:pointer}.primary{background:#fff;color:var(--brand)}.secondary{border:1px solid rgba(255,255,255,.65)!important;background:transparent;color:#fff}.hero-proof{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.hero-proof span{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.13);font-size:12px;font-weight:850}
+section{padding:44px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}.section-head.centered{text-align:center;display:block}.section-head span{color:var(--brand);font-weight:950;text-transform:uppercase;letter-spacing:.08em;font-size:12px}.section-head h2{margin:4px 0 0;font-family:Georgia,"Times New Roman",serif;color:#3d0e31;font-size:clamp(29px,4.2vw,44px);line-height:1.05}.section-head p{color:var(--muted);margin:6px 0 0}.trust{display:grid;grid-template-columns:1fr;gap:10px}.trust article{display:flex;gap:12px;padding:15px;border:1px solid var(--line);border-radius:17px;background:var(--soft)}.trust article>span{font-size:22px}.trust strong,.trust small{display:block}.trust small{color:var(--muted);margin-top:2px}
+.categories,.gallery,.products,.packs{display:grid;grid-template-columns:1fr;gap:12px}.category,.product,.pack,.gallery figure,.card-panel,.optional-panel{border:1px solid var(--line);border-radius:var(--radius);background:#fff;overflow:hidden;box-shadow:0 8px 24px rgba(75,7,55,.06)}.category-visual,.product-visual,.gallery-visual{aspect-ratio:4/3;background:linear-gradient(135deg,#f0e2e9,#fbf7f2);display:grid;place-items:center;color:var(--brand);font-size:48px}.category-body,.product-body,.pack,.card-body,.optional-body{padding:16px}.category h3,.product h3,.pack h3{margin:0 0 6px}.category p,.product p,.pack p{margin:0;color:var(--muted)}.category a,.product .cta{display:inline-flex;margin-top:12px;font-weight:950;color:var(--brand)}.product .price{display:block;margin-top:10px;font-size:21px;color:var(--brand);font-weight:1000}.badge{display:inline-flex;margin-top:10px;padding:5px 8px;border-radius:999px;background:var(--soft);font-size:11px;font-weight:900;color:var(--brand)}.packs .pack{background:linear-gradient(135deg,#fff,#fbf7f2)}.pack strong{display:block;margin-top:10px;color:var(--brand);font-size:20px}.hidden{display:none!important}
+.media-card{display:grid;grid-template-columns:1fr;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow)}.media-placeholder{min-height:260px;background:linear-gradient(135deg,#160a12,#4b0737);display:grid;place-items:center;color:#fff;text-align:center;padding:24px}.media-placeholder b{font-size:50px;display:block}.media-content{padding:18px}.media-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.media-actions a,.media-actions button{border:1px solid var(--brand);background:#fff;color:var(--brand);border-radius:12px;padding:10px 12px;font-weight:900;cursor:pointer}
+.card-panel{display:grid;grid-template-columns:1fr}.qr-placeholder{min-height:300px;background:linear-gradient(135deg,#f8f2f5,#fff);display:grid;place-items:center;padding:24px;text-align:center;color:var(--brand)}.qr-box{width:190px;aspect-ratio:1;border:8px solid #fff;border-radius:20px;box-shadow:var(--shadow);display:grid;place-items:center;background:repeating-linear-gradient(45deg,#2e0b25 0 10px,#fff 10px 20px);position:relative}.qr-box:after{content:"QR INSTANCE";position:absolute;background:#fff;color:var(--brand);font-size:12px;font-weight:1000;padding:7px;border-radius:8px}.share-status{min-height:20px;color:var(--muted);font-size:12px}
+.contact{display:grid;gap:18px;padding:24px;border-radius:24px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}.contact h2{font-family:Georgia,"Times New Roman",serif;font-size:34px;margin:4px 0 8px}.contact p{margin:0;opacity:.9}.main-wa{display:flex;align-items:center;justify-content:center;min-height:54px;padding:12px 16px;background:#fff;color:var(--brand);border-radius:14px;font-weight:1000}.doctrine{text-align:center;color:var(--muted);font-weight:850;font-size:13px;margin-top:14px}footer{padding:30px 0 100px;border-top:1px solid var(--line);text-align:center;color:var(--muted)}footer strong{color:var(--brand)}
+.dock{position:fixed;bottom:0;left:0;right:0;z-index:30;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}.dock a,.dock button{border:0;background:transparent;display:grid;place-items:center;gap:2px;padding:10px 4px;color:var(--ink);font-size:11px;font-weight:900;cursor:pointer}.dock b{font-size:19px}.notice{padding:12px 14px;border-radius:14px;background:#fff6d8;color:#5c4a00;font-size:12px;font-weight:800;margin-top:12px}
+@media(min-width:700px){.trust{grid-template-columns:repeat(2,1fr)}.categories,.products,.gallery{grid-template-columns:repeat(2,1fr)}.packs{grid-template-columns:repeat(3,1fr)}.media-card,.card-panel{grid-template-columns:1fr 1fr}.dock{display:none}body{padding-bottom:0}.wa-mini{display:inline-flex}.brand-name{max-width:280px}}
+@media(min-width:980px){.desktop-nav{display:flex}.categories{grid-template-columns:repeat(3,1fr)}.products{grid-template-columns:repeat(4,1fr)}.gallery{grid-template-columns:repeat(4,1fr)}.trust{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#top" aria-label="Accueil commerce"><span class="brand-mark" id="brandMark">MC</span><span class="brand-name" id="brandName">MON COMMERCE</span></a>
+  <nav class="desktop-nav" aria-label="Navigation principale"><a href="#top">Accueil</a><a href="#categories">Catégories</a><a href="#produits">Produits</a><a href="#galerie">Galerie</a><a href="#carte">Carte & QR</a><a href="#contact">Contact</a></nav>
+  <div class="top-actions"><div class="lang"><button id="frBtn" class="active" type="button">FR</button><button id="enBtn" type="button">EN</button></div><button id="installPwa" class="install" type="button">Installer</button><a id="waTop" class="wa-mini" href="#">WhatsApp</a></div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow" id="heroEyebrow">Ville · Commerce local · Contact direct</span>
+      <h1 id="heroTitle">Votre commerce. Vos produits. Votre relation client.</h1>
+      <p class="hero-sub" id="heroSubtitle">Une vitrine claire pour montrer, rassurer et permettre au client de contacter directement le commerçant.</p>
+      <div class="hero-actions"><a class="primary" href="#produits" id="ctaProducts">Voir les produits</a><a class="secondary" id="waHero" href="#">Commander sur WhatsApp</a></div>
+      <div class="hero-proof"><span>0 % commission DIGIYLYFE</span><span>Paiement direct</span><span>Carte & QR</span><span>PWA</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" aria-label="Avantages"><div class="trust">
+  <article><span>✓</span><div><strong>Offre claire</strong><small>Produits et services visibles rapidement.</small></div></article>
+  <article><span>💬</span><div><strong>Contact direct</strong><small>WhatsApp, appel ou retrait selon le commerce.</small></div></article>
+  <article><span>📍</span><div><strong>Commerce local</strong><small>Ville, zone et livraison définies par le commerçant.</small></div></article>
+  <article><span>▣</span><div><strong>Carte & QR</strong><small>À garder, imprimer et partager.</small></div></article>
+</div></section>
+
+<section id="categories" class="wrap"><div class="section-head centered"><span>Routes produits</span><h2>Nos catégories</h2><p id="categoryIntro">Des portes simples pour trouver rapidement le bon produit.</p></div><div id="categoryGrid" class="categories"></div></section>
+
+<section id="produits" class="wrap"><div class="section-head"><div><span>Prix boutique</span><h2>Produits disponibles</h2></div><p>Stock à confirmer avec le commerçant</p></div><div id="productGrid" class="products"></div></section>
+
+<section id="packsSection" class="wrap"><div class="section-head centered"><span>Offres composées</span><h2>Packs & bonnes affaires</h2><p>Bloc optionnel : désactivez-le si le commerce n’utilise pas de packs.</p></div><div id="packGrid" class="packs"></div></section>
+
+<section id="mediaSection" class="wrap"><div class="section-head centered"><span>Voir avant de contacter</span><h2 id="mediaTitle">Présentation du commerce</h2><p id="mediaText">Le clip, la démonstration ou la présentation est optionnel.</p></div><article class="media-card"><div class="media-placeholder"><div><b>▶</b><strong>MÉDIA INSTANCE</strong><br><small>Vidéo / présentation / démonstration</small></div></div><div class="media-content"><h3 id="mediaCardTitle">Présentation directe</h3><p id="mediaCardText">Ajoutez ici une vidéo du commerce si elle apporte une vraie preuve terrain.</p><div class="media-actions"><a id="mediaLink" href="#" target="_blank" rel="noopener">▶ Ouvrir le média</a><a id="waMedia" href="#" target="_blank" rel="noopener">💬 Contacter</a></div><div class="notice">MASTER : si aucun média n’est fourni, désactiver ce bloc au lieu d’inventer du contenu.</div></div></article></section>
+
+<section id="galerie" class="wrap"><div class="section-head centered"><span>Preuve visuelle</span><h2>Galerie</h2><p>Photos produits, boutique, atelier ou réalisations selon le commerce.</p></div><div id="galleryGrid" class="gallery"></div></section>
+
+<section id="carte" class="wrap"><div class="section-head centered"><span>Preuve terrain</span><h2>Carte & QR</h2><p>Le client garde la carte et revient directement vers le commerce.</p></div><article class="card-panel"><div class="qr-placeholder"><div><div class="qr-box" aria-label="Emplacement du QR de l'instance"></div><p><strong>Remplacer par la vraie carte DIGIYLYFE de l’instance.</strong></p></div></div><div class="card-body"><h3>Carte de visite numérique</h3><p>Partage direct sur téléphone, WhatsApp et réseaux. Le QR de production doit pointer vers l’URL publique du commerce.</p><div class="media-actions"><button id="shareBusiness" type="button">↗ Partager la vitrine</button><a id="openBusiness" href="#top">▣ Ouvrir la vitrine</a></div><p id="shareStatus" class="share-status" role="status" aria-live="polite"></p></div></article></section>
+
+<section id="optionalSection" class="wrap"><article class="optional-panel"><div class="optional-body"><div class="section-head centered"><span>Bloc optionnel</span><h2 id="optionalTitle">Livraison / retrait / paiement</h2><p id="optionalText">Le commerce choisit ses propres règles. DIGIYLYFE n’encaisse pas et ne prend pas de commission.</p></div><div class="doctrine">Paiement direct · Relation directe · 0 % commission DIGIYLYFE</div></div></article></section>
+
+<section id="contact" class="wrap"><div class="contact"><div><span>Contact direct</span><h2 id="contactTitle">Besoin d’aide ou d’une commande spéciale ?</h2><p id="contactText">Envoyez le produit, la quantité et vos précisions. Le commerçant confirme directement disponibilité, prix, retrait ou livraison.</p></div><a class="main-wa" id="waContact" href="#" target="_blank" rel="noopener">Contacter sur WhatsApp</a></div></section>
+</main>
+
+<footer><div class="wrap"><strong>DIGIYLYFE.COM</strong><br><span>Visibilité directe · paiement direct · relation directe · 0 % commission DIGIYLYFE</span></div></footer>
+
+<nav class="dock" aria-label="Navigation mobile"><a id="waDock" href="#" target="_blank" rel="noopener"><b>💬</b><span>WhatsApp</span></a><a href="#produits"><b>🛍️</b><span>Produits</span></a><a href="#carte"><b>▣</b><span>Carte</span></a><button id="shareDock" type="button"><b>↗</b><span>Partager</span></button></nav>
+
+<script>
+/* ============================================================
+   MASTER MAÎTRE MON COMMERCE · DIGIYLYFE
+   RÈGLE : pour créer une instance, modifier d'abord CONFIG.
+   Aucun moteur métier, aucune caisse, aucune commission DIGIYLYFE.
+   ============================================================ */
+const CONFIG = {
+  business: {
+    name: "NOM DU COMMERCE",
+    short: "NC",
+    city: "VILLE",
+    zone: "ZONE / QUARTIER",
+    whatsapp: "221770000000",
+    phoneDisplay: "+221 77 000 00 00",
+    url: "https://commerce-exemple.digiylyfe.com/",
+    brandColor: "#5b1b49",
+    brandColor2: "#8d3d72",
+    titleFr: "Votre commerce. Vos produits. Votre relation client.",
+    titleEn: "Your shop. Your products. Your customer relationship.",
+    subtitleFr: "Une vitrine claire pour montrer, rassurer et permettre au client de contacter directement le commerçant.",
+    subtitleEn: "A clear storefront to showcase products and let customers contact the merchant directly.",
+    whatsappMessageFr: "Bonjour, je souhaite connaître les produits disponibles.",
+    whatsappMessageEn: "Hello, I would like to know which products are available."
+  },
+  options: {
+    packs: true,
+    media: false,
+    gallery: true,
+    optionalInfo: true
+  },
+  media: {
+    url: "",
+    title: "Présentation directe",
+    text: "Ajoutez une vidéo du commerce si elle apporte une vraie preuve terrain."
+  },
+  categories: [
+    {icon:"🛍️",name:"Catégorie 1",text:"Description courte de la première famille de produits."},
+    {icon:"🎁",name:"Catégorie 2",text:"Description courte de la deuxième famille de produits."},
+    {icon:"🏠",name:"Catégorie 3",text:"Description courte de la troisième famille de produits."}
+  ],
+  products: [
+    {icon:"📦",name:"Produit 1",text:"Description courte.",price:"PRIX À POSER",badge:"Stock à confirmer"},
+    {icon:"📦",name:"Produit 2",text:"Description courte.",price:"PRIX À POSER",badge:"Stock à confirmer"},
+    {icon:"📦",name:"Produit 3",text:"Description courte.",price:"PRIX À POSER",badge:"Stock à confirmer"},
+    {icon:"📦",name:"Produit 4",text:"Description courte.",price:"PRIX À POSER",badge:"Stock à confirmer"}
+  ],
+  packs: [
+    {name:"Pack 1",text:"Composition du pack.",price:"PRIX À POSER"},
+    {name:"Pack 2",text:"Composition du pack.",price:"PRIX À POSER"},
+    {name:"Pack 3",text:"Composition du pack.",price:"PRIX À POSER"}
+  ],
+  gallery: ["🖼️","🖼️","🖼️","🖼️"]
+};
+
+let lang='fr';
+const $=s=>document.querySelector(s);
+const wa=(text)=>`https://wa.me/${CONFIG.business.whatsapp}?text=${encodeURIComponent(text)}`;
+function setTheme(){document.documentElement.style.setProperty('--brand',CONFIG.business.brandColor);document.documentElement.style.setProperty('--brand2',CONFIG.business.brandColor2);document.querySelector('meta[name="theme-color"]').setAttribute('content',CONFIG.business.brandColor)}
+function render(){
+  const b=CONFIG.business;
+  document.title=`${b.name} · ${b.city} | DIGIYLYFE.COM`;
+  document.querySelector('meta[name="description"]').setAttribute('content',`${b.name} à ${b.city} : produits, galerie, carte QR et contact direct.`);
+  $('#brandName').textContent=b.name; $('#brandMark').textContent=b.short; $('#heroEyebrow').textContent=`${b.city} · ${b.zone} · Contact direct`;
+  $('#heroTitle').textContent=lang==='fr'?b.titleFr:b.titleEn; $('#heroSubtitle').textContent=lang==='fr'?b.subtitleFr:b.subtitleEn;
+  const msg=lang==='fr'?b.whatsappMessageFr:b.whatsappMessageEn;
+  ['#waTop','#waHero','#waMedia','#waContact','#waDock'].forEach(id=>{const el=$(id); if(el) el.href=wa(msg)});
+  $('#categoryGrid').innerHTML=CONFIG.categories.map(c=>`<article class="category"><div class="category-visual">${c.icon}</div><div class="category-body"><h3>${c.name}</h3><p>${c.text}</p><a href="#produits">Voir les produits →</a></div></article>`).join('');
+  $('#productGrid').innerHTML=CONFIG.products.map(p=>`<article class="product"><div class="product-visual">${p.icon}</div><div class="product-body"><h3>${p.name}</h3><p>${p.text}</p><strong class="price">${p.price}</strong><span class="badge">${p.badge}</span><a class="cta" href="${wa(`Bonjour, je souhaite des informations sur ${p.name}.`)}" target="_blank" rel="noopener">Commander / demander →</a></div></article>`).join('');
+  $('#packGrid').innerHTML=CONFIG.packs.map(p=>`<article class="pack"><h3>${p.name}</h3><p>${p.text}</p><strong>${p.price}</strong><a class="cta" href="${wa(`Bonjour, je souhaite des informations sur ${p.name}.`)}" target="_blank" rel="noopener">Demander sur WhatsApp →</a></article>`).join('');
+  $('#galleryGrid').innerHTML=CONFIG.gallery.map((g,i)=>`<figure><div class="gallery-visual">${g}</div><figcaption style="padding:12px 14px;font-weight:900">Visuel ${i+1}</figcaption></figure>`).join('');
+  $('#packsSection').classList.toggle('hidden',!CONFIG.options.packs); $('#mediaSection').classList.toggle('hidden',!CONFIG.options.media); $('#galerie').classList.toggle('hidden',!CONFIG.options.gallery); $('#optionalSection').classList.toggle('hidden',!CONFIG.options.optionalInfo);
+  $('#mediaLink').href=CONFIG.media.url||'#'; $('#mediaCardTitle').textContent=CONFIG.media.title; $('#mediaCardText').textContent=CONFIG.media.text;
+  $('#openBusiness').href=b.url;
+}
+function setLang(next){lang=next;$('#frBtn').classList.toggle('active',lang==='fr');$('#enBtn').classList.toggle('active',lang==='en');render()}
+$('#frBtn').addEventListener('click',()=>setLang('fr'));$('#enBtn').addEventListener('click',()=>setLang('en'));
+async function share(){const data={title:CONFIG.business.name,text:`${CONFIG.business.name} · ${CONFIG.business.city}`,url:CONFIG.business.url};try{if(navigator.share){await navigator.share(data);$('#shareStatus').textContent='Partage ouvert.'}else{await navigator.clipboard.writeText(CONFIG.business.url);$('#shareStatus').textContent='Lien copié.'}}catch(e){$('#shareStatus').textContent='Partage annulé.'}}
+$('#shareBusiness').addEventListener('click',share);$('#shareDock').addEventListener('click',share);
+setTheme();render();
+
+/* PWA */
+let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('#installPwa').style.display='inline-flex'});$('#installPwa').addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$('#installPwa').style.display='none'});if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>
