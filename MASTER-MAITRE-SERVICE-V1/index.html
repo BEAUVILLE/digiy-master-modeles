@@ -7,10 +7,11 @@
 <meta name="description" content="MASTER MAÎTRE DIGIY SERVICE · modèle universel pour prestations, beauté, bien-être et services sur rendez-vous.">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#4d365c">
-<meta name="digiy-master" content="SERVICE-UNIVERSAL-V1-20260820">
+<meta name="digiy-master" content="SERVICE-UNIVERSAL-V2-GALERIE-URL-20260820">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="./icon-192.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
   --accent:#4d365c;--accent2:#76568b;--gold:#d8ad46;--cream:#f7f3ec;--paper:#fffefa;
@@ -67,6 +68,19 @@ html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .doctrine{border-left:1px sol
 @media(max-width:600px){
   .master{font-size:8px;padding:7px 8px}.join{align-items:flex-start;flex-direction:column}.join a{width:100%}.listing{grid-template-columns:35% 65%}.visual{min-height:430px}.info{padding:9px 8px}.actions{grid-template-columns:1fr}.brand{font-size:21px}.langs{gap:5px}.langs button{padding:6px 8px}.wrap{width:min(100% - 16px,1040px)}
 }
+.headActions{display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.owner-access{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:8px 10px;font-size:9px;font-weight:1000;cursor:pointer}
+.owner-modal{position:fixed;inset:0;z-index:3000;background:rgba(32,22,35,.74);display:none;align-items:center;justify-content:center;padding:14px}
+.owner-modal.show{display:flex}
+.owner-box{width:min(500px,100%);background:#fffaf5;color:var(--ink);border-radius:22px;padding:20px;box-shadow:0 25px 90px rgba(0,0,0,.35)}
+.owner-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.owner-head h3{margin:4px 0 8px;font-size:28px;color:var(--accent)}
+.owner-close{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--accent);cursor:pointer}
+.owner-field{display:grid;gap:5px;margin-top:12px}.owner-field label{font-size:9px;font-weight:1000;text-transform:uppercase;color:var(--muted)}
+.owner-field input{width:100%;min-height:48px;border:1px solid #d8cadb;border-radius:13px;padding:11px;background:#fff;color:var(--ink)}
+.owner-send{width:100%;margin-top:9px;border:0;background:var(--accent);color:#fff;border-radius:999px;padding:12px;font-size:10px;font-weight:1000;cursor:pointer}
+.owner-status{min-height:18px;margin-top:9px;font-size:10px;line-height:1.45;font-weight:850;color:#315c45}.owner-status.error{color:#a32929}
+.owner-code{display:inline-flex;margin-top:7px;border:1px solid var(--line);border-radius:999px;padding:9px 11px;font-size:9px;font-weight:1000;color:var(--accent);background:#fff}
 </style>
 </head>
 <body>
@@ -74,14 +88,16 @@ html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .doctrine{border-left:1px sol
 <div class="wrap">
   <div class="headtop">
     <div><div class="brandmark">✨</div><div class="brand" id="brand">DIGIY SERVICE</div><div class="sub" data-i18n="sub">Prestations · rendez-vous · contact direct</div></div>
-    <div class="master">MASTER MAÎTRE<br>NE PAS PUBLIER TEL QUEL</div>
+    <div class="headActions">
+      <button class="owner-access" id="ownerAccess" type="button" data-i18n="owner">🔐 PROPRIÉTAIRE</button>
+      <div class="master">MASTER MAÎTRE<br>NE PAS PUBLIER TEL QUEL</div>
+    </div>
   </div>
   <div class="nav"><a id="hubLink" href="#" class="disabled">🌍 DIGIYLYFE</a><a href="#professionals">✨ SERVICE</a></div>
   <div class="langs" id="langs"></div>
   <div class="join"><div><strong data-i18n="joinq">Vous proposez un service ?</strong><span data-i18n="jointext">Rejoignez DIGIYLYFE et préparez votre présence numérique.</span></div><a id="joinLink" href="#" class="disabled" data-i18n="join">DEMANDE D’ADHÉSION</a></div>
 </div>
 </header>
-
 <main class="wrap">
   <section class="hero"><div class="ico">🤝</div><div><h1 data-i18n="title">DIGIY SERVICE · ADHÉRENTS</h1><p id="territoryLine" data-i18n="subtitle">Services locaux · Rendez-vous direct · Paiement direct</p></div></section>
   <div class="doctrine"><strong>🛡️ <span data-i18n="role">RÔLE DE DIGIYLYFE</span></strong><span data-i18n="doctrine">DIGIYLYFE publie la présence numérique de ses adhérents. Chaque professionnel reste responsable de son activité, de ses obligations, de ses disponibilités, de ses tarifs, de ses produits, de ses précautions et de la prestation qu’il accepte. DIGIYLYFE ne réalise pas la prestation, ne certifie pas le professionnel et ne perçoit pas le paiement de la prestation.</span></div>
@@ -89,11 +105,25 @@ html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .doctrine{border-left:1px sol
   <section id="professionals"></section>
   <footer class="footer"><b>DIGIYLYFE · MASTER MAÎTRE SERVICE</b><br><span data-i18n="footer">Présence directe · 0 % commission · Le savoir-faire pour le savoir-être.</span></footer>
 </main>
-
+<div class="owner-modal" id="ownerModal" aria-hidden="true">
+  <div class="owner-box" role="dialog" aria-modal="true" aria-labelledby="ownerTitle">
+    <div class="owner-head">
+      <div><div class="eyebrow">ACCÈS PRIVÉ</div><h3 id="ownerTitle">Gérer mes photos</h3></div>
+      <button class="owner-close" id="ownerClose" type="button" aria-label="Fermer">✕</button>
+    </div>
+    <p class="desc">Saisissez l’email propriétaire autorisé. Le lien reçu ouvre directement la gestion de votre galerie.</p>
+    <div class="owner-field">
+      <label for="ownerEmail">Email propriétaire</label>
+      <input id="ownerEmail" type="email" autocomplete="email" placeholder="votre@email.com">
+    </div>
+    <button class="owner-send" id="ownerSendMagic" type="button">✉️ RECEVOIR MON MAGIC LINK</button>
+    <div class="owner-status" id="ownerStatus" aria-live="polite"></div>
+    <a class="owner-code" href="./gestion-photos.html">J’ai déjà reçu mon code →</a>
+  </div>
+</div>
 <script>
 (function(){
 "use strict";
-
 const CFG = {
   brand: "DIGIY SERVICE",
   territory: "[VILLE · RÉGION · PAYS]",
@@ -103,6 +133,14 @@ const CFG = {
   hubUrl: "",
   joinUrl: "",
   showLanguages: true,
+  gallery: {
+    enabled: false,
+    siteSlug: "[SITE-SLUG-A-CONFIGURER]",
+    supabaseUrl: "https://wesqmwjjtsefyjnluosj.supabase.co",
+    supabaseKey: "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3",
+    table: "digiy_service_gallery",
+    maxPhotos: 9
+  },
   professionals: [
     {
       name: "[NOM DU PROFESSIONNEL / ÉTABLISSEMENT]",
@@ -129,23 +167,32 @@ const CFG = {
     }
   ]
 };
-
 const I18N = {
-fr:{sub:"Prestations · rendez-vous · contact direct",joinq:"Vous proposez un service ?",jointext:"Rejoignez DIGIYLYFE et préparez votre présence numérique.",join:"DEMANDE D’ADHÉSION",title:"DIGIY SERVICE · ADHÉRENTS",subtitle:"Services locaux · Rendez-vous direct · Paiement direct",role:"RÔLE DE DIGIYLYFE",doctrine:"DIGIYLYFE publie la présence numérique de ses adhérents. Chaque professionnel reste responsable de son activité, de ses obligations, de ses disponibilités, de ses tarifs, de ses produits, de ses précautions et de la prestation qu’il accepte. DIGIYLYFE ne réalise pas la prestation, ne certifie pas le professionnel et ne perçoit pas le paiement de la prestation.",masterNote:"le pays, la ville, la devise, les couleurs et les professionnels sont des paramètres. Les blocs médias, produits et tarifs sont optionnels.",member:"ADHÉRENT DIGIYLYFE",card:"VOIR LA CARTE",call:"APPELER",book:"RENDEZ-VOUS WHATSAPP",qr:"QR · CARTE DIGIYLYFE",qrText:"Scannez pour ouvrir et conserver cette présence DIGIYLYFE.",prices:"TARIFS INDICATIFS",media:"RÉALISATIONS",footer:"Présence directe · 0 % commission · Le savoir-faire pour le savoir-être.",empty:"Ajoutez les professionnels dans CFG.professionals."},
-en:{sub:"Services · appointments · direct contact",joinq:"Do you provide a service?",jointext:"Join DIGIYLYFE and prepare your digital presence.",join:"MEMBERSHIP REQUEST",title:"DIGIY SERVICE · MEMBERS",subtitle:"Local services · Direct appointments · Direct payment",role:"DIGIYLYFE ROLE",doctrine:"DIGIYLYFE publishes the digital presence of its members. Each professional remains responsible for their activity, obligations, availability, prices, products, precautions and accepted service. DIGIYLYFE does not perform the service, certify the professional or collect payment for the service.",masterNote:"country, city, currency, colours and professionals are parameters. Media, product and price blocks are optional.",member:"DIGIYLYFE MEMBER",card:"VIEW CARD",call:"CALL",book:"BOOK ON WHATSAPP",qr:"QR · DIGIYLYFE CARD",qrText:"Scan to open and keep this DIGIYLYFE presence.",prices:"INDICATIVE PRICES",media:"WORK",footer:"Direct presence · 0% commission · Know-how for a better way of being.",empty:"Add professionals in CFG.professionals."},
-es:{sub:"Servicios · citas · contacto directo",joinq:"¿Ofreces un servicio?",jointext:"Únete a DIGIYLYFE y prepara tu presencia digital.",join:"SOLICITUD DE ADHESIÓN",title:"DIGIY SERVICE · MIEMBROS",subtitle:"Servicios locales · Citas directas · Pago directo",role:"PAPEL DE DIGIYLYFE",doctrine:"DIGIYLYFE publica la presencia digital de sus miembros. Cada profesional sigue siendo responsable de su actividad, obligaciones, disponibilidad, precios, productos, precauciones y servicio aceptado. DIGIYLYFE no presta el servicio, no certifica al profesional ni cobra el pago del servicio.",masterNote:"país, ciudad, moneda, colores y profesionales son parámetros. Los bloques de medios, productos y precios son opcionales.",member:"MIEMBRO DIGIYLYFE",card:"VER TARJETA",call:"LLAMAR",book:"CITA POR WHATSAPP",qr:"QR · TARJETA DIGIYLYFE",qrText:"Escanea para abrir y guardar esta presencia DIGIYLYFE.",prices:"PRECIOS INDICATIVOS",media:"TRABAJOS",footer:"Presencia directa · 0% comisión · El saber hacer para el saber ser.",empty:"Añade profesionales en CFG.professionals."},
-pt:{sub:"Serviços · marcações · contacto direto",joinq:"Presta um serviço?",jointext:"Adira à DIGIYLYFE e prepare a sua presença digital.",join:"PEDIDO DE ADESÃO",title:"DIGIY SERVICE · MEMBROS",subtitle:"Serviços locais · Marcações diretas · Pagamento direto",role:"PAPEL DA DIGIYLYFE",doctrine:"A DIGIYLYFE publica a presença digital dos seus membros. Cada profissional continua responsável pela sua atividade, obrigações, disponibilidade, preços, produtos, precauções e serviço aceite. A DIGIYLYFE não presta o serviço, não certifica o profissional nem recebe o pagamento do serviço.",masterNote:"país, cidade, moeda, cores e profissionais são parâmetros. Os blocos de média, produtos e preços são opcionais.",member:"MEMBRO DIGIYLYFE",card:"VER CARTÃO",call:"LIGAR",book:"MARCAR NO WHATSAPP",qr:"QR · CARTÃO DIGIYLYFE",qrText:"Digitalize para abrir e guardar esta presença DIGIYLYFE.",prices:"PREÇOS INDICATIVOS",media:"TRABALHOS",footer:"Presença direta · 0% comissão · Saber fazer para saber ser.",empty:"Adicione profissionais em CFG.professionals."},
-it:{sub:"Servizi · appuntamenti · contatto diretto",joinq:"Offri un servizio?",jointext:"Aderisci a DIGIYLYFE e prepara la tua presenza digitale.",join:"RICHIESTA DI ADESIONE",title:"DIGIY SERVICE · MEMBRI",subtitle:"Servizi locali · Appuntamenti diretti · Pagamento diretto",role:"RUOLO DI DIGIYLYFE",doctrine:"DIGIYLYFE pubblica la presenza digitale dei suoi membri. Ogni professionista resta responsabile della propria attività, obblighi, disponibilità, prezzi, prodotti, precauzioni e servizio accettato. DIGIYLYFE non esegue il servizio, non certifica il professionista e non incassa il pagamento del servizio.",masterNote:"paese, città, valuta, colori e professionisti sono parametri. I blocchi media, prodotti e prezzi sono opzionali.",member:"MEMBRO DIGIYLYFE",card:"VEDI CARTA",call:"CHIAMA",book:"APPUNTAMENTO WHATSAPP",qr:"QR · CARTA DIGIYLYFE",qrText:"Scansiona per aprire e conservare questa presenza DIGIYLYFE.",prices:"PREZZI INDICATIVI",media:"LAVORI",footer:"Presenza diretta · 0% commissione · Il saper fare per il saper essere.",empty:"Aggiungi professionisti in CFG.professionals."},
-de:{sub:"Dienstleistungen · Termine · direkter Kontakt",joinq:"Bieten Sie eine Dienstleistung an?",jointext:"Werden Sie Mitglied bei DIGIYLYFE und bereiten Sie Ihre digitale Präsenz vor.",join:"MITGLIEDSANTRAG",title:"DIGIY SERVICE · MITGLIEDER",subtitle:"Lokale Dienste · Direkte Termine · Direkte Zahlung",role:"ROLLE VON DIGIYLYFE",doctrine:"DIGIYLYFE veröffentlicht die digitale Präsenz seiner Mitglieder. Jeder Anbieter bleibt für Tätigkeit, Pflichten, Verfügbarkeit, Preise, Produkte, Vorsichtsmaßnahmen und angenommene Leistung verantwortlich. DIGIYLYFE erbringt die Leistung nicht, zertifiziert den Anbieter nicht und nimmt keine Zahlung für die Leistung entgegen.",masterNote:"Land, Stadt, Währung, Farben und Anbieter sind Parameter. Medien-, Produkt- und Preisblöcke sind optional.",member:"DIGIYLYFE MITGLIED",card:"KARTE ANSEHEN",call:"ANRUFEN",book:"TERMIN PER WHATSAPP",qr:"QR · DIGIYLYFE KARTE",qrText:"Scannen, um diese DIGIYLYFE Präsenz zu öffnen und zu speichern.",prices:"RICHTPREISE",media:"ARBEITEN",footer:"Direkte Präsenz · 0% Provision · Können für ein gutes Miteinander.",empty:"Fügen Sie Anbieter in CFG.professionals hinzu."},
-nl:{sub:"Diensten · afspraken · direct contact",joinq:"Biedt u een dienst aan?",jointext:"Word lid van DIGIYLYFE en bouw uw digitale aanwezigheid.",join:"LIDMAATSCHAPSAANVRAAG",title:"DIGIY SERVICE · LEDEN",subtitle:"Lokale diensten · Directe afspraken · Directe betaling",role:"ROL VAN DIGIYLYFE",doctrine:"DIGIYLYFE publiceert de digitale aanwezigheid van zijn leden. Elke professional blijft verantwoordelijk voor activiteit, verplichtingen, beschikbaarheid, prijzen, producten, voorzorgsmaatregelen en aanvaarde dienst. DIGIYLYFE voert de dienst niet uit, certificeert de professional niet en ontvangt geen betaling voor de dienst.",masterNote:"land, stad, valuta, kleuren en professionals zijn parameters. Media-, product- en prijsblokken zijn optioneel.",member:"DIGIYLYFE LID",card:"BEKIJK KAART",call:"BELLEN",book:"AFSPRAAK VIA WHATSAPP",qr:"QR · DIGIYLYFE KAART",qrText:"Scan om deze DIGIYLYFE aanwezigheid te openen en bewaren.",prices:"INDICATIEVE PRIJZEN",media:"WERK",footer:"Directe aanwezigheid · 0% commissie · Vakmanschap voor menselijkheid.",empty:"Voeg professionals toe in CFG.professionals."},
-ar:{sub:"خدمات · مواعيد · تواصل مباشر",joinq:"هل تقدم خدمة؟",jointext:"انضم إلى DIGIYLYFE وجهّز حضورك الرقمي.",join:"طلب الانضمام",title:"DIGIY SERVICE · الأعضاء",subtitle:"خدمات محلية · مواعيد مباشرة · دفع مباشر",role:"دور DIGIYLYFE",doctrine:"تنشر DIGIYLYFE الحضور الرقمي لأعضائها. يبقى كل مهني مسؤولاً عن نشاطه والتزاماته وتوفره وأسعاره ومنتجاته واحتياطاته والخدمة التي يقبلها. لا تنفذ DIGIYLYFE الخدمة ولا تصادق على المهني ولا تستلم ثمن الخدمة.",masterNote:"الدولة والمدينة والعملة والألوان والمهنيون إعدادات قابلة للتغيير. أقسام الوسائط والمنتجات والأسعار اختيارية.",member:"عضو DIGIYLYFE",card:"عرض البطاقة",call:"اتصال",book:"موعد عبر واتساب",qr:"QR · بطاقة DIGIYLYFE",qrText:"امسح لفتح وحفظ حضور DIGIYLYFE.",prices:"أسعار إرشادية",media:"الأعمال",footer:"حضور مباشر · 0% عمولة · الخبرة لخدمة الإنسان.",empty:"أضف المهنيين في CFG.professionals."}
+fr:{owner:"🔐 PROPRIÉTAIRE",sub:"Prestations · rendez-vous · contact direct",joinq:"Vous proposez un service ?",jointext:"Rejoignez DIGIYLYFE et préparez votre présence numérique.",join:"DEMANDE D’ADHÉSION",title:"DIGIY SERVICE · ADHÉRENTS",subtitle:"Services locaux · Rendez-vous direct · Paiement direct",role:"RÔLE DE DIGIYLYFE",doctrine:"DIGIYLYFE publie la présence numérique de ses adhérents. Chaque professionnel reste responsable de son activité, de ses obligations, de ses disponibilités, de ses tarifs, de ses produits, de ses précautions et de la prestation qu’il accepte. DIGIYLYFE ne réalise pas la prestation, ne certifie pas le professionnel et ne perçoit pas le paiement de la prestation.",masterNote:"le pays, la ville, la devise, les couleurs et les professionnels sont des paramètres. Les blocs médias, produits et tarifs sont optionnels.",member:"ADHÉRENT DIGIYLYFE",card:"VOIR LA CARTE",call:"APPELER",book:"RENDEZ-VOUS WHATSAPP",qr:"QR · CARTE DIGIYLYFE",qrText:"Scannez pour ouvrir et conserver cette présence DIGIYLYFE.",prices:"TARIFS INDICATIFS",media:"RÉALISATIONS",footer:"Présence directe · 0 % commission · Le savoir-faire pour le savoir-être.",empty:"Ajoutez les professionnels dans CFG.professionals."},
+en:{owner:"🔐 OWNER",sub:"Services · appointments · direct contact",joinq:"Do you provide a service?",jointext:"Join DIGIYLYFE and prepare your digital presence.",join:"MEMBERSHIP REQUEST",title:"DIGIY SERVICE · MEMBERS",subtitle:"Local services · Direct appointments · Direct payment",role:"DIGIYLYFE ROLE",doctrine:"DIGIYLYFE publishes the digital presence of its members. Each professional remains responsible for their activity, obligations, availability, prices, products, precautions and accepted service. DIGIYLYFE does not perform the service, certify the professional or collect payment for the service.",masterNote:"country, city, currency, colours and professionals are parameters. Media, product and price blocks are optional.",member:"DIGIYLYFE MEMBER",card:"VIEW CARD",call:"CALL",book:"BOOK ON WHATSAPP",qr:"QR · DIGIYLYFE CARD",qrText:"Scan to open and keep this DIGIYLYFE presence.",prices:"INDICATIVE PRICES",media:"WORK",footer:"Direct presence · 0% commission · Know-how for a better way of being.",empty:"Add professionals in CFG.professionals."},
+es:{owner:"🔐 PROPIETARIO",sub:"Servicios · citas · contacto directo",joinq:"¿Ofreces un servicio?",jointext:"Únete a DIGIYLYFE y prepara tu presencia digital.",join:"SOLICITUD DE ADHESIÓN",title:"DIGIY SERVICE · MIEMBROS",subtitle:"Servicios locales · Citas directas · Pago directo",role:"PAPEL DE DIGIYLYFE",doctrine:"DIGIYLYFE publica la presencia digital de sus miembros. Cada profesional sigue siendo responsable de su actividad, obligaciones, disponibilidad, precios, productos, precauciones y servicio aceptado. DIGIYLYFE no presta el servicio, no certifica al profesional ni cobra el pago del servicio.",masterNote:"país, ciudad, moneda, colores y profesionales son parámetros. Los bloques de medios, productos y precios son opcionales.",member:"MIEMBRO DIGIYLYFE",card:"VER TARJETA",call:"LLAMAR",book:"CITA POR WHATSAPP",qr:"QR · TARJETA DIGIYLYFE",qrText:"Escanea para abrir y guardar esta presencia DIGIYLYFE.",prices:"PRECIOS INDICATIVOS",media:"TRABAJOS",footer:"Presencia directa · 0% comisión · El saber hacer para el saber ser.",empty:"Añade profesionales en CFG.professionals."},
+pt:{owner:"🔐 PROPRIETÁRIO",sub:"Serviços · marcações · contacto direto",joinq:"Presta um serviço?",jointext:"Adira à DIGIYLYFE e prepare a sua presença digital.",join:"PEDIDO DE ADESÃO",title:"DIGIY SERVICE · MEMBROS",subtitle:"Serviços locais · Marcações diretas · Pagamento direto",role:"PAPEL DA DIGIYLYFE",doctrine:"A DIGIYLYFE publica a presença digital dos seus membros. Cada profissional continua responsável pela sua atividade, obrigações, disponibilidade, preços, produtos, precauções e serviço aceite. A DIGIYLYFE não presta o serviço, não certifica o profissional nem recebe o pagamento do serviço.",masterNote:"país, cidade, moeda, cores e profissionais são parâmetros. Os blocos de média, produtos e preços são opcionais.",member:"MEMBRO DIGIYLYFE",card:"VER CARTÃO",call:"LIGAR",book:"MARCAR NO WHATSAPP",qr:"QR · CARTÃO DIGIYLYFE",qrText:"Digitalize para abrir e guardar esta presença DIGIYLYFE.",prices:"PREÇOS INDICATIVOS",media:"TRABALHOS",footer:"Presença direta · 0% comissão · Saber fazer para saber ser.",empty:"Adicione profissionais em CFG.professionals."},
+it:{owner:"🔐 PROPRIETARIO",sub:"Servizi · appuntamenti · contatto diretto",joinq:"Offri un servizio?",jointext:"Aderisci a DIGIYLYFE e prepara la tua presenza digitale.",join:"RICHIESTA DI ADESIONE",title:"DIGIY SERVICE · MEMBRI",subtitle:"Servizi locali · Appuntamenti diretti · Pagamento diretto",role:"RUOLO DI DIGIYLYFE",doctrine:"DIGIYLYFE pubblica la presenza digitale dei suoi membri. Ogni professionista resta responsabile della propria attività, obblighi, disponibilità, prezzi, prodotti, precauzioni e servizio accettato. DIGIYLYFE non esegue il servizio, non certifica il professionista e non incassa il pagamento del servizio.",masterNote:"paese, città, valuta, colori e professionisti sono parametri. I blocchi media, prodotti e prezzi sono opzionali.",member:"MEMBRO DIGIYLYFE",card:"VEDI CARTA",call:"CHIAMA",book:"APPUNTAMENTO WHATSAPP",qr:"QR · CARTA DIGIYLYFE",qrText:"Scansiona per aprire e conservare questa presenza DIGIYLYFE.",prices:"PREZZI INDICATIVI",media:"LAVORI",footer:"Presenza diretta · 0% commissione · Il saper fare per il saper essere.",empty:"Aggiungi professionisti in CFG.professionals."},
+de:{owner:"🔐 INHABER",sub:"Dienstleistungen · Termine · direkter Kontakt",joinq:"Bieten Sie eine Dienstleistung an?",jointext:"Werden Sie Mitglied bei DIGIYLYFE und bereiten Sie Ihre digitale Präsenz vor.",join:"MITGLIEDSANTRAG",title:"DIGIY SERVICE · MITGLIEDER",subtitle:"Lokale Dienste · Direkte Termine · Direkte Zahlung",role:"ROLLE VON DIGIYLYFE",doctrine:"DIGIYLYFE veröffentlicht die digitale Präsenz seiner Mitglieder. Jeder Anbieter bleibt für Tätigkeit, Pflichten, Verfügbarkeit, Preise, Produkte, Vorsichtsmaßnahmen und angenommene Leistung verantwortlich. DIGIYLYFE erbringt die Leistung nicht, zertifiziert den Anbieter nicht und nimmt keine Zahlung für die Leistung entgegen.",masterNote:"Land, Stadt, Währung, Farben und Anbieter sind Parameter. Medien-, Produkt- und Preisblöcke sind optional.",member:"DIGIYLYFE MITGLIED",card:"KARTE ANSEHEN",call:"ANRUFEN",book:"TERMIN PER WHATSAPP",qr:"QR · DIGIYLYFE KARTE",qrText:"Scannen, um diese DIGIYLYFE Präsenz zu öffnen und zu speichern.",prices:"RICHTPREISE",media:"ARBEITEN",footer:"Direkte Präsenz · 0% Provision · Können für ein gutes Miteinander.",empty:"Fügen Sie Anbieter in CFG.professionals hinzu."},
+nl:{owner:"🔐 EIGENAAR",sub:"Diensten · afspraken · direct contact",joinq:"Biedt u een dienst aan?",jointext:"Word lid van DIGIYLYFE en bouw uw digitale aanwezigheid.",join:"LIDMAATSCHAPSAANVRAAG",title:"DIGIY SERVICE · LEDEN",subtitle:"Lokale diensten · Directe afspraken · Directe betaling",role:"ROL VAN DIGIYLYFE",doctrine:"DIGIYLYFE publiceert de digitale aanwezigheid van zijn leden. Elke professional blijft verantwoordelijk voor activiteit, verplichtingen, beschikbaarheid, prijzen, producten, voorzorgsmaatregelen en aanvaarde dienst. DIGIYLYFE voert de dienst niet uit, certificeert de professional niet en ontvangt geen betaling voor de dienst.",masterNote:"land, stad, valuta, kleuren en professionals zijn parameters. Media-, product- en prijsblokken zijn optioneel.",member:"DIGIYLYFE LID",card:"BEKIJK KAART",call:"BELLEN",book:"AFSPRAAK VIA WHATSAPP",qr:"QR · DIGIYLYFE KAART",qrText:"Scan om deze DIGIYLYFE aanwezigheid te openen en bewaren.",prices:"INDICATIEVE PRIJZEN",media:"WERK",footer:"Directe aanwezigheid · 0% commissie · Vakmanschap voor menselijkheid.",empty:"Voeg professionals toe in CFG.professionals."},
+ar:{owner:"🔐 المالك",sub:"خدمات · مواعيد · تواصل مباشر",joinq:"هل تقدم خدمة؟",jointext:"انضم إلى DIGIYLYFE وجهّز حضورك الرقمي.",join:"طلب الانضمام",title:"DIGIY SERVICE · الأعضاء",subtitle:"خدمات محلية · مواعيد مباشرة · دفع مباشر",role:"دور DIGIYLYFE",doctrine:"تنشر DIGIYLYFE الحضور الرقمي لأعضائها. يبقى كل مهني مسؤولاً عن نشاطه والتزاماته وتوفره وأسعاره ومنتجاته واحتياطاته والخدمة التي يقبلها. لا تنفذ DIGIYLYFE الخدمة ولا تصادق على المهني ولا تستلم ثمن الخدمة.",masterNote:"الدولة والمدينة والعملة والألوان والمهنيون إعدادات قابلة للتغيير. أقسام الوسائط والمنتجات والأسعار اختيارية.",member:"عضو DIGIYLYFE",card:"عرض البطاقة",call:"اتصال",book:"موعد عبر واتساب",qr:"QR · بطاقة DIGIYLYFE",qrText:"امسح لفتح وحفظ حضور DIGIYLYFE.",prices:"أسعار إرشادية",media:"الأعمال",footer:"حضور مباشر · 0% عمولة · الخبرة لخدمة الإنسان.",empty:"أضف المهنيين في CFG.professionals."}
 };
-
 const langOrder=["fr","en","es","pt","it","de","nl","ar"];
 let lang="fr";
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 const onlyDigits=s=>String(s||"").replace(/\D/g,"");
-
+function driveId(url){
+  const s=String(url||"");
+  for(const p of [/\/file\/d\/([a-zA-Z0-9_-]+)/,/[\?&]id=([a-zA-Z0-9_-]+)/,/\/d\/([a-zA-Z0-9_-]+)/]){
+    const m=s.match(p); if(m)return m[1];
+  }
+  return null;
+}
+function displayImageUrl(url){
+  const s=String(url||"").trim();
+  const id=driveId(s);
+  return id?"https://drive.google.com/thumbnail?id="+encodeURIComponent(id)+"&sz=w1600":s;
+}
 function applyTheme(){
   document.documentElement.style.setProperty("--accent",CFG.accent||"#4d365c");
   document.documentElement.style.setProperty("--accent2",CFG.accent2||"#76568b");
@@ -178,8 +225,8 @@ function setLang(code){
 }
 function mediaHTML(items){
   if(!Array.isArray(items)||!items.length)return "";
-  return `<div class="eyebrow">${esc(t("media"))}</div><div class="media-strip">${items.slice(0,3).map(m=>`
-    <div class="media-card">${m.image?`<img src="${esc(m.image)}" alt="${esc(m.label||"")}">`:`<div class="media-placeholder">${esc(m.label||"[MÉDIA]")}</div>`}</div>`).join("")}</div>`;
+  return `<div class="eyebrow">${esc(t("media"))}</div><div class="media-strip">${items.slice(0,9).map(m=>`
+    <div class="media-card">${m.image?`<img src="${esc(displayImageUrl(m.image))}" alt="${esc(m.label||"")}">`:`<div class="media-placeholder">${esc(m.label||"[MÉDIA]")}</div>`}</div>`).join("")}</div>`;
 }
 function pricesHTML(items){
   if(!Array.isArray(items)||!items.length)return "";
@@ -222,12 +269,53 @@ function renderProfessionals(){
     </article>`;
   }).join("");
 }
+async function loadGalleryUrls(){
+  const g=CFG.gallery||{};
+  if(!g.enabled || !g.siteSlug || g.siteSlug.startsWith("[") || !window.supabase)return;
+  try{
+    const db=window.supabase.createClient(g.supabaseUrl,g.supabaseKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
+    const {data,error}=await db.from(g.table).select("image_url,caption,position,is_active").eq("site_slug",g.siteSlug).eq("is_active",true).order("position",{ascending:true}).limit(g.maxPhotos||9);
+    if(error)throw error;
+    if(Array.isArray(data)&&data.length&&CFG.professionals&&CFG.professionals[0]){
+      CFG.professionals[0].media=data.map(r=>({image:r.image_url||"",label:r.caption||""}));
+      renderProfessionals();
+    }
+  }catch(err){console.warn("Galerie SERVICE non chargée:",err?.message||err)}
+}
+function initOwnerAccess(){
+  const modal=document.getElementById("ownerModal"),open=document.getElementById("ownerAccess"),close=document.getElementById("ownerClose");
+  const email=document.getElementById("ownerEmail"),send=document.getElementById("ownerSendMagic"),status=document.getElementById("ownerStatus");
+  if(!modal||!open)return;
+  const hide=()=>{modal.classList.remove("show");modal.setAttribute("aria-hidden","true")};
+  open.addEventListener("click",()=>{status.textContent="";status.classList.remove("error");modal.classList.add("show");modal.setAttribute("aria-hidden","false");setTimeout(()=>email.focus(),50)});
+  close.addEventListener("click",hide);
+  modal.addEventListener("click",e=>{if(e.target===modal)hide()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")hide()});
+  send.addEventListener("click",async()=>{
+    const value=email.value.trim();
+    status.classList.remove("error");
+    if(!value){status.textContent="Indiquez l’email propriétaire.";status.classList.add("error");return}
+    try{
+      const g=CFG.gallery||{};
+      const db=window.supabase.createClient(g.supabaseUrl,g.supabaseKey,{auth:{persistSession:true,detectSessionInUrl:true}});
+      const redirectTo=new URL("./gestion-photos.html",location.href).href;
+      send.disabled=true;status.textContent="Envoi du lien sécurisé…";
+      const {error}=await db.auth.signInWithOtp({email:value,options:{shouldCreateUser:false,emailRedirectTo:redirectTo}});
+      if(error)throw error;
+      status.textContent="✓ Email envoyé. Ouvrez le magic link reçu pour gérer la galerie.";
+    }catch(err){
+      status.textContent="⚠️ "+(err?.message||"Envoi impossible.");status.classList.add("error");
+    }finally{send.disabled=false}
+  });
+}
 function init(){
   applyTheme();
   document.getElementById("brand").textContent=CFG.brand;
   linkState(document.getElementById("hubLink"),CFG.hubUrl);
   linkState(document.getElementById("joinLink"),CFG.joinUrl);
   renderLangs(); setLang("fr");
+  initOwnerAccess();
+  loadGalleryUrls();
   if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 }
 init();
