@@ -16,9 +16,9 @@ Ce Master est une **vitrine / présence numérique**. Ce n’est ni une caisse, 
 - le professionnel reste responsable de son activité, de ses obligations, de ses disponibilités, de ses prix, des produits utilisés, des précautions et de la prestation acceptée ;
 - DIGIYLYFE ne certifie pas la conformité administrative, sanitaire ou professionnelle de l’adhérent.
 
-## Base terrain
+## Base de conception
 
-Le modèle reprend les **principes éprouvés** sur FG NAILS : présence mobile-first, prestations, médias, produits éventuellement associés, WhatsApp direct et relation client gardée par le professionnel. Il ne reprend aucune identité, aucun numéro, aucun prix ni contenu personnel de FG NAILS.
+Le modèle reprend des **principes éprouvés sur des vitrines de services terrain** : présence mobile-first, prestations, médias, produits éventuellement associés, WhatsApp direct et relation client gardée par le professionnel. Aucune identité, aucun numéro, aucun prix ni contenu personnel d’un client de référence n’est conservé dans le MASTER.
 
 ## Fichiers
 

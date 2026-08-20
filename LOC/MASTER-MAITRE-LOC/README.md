@@ -1,145 +1,28 @@
-# MASTER MAÎTRE LOC
+# MASTER MAÎTRE LOC — V2
 
-## Statut
+Moule universel DIGIYLYFE pour hébergements et location directe. Aucun nom client, aucun domaine client, aucun téléphone réel, aucun prix réel et aucune date de disponibilité réelle ne sont conservés dans le MASTER.
 
-**MASTER MAÎTRE universel DIGIY LOC — V1**
-
-Référence de conception : la version France / Sarlat retenue comme meilleure base fonctionnelle et visuelle.
-
-Ce dossier n'est pas un site client. C'est un **moule de fabrication**.
-
-## Fichiers
-
-- `index.html` : moule exécutable et autonome ;
-- `README.md` : règles d'utilisation et de protection du MASTER ;
-- `manifest.webmanifest` : identité PWA installable ;
-- `sw.js` : cache léger et repli hors connexion ;
-- `icon-192.png` et `icon-512.png` : icônes PWA neutres à personnaliser dans la déclinaison.
-
-## Principe
-
-Un seul MASTER LOC doit pouvoir servir pour :
-
-- Sénégal ;
-- France ;
-- Europe ;
-- autres territoires compatibles.
-
-Le pays, la devise, les contacts, les prix, les photos, les horaires et les moyens de paiement sont des **paramètres**, pas une nouvelle architecture.
-
-## Source maître
-
-La structure est inspirée de la version **SARLAT CHEZ BAPTISTE**, choisie comme référence pour :
-
-- hero fort ;
-- informations rapides ;
+## Fonctionnement
+- hero et présentation du logement ;
 - galerie ;
-- calendrier ;
-- demande directe ;
-- WhatsApp / email ;
-- paiement direct ;
-- QR / carte officielle ;
-- navigation mobile compacte ;
-- PWA légère ;
-- 0 % commission DIGIYLYFE.
+- calendrier **dynamique basé sur la date réelle du jour** ;
+- aucune vieille date codée en dur ;
+- dates occupées/fermées uniquement via `blockedDates` / `closedDates` ;
+- demande directe WhatsApp ou email ;
+- paiement direct au propriétaire/hébergeur ;
+- 0 % commission DIGIYLYFE ;
+- QR de l’instance ;
+- PWA légère.
 
-Aucun contenu personnel de Chez Baptiste n'est conservé dans ce MASTER.
+## Langues
+FR · EN · ES · PT · IT · DE · NL · AR, avec RTL automatique pour l’arabe.
 
 ## Configuration
+Renseigner `CFG` : identité, ville/pays, type d’hébergement, description, devise et prix si fournis, capacité, horaires, WhatsApp/email, adresse, moyen de paiement, équipements, photos et disponibilités. Les valeurs de prix sont volontairement neutres dans le coffre.
 
-Dans `index.html`, rechercher le bloc :
-
-```js
-const CFG = {
-```
-
-C'est le centre de configuration du moule.
-
-Les champs principaux sont :
-
-- `masterMode` : mode atelier ; reste à `true` tant que la déclinaison n'est pas validée ;
-- `name` : nom de l'hébergement ;
-- `city` et `country` ;
-- `accommodationType` : chambre, appartement, villa, maison, résidence, etc. ;
-- `tagline` et `description` ;
-- `locale` ;
-- `currency` et `nightlyRate` ;
-- `secondaryCurrency` et `secondaryNightlyRate` si nécessaire ;
-- `maxGuests` ;
-- `checkIn` / `checkOut` ;
-- `whatsapp` ;
-- `email` ;
-- `address` ;
-- `paymentTitle`, `paymentText`, `paymentBeneficiary`, `paymentInstruction` ;
-- `horizonDays` : nombre de jours futurs affichables dans le calendrier ;
-- `blockedDates` / `closedDates` ;
-- `features` ;
-- `photos`.
-
-## Calendrier
-
-Le calendrier part automatiquement de la date réelle du jour. **Aucune vieille date n'est affichée par construction.**
-
-- les dates passées sont désactivées automatiquement ;
-- la profondeur future est définie par `horizonDays` ;
-- les dates occupées sont placées dans `blockedDates` ;
-- les dates fermées sont placées dans `closedDates`.
-
-## PWA
-
-La PWA est une couche légère de confort, **pas un logiciel métier**.
-
-- `index.html` déclare `manifest.webmanifest` ;
-- `index.html` enregistre `sw.js` ;
-- le service worker met en cache le cœur local du MASTER ;
-- en cas de coupure réseau, une navigation déjà chargée peut retomber sur `index.html` ;
-- les appels WhatsApp, email, cartes et ressources externes nécessitent naturellement le réseau ;
-- lors d'une déclinaison client, adapter le nom, les icônes et les métadonnées du manifest si nécessaire.
-
-## Règles absolues
-
-1. Ne jamais ajouter de `CNAME` dans ce dossier.
-2. Ne jamais mettre un domaine client réel comme valeur maître obligatoire.
-3. Ne jamais stocker de mot de passe, PIN, clé privée ou secret Supabase.
-4. Les clés publiques éventuellement nécessaires doivent être ajoutées uniquement dans une déclinaison contrôlée.
-5. Le MASTER doit fonctionner sans backend : le calendrier local et la demande directe restent disponibles.
-6. Une intégration Supabase ou autre moteur peut être branchée dans une déclinaison, sans rendre le MASTER dépendant du cloud.
-7. Toujours créer une copie avant adaptation client.
-8. Le professionnel reste responsable de ses prix, disponibilités, conditions, obligations et confirmations.
-9. DIGIYLYFE ne perçoit pas le paiement du séjour et ne confirme pas la réservation à la place de l'hébergeur.
-10. Le MASTER reste en `noindex,nofollow` et en `masterMode:true` jusqu'à validation de la déclinaison.
-11. Le cache PWA ne doit jamais servir à figer des disponibilités ou informations sensibles : les données opérationnelles doivent être revalidées avant publication.
-
-## Déclinaison Sénégal
-
-Adapter principalement : devise FCFA, téléphone +221, Wave/Sendwave ou autre moyen choisi, adresse, textes locaux, prix, horaires et médias.
-
-## Déclinaison France / Europe
-
-Adapter principalement : devise €, téléphone local, IBAN/virement/Sendwave ou moyen choisi, adresse, mentions locales, prix et médias.
-
-## Contrôle avant publication
-
-- téléphone ;
-- WhatsApp ;
-- email ;
-- dates du calendrier ;
-- prix ;
-- devise ;
-- adresse ;
-- photos ;
-- boutons ;
-- formulaire ;
-- navigation mobile ;
-- manifest PWA ;
-- service worker ;
-- icônes ;
-- texte 0 % commission ;
-- aucune donnée du client précédent ;
-- retrait du mode atelier uniquement après validation humaine.
-
----
-
-**MASTER MAÎTRE LOC — DIGIYLYFE**
-
-Le local prépare. Le cloud renforce. Le professionnel décide.
+## Règles
+1. `masterMode:true` et `noindex,nofollow` dans le coffre.
+2. Ne jamais inventer prix, disponibilité, moyen de paiement ou condition de séjour.
+3. Le propriétaire/hébergeur confirme lui-même la réservation.
+4. DIGIYLYFE ne perçoit pas le paiement du séjour.
+5. Toujours tester dates, boutons, mobile, 8 langues, RTL et PWA avant publication d’une copie.
