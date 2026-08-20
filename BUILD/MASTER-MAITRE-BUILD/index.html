@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DIGIY BUILD · MASTER MAÎTRE UNIVERSAL</title>
+<meta name="description" content="MASTER MAÎTRE DIGIY BUILD · modèle universel pour artisans et métiers de terrain, configurable Sénégal, France et Europe.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#073f32">
+<meta name="digiy-master" content="BUILD-UNIVERSAL-V1-20260820">
+<style>
+:root{--green:#073f32;--green2:#0d634b;--gold:#d8ad46;--cream:#f6f1e5;--paper:#fffefa;--ink:#173b31;--muted:#6e8179;--line:#dfe8e2;--shadow:0 12px 28px rgba(7,63,50,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--cream);color:var(--ink)}a{text-decoration:none;color:inherit}button{font:inherit}.wrap{width:min(1040px,calc(100% - 24px));margin:auto}
+header{background:var(--green);color:#fff;border-bottom:4px solid var(--gold);padding:16px 0 18px}.headtop{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.brandmark{font-size:30px}.brand{font-weight:1000;font-size:24px}.sub{font-size:11px;color:#eadfae;margin-top:4px}.master{border:1px solid var(--gold);border-radius:999px;padding:8px 11px;color:#f2d77e;font-size:10px;font-weight:1000;text-align:center;white-space:nowrap}.nav,.langs{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}.nav a,.langs button{border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;border-radius:999px;padding:7px 10px;font-size:9px;font-weight:900;cursor:pointer}.langs button{background:#fffefa;color:var(--green);border-color:#e1e8e4}.langs button.active{background:var(--gold);border-color:var(--gold)}
+.join{margin-top:11px;display:flex;justify-content:space-between;gap:12px;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(216,173,70,.55);border-radius:14px;padding:10px 11px}.join div{display:flex;flex-direction:column;gap:2px}.join strong{font-size:11px}.join span{font-size:9px;color:#e8e2ca}.join a{background:var(--gold);color:var(--green);border-radius:999px;padding:9px 12px;font-size:9px;font-weight:1000;text-align:center}.join a.disabled{opacity:.55;pointer-events:none}
+main{padding:18px 0 42px}.hero{display:flex;align-items:center;gap:11px;margin-bottom:11px}.hero .ico{width:42px;height:42px;background:#e4efe8;border-radius:50%;display:grid;place-items:center;font-size:20px}.hero h1{font-size:21px;margin:0}.hero p{font-size:11px;color:var(--muted);margin:3px 0 0}.doctrine{background:#fff8df;border:1px solid #ead28a;border-left:4px solid var(--gold);border-radius:12px;padding:11px 12px;font-size:10px;line-height:1.45;color:#5e5124;margin-bottom:12px}.doctrine strong{display:block;color:var(--green);font-size:11px;margin-bottom:4px}
+.master-note{background:#173b31;color:#fff;border-radius:13px;padding:10px 12px;margin-bottom:12px;font-size:10px;line-height:1.45}.master-note b{color:#f2d77e}.empty{padding:28px;border:2px dashed #b9c9c0;border-radius:16px;text-align:center;color:var(--muted);background:#fffefa;font-weight:800}
+.listing{display:grid;grid-template-columns:34% 66%;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:12px 0;box-shadow:var(--shadow)}.visual{position:relative;display:block;min-height:395px;background:linear-gradient(145deg,#dce5df,#b9cfc1);overflow:hidden}.visual img{width:100%;height:100%;object-fit:cover;display:block}.visual-placeholder{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;font-weight:1000;color:var(--green);background:linear-gradient(145deg,#edf4ef,#d9e7dd)}.visual-hint{position:absolute;bottom:8px;left:7px;right:7px;background:rgba(7,63,50,.92);color:#fff;border-radius:999px;padding:7px 6px;text-align:center;font-size:8px;font-weight:1000}.info{padding:13px 12px}.eyebrow{color:var(--gold);font-size:8px;font-weight:1000;letter-spacing:.8px;margin:0 0 4px}.name-row{display:block}h2{font-size:19px;margin:0;color:var(--green);line-height:1.08}.activity{font-size:10px;color:var(--muted);margin:4px 0}.area{display:inline-block;background:#e8f1eb;border-radius:999px;padding:5px 7px;font-size:8px;font-weight:900}.chips{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 6px}.chip{font-size:8px;background:#eef4f0;border:1px solid #dfe8e2;border-radius:999px;padding:5px 6px;font-weight:800}.desc,.rule{font-size:9px;line-height:1.4;color:var(--muted);margin:6px 0}.rule{border-left:2px solid var(--gold);padding-left:7px}.direct{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 0;margin:8px 0;display:grid;gap:4px}.direct div{display:grid;grid-template-columns:1.05fr .95fr;gap:4px;font-size:8px}.direct strong{color:var(--green);font-size:9px}.qrrow{display:flex;gap:8px;align-items:center;background:#edf5ef;border-radius:10px;padding:8px}.qr{width:58px;height:58px;background:white;border-radius:6px;object-fit:contain}.qr-placeholder{width:58px;height:58px;background:#fff;border:2px dashed #b7c8be;border-radius:6px;display:grid;place-items:center;font-size:8px;font-weight:1000;color:var(--muted);text-align:center}.qrrow div:last-child{display:flex;flex-direction:column;gap:3px}.qrrow strong{font-size:9px}.qrrow span{font-size:8px;color:var(--muted);line-height:1.25}.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}.btn{border-radius:999px;padding:9px 8px;text-align:center;font-size:9px;font-weight:1000}.primary{background:var(--green);color:#fff}.secondary{border:1px solid var(--green2);color:var(--green2);background:#fff}.whatsapp{border:1px solid #1d8b57;color:#1d8b57;background:#fff}.disabled{opacity:.5;pointer-events:none}.footer{text-align:center;color:var(--muted);font-size:9px;padding:20px 5px 4px;line-height:1.5}.footer b{color:var(--green)}
+html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .doctrine{border-left:1px solid #ead28a;border-right:4px solid var(--gold)}html[dir="rtl"] .rule{border-left:0;border-right:2px solid var(--gold);padding-left:0;padding-right:7px}
+@media(min-width:651px){main{padding-top:24px}.listing{border-radius:20px}.visual{min-height:445px}.info{padding:19px}h2{font-size:26px}.activity{font-size:13px}.area{font-size:11px}.chip{font-size:11px;padding:6px 9px}.desc,.rule{font-size:12px}.direct{grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 0;margin:13px 0}.direct div{display:flex;flex-direction:column;text-align:center;font-size:10px}.direct strong{font-size:11px}.qr,.qr-placeholder{width:76px;height:76px}.qrrow strong{font-size:12px}.qrrow span{font-size:11px}.btn{font-size:11px;padding:11px}.doctrine,.master-note{font-size:11px}.hero h1{font-size:24px}.hero p{font-size:13px}}
+@media(max-width:600px){.headtop{align-items:flex-start}.master{font-size:8px;padding:7px 8px}.join{align-items:flex-start;flex-direction:column}.join a{width:100%}.listing{grid-template-columns:35% 65%}.visual{min-height:390px}.info{padding:9px 8px}.actions{grid-template-columns:1fr}.brand{font-size:21px}.langs{gap:5px}.langs button{padding:6px 8px}.wrap{width:min(100% - 16px,1040px)}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<div class="headtop">
+<div><div class="brandmark">🛠️</div><div class="brand" id="brand">DIGIY BUILD</div><div class="sub" data-i18n="sub">Artisans · métiers de terrain · contact direct</div></div>
+<div class="master">MASTER MAÎTRE<br>NE PAS PUBLIER TEL QUEL</div>
+</div>
+<div class="nav"><a id="hubLink" href="#" class="disabled">🌍 DIGIYLYFE</a><a href="#professionals">🛠️ BUILD</a></div>
+<div class="langs" id="langs"></div>
+<div class="join"><div><strong data-i18n="joinq">Vous êtes artisan ?</strong><span data-i18n="jointext">Rejoignez DIGIYLYFE et préparez votre présence numérique.</span></div><a id="joinLink" href="#" class="disabled" data-i18n="join">DEMANDE D’ADHÉSION</a></div>
+</div>
+</header>
+<main class="wrap">
+<section class="hero"><div class="ico">🧰</div><div><h1 data-i18n="title">DIGIY BUILD · ADHÉRENTS</h1><p id="territoryLine" data-i18n="subtitle">Artisans locaux · Contact direct · Paiement direct</p></div></section>
+<div class="doctrine"><strong>🛡️ <span data-i18n="role">RÔLE DE DIGIYLYFE</span></strong><span data-i18n="doctrine">DIGIYLYFE publie la présence numérique de ses adhérents. Chaque artisan reste responsable de son activité, de ses obligations, de son diagnostic, de son devis, de ses matériaux, de ses délais, de ses tarifs et de la prestation qu’il accepte. DIGIYLYFE ne réalise pas les travaux, ne fixe pas le devis final et ne perçoit pas le paiement de la prestation.</span></div>
+<div class="master-note"><b>MASTER UNIVERSAL :</b> <span data-i18n="masterNote">le pays, la ville, la devise et les professionnels sont des paramètres. La structure reste la même au Sénégal, en France et en Europe.</span></div>
+<section id="professionals"></section>
+<footer class="footer"><b>DIGIYLYFE · MASTER MAÎTRE BUILD</b><br><span data-i18n="footer">Présence directe · 0 % commission · Le savoir-faire pour le savoir-être.</span></footer>
+</main>
+<script>
+(function(){
+"use strict";
+
+const CFG = {
+  brand: "DIGIY BUILD",
+  territory: "[VILLE · RÉGION · PAYS]",
+  currency: "[DEVISE]",
+  hubUrl: "",
+  joinUrl: "",
+  joinLabel: "DEMANDE D’ADHÉSION",
+  showLanguages: true,
+  professionals: [
+    {
+      name: "[NOM ARTISAN]",
+      activity: "[MÉTIER]",
+      area: "[ZONE D’INTERVENTION]",
+      tags: ["[SERVICE 1]","[SERVICE 2]","[SERVICE 3]"],
+      description: "[DESCRIPTION COURTE DU SAVOIR-FAIRE ET DE LA PRESTATION]",
+      rule: "Disponibilité, diagnostic, devis, matériaux, délai et montant final : accord direct avec l’artisan, sous sa responsabilité.",
+      phoneDisplay: "[TÉLÉPHONE]",
+      whatsapp: "",
+      priceLabel: "Sur devis",
+      cardUrl: "",
+      image: "",
+      qrImage: ""
+    }
+  ]
+};
+
+const I18N = {
+fr:{sub:"Artisans · métiers de terrain · contact direct",joinq:"Vous êtes artisan ?",jointext:"Rejoignez DIGIYLYFE et préparez votre présence numérique.",join:"DEMANDE D’ADHÉSION",title:"DIGIY BUILD · ADHÉRENTS",subtitle:"Artisans locaux · Contact direct · Paiement direct",role:"RÔLE DE DIGIYLYFE",doctrine:"DIGIYLYFE publie la présence numérique de ses adhérents. Chaque artisan reste responsable de son activité, de ses obligations, de son diagnostic, de son devis, de ses matériaux, de ses délais, de ses tarifs et de la prestation qu’il accepte. DIGIYLYFE ne réalise pas les travaux, ne fixe pas le devis final et ne perçoit pas le paiement de la prestation.",masterNote:"le pays, la ville, la devise et les professionnels sont des paramètres. La structure reste la même au Sénégal, en France et en Europe.",adherent:"ADHÉRENT DIGIYLYFE",card:"VOIR LA CARTE",contact:"Contact direct",commission:"commission DIGIYLYFE",whatsapp:"WhatsApp direct",qr:"QR · CARTE DIGIYLYFE",qrText:"Scannez pour ouvrir et conserver la présence DIGIYLYFE.",footer:"Présence directe · 0 % commission · Le savoir-faire pour le savoir-être.",empty:"Ajoutez les artisans dans CFG.professionals."},
+en:{sub:"Craftspeople · field trades · direct contact",joinq:"Are you a craft professional?",jointext:"Join DIGIYLYFE and prepare your digital presence.",join:"MEMBERSHIP REQUEST",title:"DIGIY BUILD · MEMBERS",subtitle:"Local professionals · Direct contact · Direct payment",role:"DIGIYLYFE ROLE",doctrine:"DIGIYLYFE publishes the digital presence of its members. Each professional remains responsible for their activity, obligations, diagnosis, quote, materials, deadlines, prices and accepted work. DIGIYLYFE does not perform the work, set the final quote or collect payment for the service.",masterNote:"country, city, currency and professionals are configuration parameters. The structure remains the same in Senegal, France and Europe.",adherent:"DIGIYLYFE MEMBER",card:"VIEW CARD",contact:"Direct contact",commission:"DIGIYLYFE commission",whatsapp:"Direct WhatsApp",qr:"QR · DIGIYLYFE CARD",qrText:"Scan to open and keep this DIGIYLYFE presence.",footer:"Direct presence · 0% commission · Know-how for a better way of being.",empty:"Add professionals in CFG.professionals."},
+es:{sub:"Artesanos · oficios de terreno · contacto directo",joinq:"¿Eres artesano?",jointext:"Únete a DIGIYLYFE y prepara tu presencia digital.",join:"SOLICITUD DE ADHESIÓN",title:"DIGIY BUILD · ADHERENTES",subtitle:"Profesionales locales · Contacto directo · Pago directo",role:"PAPEL DE DIGIYLYFE",doctrine:"DIGIYLYFE publica la presencia digital de sus adherentes. Cada profesional sigue siendo responsable de su actividad, obligaciones, diagnóstico, presupuesto, materiales, plazos, tarifas y trabajo aceptado. DIGIYLYFE no realiza los trabajos, no fija el presupuesto final ni cobra la prestación.",masterNote:"el país, la ciudad, la moneda y los profesionales son parámetros. La estructura es la misma en Senegal, Francia y Europa.",adherent:"ADHERENTE DIGIYLYFE",card:"VER TARJETA",contact:"Contacto directo",commission:"comisión DIGIYLYFE",whatsapp:"WhatsApp directo",qr:"QR · TARJETA DIGIYLYFE",qrText:"Escanea para abrir y guardar esta presencia DIGIYLYFE.",footer:"Presencia directa · 0 % comisión · El saber hacer para el saber ser.",empty:"Añade profesionales en CFG.professionals."},
+pt:{sub:"Artesãos · ofícios de terreno · contacto direto",joinq:"É profissional?",jointext:"Junte-se à DIGIYLYFE e prepare a sua presença digital.",join:"PEDIDO DE ADESÃO",title:"DIGIY BUILD · ADERENTES",subtitle:"Profissionais locais · Contacto direto · Pagamento direto",role:"PAPEL DA DIGIYLYFE",doctrine:"A DIGIYLYFE publica a presença digital dos seus aderentes. Cada profissional continua responsável pela sua atividade, obrigações, diagnóstico, orçamento, materiais, prazos, preços e trabalho aceite. A DIGIYLYFE não executa os trabalhos, não fixa o orçamento final e não recebe o pagamento da prestação.",masterNote:"país, cidade, moeda e profissionais são parâmetros. A estrutura permanece igual no Senegal, França e Europa.",adherent:"ADERENTE DIGIYLYFE",card:"VER CARTÃO",contact:"Contacto direto",commission:"comissão DIGIYLYFE",whatsapp:"WhatsApp direto",qr:"QR · CARTÃO DIGIYLYFE",qrText:"Digitalize para abrir e guardar esta presença DIGIYLYFE.",footer:"Presença direta · 0 % comissão · Saber fazer para saber ser.",empty:"Adicione profissionais em CFG.professionals."},
+de:{sub:"Handwerk · lokale Berufe · direkter Kontakt",joinq:"Sind Sie Handwerker?",jointext:"Werden Sie DIGIYLYFE-Mitglied und erstellen Sie Ihre digitale Präsenz.",join:"MITGLIEDSCHAFT ANFRAGEN",title:"DIGIY BUILD · MITGLIEDER",subtitle:"Lokale Profis · Direkter Kontakt · Direkte Zahlung",role:"ROLLE VON DIGIYLYFE",doctrine:"DIGIYLYFE veröffentlicht die digitale Präsenz seiner Mitglieder. Jeder Profi bleibt für Tätigkeit, Pflichten, Diagnose, Angebot, Material, Fristen, Preise und angenommene Leistungen verantwortlich. DIGIYLYFE führt keine Arbeiten aus, legt kein endgültiges Angebot fest und nimmt keine Zahlung für die Leistung entgegen.",masterNote:"Land, Stadt, Währung und Profis sind Konfigurationsparameter. Die Struktur bleibt in Senegal, Frankreich und Europa gleich.",adherent:"DIGIYLYFE MITGLIED",card:"KARTE ANSEHEN",contact:"Direkter Kontakt",commission:"DIGIYLYFE Provision",whatsapp:"Direktes WhatsApp",qr:"QR · DIGIYLYFE KARTE",qrText:"Scannen, um diese DIGIYLYFE-Präsenz zu öffnen und zu speichern.",footer:"Direkte Präsenz · 0 % Provision · Können für ein besseres Miteinander.",empty:"Profis in CFG.professionals hinzufügen."},
+it:{sub:"Artigiani · mestieri sul territorio · contatto diretto",joinq:"Sei un artigiano?",jointext:"Aderisci a DIGIYLYFE e prepara la tua presenza digitale.",join:"RICHIESTA DI ADESIONE",title:"DIGIY BUILD · ADERENTI",subtitle:"Professionisti locali · Contatto diretto · Pagamento diretto",role:"RUOLO DI DIGIYLYFE",doctrine:"DIGIYLYFE pubblica la presenza digitale dei propri aderenti. Ogni professionista resta responsabile della propria attività, obblighi, diagnosi, preventivo, materiali, tempi, prezzi e lavoro accettato. DIGIYLYFE non esegue i lavori, non fissa il preventivo finale e non incassa il pagamento della prestazione.",masterNote:"paese, città, valuta e professionisti sono parametri. La struttura resta la stessa in Senegal, Francia ed Europa.",adherent:"ADERENTE DIGIYLYFE",card:"VEDI CARTA",contact:"Contatto diretto",commission:"commissione DIGIYLYFE",whatsapp:"WhatsApp diretto",qr:"QR · CARTA DIGIYLYFE",qrText:"Scansiona per aprire e conservare questa presenza DIGIYLYFE.",footer:"Presenza diretta · 0 % commissione · Il saper fare per il saper essere.",empty:"Aggiungi professionisti in CFG.professionals."},
+nl:{sub:"Vakmensen · lokale beroepen · direct contact",joinq:"Bent u vakman?",jointext:"Word lid van DIGIYLYFE en maak uw digitale aanwezigheid klaar.",join:"LIDMAATSCHAP AANVRAGEN",title:"DIGIY BUILD · LEDEN",subtitle:"Lokale vakmensen · Direct contact · Directe betaling",role:"ROL VAN DIGIYLYFE",doctrine:"DIGIYLYFE publiceert de digitale aanwezigheid van zijn leden. Elke vakman blijft verantwoordelijk voor activiteit, verplichtingen, diagnose, offerte, materialen, termijnen, prijzen en aanvaarde werkzaamheden. DIGIYLYFE voert de werkzaamheden niet uit, bepaalt de definitieve offerte niet en ontvangt geen betaling voor de prestatie.",masterNote:"land, stad, valuta en vakmensen zijn configuratieparameters. De structuur blijft hetzelfde in Senegal, Frankrijk en Europa.",adherent:"DIGIYLYFE LID",card:"KAART BEKIJKEN",contact:"Direct contact",commission:"DIGIYLYFE commissie",whatsapp:"Direct WhatsApp",qr:"QR · DIGIYLYFE KAART",qrText:"Scan om deze DIGIYLYFE-aanwezigheid te openen en te bewaren.",footer:"Directe aanwezigheid · 0 % commissie · Vakmanschap voor menselijkheid.",empty:"Voeg vakmensen toe in CFG.professionals."},
+ar:{sub:"حرفيون · مهن ميدانية · تواصل مباشر",joinq:"هل أنت حرفي؟",jointext:"انضم إلى DIGIYLYFE وجهّز حضورك الرقمي.",join:"طلب الانضمام",title:"DIGIY BUILD · الأعضاء",subtitle:"حرفيون محليون · تواصل مباشر · دفع مباشر",role:"دور DIGIYLYFE",doctrine:"تنشر DIGIYLYFE الحضور الرقمي لأعضائها. يبقى كل مهني مسؤولاً عن نشاطه والتزاماته والتشخيص وعرض السعر والمواد والمواعيد والأسعار والعمل الذي يقبله. لا تنفذ DIGIYLYFE الأشغال ولا تحدد السعر النهائي ولا تتلقى قيمة الخدمة.",masterNote:"البلد والمدينة والعملة والمهنيون عناصر إعداد. تبقى البنية نفسها في السنغال وفرنسا وأوروبا.",adherent:"عضو DIGIYLYFE",card:"عرض البطاقة",contact:"تواصل مباشر",commission:"عمولة DIGIYLYFE",whatsapp:"واتساب مباشر",qr:"QR · بطاقة DIGIYLYFE",qrText:"امسح الرمز لفتح هذا الحضور الرقمي وحفظه.",footer:"حضور مباشر · 0٪ عمولة · الخبرة من أجل حسن التعامل.",empty:"أضف المهنيين داخل CFG.professionals."}
+};
+
+const LANGS=[['fr','🇫🇷 FR'],['en','🇬🇧 EN'],['es','🇪🇸 ES'],['pt','🇵🇹 PT'],['de','🇩🇪 DE'],['it','🇮🇹 IT'],['nl','🇳🇱 NL'],['ar','🇸🇦 AR']];
+let lang='fr';
+
+function safeText(v,fallback=''){return (v===undefined||v===null||v==='')?fallback:String(v)}
+function safeHref(v){return /^https?:\/\//i.test(String(v||''))?String(v):''}
+function waHref(v){const digits=String(v||'').replace(/\D/g,'');return digits?`https://wa.me/${digits}`:''}
+function t(key){return (I18N[lang]&&I18N[lang][key])||I18N.fr[key]||key}
+
+function applyConfig(){
+  document.getElementById('brand').textContent=safeText(CFG.brand,'DIGIY BUILD');
+  const territory=document.getElementById('territoryLine');
+  territory.textContent=`${t('subtitle')} · ${safeText(CFG.territory,'[TERRITOIRE]')}`;
+  const hub=document.getElementById('hubLink');const hubUrl=safeHref(CFG.hubUrl);hub.href=hubUrl||'#';hub.classList.toggle('disabled',!hubUrl);
+  const join=document.getElementById('joinLink');const joinUrl=safeHref(CFG.joinUrl);join.href=joinUrl||'#';join.classList.toggle('disabled',!joinUrl);join.textContent=safeText(CFG.joinLabel,t('join'));
+}
+
+function renderLanguages(){
+  const box=document.getElementById('langs');box.innerHTML='';
+  if(!CFG.showLanguages){box.style.display='none';return}
+  LANGS.forEach(([code,label])=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.lang=code;b.classList.toggle('active',code===lang);b.addEventListener('click',()=>setLang(code));box.appendChild(b)});
+}
+
+function setLang(code){
+  lang=I18N[code]?code:'fr';
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n)});
+  renderLanguages();applyConfig();renderProfessionals();
+}
+
+function renderProfessionals(){
+  const root=document.getElementById('professionals');root.innerHTML='';
+  const list=Array.isArray(CFG.professionals)?CFG.professionals:[];
+  if(!list.length){root.innerHTML=`<div class="empty">${t('empty')}</div>`;return}
+  list.forEach(p=>{
+    const cardUrl=safeHref(p.cardUrl);const whatsapp=waHref(p.whatsapp);const img=safeHref(p.image);const qr=safeHref(p.qrImage);
+    const tags=(Array.isArray(p.tags)?p.tags:[]).filter(Boolean).map(x=>`<span class="chip">${safeText(x)}</span>`).join('');
+    const visual=img?`<img src="${img}" alt="${safeText(p.name,'Artisan')}" loading="lazy">`:`<div class="visual-placeholder">PHOTO ARTISAN<br>À CONFIGURER</div>`;
+    const qrBox=qr?`<img class="qr" src="${qr}" alt="QR ${safeText(p.name,'Artisan')}">`:`<div class="qr-placeholder">QR<br>À POSER</div>`;
+    const a=document.createElement('article');a.className='listing';
+    a.innerHTML=`
+      <a class="visual ${cardUrl?'':'disabled'}" href="${cardUrl||'#'}" target="_blank" rel="noopener">${visual}<span class="visual-hint">↗ ${t('card')}</span></a>
+      <div class="info">
+        <p class="eyebrow">${t('adherent')}</p>
+        <div class="name-row"><h2>${safeText(p.name,'[NOM ARTISAN]')}</h2><p class="activity">${safeText(p.activity,'[MÉTIER]')}</p><span class="area">📍 ${safeText(p.area,'[ZONE]')}</span></div>
+        <div class="chips">${tags}</div>
+        <p class="desc">${safeText(p.description,'[DESCRIPTION]')}</p>
+        <p class="rule">${safeText(p.rule,'Disponibilité, diagnostic, devis, matériaux, délai et montant final : accord direct avec l’artisan, sous sa responsabilité.')}</p>
+        <div class="direct"><div><strong>${t('contact')}</strong><span>${safeText(p.phoneDisplay,'[TÉLÉPHONE]')}</span></div><div><strong>${safeText(CFG.currency,'Tarif')}</strong><span>${safeText(p.priceLabel,'Sur devis')}</span></div><div><strong>0 %</strong><span>${t('commission')}</span></div></div>
+        <div class="qrrow">${qrBox}<div><strong>${t('qr')}</strong><span>${t('qrText')}</span></div></div>
+        <div class="actions"><a class="btn primary ${cardUrl?'':'disabled'}" href="${cardUrl||'#'}" target="_blank" rel="noopener">${t('card')}</a><a class="btn whatsapp ${whatsapp?'':'disabled'}" href="${whatsapp||'#'}" target="_blank" rel="noopener">${t('whatsapp')}</a></div>
+      </div>`;
+    root.appendChild(a);
+  });
+}
+
+setLang('fr');
+})();
+</script>
+</body>
+</html>
