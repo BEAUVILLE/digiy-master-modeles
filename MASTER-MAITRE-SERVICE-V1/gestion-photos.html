@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#4d365c">
+<title>Gestion galerie · DIGIY SERVICE</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--accent:#4d365c;--gold:#d8ad46;--cream:#f7f3ec;--paper:#fffefa;--ink:#35293b;--muted:#7b6f80;--line:#e7dfe9;--ok:#2f6b49;--bad:#a32b2b;--shadow:0 14px 38px rgba(77,54,92,.10)}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}.wrap{width:min(940px,calc(100% - 22px));margin:auto}
+header{background:var(--accent);color:#fff;border-bottom:4px solid var(--gold)}.head{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:1000}.brand small{display:block;margin-top:3px;color:#eedca9;font-size:9px;letter-spacing:.08em}.logout{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:9px 11px;font-size:9px;font-weight:1000}
+main{padding:20px 0 38px}.title{font-size:clamp(30px,6vw,50px);margin:2px 0 8px}.sub{margin:0 0 15px;color:var(--muted);font-size:12px;line-height:1.55}.ey{color:var(--gold);font-size:9px;font-weight:1000;letter-spacing:.12em;text-transform:uppercase}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow);margin-bottom:13px}.hidden{display:none!important}
+.help{background:#fff7dc;border:1px solid #ead28a;border-left:4px solid var(--gold);border-radius:15px;padding:13px;font-size:11px;line-height:1.6;color:#605325}.help b{color:var(--accent)}
+.grid{display:grid;grid-template-columns:1fr 160px;gap:9px}.field{display:grid;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:9px;color:var(--muted);font-weight:1000;text-transform:uppercase}.field input{width:100%;min-height:46px;border:1px solid #d7c8da;border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
+.btn{border:0;border-radius:999px;padding:11px 13px;font-size:9px;font-weight:1000}.primary{background:var(--accent);color:#fff}.secondary{background:#fff;border:1px solid var(--line);color:var(--accent)}.danger{background:#fff;border:1px solid #e3c5c5;color:var(--bad)}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.status{min-height:18px;margin-top:9px;font-size:10px;font-weight:900;line-height:1.45;color:var(--ok)}.status.error{color:var(--bad)}
+.preview{display:none;grid-template-columns:130px 1fr;gap:12px;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}.preview.show{display:grid}.preview img{width:130px;height:130px;object-fit:cover;border-radius:13px;border:1px solid var(--line);background:#f1eaf4}.preview p{color:var(--muted);font-size:10px;line-height:1.55;word-break:break-all}
+.list{display:grid;gap:9px}.row{display:grid;grid-template-columns:88px 1fr auto;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:9px}.thumb{width:88px;height:88px;border-radius:12px;overflow:hidden;background:#f1eaf4;display:grid;place-items:center;color:var(--accent);font-size:9px;font-weight:1000}.thumb img{width:100%;height:100%;object-fit:cover}.meta{min-width:0}.meta b{display:block}.meta .url{margin-top:5px;color:var(--muted);font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tools{display:grid;grid-template-columns:1fr;gap:5px}.tools .btn{min-width:82px;padding:8px 10px}
+.authGrid{display:grid;grid-template-columns:1fr 150px;gap:8px}.authCode{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.note{color:var(--muted);font-size:10px;line-height:1.55}.count{font-size:10px;font-weight:1000;color:var(--accent)}
+@media(max-width:700px){.grid,.authGrid{grid-template-columns:1fr}.preview{grid-template-columns:88px 1fr}.preview img{width:88px;height:88px}.row{grid-template-columns:72px 1fr}.thumb{width:72px;height:72px}.tools{grid-column:1/-1;grid-template-columns:repeat(4,1fr)}.tools .btn{min-width:0;padding:8px 5px;font-size:8px}.head{align-items:flex-start;padding:13px 0}.logout{margin-top:3px}}
+</style>
+</head>
+<body>
+<header><div class="wrap head"><div class="brand">DIGIY SERVICE<small>GESTION PRIVÉE DE LA GALERIE · URL UNIQUEMENT</small></div><button class="logout" id="logout" type="button">DÉCONNEXION</button></div></header>
+<main class="wrap">
+  <section id="authPanel" class="panel">
+    <div class="ey">ACCÈS PROPRIÉTAIRE</div>
+    <h1 class="title">Connexion sécurisée.</h1>
+    <p class="sub">Utilisez l’email propriétaire autorisé. Aucun nouveau compte n’est créé depuis cette page.</p>
+    <div class="authGrid">
+      <div class="field"><label for="authEmail">Email propriétaire</label><input id="authEmail" type="email" autocomplete="email" placeholder="votre@email.com"></div>
+      <button class="btn primary" id="sendMagic" type="button">ENVOYER LE LIEN</button>
+    </div>
+    <div class="authCode">
+      <p class="note">Si votre email contient un code au lieu d’un lien :</p>
+      <div class="authGrid">
+        <div class="field"><label for="authCode">Code reçu</label><input id="authCode" inputmode="numeric" autocomplete="one-time-code" placeholder="123456"></div>
+        <button class="btn secondary" id="verifyCode" type="button">VALIDER LE CODE</button>
+      </div>
+    </div>
+    <div class="status" id="authStatus"></div>
+  </section>
+  <section id="appPanel" class="hidden">
+    <div class="ey">ESPACE PROPRIÉTAIRE · PHOTOS</div>
+    <h1 class="title">Ma galerie.</h1>
+    <p class="sub"><span id="siteName">[ÉTABLISSEMENT]</span> · <span class="count" id="count"></span></p>
+    <div class="help"><b>Conseil DIGIYLYFE :</b> hébergez vos photos sur votre Google Drive, choisissez <b>« Toute personne disposant du lien »</b> en lecture, copiez le lien puis collez-le ici. <b>Supabase ne stocke jamais la photo :</b> seulement son URL, sa légende, son ordre et son état.</div>
+    <section class="panel">
+      <div class="ey" id="formMode">AJOUTER UNE PHOTO</div>
+      <div class="grid" style="margin-top:10px">
+        <div class="field"><label for="imageUrl">URL de la photo</label><input id="imageUrl" type="url" placeholder="https://drive.google.com/file/d/.../view"></div>
+        <div class="field"><label for="caption">Légende</label><input id="caption" type="text" maxlength="80" placeholder="Ex. Soin visage"></div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" id="previewBtn" type="button">👁️ APERÇU</button>
+        <button class="btn primary" id="saveBtn" type="button">➕ AJOUTER À LA GALERIE</button>
+        <button class="btn secondary hidden" id="cancelEdit" type="button">ANNULER</button>
+      </div>
+      <div class="preview" id="preview">
+        <img id="previewImg" alt="Aperçu de la photo">
+        <div><b>Aperçu avant validation</b><p id="normalizedUrl"></p></div>
+      </div>
+      <div class="status" id="galleryStatus"></div>
+    </section>
+    <div class="list" id="galleryList"></div>
+    <p class="note">Maximum du MASTER : 9 photos. Pour alléger le site, DIGIYLYFE recommande de remplacer les anciennes réalisations plutôt que d’accumuler les images.</p>
+  </section>
+</main>
+<script>
+"use strict";
+const SUPABASE_URL="https://wesqmwjjtsefyjnluosj.supabase.co";
+const SUPABASE_KEY="sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+const SITE_SLUG="[SITE-SLUG-A-CONFIGURER]";
+const SITE_TABLE="digiy_service_sites";
+const GALLERY_TABLE="digiy_service_gallery";
+const MAX_PHOTOS=9;
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+let site=null, rows=[], editingId=null;
+const $=id=>document.getElementById(id);
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+function driveId(url){
+  const s=String(url||"");
+  for(const p of [/\/file\/d\/([a-zA-Z0-9_-]+)/,/[\?&]id=([a-zA-Z0-9_-]+)/,/\/d\/([a-zA-Z0-9_-]+)/]){
+    const m=s.match(p); if(m)return m[1];
+  }
+  return null;
+}
+function normalizeImageUrl(raw){
+  const url=String(raw||"").trim();
+  if(!/^https:\/\//i.test(url))throw new Error("L’URL doit commencer par https://");
+  const id=driveId(url);
+  if(id)return "https://drive.google.com/thumbnail?id="+encodeURIComponent(id)+"&sz=w1600";
+  return url;
+}
+function setStatus(id,text,error=false){const el=$(id);el.textContent=text||"";el.classList.toggle("error",!!error)}
+function updateCount(){$("count").textContent=rows.length+" / "+MAX_PHOTOS+" photos"}
+async function sendMagic(){
+  const email=$("authEmail").value.trim();
+  if(!email){setStatus("authStatus","Indiquez l’email propriétaire.",true);return}
+  try{
+    $("sendMagic").disabled=true;setStatus("authStatus","Envoi du lien sécurisé…");
+    const redirectTo=new URL("./gestion-photos.html",location.href).href;
+    const {error}=await db.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:redirectTo}});
+    if(error)throw error;
+    setStatus("authStatus","✓ Email envoyé. Ouvrez le magic link reçu.");
+  }catch(err){setStatus("authStatus","⚠️ "+(err?.message||"Envoi impossible."),true)}
+  finally{$("sendMagic").disabled=false}
+}
+async function verifyCode(){
+  const email=$("authEmail").value.trim(),token=$("authCode").value.trim();
+  if(!email||!token){setStatus("authStatus","Email et code requis.",true);return}
+  try{
+    $("verifyCode").disabled=true;setStatus("authStatus","Vérification…");
+    const {error}=await db.auth.verifyOtp({email,token,type:"email"});
+    if(error)throw error;
+    await boot();
+  }catch(err){setStatus("authStatus","⚠️ "+(err?.message||"Code invalide."),true)}
+  finally{$("verifyCode").disabled=false}
+}
+async function loadSite(){
+  if(!SITE_SLUG||SITE_SLUG.startsWith("["))throw new Error("SITE_SLUG doit être configuré dans le MASTER.");
+  const {data,error}=await db.from(SITE_TABLE).select("slug,name").eq("slug",SITE_SLUG).single();
+  if(error)throw error;
+  site=data;
+  $("siteName").textContent=site.name||site.slug;
+}
+async function loadGallery(){
+  const {data,error}=await db.from(GALLERY_TABLE).select("id,image_url,caption,position,is_active").eq("site_slug",SITE_SLUG).order("position",{ascending:true});
+  if(error)throw error;
+  rows=Array.isArray(data)?data:[];
+  renderRows();updateCount();
+}
+function renderRows(){
+  const list=$("galleryList");list.innerHTML="";
+  if(!rows.length){list.innerHTML='<div class="panel note">Aucune photo dans la galerie pour le moment.</div>';return}
+  rows.forEach((r,i)=>{
+    const el=document.createElement("div");el.className="row";
+    const thumb=document.createElement("div");thumb.className="thumb";
+    if(r.image_url){const img=document.createElement("img");img.src=r.image_url;img.alt=r.caption||("Photo "+(i+1));thumb.appendChild(img)}else thumb.textContent="PHOTO "+(i+1);
+    const meta=document.createElement("div");meta.className="meta";
+    meta.innerHTML="<b>"+esc(r.caption||("Photo "+(i+1)))+"</b><div class='url'>"+esc(r.image_url||"")+"</div>";
+    const tools=document.createElement("div");tools.className="tools";
+    tools.innerHTML="<button class='btn secondary' data-up='"+r.id+"'>↑</button><button class='btn secondary' data-down='"+r.id+"'>↓</button><button class='btn secondary' data-edit='"+r.id+"'>REMPLACER</button><button class='btn danger' data-del='"+r.id+"'>SUPPRIMER</button>";
+    el.append(thumb,meta,tools);list.appendChild(el);
+  });
+  document.querySelectorAll("[data-up]").forEach(b=>b.onclick=()=>move(b.dataset.up,-1));
+  document.querySelectorAll("[data-down]").forEach(b=>b.onclick=()=>move(b.dataset.down,1));
+  document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>startEdit(b.dataset.edit));
+  document.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>removePhoto(b.dataset.del));
+}
+function preview(){
+  try{
+    const url=normalizeImageUrl($("imageUrl").value);
+    $("previewImg").src=url;$("normalizedUrl").textContent=url;$("preview").classList.add("show");
+    $("previewImg").onload=()=>setStatus("galleryStatus","✓ Aperçu chargé. Vous pouvez valider.");
+    $("previewImg").onerror=()=>setStatus("galleryStatus","⚠️ La photo ne peut pas être affichée. Vérifiez que le lien est public.",true);
+  }catch(err){$("preview").classList.remove("show");setStatus("galleryStatus",err.message,true)}
+}
+function startEdit(id){
+  const r=rows.find(x=>String(x.id)===String(id));if(!r)return;
+  editingId=r.id;$("imageUrl").value=r.image_url||"";$("caption").value=r.caption||"";
+  $("formMode").textContent="REMPLACER UNE PHOTO";$("saveBtn").textContent="🔄 ENREGISTRER LE REMPLACEMENT";$("cancelEdit").classList.remove("hidden");
+  preview();scrollTo({top:0,behavior:"smooth"});
+}
+function resetForm(){
+  editingId=null;$("imageUrl").value="";$("caption").value="";$("preview").classList.remove("show");
+  $("formMode").textContent="AJOUTER UNE PHOTO";$("saveBtn").textContent="➕ AJOUTER À LA GALERIE";$("cancelEdit").classList.add("hidden");
+}
+async function savePhoto(){
+  try{
+    const image_url=normalizeImageUrl($("imageUrl").value),caption=$("caption").value.trim()||"Photo";
+    $("saveBtn").disabled=true;setStatus("galleryStatus","Enregistrement…");
+    if(editingId){
+      const {error}=await db.from(GALLERY_TABLE).update({image_url,caption}).eq("id",editingId).eq("site_slug",SITE_SLUG);
+      if(error)throw error;
+    }else{
+      if(rows.length>=MAX_PHOTOS)throw new Error("La galerie a atteint la limite de "+MAX_PHOTOS+" photos.");
+      const {error}=await db.from(GALLERY_TABLE).insert({site_slug:SITE_SLUG,image_url,caption,position:rows.length+1,is_active:true});
+      if(error)throw error;
+    }
+    resetForm();await loadGallery();setStatus("galleryStatus","✓ Galerie mise à jour.");
+  }catch(err){setStatus("galleryStatus","⚠️ "+(err?.message||"Enregistrement impossible."),true)}
+  finally{$("saveBtn").disabled=false}
+}
+async function removePhoto(id){
+  if(!confirm("Supprimer cette photo de la galerie ?"))return;
+  try{
+    const {error}=await db.from(GALLERY_TABLE).delete().eq("id",id).eq("site_slug",SITE_SLUG);
+    if(error)throw error;
+    await loadGallery();await persistOrder();setStatus("galleryStatus","✓ Photo supprimée.");
+  }catch(err){setStatus("galleryStatus","⚠️ "+(err?.message||"Suppression impossible."),true)}
+}
+async function move(id,delta){
+  const index=rows.findIndex(r=>String(r.id)===String(id)),next=index+delta;
+  if(index<0||next<0||next>=rows.length)return;
+  [rows[index],rows[next]]=[rows[next],rows[index]];renderRows();updateCount();
+  try{await persistOrder();setStatus("galleryStatus","✓ Ordre mis à jour.")}
+  catch(err){setStatus("galleryStatus","⚠️ "+(err?.message||"Ordre non enregistré."),true);await loadGallery()}
+}
+async function persistOrder(){
+  for(let i=0;i<rows.length;i++){
+    const {error}=await db.from(GALLERY_TABLE).update({position:i+1}).eq("id",rows[i].id).eq("site_slug",SITE_SLUG);
+    if(error)throw error;
+    rows[i].position=i+1;
+  }
+}
+async function boot(){
+  const {data:{session}}=await db.auth.getSession();
+  if(!session){$("authPanel").classList.remove("hidden");$("appPanel").classList.add("hidden");return}
+  try{
+    await loadSite();
+    await loadGallery();
+    $("authPanel").classList.add("hidden");$("appPanel").classList.remove("hidden");
+    setStatus("authStatus","");
+  }catch(err){
+    $("authPanel").classList.remove("hidden");$("appPanel").classList.add("hidden");
+    setStatus("authStatus","⚠️ Accès propriétaire non autorisé pour ce site. "+(err?.message||""),true);
+  }
+}
+$("sendMagic").onclick=sendMagic;
+$("verifyCode").onclick=verifyCode;
+$("previewBtn").onclick=preview;
+$("saveBtn").onclick=savePhoto;
+$("cancelEdit").onclick=resetForm;
+$("logout").onclick=async()=>{await db.auth.signOut();location.href="./index.html"};
+db.auth.onAuthStateChange(()=>setTimeout(boot,0));
+boot();
+</script>
+</body>
+</html>
