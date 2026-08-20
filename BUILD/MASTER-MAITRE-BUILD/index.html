@@ -8,6 +8,9 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#073f32">
 <meta name="digiy-master" content="BUILD-UNIVERSAL-V1-20260820">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="./icon-192.png">
 <style>
 :root{--green:#073f32;--green2:#0d634b;--gold:#d8ad46;--cream:#f6f1e5;--paper:#fffefa;--ink:#173b31;--muted:#6e8179;--line:#dfe8e2;--shadow:0 12px 28px rgba(7,63,50,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--cream);color:var(--ink)}a{text-decoration:none;color:inherit}button{font:inherit}.wrap{width:min(1040px,calc(100% - 24px));margin:auto}
@@ -137,6 +140,7 @@ function renderProfessionals(){
 }
 
 setLang('fr');
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('[DIGIY BUILD PWA]',err));});}
 })();
 </script>
 </body>

@@ -10,8 +10,11 @@ Ce dossier n'est pas un site client. C'est un **moule de fabrication**.
 
 ## Fichiers
 
-- `index.html` : moule exécutable et autonome.
-- `README.md` : règles d'utilisation et de protection du MASTER.
+- `index.html` : moule exécutable et autonome ;
+- `README.md` : règles d'utilisation et de protection du MASTER ;
+- `manifest.webmanifest` : identité PWA installable ;
+- `sw.js` : cache léger et repli hors connexion ;
+- `icon-192.png` et `icon-512.png` : icônes PWA neutres à personnaliser dans la déclinaison.
 
 ## Principe
 
@@ -37,6 +40,7 @@ La structure est inspirée de la version **SARLAT CHEZ BAPTISTE**, choisie comme
 - paiement direct ;
 - QR / carte officielle ;
 - navigation mobile compacte ;
+- PWA légère ;
 - 0 % commission DIGIYLYFE.
 
 Aucun contenu personnel de Chez Baptiste n'est conservé dans ce MASTER.
@@ -81,6 +85,17 @@ Le calendrier part automatiquement de la date réelle du jour. **Aucune vieille 
 - les dates occupées sont placées dans `blockedDates` ;
 - les dates fermées sont placées dans `closedDates`.
 
+## PWA
+
+La PWA est une couche légère de confort, **pas un logiciel métier**.
+
+- `index.html` déclare `manifest.webmanifest` ;
+- `index.html` enregistre `sw.js` ;
+- le service worker met en cache le cœur local du MASTER ;
+- en cas de coupure réseau, une navigation déjà chargée peut retomber sur `index.html` ;
+- les appels WhatsApp, email, cartes et ressources externes nécessitent naturellement le réseau ;
+- lors d'une déclinaison client, adapter le nom, les icônes et les métadonnées du manifest si nécessaire.
+
 ## Règles absolues
 
 1. Ne jamais ajouter de `CNAME` dans ce dossier.
@@ -93,6 +108,7 @@ Le calendrier part automatiquement de la date réelle du jour. **Aucune vieille 
 8. Le professionnel reste responsable de ses prix, disponibilités, conditions, obligations et confirmations.
 9. DIGIYLYFE ne perçoit pas le paiement du séjour et ne confirme pas la réservation à la place de l'hébergeur.
 10. Le MASTER reste en `noindex,nofollow` et en `masterMode:true` jusqu'à validation de la déclinaison.
+11. Le cache PWA ne doit jamais servir à figer des disponibilités ou informations sensibles : les données opérationnelles doivent être revalidées avant publication.
 
 ## Déclinaison Sénégal
 
@@ -115,6 +131,9 @@ Adapter principalement : devise €, téléphone local, IBAN/virement/Sendwave o
 - boutons ;
 - formulaire ;
 - navigation mobile ;
+- manifest PWA ;
+- service worker ;
+- icônes ;
 - texte 0 % commission ;
 - aucune donnée du client précédent ;
 - retrait du mode atelier uniquement après validation humaine.

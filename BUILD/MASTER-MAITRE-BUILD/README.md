@@ -10,8 +10,11 @@ Ce dossier n'est pas un site client. C'est un **moule de fabrication** destiné 
 
 ## Fichiers
 
-- `index.html` : moule exécutable et autonome.
-- `README.md` : règles d'utilisation et de protection du MASTER.
+- `index.html` : moule exécutable et autonome ;
+- `README.md` : règles d'utilisation et de protection du MASTER ;
+- `manifest.webmanifest` : identité PWA installable ;
+- `sw.js` : cache léger et repli hors connexion ;
+- `icon-192.png` et `icon-512.png` : icônes PWA neutres à personnaliser dans la déclinaison.
 
 ## Principe
 
@@ -77,6 +80,17 @@ Le MASTER prévoit :
 
 Les données propres à l'artisan restent saisies telles qu'elles ont été validées. La traduction automatique des éléments métier n'est pas imposée par le MASTER.
 
+## PWA
+
+La PWA reste une **couche légère de présence**, pas un logiciel métier.
+
+- `index.html` déclare `manifest.webmanifest` ;
+- `index.html` enregistre `sw.js` ;
+- le service worker met en cache le cœur local du MASTER ;
+- une navigation déjà chargée peut retomber sur `index.html` hors connexion ;
+- WhatsApp, cartes externes, liens clients et médias distants nécessitent naturellement le réseau ;
+- les icônes et métadonnées du manifest sont adaptées lors de la déclinaison si besoin.
+
 ## Règles absolues
 
 1. Ne jamais ajouter de `CNAME` dans ce dossier.
@@ -88,6 +102,7 @@ Les données propres à l'artisan restent saisies telles qu'elles ont été vali
 7. La carte ou la fiche d'un adhérent reste une présence numérique, pas une certification.
 8. Les prix, devis, disponibilités et obligations relèvent du professionnel.
 9. Toute évolution majeure du MASTER est testée avant propagation.
+10. Le cache PWA ne doit pas transformer une ancienne information client en donnée supposée actuelle : les contenus opérationnels sont revalidés avant publication.
 
 ## Déclinaison Sénégal
 
@@ -109,6 +124,9 @@ Adapter principalement : zones d'intervention, téléphone local, euro si un pri
 - prix ou mention `Sur devis` ;
 - langues ;
 - affichage mobile ;
+- manifest PWA ;
+- service worker ;
+- icônes ;
 - doctrine 0 % commission ;
 - aucune donnée du client précédent.
 
