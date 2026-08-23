@@ -1,0 +1,19 @@
+{
+  "validation": "DIGIYLYFE-CORE-RUNTIME-SMOKE-2026-08-23",
+  "mode": "master-only",
+  "target": {"country": "SN", "territory": "petite-cote"},
+  "expected": {
+    "territory_id": "SN-PETITE-COTE",
+    "active_zone_count": 7,
+    "core_need_count": 9,
+    "planned_zones_excluded": ["nianing", "joal-fadiouth"],
+    "generic_action": "OUVRIR"
+  },
+  "guards": {
+    "planned_territories_excluded": true,
+    "planned_zones_excluded": true,
+    "fail_closed": true,
+    "production_mutation": false
+  },
+  "next_step": "connect public territory engine to runtime after review"
+}
