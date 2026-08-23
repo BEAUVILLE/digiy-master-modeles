@@ -45,12 +45,18 @@ Les zones sont des repères terrain. Elles n'imposent aucune capacité métier.
 Le professionnel garde un ancrage principal distinct de sa zone de travail réelle :
 
 - `base_zone_id` — une seule zone de base ;
-- `service_zone_ids` — zéro à plusieurs zones d'intervention ;
+- `service_zone_ids` — zéro à plusieurs zones d'intervention supplémentaires ;
 - `service_territory_ids` — zéro à plusieurs territoires entiers couverts.
+
+La zone de base est toujours considérée comme desservie, même sans ligne de couverture explicite.
+
+La couverture effective suit donc :
+
+`base_zone_id + service_zone_ids + zones actives des service_territory_ids validés`
 
 Exemple : un professionnel peut être basé à **Saly** et intervenir à **Mbour** ou **AIBD** sans changer sa zone de base.
 
-Une couverture extérieure ne réattribue jamais automatiquement le professionnel à un autre territoire. Elle reste une couverture explicite, validée séparément.
+Une couverture extérieure ne réattribue jamais automatiquement le professionnel à un autre territoire. Elle reste une couverture explicite, validée séparément. Tant qu'une destination extérieure n'est pas structurée et validée, elle reste en attente et n'étend pas automatiquement les résultats publics.
 
 Règle technique : `config/coverage-policy.json`.
 
@@ -70,6 +76,22 @@ Le moteur affiche ensuite la présence avec l'action générique **OUVRIR**.
 
 Les UUID et identifiants historiques de production peuvent rester en place via l'adaptateur `config/production-adapter.json`. Le champ historique `zone_id` peut être traduit en `base_zone_id` sans migration brutale de la production.
 
+## Validation pilote Saly
+
+Un contrôle **lecture seule** de la production a été effectué sur Saly le 23 août 2026.
+
+Résultat agrégé :
+
+- 9 présences de type `professional` actives et publiques ;
+- 9/9 raccordables au contrat ;
+- 9/9 avec un `need_id` résolvable ;
+- 9/9 avec une `public_url` ;
+- 1 présence sans ligne de couverture explicite, correctement couverte par la règle `base_zone_id = couverture minimale` ;
+- 6 présences utilisent déjà un marqueur de couverture Petite Côte ;
+- 1 référence de couverture extérieure existe et reste en attente de validation territoriale.
+
+Aucune identité professionnelle réelle n'est conservée dans le MASTER. Le rapport agrégé est stocké dans `validation/saly-pilot-readonly-2026-08-23.json`.
+
 ## Données professionnelles
 
 Aucun professionnel réel ne doit être stocké dans ce MASTER.
@@ -86,9 +108,11 @@ Le niveau commercial d'un professionnel — carte, présence, site ou capacités
 4. Utiliser les identifiants canoniques pour le CORE ; adapter la production existante sans migration brutale.
 5. Ne jamais confondre zone de base et zones d'intervention.
 6. Une zone d'intervention ne modifie jamais automatiquement l'ancrage du professionnel.
-7. Ne jamais exposer le niveau commercial du professionnel dans l'arbre territorial.
-8. L'action générique reste **OUVRIR**.
-9. Toute règle universelle remonte au CORE ; toute règle pays remonte au MASTER PAYS Sénégal.
+7. La zone de base constitue toujours la couverture minimale implicite.
+8. Une couverture extérieure non validée n'étend pas automatiquement les résultats publics.
+9. Ne jamais exposer le niveau commercial du professionnel dans l'arbre territorial.
+10. L'action générique reste **OUVRIR**.
+11. Toute règle universelle remonte au CORE ; toute règle pays remonte au MASTER PAYS Sénégal.
 
 ---
 
