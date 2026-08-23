@@ -23,9 +23,34 @@ Ce dossier ne doit jamais devenir une copie d'un site pays. Il décrit la struct
 
 - `config/languages.json` — socle multilingue commun.
 - `config/countries.json` — pays pilotes et paramètres locaux.
-- `config/territories.json` — territoires rattachés à leur pays.
+- `config/territories.json` — instantané de compatibilité historique ; ne doit plus être la source runtime prioritaire.
 - `config/needs.json` — familles universelles visibles au visiteur.
 - `config/capabilities.json` — capacités internes activables derrière un professionnel.
+- `config/runtime-contract.json` — contrat de découverte automatique.
+- `config/runtime-registry.json` — registre des pays raccordables au runtime.
+- `runtime/core-runtime.js` — loader générique pays → territoire → zones → besoins.
+
+## Runtime auto-raccordable V1
+
+Le moteur ne doit plus contenir de listes géographiques écrites à la main.
+
+La découverte suit désormais :
+
+`runtime-registry → MASTER PAYS → MASTER TERRITOIRE → zones actives → besoins CORE`
+
+Le registre indique où se trouvent la configuration pays, la liste des territoires et, lorsqu'il existe, le garde géographique du pays. Le MASTER PAYS pointe ensuite vers le MASTER TERRITOIRE concerné. Le territoire fournit ses zones actives. Les besoins viennent du CORE.
+
+Règles de sécurité du runtime :
+
+- pays présent et activé dans le registre ;
+- territoire `active` uniquement ;
+- zone `active` uniquement ;
+- une zone `planned` n'est jamais publique ;
+- une couverture de territoire ne rend jamais automatiquement publique une zone planifiée ;
+- toute incohérence de configuration bloque l'expansion au lieu d'inventer une donnée ;
+- les professionnels continuent de venir de la donnée vivante via l'adaptateur du territoire.
+
+Le premier raccord automatique est le Sénégal / Petite Côte. La France reste volontairement hors du registre automatique V1 tant qu'un MASTER PAYS FRANCE équivalent n'est pas posé ; le moteur public existant n'est pas modifié par cette étape.
 
 ## Règle pays
 
@@ -64,6 +89,12 @@ Un nouveau pays est conforme si son lancement peut se faire principalement par :
 - tests téléphone + ordinateur.
 
 Si le lancement exige de dupliquer le moteur, le MASTER CORE doit être corrigé avant expansion.
+
+## Porte suivante
+
+Le runtime V1 est posé dans le MASTER et ne touche pas encore `digiylyfe.com/territoire.html`.
+
+La prochaine porte consiste à remplacer dans le moteur public les constantes géographiques codées en dur par ce loader, sans changer les routes publiques, la logique métier, les professionnels, les liens directs ni les filtres déjà validés.
 
 ---
 
