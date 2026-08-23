@@ -13,9 +13,10 @@
     {
       "id": "FR",
       "slug": "france",
-      "enabled": false,
-      "status": "legacy-runtime-pending-country-master",
-      "note": "La France reste servie par le moteur public existant tant qu'un MASTER PAYS FRANCE équivalent n'est pas posé. Ne pas la découvrir automatiquement via ce registre V1."
+      "enabled": true,
+      "country_config": "../../MASTER-PAYS-FRANCE-V1/config/country.json",
+      "territories_config": "../../MASTER-PAYS-FRANCE-V1/config/territories.json",
+      "guard_config": "../../MASTER-PAYS-FRANCE-V1/config/geography-freeze-v1.json"
     }
   ],
   "rules": {
