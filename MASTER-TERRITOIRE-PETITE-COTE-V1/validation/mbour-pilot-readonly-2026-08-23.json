@@ -1,0 +1,43 @@
+{
+  "validation": "MBOUR-PILOT-READONLY-2026-08-23",
+  "mode": "read-only",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "target_zone_id": "SN-PETITE-COTE-MBOUR",
+  "source": "Supabase production",
+  "rules": {
+    "no_production_mutation": true,
+    "no_real_professional_identity_stored": true,
+    "aggregate_only": true
+  },
+  "result": {
+    "professional_count_should_appear": 9,
+    "based_in_target_zone_count": 1,
+    "explicit_target_zone_service_count": 5,
+    "whole_territory_service_count": 8,
+    "unmapped_need_count": 0,
+    "missing_public_url_count": 0,
+    "need_counts": {
+      "artisan": 5,
+      "shopping": 1,
+      "transport": 3
+    },
+    "base_zone_distribution": {
+      "aibd": 1,
+      "dakar": 1,
+      "mbour": 1,
+      "saly": 6
+    },
+    "cross_territory_base_count": 1
+  },
+  "interpretation": {
+    "contract_status": "pass",
+    "target_zone_eligibility_rule_validated": true,
+    "base_zone_identity_preserved": true,
+    "service_zone_does_not_rehome_professional": true,
+    "whole_territory_marker_expands_coverage": true,
+    "cross_territory_professional_keeps_original_base": true,
+    "deduplication_by_professional_id_required": true
+  },
+  "conclusion": "Le pilote Mbour confirme qu'un professionnel peut apparaître dans une zone cible parce qu'il y est basé, qu'il la dessert explicitement ou qu'il couvre le territoire validé, sans être artificiellement réattribué à cette zone. Le CORE doit préserver l'ancrage d'origine et dédupliquer les résultats par professional_id."
+}
