@@ -1,0 +1,34 @@
+{
+  "contract": "DIGIYLYFE-PRO-SOVEREIGNTY-CONTRACT-V1",
+  "principle": "DIGIYLYFE ouvre la porte. Le professionnel garde les clés.",
+  "purpose": "Garantir que l'expansion mondiale de DIGIYLYFE renforce l'autonomie du professionnel au lieu de créer une dépendance technique ou commerciale.",
+  "professional_rights": {
+    "customer_relationship": "La relation commerciale reste directe entre le professionnel et son client.",
+    "direct_contact": "Le professionnel peut exposer ses moyens de contact directs lorsqu'il les active : téléphone, WhatsApp, email, réservation ou autre canal validé.",
+    "channel_freedom": "Le professionnel peut continuer à utiliser ses propres réseaux sociaux, plateformes, outils, domaine et canaux commerciaux.",
+    "identity_independence": "L'identité commerciale du professionnel ne dépend pas de DIGIYLYFE et peut continuer d'exister hors de l'écosystème.",
+    "content_portability": "Les contenus et données fournis par le professionnel et qu'il est en droit de réutiliser doivent rester récupérables dans un format exploitable, sous réserve des contraintes de confidentialité, de sécurité et de droit applicables.",
+    "exit_freedom": "Le professionnel peut quitter DIGIYLYFE sans verrou technique artificiel ; la rétention doit venir de la valeur du service, jamais de la captivité."
+  },
+  "commercial_rules": {
+    "zero_percent_commission_core_principle": true,
+    "no_forced_transaction_intermediation": true,
+    "no_exclusive_channel_requirement": true,
+    "no_lock_in_as_retention_strategy": true,
+    "direct_relationship_is_default": true,
+    "platform_value_must_come_from_service": true
+  },
+  "technical_rules": {
+    "core_world_does_not_own_professional_identity": true,
+    "country_or_territory_assignment_does_not_transfer_professional_ownership": true,
+    "public_discovery_and_professional_transaction_channels_are_decoupled": true,
+    "direct_contact_actions_remain_explicit": true,
+    "professional_can_link_to_owned_or_authorized_external_channels": true,
+    "professional_live_data_remains_outside_master": true,
+    "exit_must_not_corrupt_professional_source_content": true,
+    "portability_scope_is_limited_to_data_the_professional_may_lawfully_receive": true,
+    "privacy_security_and_legal_constraints_override_export": true
+  },
+  "world_rule": "Même CORE, mêmes droits de souveraineté professionnelle, adaptations locales par pays et territoire.",
+  "guard": "Toute future fonctionnalité qui exige la captivité du professionnel pour fonctionner doit être revue avant intégration au CORE."
+}
