@@ -1,0 +1,25 @@
+{
+  "country": {
+    "id": "SN",
+    "slug": "senegal",
+    "label": "Sénégal",
+    "iso2": "SN",
+    "iso3": "SEN",
+    "currency": {
+      "code": "XOF",
+      "label": "FCFA"
+    },
+    "phone": {
+      "calling_code": "+221"
+    },
+    "timezone": "Africa/Dakar",
+    "default_language": "fr",
+    "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+    "local_languages": [
+      {"code": "wo", "label": "Wolof", "status": "progressive"},
+      {"code": "ff", "label": "Pulaar", "status": "future"},
+      {"code": "srr", "label": "Sérère", "status": "future"}
+    ],
+    "status": "pilot"
+  }
+}
