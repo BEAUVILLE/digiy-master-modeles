@@ -1,0 +1,19 @@
+{
+  "master": "MASTER-PAYS-SENEGAL-V1",
+  "country_id": "SN",
+  "inherits": {
+    "core": "../MASTER-CORE-WORLD-V1",
+    "needs": "../MASTER-CORE-WORLD-V1/config/needs.json",
+    "languages": "../MASTER-CORE-WORLD-V1/config/languages.json",
+    "capabilities": "../MASTER-CORE-WORLD-V1/config/capabilities.json"
+  },
+  "rules": {
+    "country_first_operational_layer": true,
+    "isolate_public_results_by_country": true,
+    "duplicate_core_engine": false,
+    "generic_professional_action": "OUVRIR",
+    "publish_planned_territories": false,
+    "publish_unvalidated_local_translations": false,
+    "store_real_professionals_in_master": false
+  }
+}
