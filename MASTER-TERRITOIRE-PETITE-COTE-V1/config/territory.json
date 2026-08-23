@@ -1,0 +1,14 @@
+{
+  "territory": {
+    "id": "SN-PETITE-COTE",
+    "country_id": "SN",
+    "slug": "petite-cote",
+    "label": "Petite Côte",
+    "status": "active",
+    "public_route": "https://digiylyfe.com/territoire.html?zone=petite-cote",
+    "inherit_needs_from_core": true,
+    "inherit_capabilities_from_core": true,
+    "inherit_languages_from_country": true,
+    "generic_professional_action": "OUVRIR"
+  }
+}
