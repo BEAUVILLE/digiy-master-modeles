@@ -1,0 +1,41 @@
+{
+  "validation": "SOMONE-PILOT-READONLY-2026-08-23",
+  "mode": "read-only",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "target_zone_id": "SN-PETITE-COTE-SOMONE",
+  "source": "Supabase production",
+  "rules": {
+    "no_production_mutation": true,
+    "no_real_professional_identity_stored": true,
+    "aggregate_only": true
+  },
+  "result": {
+    "professional_count_should_appear": 8,
+    "based_in_target_zone_count": 0,
+    "explicit_target_zone_service_count": 0,
+    "whole_territory_service_count": 8,
+    "unmapped_need_count": 0,
+    "missing_public_url_count": 0,
+    "need_counts": {
+      "artisan": 4,
+      "shopping": 1,
+      "transport": 3
+    },
+    "base_zone_distribution": {
+      "aibd": 1,
+      "dakar": 1,
+      "saly": 6
+    }
+  },
+  "interpretation": {
+    "contract_status": "pass",
+    "territory_only_coverage_rule_validated": true,
+    "active_target_zone_can_receive_results_without_direct_rows": true,
+    "base_zone_identity_preserved": true,
+    "no_synthetic_base_assignment": true,
+    "zone_and_need_filters_remain_distinct": true,
+    "deduplication_by_professional_id_required": true
+  },
+  "conclusion": "Le pilote Somone confirme qu'une zone active peut afficher des professionnels même lorsqu'aucun professionnel n'y est basé et qu'aucune couverture Somone explicite n'existe, dès lors que des professionnels couvrent explicitement le territoire Petite Côte validé. Cette couverture territoriale n'invente aucune implantation locale : chaque professionnel conserve sa vraie zone de base et les résultats restent filtrés ensuite par besoin."
+}
