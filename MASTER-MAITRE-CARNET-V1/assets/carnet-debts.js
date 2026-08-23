@@ -22,36 +22,32 @@
   }
 
   async function create(input){
-    const u = await user();
     await Store.access();
     const label = String(input?.client_label || "").trim();
     const amount = Math.round(Number(input?.amount_due_xof || 0));
     if(!label) throw new Error("client_name_required");
     if(!(amount > 0)) throw new Error("bad_amount");
 
-    const clientId = globalThis.crypto?.randomUUID ? crypto.randomUUID() : "d_"+Date.now().toString(36)+Math.random().toString(36).slice(2,10);
-    const payload = {
-      owner_id:u.id,
-      member_slug:C.identity.memberSlug,
-      client_label:label,
-      client_phone:String(input?.client_phone || "").trim() || null,
-      amount_due_xof:amount,
-      amount_paid_xof:0,
-      currency_code:C.identity?.currency || "XOF",
-      debt_date:input?.debt_date || new Date().toISOString().slice(0,10),
-      due_date:input?.due_date || null,
-      note_text:String(input?.note_text || "").trim() || null,
-      client_id:clientId,
-      status:"open"
-    };
-
-    const {data,error} = await Store.client()
-      .from("digiy_carnet_receivables")
-      .insert(payload)
-      .select("*")
-      .single();
+    const clientId = input?.client_id || (globalThis.crypto?.randomUUID ? crypto.randomUUID() : "d_"+Date.now().toString(36)+Math.random().toString(36).slice(2,10));
+    const {data,error} = await Store.client().rpc("digiy_carnet_create_receivable",{
+      p_member_slug:C.identity.memberSlug,
+      p_client_label:label,
+      p_amount_xof:amount,
+      p_client_phone:String(input?.client_phone || "").trim() || null,
+      p_due_date:input?.due_date || null,
+      p_note_text:String(input?.note_text || "").trim() || null,
+      p_client_id:clientId
+    });
     if(error) throw error;
-    return data;
+    if(!data?.ok) throw new Error(data?.error || "receivable_create_failed");
+
+    const {data:row,error:rowError} = await Store.client()
+      .from("digiy_carnet_receivables")
+      .select("*")
+      .eq("id",data.id)
+      .single();
+    if(rowError) throw rowError;
+    return Object.assign({},row,{idempotent:data.idempotent===true});
   }
 
   async function payments(receivableId){
@@ -72,7 +68,7 @@
     const channel = String(input?.channel || "").trim();
     if(!(amount > 0)) throw new Error("bad_amount");
     if(!channel) throw new Error("channel_required");
-    const clientId = globalThis.crypto?.randomUUID ? crypto.randomUUID() : "rp_"+Date.now().toString(36)+Math.random().toString(36).slice(2,10);
+    const clientId = input?.client_id || (globalThis.crypto?.randomUUID ? crypto.randomUUID() : "rp_"+Date.now().toString(36)+Math.random().toString(36).slice(2,10));
 
     const {data,error} = await Store.client().rpc("digiy_carnet_record_receivable_payment",{
       p_receivable_id:receivableId,
@@ -88,16 +84,12 @@
   }
 
   async function cancel(receivableId){
-    const u = await user();
-    const {data,error} = await Store.client()
-      .from("digiy_carnet_receivables")
-      .update({status:"cancelled",updated_at:new Date().toISOString()})
-      .eq("owner_id",u.id)
-      .eq("member_slug",C.identity.memberSlug)
-      .eq("id",receivableId)
-      .select("id")
-      .single();
+    await Store.access();
+    const {data,error} = await Store.client().rpc("digiy_carnet_cancel_receivable",{
+      p_receivable_id:receivableId
+    });
     if(error) throw error;
+    if(!data?.ok) throw new Error(data?.error || "receivable_cancel_failed");
     return data;
   }
 
