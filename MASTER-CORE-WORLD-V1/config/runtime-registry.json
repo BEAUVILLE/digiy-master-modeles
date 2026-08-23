@@ -1,0 +1,29 @@
+{
+  "registry": "DIGIYLYFE-CORE-RUNTIME-REGISTRY-V1",
+  "needs_config": "./needs.json",
+  "countries": [
+    {
+      "id": "SN",
+      "slug": "senegal",
+      "enabled": true,
+      "country_config": "../../MASTER-PAYS-SENEGAL-V1/config/country.json",
+      "territories_config": "../../MASTER-PAYS-SENEGAL-V1/config/territories.json",
+      "guard_config": "../../MASTER-PAYS-SENEGAL-V1/config/geography-freeze-v1.json"
+    },
+    {
+      "id": "FR",
+      "slug": "france",
+      "enabled": false,
+      "status": "legacy-runtime-pending-country-master",
+      "note": "La France reste servie par le moteur public existant tant qu'un MASTER PAYS FRANCE équivalent n'est pas posé. Ne pas la découvrir automatiquement via ce registre V1."
+    }
+  ],
+  "rules": {
+    "enabled_country_only": true,
+    "active_territory_only": true,
+    "active_zone_only": true,
+    "planned_is_never_public": true,
+    "no_geography_hardcoded_in_engine": true,
+    "fail_closed": true
+  }
+}
