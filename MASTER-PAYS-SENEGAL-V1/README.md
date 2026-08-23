@@ -31,7 +31,7 @@ Socle technique : `../MASTER-CORE-WORLD-V1/`
 
 ### Actif
 
-- **Petite Côte**
+- **Petite Côte** — MASTER dédié : `../MASTER-TERRITOIRE-PETITE-COTE-V1/`
   - AIBD
   - Ndayane
   - Popenguine
