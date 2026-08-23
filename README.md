@@ -28,6 +28,14 @@ La doctrine complète est conservée dans `BEAUVILLE/digiy-master/MASTER-CORE.md
 
 Doctrine pays : `BEAUVILLE/digiy-master/MASTER-PAYS.md`.
 
+## MASTER TERRITOIRE
+
+- `MASTER-TERRITOIRE-PETITE-COTE-V1/` — premier territoire de référence sous le Sénégal.
+- Zones V1 : AIBD, Ndayane, Popenguine, Somone, Ngaparou, Saly, Mbour.
+- Les besoins et capacités sont hérités du CORE ; aucun moteur ni professionnel réel n'est recopié dans le MASTER territoire.
+
+Doctrine territoire : `BEAUVILLE/digiy-master/MASTER-TERRITOIRE.md`.
+
 ## Règle d'architecture
 
 **1 famille métier = 1 MASTER MAÎTRE universel.**
@@ -38,6 +46,7 @@ Le pays n'est pas un nouveau MASTER métier : Sénégal, France ou autre pays co
 
 - `MASTER-CORE-WORLD-V1/` — configuration mondiale, pays, territoires, besoins, langues et capacités.
 - `MASTER-PAYS-SENEGAL-V1/` — configuration pays Sénégal héritée du CORE.
+- `MASTER-TERRITOIRE-PETITE-COTE-V1/` — configuration territoire Petite Côte héritée du Sénégal et du CORE.
 - `BUILD/MASTER-MAITRE-BUILD/` — artisans, techniciens, métiers de terrain.
 - `EXPLORE/MASTER-MAITRE-EXPLORE/` — lieux, sorties, expériences, activités locales.
 - `JOB/MASTER-MAITRE-JOB/` — missions, offres et candidatures directes.
@@ -78,8 +87,8 @@ Chaque MASTER opérationnel doit tendre vers :
 6. DIGIYLYFE publie la présence numérique ; il ne certifie pas administrativement le professionnel et ne prélève pas de commission sur la prestation ou la vente présentée.
 7. Toute évolution majeure est testée avant propagation.
 8. Avant publication d'une instance : contrôler mobile, boutons, téléphone, WhatsApp, formulaires, langues, RTL, PWA, QR et données opérationnelles.
-9. Un nouveau pays doit passer le test MASTER CORE : configuration + données, sans copie complète du moteur.
+9. Un nouveau pays ou territoire doit passer le test MASTER CORE : configuration + données, sans copie complète du moteur.
 
 ---
 
-**DIGIYLYFE — Le CORE est mondial. Le terrain reste local.**
+**DIGIYLYFE — Le CORE est mondial. Le pays organise. Le territoire rapproche.**
