@@ -1,0 +1,24 @@
+{
+  "validation": "DIGIYLYFE-ADHESION-COUNTRY-RUNTIME-READINESS-2026-08-23",
+  "mode": "read-only-schema-check",
+  "result": {
+    "country_configs_ready": true,
+    "country_pricing_ready": true,
+    "core_adhesion_contract_ready": true,
+    "production_structured_geography_ready": false,
+    "public_form_switched": false,
+    "production_mutation": false
+  },
+  "current_production_gap": [
+    "country_id",
+    "territory_id",
+    "base_zone_id",
+    "service_zone_ids",
+    "service_territory_ids",
+    "currency_code",
+    "calling_code",
+    "timezone"
+  ],
+  "rule": "Ne pas détourner zone_label, notes_internal ou card_i18n pour simuler la géographie structurée. Appliquer la migration dédiée avant de basculer le formulaire public.",
+  "next_gate": "Valider puis appliquer la migration production, contrôler le schéma, puis raccorder preparer-ma-carte.html au runtime pays."
+}
