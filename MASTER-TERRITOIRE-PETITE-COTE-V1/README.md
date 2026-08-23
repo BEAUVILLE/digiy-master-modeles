@@ -40,6 +40,20 @@ Le `slug` reste humain et peut servir d'adaptateur vers les identifiants de prod
 
 Les zones sont des repères terrain. Elles n'imposent aucune capacité métier.
 
+## Zone de base et couverture
+
+Le professionnel garde un ancrage principal distinct de sa zone de travail réelle :
+
+- `base_zone_id` — une seule zone de base ;
+- `service_zone_ids` — zéro à plusieurs zones d'intervention ;
+- `service_territory_ids` — zéro à plusieurs territoires entiers couverts.
+
+Exemple : un professionnel peut être basé à **Saly** et intervenir à **Mbour** ou **AIBD** sans changer sa zone de base.
+
+Une couverture extérieure ne réattribue jamais automatiquement le professionnel à un autre territoire. Elle reste une couverture explicite, validée séparément.
+
+Règle technique : `config/coverage-policy.json`.
+
 ## Héritage
 
 Les besoins, langues communes et capacités ne sont pas recopiés ici. Ils sont hérités du CORE et du MASTER PAYS Sénégal.
@@ -50,11 +64,11 @@ Le fichier `config/professional-contract.json` définit le contrat minimal de ra
 
 Chaîne minimale :
 
-`country_id → territory_id → zone_id → need_id → professional_id → public_url`
+`country_id → territory_id → base_zone_id → need_id → professional_id → public_url`
 
 Le moteur affiche ensuite la présence avec l'action générique **OUVRIR**.
 
-Les UUID et identifiants historiques de production peuvent rester en place via `source_zone_id` ou `source_zone_slug`. Le `zone_id` canonique sert d'identifiant commun au CORE.
+Les UUID et identifiants historiques de production peuvent rester en place via l'adaptateur `config/production-adapter.json`. Le champ historique `zone_id` peut être traduit en `base_zone_id` sans migration brutale de la production.
 
 ## Données professionnelles
 
@@ -69,10 +83,12 @@ Le niveau commercial d'un professionnel — carte, présence, site ou capacités
 1. Ne jamais copier `territoire.html` pour créer un nouveau territoire.
 2. Modifier les données ou la configuration avant de toucher au moteur.
 3. Ne publier comme actives que les zones validées terrain.
-4. Utiliser les `zone_id` canoniques pour le CORE ; adapter la production existante sans migration brutale.
-5. Ne jamais exposer le niveau commercial du professionnel dans l'arbre territorial.
-6. L'action générique reste **OUVRIR**.
-7. Toute règle universelle remonte au CORE ; toute règle pays remonte au MASTER PAYS Sénégal.
+4. Utiliser les identifiants canoniques pour le CORE ; adapter la production existante sans migration brutale.
+5. Ne jamais confondre zone de base et zones d'intervention.
+6. Une zone d'intervention ne modifie jamais automatiquement l'ancrage du professionnel.
+7. Ne jamais exposer le niveau commercial du professionnel dans l'arbre territorial.
+8. L'action générique reste **OUVRIR**.
+9. Toute règle universelle remonte au CORE ; toute règle pays remonte au MASTER PAYS Sénégal.
 
 ---
 
