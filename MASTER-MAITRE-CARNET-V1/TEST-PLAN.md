@@ -16,7 +16,8 @@ Le MASTER n’est déclaré opérationnel qu’après passage des blocs A à H.
 - [ ] adhérent sans droit CARNET -> refus ;
 - [ ] adhérent avec droit CARNET -> HUB ouvert ;
 - [ ] déconnexion -> accès privé fermé ;
-- [ ] aucune donnée sensible dans l’URL.
+- [ ] aucune donnée sensible dans l’URL ;
+- [ ] aucun numéro de téléphone n’est transmis comme secret par le navigateur.
 
 ## B — Cloisonnement des données
 
@@ -25,8 +26,15 @@ Avec deux utilisateurs de test A et B :
 - [ ] A ne voit aucun mouvement de B ;
 - [ ] A ne voit aucune dette de B ;
 - [ ] A ne peut pas rembourser une dette de B ;
+- [ ] A ne peut pas annuler une dette de B ;
 - [ ] anon ne lit ni mouvements privés ni échéanciers ;
-- [ ] les nouveaux RPC CARNET sont exécutables par `authenticated` uniquement.
+- [ ] anon n’exécute aucun RPC CARNET ;
+- [ ] les RPC navigateur CARNET sont exécutables par `authenticated` uniquement ;
+- [ ] les helpers internes non destinés au navigateur ne sont pas exécutables par `authenticated` ;
+- [ ] `SECURITY DEFINER` utilise `search_path = ''` et des noms d’objets qualifiés ;
+- [ ] un INSERT direct dans `digiy_carnet_receivables` depuis le client est refusé ;
+- [ ] un UPDATE direct de `amount_paid_xof` ou `status` depuis le client est refusé ;
+- [ ] un INSERT direct dans `digiy_carnet_receivable_payments` depuis le client est refusé.
 
 ## C — 1 geste = 1 trace
 
@@ -35,8 +43,10 @@ Créer un mouvement avec un `client_id/source_id` fixe :
 - [ ] premier envoi -> 1 ligne ;
 - [ ] deuxième envoi identique -> même ID renvoyé ;
 - [ ] double clic rapide -> 1 seule ligne ;
+- [ ] deux requêtes réellement concurrentes -> 1 seule ligne grâce à la contrainte UNIQUE ;
 - [ ] reprise après coupure -> 1 seule ligne ;
-- [ ] resynchronisation de la file offline -> aucun doublon.
+- [ ] resynchronisation de la file offline -> aucun doublon ;
+- [ ] la contrainte historique `(phone, source_module, source_id, kind, direction)` est toujours présente.
 
 ## D — Caisse / CA du jour
 
@@ -58,6 +68,7 @@ OM entrée     = 15 000
 Cash sortie   = 10 000
 ```
 
+- [ ] Orange Money reste visible comme `orange_money` côté CARNET même si le legacy stocke `other` + `meta.carnet_channel` ;
 - [ ] aucun transfert ou apport ne gonfle le CA ;
 - [ ] aucun mouvement `void` n’entre dans les totaux.
 
@@ -80,6 +91,9 @@ RESTE     = 50 000
 CA        = inchangé
 Entrées   = inchangées
 ```
+
+- [ ] création via `digiy_carnet_create_receivable` seulement ;
+- [ ] deuxième création avec le même `client_id` -> même dette renvoyée, aucun doublon.
 
 Puis :
 
@@ -133,9 +147,14 @@ OM        += 25 000
 ```
 
 - [ ] un remboursement supérieur au reste est refusé ;
-- [ ] un double clic remboursement ne crée pas deux entrées ;
+- [ ] un double clic remboursement ne crée pas deux paiements ;
+- [ ] deux remboursements simultanés avec le même `client_id` -> un seul paiement + un seul mouvement ;
+- [ ] chaque paiement possède un `movement_id` lié à une vraie ligne `digiy_pay_movements` ;
+- [ ] tenter de supprimer ce mouvement financier est refusé par FK ;
 - [ ] nom + téléphone restent visibles dans l’échéancier ;
-- [ ] dette initiale jamais comptée comme cash.
+- [ ] dette initiale jamais comptée comme cash ;
+- [ ] une dette `paid` ne peut pas être annulée ;
+- [ ] l’annulation conserve l’historique au lieu de supprimer la ligne.
 
 ## F — Oreille
 
@@ -156,6 +175,18 @@ Attendu :
 - [ ] statut reste `draft` avant confirmation ;
 - [ ] aucun enregistrement automatique ;
 - [ ] après validation humaine -> 1 trace seulement.
+
+Tester aussi les formes WORLD8 déjà prévues :
+
+```txt
+EN  Fuel 25,000 cash
+ES  Combustible 15.000 efectivo
+PT  Despesa 12 500 cartão
+IT  Vendita 25.000 Wave
+DE  Treibstoff 15.000 bar
+NL  Brandstof 15.000 contant
+AR  وقود ٢٥٠٠٠ نقدا
+```
 
 ## G — Offline / PWA
 
@@ -212,4 +243,5 @@ uniquement après :
 - test sur téléphone réel ;
 - test magic link réel ;
 - test de coupure réseau réel ;
-- contrôle qu’aucun secret ou identifiant client réel n’est présent dans le coffre.
+- contrôle qu’aucun secret ou identifiant client réel n’est présent dans le coffre ;
+- confirmation que la base de production n’a reçu aucune migration MASTER avant le jalon explicitement autorisé.
