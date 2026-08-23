@@ -20,6 +20,7 @@
       {"code": "ff", "label": "Pulaar", "status": "future"},
       {"code": "srr", "label": "Sérère", "status": "future"}
     ],
+    "pricing_config": "./pricing.json",
     "status": "pilot"
   }
 }
