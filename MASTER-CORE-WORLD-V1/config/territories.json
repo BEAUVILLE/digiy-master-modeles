@@ -1,0 +1,60 @@
+{
+  "territories": [
+    {
+      "id": "SN-PETITE-COTE",
+      "country_id": "SN",
+      "slug": "petite-cote",
+      "label": "Petite Côte",
+      "status": "active",
+      "zones": ["aibd", "ndayane", "popenguine", "somone", "ngaparou", "saly", "mbour"]
+    },
+    {
+      "id": "SN-DAKAR",
+      "country_id": "SN",
+      "slug": "dakar",
+      "label": "Dakar",
+      "status": "planned",
+      "zones": []
+    },
+    {
+      "id": "SN-THIES",
+      "country_id": "SN",
+      "slug": "thies",
+      "label": "Thiès",
+      "status": "planned",
+      "zones": []
+    },
+    {
+      "id": "SN-SAINT-LOUIS",
+      "country_id": "SN",
+      "slug": "saint-louis",
+      "label": "Saint-Louis",
+      "status": "planned",
+      "zones": []
+    },
+    {
+      "id": "FR-DORDOGNE",
+      "country_id": "FR",
+      "slug": "vallee-dordogne",
+      "label": "Vallée de la Dordogne",
+      "status": "active",
+      "zones": ["sarlat"]
+    },
+    {
+      "id": "FR-BORDEAUX",
+      "country_id": "FR",
+      "slug": "bordeaux",
+      "label": "Bordeaux",
+      "status": "planned",
+      "zones": []
+    },
+    {
+      "id": "FR-ARCACHON",
+      "country_id": "FR",
+      "slug": "arcachon",
+      "label": "Arcachon",
+      "status": "planned",
+      "zones": []
+    }
+  ]
+}
