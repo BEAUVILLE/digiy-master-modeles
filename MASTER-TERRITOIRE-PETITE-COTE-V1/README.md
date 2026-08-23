@@ -30,7 +30,7 @@ Les zones utilisent désormais un identifiant canonique stable et mondialement n
 
 - `SN-PETITE-COTE-AIBD` — AIBD — pilote zone cible transport
 - `SN-PETITE-COTE-NDAYANE` — Ndayane
-- `SN-PETITE-COTE-POPENGUINE` — Popenguine
+- `SN-PETITE-COTE-POPENGUINE` — Popenguine — pilote confirmation couverture territoire sans présence locale directe
 - `SN-PETITE-COTE-SOMONE` — Somone — pilote couverture territoire sans présence locale directe
 - `SN-PETITE-COTE-NGAPAROU` — Ngaparou — pilote couverture additive zone + territoire
 - `SN-PETITE-COTE-SALY` — Saly — zone pilote de référence
@@ -180,6 +180,25 @@ Résultat agrégé :
 Ce test valide la règle **couverture additive** : `service_zone_ids` et `service_territory_ids` sont deux sources indépendantes d'éligibilité. Le CORE les réunit sans écraser l'ancrage réel, puis déduplique par `professional_id`.
 
 Aucune identité professionnelle réelle n'est conservée dans le MASTER. Le rapport agrégé est stocké dans `validation/ngaparou-pilot-readonly-2026-08-23.json`.
+
+## Validation pilote Popenguine
+
+Un sixième contrôle **lecture seule** a été effectué sur Popenguine le 23 août 2026 pour confirmer sur une deuxième zone le fonctionnement d'une couverture uniquement territoriale.
+
+Résultat agrégé :
+
+- 8 professionnels sont éligibles dans Popenguine ;
+- 0 est basé à Popenguine ;
+- 0 déclare Popenguine comme zone d'intervention explicite ;
+- les 8 sont éligibles uniquement grâce à une couverture Petite Côte entière validée ;
+- 0 besoin non résolu ;
+- 0 URL publique manquante ;
+- répartition des besoins : 4 artisans, 1 commerce local, 3 transports ;
+- les zones de base restent AIBD, Dakar et Saly ; aucune implantation Popenguine fictive n'est créée.
+
+Ce test reconfirme le cas **territoire → zone active sans présence locale directe** déjà observé à Somone. Le comportement est reproductible : la couverture territoriale ouvre la disponibilité dans la zone sans modifier l'ancrage réel du professionnel.
+
+Aucune identité professionnelle réelle n'est conservée dans le MASTER. Le rapport agrégé est stocké dans `validation/popenguine-pilot-readonly-2026-08-23.json`.
 
 ## Données professionnelles
 
