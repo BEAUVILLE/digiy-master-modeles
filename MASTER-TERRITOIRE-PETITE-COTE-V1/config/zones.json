@@ -1,0 +1,13 @@
+{
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "zones": [
+    {"id": "aibd", "label": "AIBD", "slug": "aibd", "status": "active"},
+    {"id": "ndayane", "label": "Ndayane", "slug": "ndayane", "status": "active"},
+    {"id": "popenguine", "label": "Popenguine", "slug": "popenguine", "status": "active"},
+    {"id": "somone", "label": "Somone", "slug": "somone", "status": "active"},
+    {"id": "ngaparou", "label": "Ngaparou", "slug": "ngaparou", "status": "active"},
+    {"id": "saly", "label": "Saly", "slug": "saly", "status": "active"},
+    {"id": "mbour", "label": "Mbour", "slug": "mbour", "status": "active"}
+  ]
+}
