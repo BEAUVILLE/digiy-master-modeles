@@ -1,0 +1,16 @@
+{
+  "master": "MASTER-TERRITOIRE-PETITE-COTE-V1",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "rules": {
+    "duplicate_core_engine": false,
+    "inherit_needs_from_core": true,
+    "inherit_capabilities_from_core": true,
+    "isolate_results_by_country": true,
+    "isolate_results_by_territory": true,
+    "publish_only_validated_zones": true,
+    "store_real_professionals_in_master": false,
+    "reveal_commercial_level": false,
+    "generic_professional_action": "OUVRIR"
+  }
+}
