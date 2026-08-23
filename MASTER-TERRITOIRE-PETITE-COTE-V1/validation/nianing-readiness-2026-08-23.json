@@ -1,0 +1,30 @@
+{
+  "validation": "NIANING-READINESS-2026-08-23",
+  "mode": "read-only-readiness",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "target_zone_id": "SN-PETITE-COTE-NIANING",
+  "target_slug": "nianing",
+  "source": "Supabase production",
+  "result": {
+    "production_zone_found": false,
+    "production_zone_active": false,
+    "professional_audit_run": false,
+    "public_results_enabled": false
+  },
+  "interpretation": {
+    "master_status": "planned",
+    "canonical_id_reserved": true,
+    "production_mutation_required_now": false,
+    "territory_coverage_must_not_imply_planned_zone": true,
+    "activation_requires_explicit_validation": true
+  },
+  "next_activation_gate": [
+    "Créer ou identifier la zone Nianing dans la production seulement après validation explicite.",
+    "La rattacher au territoire Petite Côte.",
+    "Valider son statut actif terrain.",
+    "Exécuter ensuite le même audit lecture seule que les zones déjà validées.",
+    "N'ouvrir les résultats publics qu'après passage de ces contrôles."
+  ],
+  "conclusion": "Nianing est préparée proprement dans le MASTER avec un identifiant canonique réservé, mais reste planifiée car aucune zone correspondante n'existe actuellement dans Supabase. Aucune présence ni couverture publique n'est inventée."
+}
