@@ -31,7 +31,7 @@ Les zones utilisent désormais un identifiant canonique stable et mondialement n
 - `SN-PETITE-COTE-AIBD` — AIBD — pilote zone cible transport
 - `SN-PETITE-COTE-NDAYANE` — Ndayane
 - `SN-PETITE-COTE-POPENGUINE` — Popenguine
-- `SN-PETITE-COTE-SOMONE` — Somone
+- `SN-PETITE-COTE-SOMONE` — Somone — pilote couverture territoire sans présence locale directe
 - `SN-PETITE-COTE-NGAPAROU` — Ngaparou
 - `SN-PETITE-COTE-SALY` — Saly — zone pilote de référence
 - `SN-PETITE-COTE-MBOUR` — Mbour — pilote couverture inter-zones
@@ -59,6 +59,8 @@ Pour une zone cible, l'éligibilité suit :
 `zone cible = zone de base OU zone d'intervention OU zone incluse dans un territoire d'intervention validé`
 
 Un professionnel qui apparaît grâce à sa couverture garde toujours sa véritable zone de base et son véritable territoire d'ancrage. Il n'est jamais artificiellement « relogé » dans la zone affichée. Les résultats sont dédupliqués par `professional_id`.
+
+Une zone active peut donc présenter des professionnels même si aucun professionnel n'y est basé et qu'aucune ligne d'intervention explicite ne cible cette zone, dès lors qu'un `service_territory_id` validé couvre le territoire auquel elle appartient. Cette règle étend la couverture ; elle ne crée jamais une implantation locale fictive.
 
 Exemple : un professionnel peut être basé à **Saly** et intervenir à **Mbour** ou **AIBD** sans changer sa zone de base.
 
@@ -138,6 +140,25 @@ Ce test confirme que **AIBD n'est pas un nouveau moteur ni une catégorie métie
 
 Aucune identité professionnelle réelle n'est conservée dans le MASTER. Le rapport agrégé est stocké dans `validation/aibd-pilot-readonly-2026-08-23.json`.
 
+## Validation pilote Somone
+
+Un quatrième contrôle **lecture seule** a été effectué sur Somone le 23 août 2026 pour tester une zone active ne possédant ni professionnel basé localement ni ligne de couverture Somone explicite.
+
+Résultat agrégé :
+
+- 8 professionnels sont néanmoins éligibles dans Somone ;
+- 0 est basé à Somone ;
+- 0 déclare Somone comme zone d'intervention explicite ;
+- les 8 sont éligibles uniquement grâce à une couverture Petite Côte entière validée ;
+- 0 besoin non résolu ;
+- 0 URL publique manquante ;
+- répartition des besoins : 4 artisans, 1 commerce local, 3 transports ;
+- les zones de base restent AIBD, Dakar et Saly ; aucune implantation Somone fictive n'est créée.
+
+Ce test valide le cas **territoire → zone active sans présence locale directe**. Un `service_territory_id` validé peut rendre un professionnel disponible dans une zone active du territoire, mais sa véritable `base_zone_id` reste intacte.
+
+Aucune identité professionnelle réelle n'est conservée dans le MASTER. Le rapport agrégé est stocké dans `validation/somone-pilot-readonly-2026-08-23.json`.
+
 ## Données professionnelles
 
 Aucun professionnel réel ne doit être stocké dans ce MASTER.
@@ -159,9 +180,10 @@ Le niveau commercial d'un professionnel — carte, présence, site ou capacités
 9. Une présence peut être éligible dans une zone cible sans y être basée ; son ancrage réel doit rester visible dans les données.
 10. Dédupliquer les résultats par `professional_id`.
 11. La zone géographique et le besoin restent des filtres distincts ; aucun type de zone ne remplace automatiquement un `need_id`.
-12. Ne jamais exposer le niveau commercial du professionnel dans l'arbre territorial.
-13. L'action générique reste **OUVRIR**.
-14. Toute règle universelle remonte au CORE ; toute règle pays remonte au MASTER PAYS Sénégal.
+12. Une zone active peut recevoir des résultats uniquement par couverture territoire validée, sans fabriquer de présence locale ni modifier la zone de base.
+13. Ne jamais exposer le niveau commercial du professionnel dans l'arbre territorial.
+14. L'action générique reste **OUVRIR**.
+15. Toute règle universelle remonte au CORE ; toute règle pays remonte au MASTER PAYS Sénégal.
 
 ---
 
