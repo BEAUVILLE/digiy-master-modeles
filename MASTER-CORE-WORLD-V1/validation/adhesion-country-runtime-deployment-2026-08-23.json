@@ -1,0 +1,49 @@
+{
+  "validation": "DIGIYLYFE-ADHESION-COUNTRY-RUNTIME-DEPLOYMENT-2026-08-23",
+  "mode": "validated-production-migration-and-public-wiring",
+  "result": {
+    "production_structured_geography_ready": true,
+    "generic_membership_price_ready": true,
+    "generic_service_price_ready": true,
+    "legacy_xof_service_price_nullable_for_non_xof_countries": true,
+    "public_country_runtime_created": true,
+    "public_form_switched": true,
+    "schema_verification_pass": true
+  },
+  "production_fields": {
+    "digiy_adhesion_requests": [
+      "country_id",
+      "territory_id",
+      "base_zone_id",
+      "service_zone_ids",
+      "service_territory_ids",
+      "currency_code",
+      "calling_code",
+      "timezone",
+      "price_amount"
+    ],
+    "digiy_service_requests": [
+      "starting_price_amount",
+      "currency_code"
+    ]
+  },
+  "public_runtime": "BEAUVILLE/digiylyfe.com/assets/digiy-adhesion-runtime-v1.json",
+  "public_form": "BEAUVILLE/digiylyfe.com/preparer-ma-carte.html",
+  "public_commits": {
+    "runtime": "68baa4105bafa109fd2c0d3190cc6377c19b36df",
+    "form": "0dfdb7360bef6cd346f2d56eccb0b026e74cc459"
+  },
+  "rules_confirmed": {
+    "country_drives_currency": true,
+    "country_drives_calling_code": true,
+    "country_drives_timezone": true,
+    "country_drives_languages": true,
+    "country_drives_membership_pricing": true,
+    "country_drives_service_pricing": true,
+    "active_geography_only_is_offered": true,
+    "unknown_locality_remains_pending_validation": true,
+    "base_zone_identity_is_separate_from_service_coverage": true,
+    "planned_geography_is_not_public": true
+  },
+  "conclusion": "Le dossier d’adhésion est raccordé au runtime pays. Sénégal et France utilisent la même mécanique ; la devise, l’indicatif, le fuseau, les langues et les tarifs sont dérivés de la configuration pays, tandis que la géographie de base et la couverture de service restent distinctes."
+}
