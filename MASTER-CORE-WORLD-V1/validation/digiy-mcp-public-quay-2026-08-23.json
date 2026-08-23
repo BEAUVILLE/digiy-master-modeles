@@ -7,14 +7,21 @@
     "normalized_view": "public.v_digiy_public_discovery_entities",
     "migrations": [
       "create_digiy_public_discovery_quay_v1",
-      "harden_digiy_public_discovery_quay_v1"
+      "harden_digiy_public_discovery_quay_v1",
+      "secure_digiy_public_discovery_quay_v1"
     ],
     "rules": {
       "adhesion_source_keeps_active_paid_public_guards": true,
       "historical_sources_require_explicit_bridge_authorization": true,
       "loc_master_site_requires_source_is_active": true,
       "mcp_is_read_only": true,
-      "no_private_data_required_for_discovery": true
+      "no_private_data_required_for_discovery": true,
+      "normalized_view_security_invoker": true,
+      "normalized_view_direct_anon_access": false,
+      "normalized_view_direct_authenticated_access": false,
+      "normalized_view_service_role_select": true,
+      "bridge_rls_enabled": true,
+      "bridge_direct_client_policy": false
     }
   },
   "mcp": {
@@ -45,6 +52,7 @@
   },
   "network_test": {
     "transport": "PostgreSQL pg_net -> public Supabase Edge Function HTTPS endpoint",
+    "after_security_hardening": true,
     "server_discover_http_status": 200,
     "tools_list_http_status": 200,
     "search_professionals_http_status": 200,
@@ -59,6 +67,11 @@
     "get_professional_http_status": 200,
     "returned_public_url": "https://sarlat-chez-baptiste.digiylyfe.com/",
     "private_contact_data_returned": false
+  },
+  "security_advisor": {
+    "normalized_view_security_definer_warning_present": false,
+    "bridge_rls_no_policy_warning_intentional": true,
+    "note": "The bridge is server-only by design; no anon/authenticated direct access policy is created."
   },
   "result": "PUBLIC_QUAY_V1_PASS"
 }
