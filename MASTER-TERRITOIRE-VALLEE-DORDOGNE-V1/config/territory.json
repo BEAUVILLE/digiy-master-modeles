@@ -1,0 +1,14 @@
+{
+  "territory": {
+    "id": "FR-DORDOGNE",
+    "country_id": "FR",
+    "slug": "vallee-dordogne",
+    "label": "Périgord · Vallée de la Dordogne",
+    "status": "active",
+    "public_route": "https://digiylyfe.com/territoire.html?zone=vallee-dordogne",
+    "inherit_needs_from_core": true,
+    "inherit_capabilities_from_core": true,
+    "inherit_languages_from_country": true,
+    "generic_professional_action": "OUVRIR"
+  }
+}
