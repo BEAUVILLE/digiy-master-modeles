@@ -10,14 +10,25 @@ Ce dépôt contient les moules techniques prêts à être copiés, configurés e
 - `BEAUVILLE/digiy-master-modeles` = modèles techniques / MASTER MAÎTRE.
 - Les dépôts clients et modules publics restent séparés et ne servent jamais de coffre maître.
 
+## MASTER CORE WORLD
+
+- `MASTER-CORE-WORLD-V1/` — socle technique mondial.
+- Arbre maître : `CORE MONDIAL → PAYS → TERRITOIRE → ZONE → BESOIN → PROFESSIONNEL → OUVRIR`.
+- Le pays est la première couche opérationnelle.
+- Un nouveau pays est ajouté par configuration et données, jamais par duplication complète du moteur.
+- Les modules métier deviennent des capacités activables derrière les professionnels.
+
+La doctrine complète est conservée dans `BEAUVILLE/digiy-master/MASTER-CORE.md`.
+
 ## Règle d'architecture
 
 **1 famille métier = 1 MASTER MAÎTRE universel.**
 
-Le pays n'est pas un nouveau MASTER : Sénégal, France, Europe ou autre territoire compatible sont des configurations du même moule.
+Le pays n'est pas un nouveau MASTER métier : Sénégal, France ou autre pays compatible sont des configurations du même CORE et des mêmes moules.
 
 ## MASTER MAÎTRES présents
 
+- `MASTER-CORE-WORLD-V1/` — configuration mondiale, pays, territoires, besoins, langues et capacités.
 - `BUILD/MASTER-MAITRE-BUILD/` — artisans, techniciens, métiers de terrain.
 - `EXPLORE/MASTER-MAITRE-EXPLORE/` — lieux, sorties, expériences, activités locales.
 - `JOB/MASTER-MAITRE-JOB/` — missions, offres et candidatures directes.
@@ -58,7 +69,8 @@ Chaque MASTER opérationnel doit tendre vers :
 6. DIGIYLYFE publie la présence numérique ; il ne certifie pas administrativement le professionnel et ne prélève pas de commission sur la prestation ou la vente présentée.
 7. Toute évolution majeure est testée avant propagation.
 8. Avant publication d'une instance : contrôler mobile, boutons, téléphone, WhatsApp, formulaires, langues, RTL, PWA, QR et données opérationnelles.
+9. Un nouveau pays doit passer le test MASTER CORE : configuration + données, sans copie complète du moteur.
 
 ---
 
-**DIGIYLYFE — Le moule reste maître, le terrain reste humain.**
+**DIGIYLYFE — Le CORE est mondial. Le terrain reste local.**
