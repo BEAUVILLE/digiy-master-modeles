@@ -1,5 +1,5 @@
 {
-  "contract": "DIGIYLYFE-PROFESSIONAL-CONNECTION-V1.1",
+  "contract": "DIGIYLYFE-PROFESSIONAL-CONNECTION-V1.2",
   "country_id": "SN",
   "territory_id": "SN-PETITE-COTE",
   "purpose": "Définir le raccordement minimal d'un professionnel de production au moteur territoire sans stocker de professionnel réel dans le MASTER.",
@@ -25,12 +25,14 @@
     "source_zone_id",
     "source_zone_slug",
     "source_service_zone_ids",
-    "source_service_zone_slugs"
+    "source_service_zone_slugs",
+    "pending_external_service_references"
   ],
   "references": {
     "zones": "./zones.json",
     "needs": "../../MASTER-CORE-WORLD-V1/config/needs.json",
-    "capabilities": "../../MASTER-CORE-WORLD-V1/config/capabilities.json"
+    "capabilities": "../../MASTER-CORE-WORLD-V1/config/capabilities.json",
+    "coverage": "./coverage-policy.json"
   },
   "rules": {
     "country_must_match": "SN",
@@ -44,19 +46,25 @@
     "production_data_is_source_of_truth": true,
     "production_uuid_or_legacy_zone_can_be_mapped": true,
     "base_zone_is_identity_anchor": true,
+    "base_zone_is_implicitly_served": true,
+    "service_zones_are_additive": true,
     "service_zones_do_not_rehome_professional": true,
-    "cross_territory_service_requires_explicit_validation": true
+    "validated_service_territory_can_cover_active_zones": true,
+    "cross_territory_service_requires_explicit_validation": true,
+    "unvalidated_external_service_reference_is_not_public_expansion": true
   },
   "compatibility": {
-    "legacy_zone_id": "Peut être lu comme source de base_zone_id via l'adaptateur de production. La production n'a pas besoin d'être migrée immédiatement."
+    "legacy_zone_id": "Peut être lu comme source de base_zone_id via l'adaptateur de production. La production n'a pas besoin d'être migrée immédiatement.",
+    "missing_service_rows": "N'empêche pas le professionnel d'être éligible dans sa zone de base : base_zone_id vaut couverture minimale implicite."
   },
-  "adapter_note": "La production peut conserver ses UUID ou identifiants historiques. Le CORE utilise un base_zone_id canonique stable ; source_zone_id ou source_zone_slug servent d'adaptateur. Les zones d'intervention sont séparées de la zone de base et ne modifient jamais automatiquement l'ancrage territorial du professionnel.",
+  "adapter_note": "La production peut conserver ses UUID ou identifiants historiques. Le CORE utilise un base_zone_id canonique stable ; source_zone_id ou source_zone_slug servent d'adaptateur. Les zones d'intervention sont séparées de la zone de base et ne modifient jamais automatiquement l'ancrage territorial du professionnel. Une référence de couverture extérieure non encore structurée est conservée comme pending_external_service_references jusqu'à validation.",
   "template": {
     "country_id": "SN",
     "territory_id": "SN-PETITE-COTE",
     "base_zone_id": "SN-PETITE-COTE-<ZONE>",
     "service_zone_ids": [],
     "service_territory_ids": [],
+    "pending_external_service_references": [],
     "need_id": "<CORE_NEED_ID>",
     "professional_id": "<PRODUCTION_ID>",
     "display_name": "<PUBLIC_NAME>",
