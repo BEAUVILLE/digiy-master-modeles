@@ -1,4 +1,4 @@
-const CACHE = "digiy-carnet-master-v1-20260823-b";
+const CACHE = "digiy-carnet-master-v1-20260823-c";
 const CORE = [
   "./",
   "./index.html",
@@ -9,9 +9,11 @@ const CORE = [
   "./DATA-CONTRACT.md",
   "./app/index.html",
   "./app/oreille.html",
+  "./app/dettes.html",
   "./assets/carnet-contract.js",
   "./assets/carnet-store.js",
-  "./assets/carnet-oreille.js"
+  "./assets/carnet-oreille.js",
+  "./assets/carnet-debts.js"
 ];
 
 self.addEventListener("install", event => {
