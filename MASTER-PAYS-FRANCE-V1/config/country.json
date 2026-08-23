@@ -16,6 +16,7 @@
     "default_language": "fr",
     "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
     "local_languages": [],
+    "pricing_config": "./pricing.json",
     "status": "pilot"
   }
 }
