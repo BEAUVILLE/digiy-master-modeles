@@ -1,0 +1,16 @@
+{
+  "country_id": "FR",
+  "territory_id": "FR-DORDOGNE",
+  "zone_id_format": "FR-DORDOGNE-{ZONE}",
+  "rule": "Le zone_id canonique est stable et mondialement non ambigu. Le slug reste la clé humaine et peut servir d'adaptateur vers une donnée de production existante.",
+  "zones": [
+    {
+      "id": "FR-DORDOGNE-SARLAT",
+      "label": "Sarlat-la-Canéda",
+      "slug": "sarlat",
+      "kind": "locality",
+      "status": "active",
+      "pilot_reference": true
+    }
+  ]
+}
