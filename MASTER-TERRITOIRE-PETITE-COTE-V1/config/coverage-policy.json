@@ -1,0 +1,42 @@
+{
+  "policy": "DIGIYLYFE-BASE-ZONE-SERVICE-AREA-V1",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "principle": "La zone de base définit l'ancrage du professionnel. Les zones d'intervention définissent sa couverture sans modifier cet ancrage.",
+  "fields": {
+    "base_zone_id": {
+      "cardinality": "one",
+      "required": true,
+      "meaning": "Zone principale d'ancrage du professionnel."
+    },
+    "service_zone_ids": {
+      "cardinality": "zero_to_many",
+      "required": false,
+      "meaning": "Zones dans lesquelles le professionnel accepte d'intervenir ou de servir."
+    },
+    "service_territory_ids": {
+      "cardinality": "zero_to_many",
+      "required": false,
+      "meaning": "Territoires entiers couverts explicitement par le professionnel."
+    }
+  },
+  "rules": {
+    "service_zone_does_not_change_base_zone": true,
+    "service_territory_does_not_change_base_territory": true,
+    "cross_territory_coverage_must_be_explicit": true,
+    "cross_country_coverage_must_be_explicit": true,
+    "planned_or_unknown_destination_requires_validation": true,
+    "production_source_remains_authoritative": true,
+    "no_real_professional_is_stored_here": true
+  },
+  "example": {
+    "base_zone_id": "SN-PETITE-COTE-SALY",
+    "service_zone_ids": [
+      "SN-PETITE-COTE-MBOUR",
+      "SN-PETITE-COTE-AIBD"
+    ],
+    "service_territory_ids": [
+      "SN-PETITE-COTE"
+    ]
+  }
+}
