@@ -28,7 +28,7 @@ Il ne contient pas un nouveau moteur. Il configure le moteur commun pour la Peti
 
 Les zones utilisent désormais un identifiant canonique stable et mondialement non ambigu :
 
-- `SN-PETITE-COTE-AIBD` — AIBD
+- `SN-PETITE-COTE-AIBD` — AIBD — pilote zone cible transport
 - `SN-PETITE-COTE-NDAYANE` — Ndayane
 - `SN-PETITE-COTE-POPENGUINE` — Popenguine
 - `SN-PETITE-COTE-SOMONE` — Somone
@@ -118,6 +118,26 @@ Ce test valide la règle d'éligibilité d'une zone cible et confirme la nécess
 
 Aucune identité professionnelle réelle n'est conservée dans le MASTER. Le rapport agrégé est stocké dans `validation/mbour-pilot-readonly-2026-08-23.json`.
 
+## Validation pilote AIBD
+
+Un troisième contrôle **lecture seule** a été effectué sur AIBD le 23 août 2026 pour tester une zone cible fortement liée au transport.
+
+Résultat agrégé :
+
+- 8 professionnels sont éligibles dans la zone AIBD selon la couverture actuelle ;
+- 1 est réellement basé à AIBD ;
+- 3 déclarent AIBD comme zone d'intervention explicite ;
+- 8 disposent d'une couverture Petite Côte entière ;
+- 0 besoin non résolu ;
+- 0 URL publique manquante ;
+- répartition des besoins : 4 artisans, 1 commerce local, 3 transports ;
+- pour le besoin `transport`, 3 professionnels sont éligibles ; tous cumulent plusieurs motifs d'éligibilité, ce qui confirme la déduplication obligatoire par `professional_id` ;
+- la zone et le besoin restent deux filtres distincts : la couverture géographique décide si le professionnel peut servir AIBD, puis le `need_id` décide dans quelle famille de besoin il apparaît.
+
+Ce test confirme que **AIBD n'est pas un nouveau moteur ni une catégorie métier** : c'est une zone du territoire. Le visiteur combine zone + besoin, et l'ancrage réel du professionnel reste inchangé.
+
+Aucune identité professionnelle réelle n'est conservée dans le MASTER. Le rapport agrégé est stocké dans `validation/aibd-pilot-readonly-2026-08-23.json`.
+
 ## Données professionnelles
 
 Aucun professionnel réel ne doit être stocké dans ce MASTER.
@@ -138,9 +158,10 @@ Le niveau commercial d'un professionnel — carte, présence, site ou capacités
 8. Une couverture extérieure non validée n'étend pas automatiquement les résultats publics.
 9. Une présence peut être éligible dans une zone cible sans y être basée ; son ancrage réel doit rester visible dans les données.
 10. Dédupliquer les résultats par `professional_id`.
-11. Ne jamais exposer le niveau commercial du professionnel dans l'arbre territorial.
-12. L'action générique reste **OUVRIR**.
-13. Toute règle universelle remonte au CORE ; toute règle pays remonte au MASTER PAYS Sénégal.
+11. La zone géographique et le besoin restent des filtres distincts ; aucun type de zone ne remplace automatiquement un `need_id`.
+12. Ne jamais exposer le niveau commercial du professionnel dans l'arbre territorial.
+13. L'action générique reste **OUVRIR**.
+14. Toute règle universelle remonte au CORE ; toute règle pays remonte au MASTER PAYS Sénégal.
 
 ---
 
