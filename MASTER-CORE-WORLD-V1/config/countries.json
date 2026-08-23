@@ -13,7 +13,9 @@
         {"code": "ff", "label": "Pulaar", "status": "future"},
         {"code": "srr", "label": "Sérère", "status": "future"}
       ],
-      "status": "pilot"
+      "status": "pilot",
+      "launch_status": "active",
+      "runtime_enabled": true
     },
     {
       "id": "FR",
@@ -24,7 +26,74 @@
       "default_language": "fr",
       "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
       "local_languages": [],
-      "status": "pilot"
+      "status": "pilot",
+      "launch_status": "active",
+      "runtime_enabled": true
+    },
+    {
+      "id": "ES",
+      "slug": "espagne",
+      "label": "Espagne",
+      "currency": "EUR",
+      "currency_label": "€",
+      "default_language": "es",
+      "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+      "local_languages": [],
+      "status": "planned",
+      "launch_status": "planned",
+      "runtime_enabled": false
+    },
+    {
+      "id": "PT",
+      "slug": "portugal",
+      "label": "Portugal",
+      "currency": "EUR",
+      "currency_label": "€",
+      "default_language": "pt",
+      "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+      "local_languages": [],
+      "status": "planned",
+      "launch_status": "planned",
+      "runtime_enabled": false
+    },
+    {
+      "id": "IT",
+      "slug": "italie",
+      "label": "Italie",
+      "currency": "EUR",
+      "currency_label": "€",
+      "default_language": "it",
+      "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+      "local_languages": [],
+      "status": "planned",
+      "launch_status": "planned",
+      "runtime_enabled": false
+    },
+    {
+      "id": "DE",
+      "slug": "allemagne",
+      "label": "Allemagne",
+      "currency": "EUR",
+      "currency_label": "€",
+      "default_language": "de",
+      "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+      "local_languages": [],
+      "status": "planned",
+      "launch_status": "planned",
+      "runtime_enabled": false
+    },
+    {
+      "id": "NL",
+      "slug": "pays-bas",
+      "label": "Pays-Bas",
+      "currency": "EUR",
+      "currency_label": "€",
+      "default_language": "nl",
+      "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+      "local_languages": [],
+      "status": "planned",
+      "launch_status": "planned",
+      "runtime_enabled": false
     }
   ]
 }

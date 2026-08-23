@@ -1,0 +1,19 @@
+{
+  "country": {
+    "id": "PT",
+    "slug": "portugal",
+    "label": "Portugal",
+    "iso2": "PT",
+    "iso3": "PRT",
+    "currency": {"code": "EUR", "label": "€"},
+    "phone": {"calling_code": "+351"},
+    "timezone": "Europe/Lisbon",
+    "default_language": "pt",
+    "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+    "local_languages": [],
+    "pricing_config": "./pricing.json",
+    "payment_config": "./payments.json",
+    "territories_config": "./territories.json",
+    "status": "planned"
+  }
+}

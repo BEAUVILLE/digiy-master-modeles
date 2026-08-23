@@ -1,0 +1,15 @@
+{
+  "pricing": {
+    "country_id": "DE",
+    "currency": "EUR",
+    "status": "pending_validation",
+    "membership": {},
+    "services": {}
+  },
+  "rules": {
+    "country_currency_is_authoritative": true,
+    "no_price_inherited_from_another_country": true,
+    "pricing_must_be_human_validated_before_activation": true,
+    "form_must_not_hardcode_country_price": true
+  }
+}

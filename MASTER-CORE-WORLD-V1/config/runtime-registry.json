@@ -17,13 +17,50 @@
       "country_config": "../../MASTER-PAYS-FRANCE-V1/config/country.json",
       "territories_config": "../../MASTER-PAYS-FRANCE-V1/config/territories.json",
       "guard_config": "../../MASTER-PAYS-FRANCE-V1/config/geography-freeze-v1.json"
+    },
+    {
+      "id": "ES",
+      "slug": "espagne",
+      "enabled": false,
+      "country_config": "../../MASTER-PAYS-ESPAGNE-V1/config/country.json",
+      "territories_config": "../../MASTER-PAYS-ESPAGNE-V1/config/territories.json"
+    },
+    {
+      "id": "PT",
+      "slug": "portugal",
+      "enabled": false,
+      "country_config": "../../MASTER-PAYS-PORTUGAL-V1/config/country.json",
+      "territories_config": "../../MASTER-PAYS-PORTUGAL-V1/config/territories.json"
+    },
+    {
+      "id": "IT",
+      "slug": "italie",
+      "enabled": false,
+      "country_config": "../../MASTER-PAYS-ITALIE-V1/config/country.json",
+      "territories_config": "../../MASTER-PAYS-ITALIE-V1/config/territories.json"
+    },
+    {
+      "id": "DE",
+      "slug": "allemagne",
+      "enabled": false,
+      "country_config": "../../MASTER-PAYS-ALLEMAGNE-V1/config/country.json",
+      "territories_config": "../../MASTER-PAYS-ALLEMAGNE-V1/config/territories.json"
+    },
+    {
+      "id": "NL",
+      "slug": "pays-bas",
+      "enabled": false,
+      "country_config": "../../MASTER-PAYS-PAYS-BAS-V1/config/country.json",
+      "territories_config": "../../MASTER-PAYS-PAYS-BAS-V1/config/territories.json"
     }
   ],
   "rules": {
     "enabled_country_only": true,
+    "disabled_country_is_never_public": true,
     "active_territory_only": true,
     "active_zone_only": true,
     "planned_is_never_public": true,
+    "language_does_not_activate_country": true,
     "no_geography_hardcoded_in_engine": true,
     "fail_closed": true
   }

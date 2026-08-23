@@ -1,0 +1,12 @@
+{
+  "payments": {
+    "country_id": "IT",
+    "status": "pending_validation",
+    "methods": []
+  },
+  "rules": {
+    "no_payment_method_is_assumed": true,
+    "payment_method_must_be_human_validated_before_activation": true,
+    "country_activation_requires_validated_payment_path": true
+  }
+}

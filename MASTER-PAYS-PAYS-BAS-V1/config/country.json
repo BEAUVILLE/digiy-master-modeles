@@ -1,0 +1,19 @@
+{
+  "country": {
+    "id": "NL",
+    "slug": "pays-bas",
+    "label": "Pays-Bas",
+    "iso2": "NL",
+    "iso3": "NLD",
+    "currency": {"code": "EUR", "label": "€"},
+    "phone": {"calling_code": "+31"},
+    "timezone": "Europe/Amsterdam",
+    "default_language": "nl",
+    "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+    "local_languages": [],
+    "pricing_config": "./pricing.json",
+    "payment_config": "./payments.json",
+    "territories_config": "./territories.json",
+    "status": "planned"
+  }
+}

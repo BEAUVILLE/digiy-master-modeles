@@ -1,0 +1,19 @@
+{
+  "country": {
+    "id": "ES",
+    "slug": "espagne",
+    "label": "Espagne",
+    "iso2": "ES",
+    "iso3": "ESP",
+    "currency": {"code": "EUR", "label": "€"},
+    "phone": {"calling_code": "+34"},
+    "timezone": "Europe/Madrid",
+    "default_language": "es",
+    "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+    "local_languages": [],
+    "pricing_config": "./pricing.json",
+    "payment_config": "./payments.json",
+    "territories_config": "./territories.json",
+    "status": "planned"
+  }
+}

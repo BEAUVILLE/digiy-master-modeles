@@ -1,0 +1,19 @@
+{
+  "country": {
+    "id": "DE",
+    "slug": "allemagne",
+    "label": "Allemagne",
+    "iso2": "DE",
+    "iso3": "DEU",
+    "currency": {"code": "EUR", "label": "€"},
+    "phone": {"calling_code": "+49"},
+    "timezone": "Europe/Berlin",
+    "default_language": "de",
+    "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+    "local_languages": [],
+    "pricing_config": "./pricing.json",
+    "payment_config": "./payments.json",
+    "territories_config": "./territories.json",
+    "status": "planned"
+  }
+}

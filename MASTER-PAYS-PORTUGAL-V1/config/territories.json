@@ -1,0 +1,8 @@
+{
+  "country_id": "PT",
+  "territories": [],
+  "rules": {
+    "no_territory_is_public_by_default": true,
+    "territory_must_be_created_and_human_validated_before_activation": true
+  }
+}

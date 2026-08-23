@@ -1,0 +1,19 @@
+{
+  "validation_id": "DIGIYLYFE-WORLD-COUNTRY-SKELETON-2026-08-23",
+  "date": "2026-08-23",
+  "status": "pass",
+  "active_countries": ["SN", "FR"],
+  "planned_countries": ["ES", "PT", "IT", "DE", "NL"],
+  "checks": [
+    "planned countries are present in CORE country registry",
+    "planned countries are disabled in runtime registry",
+    "each planned country has country, pricing, payments and territories configs",
+    "planned pricing is empty and pending validation",
+    "planned payment methods are empty and pending validation",
+    "planned territories are empty",
+    "eight interface languages do not activate countries",
+    "public runtime remains active-country-only",
+    "no engine fork introduced"
+  ],
+  "conclusion": "WORLD skeleton is ready for future country activation without exposing unvalidated markets."
+}

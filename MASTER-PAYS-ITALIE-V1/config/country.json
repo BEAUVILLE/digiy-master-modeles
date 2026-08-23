@@ -1,0 +1,19 @@
+{
+  "country": {
+    "id": "IT",
+    "slug": "italie",
+    "label": "Italie",
+    "iso2": "IT",
+    "iso3": "ITA",
+    "currency": {"code": "EUR", "label": "€"},
+    "phone": {"calling_code": "+39"},
+    "timezone": "Europe/Rome",
+    "default_language": "it",
+    "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+    "local_languages": [],
+    "pricing_config": "./pricing.json",
+    "payment_config": "./payments.json",
+    "territories_config": "./territories.json",
+    "status": "planned"
+  }
+}

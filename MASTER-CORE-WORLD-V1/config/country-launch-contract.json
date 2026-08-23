@@ -1,0 +1,33 @@
+{
+  "contract": "DIGIYLYFE-COUNTRY-LAUNCH-CONTRACT-V1",
+  "principle": "International par son architecture. Multilingue par son interface. Local par ses territoires.",
+  "active_now": ["SN", "FR"],
+  "planned_next": ["ES", "PT", "IT", "DE", "NL"],
+  "status_model": {
+    "active": "Pays exploitable publiquement dans le runtime.",
+    "planned": "Configuration préparée mais pays invisible au public."
+  },
+  "activation_gates": [
+    "country_config_validated",
+    "currency_validated",
+    "calling_code_validated",
+    "timezone_validated",
+    "pricing_validated",
+    "payment_path_validated",
+    "at_least_one_territory_validated",
+    "at_least_one_zone_active",
+    "public_runtime_enabled",
+    "human_validation"
+  ],
+  "rules": {
+    "eight_interface_languages_do_not_create_eight_countries": true,
+    "language_does_not_activate_country": true,
+    "planned_country_is_never_public": true,
+    "planned_country_has_no_inherited_pricing": true,
+    "planned_country_has_no_assumed_payment_method": true,
+    "territory_and_zone_must_be_explicitly_created": true,
+    "activation_is_configuration_not_engine_fork": true,
+    "public_runtime_remains_active_country_only": true,
+    "fail_closed": true
+  }
+}
