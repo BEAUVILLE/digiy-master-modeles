@@ -62,6 +62,8 @@
     if(!validation.ok) throw new Error("carnet_invalid:" + validation.errors.join(","));
 
     // IMPORTANT : l’appel est fait uniquement après validation humaine par l’UI.
+    // client_id devient source_id dans l’adaptateur : le serveur peut donc refuser
+    // un doublon sans perdre la trace originale.
     const payload = Contract.toLegacyPayload(movement);
     const {data,error} = await client().rpc("digiy_carnet_insert_movement", {
       p_slug:C.identity.memberSlug,
@@ -69,7 +71,11 @@
     });
     if(error) throw error;
     if(!data?.ok) throw new Error(data?.error || "carnet_insert_failed");
-    return Object.assign({}, movement, {id:data.id || movement.id, status:"posted"});
+    return Object.assign({}, movement, {
+      id:data.id || movement.id,
+      status:"posted",
+      idempotent:data.idempotent === true
+    });
   }
 
   async function deleteMovement(id){
@@ -86,8 +92,6 @@
 
   async function daySummary(date = new Date()){
     const rows = await listMovements(100);
-    // Les lignes sont déjà canoniques : on recalcule ici pour éviter que le vieux
-    // résumé PAY confonde toutes les entrées avec le CA.
     const day = new Date(date).toDateString();
     const out = {
       salesRevenue:0,
@@ -125,6 +129,10 @@
     }catch(_){ return []; }
   }
 
+  function writeQueue(rows){
+    localStorage.setItem(queueKey(), JSON.stringify((rows || []).slice(-200)));
+  }
+
   function queueDraft(input){
     const movement = Contract.canonicalMovement(Object.assign({}, input, {
       member_slug:C.identity?.memberSlug || "",
@@ -135,17 +143,48 @@
     if(!validation.ok) throw new Error("carnet_invalid:" + validation.errors.join(","));
     const q = readQueue();
     if(!q.some(x => x.client_id === movement.client_id)) q.push(movement);
-    localStorage.setItem(queueKey(), JSON.stringify(q.slice(-200)));
+    writeQueue(q);
     return movement;
   }
 
   function queued(){ return readQueue(); }
 
   async function syncQueued(){
-    // DÉLIBÉRÉMENT BLOQUÉ en V1 atelier : la file existe, mais l’envoi automatique
-    // attend une garantie d’idempotence serveur testée. On refuse de risquer un
-    // double encaissement dans l’historique.
-    throw new Error("offline_sync_not_enabled_until_server_idempotence_is_verified");
+    await access();
+    const before = readQueue();
+    if(!before.length) return {ok:true,synced:0,remaining:0,items:[]};
+
+    const remaining = [];
+    const synced = [];
+
+    // Séquentiel volontairement : plus simple à auditer sur le terrain.
+    for(const movement of before){
+      try{
+        const saved = await insertMovement(Object.assign({}, movement, {
+          status:"posted",
+          origin:"offline_sync"
+        }));
+        synced.push({
+          client_id:movement.client_id,
+          id:saved.id,
+          idempotent:saved.idempotent === true
+        });
+      }catch(err){
+        remaining.push(Object.assign({}, movement, {
+          status:"queued",
+          last_sync_error:String(err?.message || err),
+          last_sync_at:new Date().toISOString()
+        }));
+      }
+    }
+
+    writeQueue(remaining);
+    return {
+      ok:remaining.length === 0,
+      synced:synced.length,
+      remaining:remaining.length,
+      items:synced
+    };
   }
 
   window.DIGIY_CARNET_STORE = Object.freeze({
