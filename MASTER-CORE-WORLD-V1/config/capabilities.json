@@ -1,0 +1,14 @@
+{
+  "capabilities": [
+    {"id": "DRIVER", "label": "Transport / chauffeur"},
+    {"id": "LOC", "label": "Location / hébergement"},
+    {"id": "RESA", "label": "Réservation / rendez-vous"},
+    {"id": "MARKET", "label": "Commerce / produits"},
+    {"id": "BUILD", "label": "Artisans / chantier"},
+    {"id": "JOB", "label": "Emploi / missions"},
+    {"id": "EXPLORE", "label": "Lieux / activités"},
+    {"id": "CARNET", "label": "Suivi métier / carnet"},
+    {"id": "RESTO", "label": "Restaurant / restauration"}
+  ],
+  "rule": "Une capacité se branche derrière un professionnel. Elle ne devient jamais la première couche de navigation mondiale."
+}
