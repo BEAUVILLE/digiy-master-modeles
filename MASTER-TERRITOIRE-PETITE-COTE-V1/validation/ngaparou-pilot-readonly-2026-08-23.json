@@ -1,0 +1,50 @@
+{
+  "validation": "NGAPAROU-PILOT-READONLY-2026-08-23",
+  "mode": "read-only",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "target_zone_id": "SN-PETITE-COTE-NGAPAROU",
+  "source": "Supabase production",
+  "rules": {
+    "no_production_mutation": true,
+    "no_real_professional_identity_stored": true,
+    "aggregate_only": true
+  },
+  "result": {
+    "professional_count_should_appear": 9,
+    "based_in_target_zone_count": 0,
+    "explicit_target_zone_service_count": 1,
+    "whole_territory_service_count": 8,
+    "unmapped_need_count": 0,
+    "missing_public_url_count": 0,
+    "need_counts": {
+      "artisan": 5,
+      "shopping": 1,
+      "transport": 3
+    },
+    "base_zone_distribution": {
+      "aibd": 1,
+      "dakar": 1,
+      "mbour": 1,
+      "saly": 6
+    },
+    "coverage_reason_mix": {
+      "base_only": 0,
+      "explicit_zone_only": 1,
+      "territory_only": 8,
+      "explicit_zone_and_territory": 0,
+      "base_plus_coverage": 0
+    }
+  },
+  "interpretation": {
+    "contract_status": "pass",
+    "additive_coverage_rule_validated": true,
+    "explicit_zone_coverage_can_add_beyond_territory_coverage": true,
+    "territory_coverage_remains_independent": true,
+    "base_zone_identity_preserved": true,
+    "no_synthetic_base_assignment": true,
+    "zone_and_need_filters_remain_distinct": true,
+    "deduplication_by_professional_id_required": true
+  },
+  "conclusion": "Le pilote Ngaparou confirme que les sources de couverture sont additives et indépendantes. Huit professionnels deviennent éligibles par couverture Petite Côte entière et un professionnel supplémentaire par couverture Ngaparou explicite, sans qu'aucun ne soit basé à Ngaparou. Le CORE doit réunir ces motifs d'éligibilité, préserver la vraie zone de base et dédupliquer par professional_id."
+}
