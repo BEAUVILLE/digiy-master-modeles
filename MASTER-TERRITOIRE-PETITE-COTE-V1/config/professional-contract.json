@@ -1,12 +1,12 @@
 {
-  "contract": "DIGIYLYFE-PROFESSIONAL-CONNECTION-V1",
+  "contract": "DIGIYLYFE-PROFESSIONAL-CONNECTION-V1.1",
   "country_id": "SN",
   "territory_id": "SN-PETITE-COTE",
   "purpose": "Définir le raccordement minimal d'un professionnel de production au moteur territoire sans stocker de professionnel réel dans le MASTER.",
   "required": [
     "country_id",
     "territory_id",
-    "zone_id",
+    "base_zone_id",
     "need_id",
     "professional_id",
     "display_name",
@@ -21,8 +21,11 @@
     "capabilities",
     "rank_weight",
     "service_zone_ids",
+    "service_territory_ids",
     "source_zone_id",
-    "source_zone_slug"
+    "source_zone_slug",
+    "source_service_zone_ids",
+    "source_service_zone_slugs"
   ],
   "references": {
     "zones": "./zones.json",
@@ -32,20 +35,28 @@
   "rules": {
     "country_must_match": "SN",
     "territory_must_match": "SN-PETITE-COTE",
-    "zone_id_must_exist_in_zones": true,
+    "base_zone_id_must_exist_in_zones": true,
     "need_id_must_exist_in_core": true,
     "public_url_required": true,
     "generic_public_action": "OUVRIR",
     "commercial_level_public": false,
     "real_professionals_stored_in_master": false,
     "production_data_is_source_of_truth": true,
-    "production_uuid_or_legacy_zone_can_be_mapped": true
+    "production_uuid_or_legacy_zone_can_be_mapped": true,
+    "base_zone_is_identity_anchor": true,
+    "service_zones_do_not_rehome_professional": true,
+    "cross_territory_service_requires_explicit_validation": true
   },
-  "adapter_note": "La production peut conserver ses UUID ou identifiants historiques. Le CORE utilise un zone_id canonique stable ; source_zone_id ou source_zone_slug servent d'adaptateur tant que la production n'expose pas directement ce canonical id.",
+  "compatibility": {
+    "legacy_zone_id": "Peut être lu comme source de base_zone_id via l'adaptateur de production. La production n'a pas besoin d'être migrée immédiatement."
+  },
+  "adapter_note": "La production peut conserver ses UUID ou identifiants historiques. Le CORE utilise un base_zone_id canonique stable ; source_zone_id ou source_zone_slug servent d'adaptateur. Les zones d'intervention sont séparées de la zone de base et ne modifient jamais automatiquement l'ancrage territorial du professionnel.",
   "template": {
     "country_id": "SN",
     "territory_id": "SN-PETITE-COTE",
-    "zone_id": "SN-PETITE-COTE-<ZONE>",
+    "base_zone_id": "SN-PETITE-COTE-<ZONE>",
+    "service_zone_ids": [],
+    "service_territory_ids": [],
     "need_id": "<CORE_NEED_ID>",
     "professional_id": "<PRODUCTION_ID>",
     "display_name": "<PUBLIC_NAME>",
