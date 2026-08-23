@@ -211,20 +211,27 @@ Le backend historique ne connaît actuellement que `posted|void`. Les autres ét
 
 ---
 
-## 8. Créance / dette client
+## 8. CLIENT DÛ / échéancier terrain
 
-Une créance est un objet séparé :
+Le modèle visible reste volontairement simple :
+
+```txt
+CLIENT DÛ -> NOM -> SOMME INITIALE -> REMBOURSEMENTS -> RESTE
+```
+
+Objet dette :
 
 ```js
 {
   id: "uuid",
   member_slug: "slug-instance",
-  client_name: "",
+  client_name: "Mamadou",
   client_phone: "",
   amount_due: 50000,
-  amount_paid: 20000,
+  amount_paid: 25000,
   currency: "XOF",
   status: "partial",
+  debt_date: "2026-08-23",
   due_date: null,
   note: "",
   created_at: "ISO-8601"
@@ -242,14 +249,64 @@ cancelled
 
 ### Règle absolue
 
-Créer une créance **ne crée jamais une entrée d’argent**.
+Créer la dette **ne crée aucune entrée d’argent**.
 
-Lors d’un règlement réel :
+En revanche, **chaque remboursement réel confirmé doit obligatoirement créer une entrée CARNET** dans la même opération.
 
-1. enregistrer le paiement de la créance ;
-2. créer un vrai mouvement `direction=in` ;
-3. lier le mouvement à la créance ;
-4. recalculer `amount_paid` et le statut.
+Flux obligatoire :
+
+```txt
+CLIENT DÛ 50 000 F
+      ↓
+REMBOURSEMENT 10 000 F · Wave
+      ↓
+MOUVEMENT CARNET +10 000 F
+      ↓
+RESTE 40 000 F
+```
+
+Puis :
+
+```txt
+REMBOURSEMENT 15 000 F · Espèces
+      ↓
+MOUVEMENT CARNET +15 000 F
+      ↓
+RESTE 25 000 F
+```
+
+Le remboursement est enregistré comme :
+
+```txt
+scope=activity
+direction=in
+kind=sale
+category=client_du
+channel=mode réellement reçu
+source_module=CARNET_DEBT
+source_id=id unique du remboursement
+```
+
+### Conséquence terrain validée
+
+Le remboursement entre immédiatement dans :
+
+- **Entrées du jour** ;
+- **Net du jour** ;
+- total du canal réellement reçu (Wave / Orange Money / Espèces / etc.) ;
+- **CA du jour**, puisque CARNET suit ici le CA encaissé : la vente à crédit n’entre pas au moment de la dette, elle entre au rythme des remboursements réellement reçus.
+
+Donc :
+
+```txt
+Dette créée = 0 F encaissé
+Remboursement 1 = montant encaissé ce jour
+Remboursement 2 = montant encaissé ce jour
+...
+Reste = somme initiale - total des remboursements
+```
+
+Le système ne doit jamais permettre d’enregistrer un remboursement sans sa trace financière correspondante.
 
 ---
 
@@ -267,6 +324,8 @@ Objectif :
 
 Même après coupure réseau, fermeture de page ou double appui.
 
+Pour CLIENT DÛ, le même identifiant de remboursement sert aussi de `source_id` du mouvement CARNET afin qu’un double appui ne puisse pas compter deux fois le même remboursement.
+
 ---
 
 ## 10. Résumé du jour
@@ -275,7 +334,7 @@ Le store expose :
 
 ```js
 {
-  salesRevenue: 0, // CA strict
+  salesRevenue: 0, // CA encaissé : ventes directes + remboursements CLIENT DÛ du jour
   income: 0,       // toutes entrées confirmées
   expenses: 0,
   net: 0,
@@ -297,7 +356,7 @@ net      = income - expenses
 CA       = direction=in + kind=sale + posted
 ```
 
-Les créances ouvertes sont affichées séparément et ne touchent ni `income`, ni `net`, ni `CA` avant paiement.
+Les dettes ouvertes sont affichées séparément. **Seuls leurs remboursements réellement confirmés** touchent `income`, `net` et `CA`.
 
 ---
 
@@ -317,6 +376,12 @@ APERÇU
 VALIDATION ADHÉRENT
    ↓
 POSTED / QUEUED OFFLINE
+```
+
+Pour un remboursement CLIENT DÛ, la validation humaine confirme en une seule action :
+
+```txt
+montant + mode reçu + date + entrée CARNET + nouveau reste dû
 ```
 
 **La VOIX est au-dessus de l’ACTION. L’humain reste au-dessus de la validation.**
