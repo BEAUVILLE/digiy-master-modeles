@@ -1,0 +1,71 @@
+{
+  "validation": "DIGIYLYFE-BONNE-AFFAIRE-MULTICURRENCY-ADMIN-2026-08-23",
+  "mode": "production-migration-edge-functions-public-flow-admin-wiring",
+  "status": "pass",
+  "bonne_affaire": {
+    "database": {
+      "table": "digiy_bonne_affaire_annonces",
+      "generic_fields": ["amount", "currency_code", "country_id"],
+      "legacy_xof_preserved": true
+    },
+    "markets": {
+      "SN": {
+        "currency": "XOF",
+        "packs": {"A": 3000, "B": 5000, "C": 10000},
+        "days": {"A": 7, "B": 14, "C": 30}
+      },
+      "FR": {
+        "currency": "EUR",
+        "packs": {"A": 9, "B": 15, "C": 25},
+        "days": {"A": 7, "B": 14, "C": 30}
+      }
+    },
+    "submit_edge_function": {
+      "slug": "digiy-bonne-affaire-submit",
+      "version": 2,
+      "server_side_country_pack_pricing": true,
+      "human_payment_review_preserved": true
+    },
+    "cockpit_edge_function": {
+      "slug": "digiy-bonne-affaire-cockpit",
+      "version": 3,
+      "generic_currency_exposed": true,
+      "human_payment_and_publication_review_preserved": true
+    },
+    "public_files": {
+      "tarifs-annonce.html": {
+        "commit": "d9e939ffc1243ca634bc8441f3ed4dcba0d01bea",
+        "country_parameter_preserved_to_publish_form": true
+      },
+      "publier-auto.html": {
+        "commit": "15e31c71025a91431a001dc9e31d003f17fce71c",
+        "country_selector": true,
+        "sn_xof": true,
+        "fr_eur": true
+      }
+    }
+  },
+  "admin": {
+    "engine_file": {
+      "path": "BEAUVILLE/admin-digiy/admin-cockpit-v2.js",
+      "commit": "9c29e8c67eb937d57f5959e3f24f155de02af69e"
+    },
+    "index_file": {
+      "path": "BEAUVILLE/admin-digiy/index.html",
+      "commit": "af4ee73e89e8d6b315614248ae1c7b37b34d2e91",
+      "external_engine": "./admin-cockpit-v2.js?v=20260823-world-v2"
+    },
+    "adhesion_multicurrency": true,
+    "bonne_affaire_multicurrency": true,
+    "country_geography_visible_for_adhesions": true,
+    "legacy_rows_supported": true
+  },
+  "rules_confirmed": {
+    "country_is_authoritative_for_currency": true,
+    "bonne_affaire_pack_price_is_country_specific": true,
+    "client_cannot_override_server_pack_price": true,
+    "no_automatic_payment_validation": true,
+    "no_automatic_ad_publication_before_human_review": true
+  },
+  "conclusion": "Le grand cockpit admin est maintenant raccordé au moteur multi-pays. BONNE AFFAIRE conserve les tarifs officiels Sénégal XOF et France EUR, du choix du marché jusqu'au formulaire, à Supabase et au contrôle admin."
+}
