@@ -1,0 +1,14 @@
+{
+  "territory": {
+    "id": "SN-SINE-SALOUM",
+    "country_id": "SN",
+    "slug": "sine-saloum",
+    "label": "Siné-Saloum",
+    "status": "planned",
+    "public_route": null,
+    "inherit_needs_from_core": true,
+    "inherit_capabilities_from_core": true,
+    "inherit_languages_from_country": true,
+    "generic_professional_action": "OUVRIR"
+  }
+}
