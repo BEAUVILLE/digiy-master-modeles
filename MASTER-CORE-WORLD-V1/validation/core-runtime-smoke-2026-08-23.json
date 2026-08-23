@@ -1,19 +1,28 @@
 {
   "validation": "DIGIYLYFE-CORE-RUNTIME-SMOKE-2026-08-23",
   "mode": "master-only",
+  "status": "pass",
   "target": {"country": "SN", "territory": "petite-cote"},
-  "expected": {
+  "observed": {
+    "country_id": "SN",
     "territory_id": "SN-PETITE-COTE",
     "active_zone_count": 7,
+    "active_zone_slugs": ["aibd", "ndayane", "popenguine", "somone", "ngaparou", "saly", "mbour"],
     "core_need_count": 9,
     "planned_zones_excluded": ["nianing", "joal-fadiouth"],
     "generic_action": "OUVRIR"
   },
   "guards": {
-    "planned_territories_excluded": true,
+    "sine_saloum_planned_territory_blocked": true,
     "planned_zones_excluded": true,
     "fail_closed": true,
     "production_mutation": false
+  },
+  "checks": {
+    "javascript_syntax": "pass",
+    "configuration_resolution": "pass",
+    "geography_guard": "pass",
+    "planned_territory_rejection": "pass"
   },
   "next_step": "connect public territory engine to runtime after review"
 }
