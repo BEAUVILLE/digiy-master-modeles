@@ -1,0 +1,34 @@
+{
+  "validation": "DIGIYLYFE-BONNE-AFFAIRE-CORE-GEOGRAPHY-BRIDGE-2026-08-23",
+  "status": "PASS",
+  "scope": "BONNE AFFAIRE -> Supabase -> CORE WORLD geography",
+  "production": {
+    "project_id": "wesqmwjjtsefyjnluosj",
+    "table": "digiy_bonne_affaire_annonces",
+    "migration_applied": true,
+    "edge_submit_version": 3,
+    "edge_cockpit_version": 4
+  },
+  "structured_fields": [
+    "country_id",
+    "territory_id",
+    "base_zone_id",
+    "geography_status",
+    "pending_locality_label"
+  ],
+  "runtime_source": "https://digiylyfe.com/assets/digiy-core-runtime-v1.json",
+  "resolution": {
+    "known_active_zone": "validated",
+    "unknown_or_not_active_locality": "pending_validation",
+    "previous_rows": "legacy",
+    "automatic_public_geography_creation": false
+  },
+  "compatibility": {
+    "keep_pays_zone_ville": true,
+    "public_form_rebuilt": false,
+    "existing_payment_flow_preserved": true,
+    "human_payment_review_preserved": true,
+    "human_ad_review_preserved": true
+  },
+  "doctrine": "Raccorder sans refaire : le formulaire historique reste utilisable, le serveur résout automatiquement la géographie CORE et met les localités inconnues en attente de validation."
+}
