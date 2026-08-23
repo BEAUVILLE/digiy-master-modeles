@@ -1,24 +1,30 @@
 {
-  "policy": "DIGIYLYFE-BASE-ZONE-SERVICE-AREA-V1",
+  "policy": "DIGIYLYFE-BASE-ZONE-SERVICE-AREA-V1.1",
   "country_id": "SN",
   "territory_id": "SN-PETITE-COTE",
-  "principle": "La zone de base définit l'ancrage du professionnel. Les zones d'intervention définissent sa couverture sans modifier cet ancrage.",
+  "principle": "La zone de base définit l'ancrage du professionnel. Les zones et territoires d'intervention étendent sa couverture sans modifier cet ancrage.",
   "fields": {
     "base_zone_id": {
       "cardinality": "one",
       "required": true,
-      "meaning": "Zone principale d'ancrage du professionnel."
+      "meaning": "Zone principale d'ancrage du professionnel. Elle est toujours considérée comme desservie, même si aucune ligne de couverture explicite n'existe."
     },
     "service_zone_ids": {
       "cardinality": "zero_to_many",
       "required": false,
-      "meaning": "Zones dans lesquelles le professionnel accepte d'intervenir ou de servir."
+      "meaning": "Zones supplémentaires dans lesquelles le professionnel accepte d'intervenir ou de servir."
     },
     "service_territory_ids": {
       "cardinality": "zero_to_many",
       "required": false,
-      "meaning": "Territoires entiers couverts explicitement par le professionnel."
+      "meaning": "Territoires entiers couverts explicitement par le professionnel. Une couverture territoire rend le professionnel éligible dans les zones actives de ce territoire, sans changer sa zone de base."
     }
+  },
+  "effective_coverage": {
+    "formula": "base_zone_id + service_zone_ids + active zones implied by validated service_territory_ids",
+    "base_zone_is_implicit_service_zone": true,
+    "explicit_service_zones_are_additive": true,
+    "territory_marker_is_not_a_zone": true
   },
   "rules": {
     "service_zone_does_not_change_base_zone": true,
@@ -26,6 +32,7 @@
     "cross_territory_coverage_must_be_explicit": true,
     "cross_country_coverage_must_be_explicit": true,
     "planned_or_unknown_destination_requires_validation": true,
+    "unvalidated_external_coverage_does_not_expand_public_results": true,
     "production_source_remains_authoritative": true,
     "no_real_professional_is_stored_here": true
   },
