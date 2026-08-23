@@ -10,6 +10,14 @@
       "planned_zones": ["joal-fadiouth"]
     },
     {
+      "id": "SN-SINE-SALOUM",
+      "slug": "sine-saloum",
+      "label": "Siné-Saloum",
+      "status": "planned",
+      "zones": [],
+      "master": "../MASTER-TERRITOIRE-SINE-SALOUM-V1/"
+    },
+    {
       "id": "SN-DAKAR",
       "slug": "dakar",
       "label": "Dakar",
