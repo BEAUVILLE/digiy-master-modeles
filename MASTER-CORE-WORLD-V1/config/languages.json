@@ -1,0 +1,15 @@
+{
+  "default": "fr",
+  "rtl": ["ar"],
+  "languages": [
+    {"code": "fr", "label": "Français", "status": "core"},
+    {"code": "en", "label": "English", "status": "core"},
+    {"code": "es", "label": "Español", "status": "core"},
+    {"code": "pt", "label": "Português", "status": "core"},
+    {"code": "it", "label": "Italiano", "status": "core"},
+    {"code": "de", "label": "Deutsch", "status": "core"},
+    {"code": "nl", "label": "Nederlands", "status": "core"},
+    {"code": "ar", "label": "العربية", "status": "core", "written_variant": "Modern Standard Arabic"}
+  ],
+  "rule": "Les langues locales supplémentaires sont activées par pays uniquement lorsque leur qualité est suffisante."
+}
