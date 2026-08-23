@@ -1,0 +1,41 @@
+{
+  "validation": "POPENGUINE-PILOT-READONLY-2026-08-23",
+  "mode": "read-only",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "target_zone_id": "SN-PETITE-COTE-POPENGUINE",
+  "source": "Supabase production",
+  "rules": {
+    "no_production_mutation": true,
+    "no_real_professional_identity_stored": true,
+    "aggregate_only": true
+  },
+  "result": {
+    "professional_count_should_appear": 8,
+    "based_in_target_zone_count": 0,
+    "explicit_target_zone_service_count": 0,
+    "whole_territory_service_count": 8,
+    "unmapped_need_count": 0,
+    "missing_public_url_count": 0,
+    "need_counts": {
+      "artisan": 4,
+      "shopping": 1,
+      "transport": 3
+    },
+    "base_zone_distribution": {
+      "aibd": 1,
+      "dakar": 1,
+      "saly": 6
+    }
+  },
+  "interpretation": {
+    "contract_status": "pass",
+    "territory_only_coverage_rule_reconfirmed": true,
+    "active_target_zone_can_receive_results_without_direct_rows": true,
+    "base_zone_identity_preserved": true,
+    "no_synthetic_base_assignment": true,
+    "zone_and_need_filters_remain_distinct": true,
+    "deduplication_by_professional_id_required": true
+  },
+  "conclusion": "Le pilote Popenguine confirme une deuxième fois qu'une zone active peut recevoir des professionnels uniquement par couverture du territoire Petite Côte validé, sans professionnel basé localement ni ligne d'intervention Popenguine explicite. Cette couverture n'invente aucune implantation locale : chaque professionnel conserve sa vraie zone de base et reste ensuite filtré par besoin."
+}
