@@ -1,5 +1,5 @@
 {
-  "policy": "DIGIYLYFE-BASE-ZONE-SERVICE-AREA-V1.1",
+  "policy": "DIGIYLYFE-BASE-ZONE-SERVICE-AREA-V1.2",
   "country_id": "SN",
   "territory_id": "SN-PETITE-COTE",
   "principle": "La zone de base définit l'ancrage du professionnel. Les zones et territoires d'intervention étendent sa couverture sans modifier cet ancrage.",
@@ -25,6 +25,14 @@
     "base_zone_is_implicit_service_zone": true,
     "explicit_service_zones_are_additive": true,
     "territory_marker_is_not_a_zone": true
+  },
+  "target_zone_eligibility": {
+    "formula": "target_zone_id == base_zone_id OR target_zone_id IN service_zone_ids OR target_zone_id belongs to a validated service_territory_id",
+    "deduplicate_by_professional_id": true,
+    "preserve_base_zone_in_result": true,
+    "preserve_base_territory_in_result": true,
+    "cross_territory_professional_can_appear": true,
+    "cross_territory_appearance_requires_explicit_validated_coverage": true
   },
   "rules": {
     "service_zone_does_not_change_base_zone": true,
