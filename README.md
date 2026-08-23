@@ -56,6 +56,10 @@ Le pays n'est pas un nouveau MASTER métier : Sénégal, France ou autre pays co
 - `MASTER-MAITRE-SERVICE-V1/` — prestations, beauté, bien-être et services sur rendez-vous.
 - `MASTER-MAITRE-RESTO-V2-SITE/` — site restaurant complet.
 
+## MASTER en construction contrôlée
+
+- `MASTER-MAITRE-CARNET-V1/` — futur moule universel DIGIY CARNET : trace financière terrain, entrées/sorties/net du jour, modes Wave/Orange Money/espèces, Oreille/voix et accès adhérent par magic link. **Ne pas déployer avant validation de la source de vérité Supabase, du bridge d’authentification et de la parité avec le moteur vivant.**
+
 ## Standard technique commun
 
 Chaque MASTER opérationnel doit tendre vers :
