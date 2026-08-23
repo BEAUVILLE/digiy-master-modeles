@@ -1,0 +1,56 @@
+{
+  "contract": "DIGIYLYFE-PROFESSIONAL-CONNECTION-V1",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "purpose": "Définir le raccordement minimal d'un professionnel de production au moteur territoire sans stocker de professionnel réel dans le MASTER.",
+  "required": [
+    "country_id",
+    "territory_id",
+    "zone_id",
+    "need_id",
+    "professional_id",
+    "display_name",
+    "public_url",
+    "status"
+  ],
+  "optional": [
+    "activity_label",
+    "category",
+    "phone",
+    "whatsapp",
+    "capabilities",
+    "rank_weight",
+    "service_zone_ids",
+    "source_zone_id",
+    "source_zone_slug"
+  ],
+  "references": {
+    "zones": "./zones.json",
+    "needs": "../../MASTER-CORE-WORLD-V1/config/needs.json",
+    "capabilities": "../../MASTER-CORE-WORLD-V1/config/capabilities.json"
+  },
+  "rules": {
+    "country_must_match": "SN",
+    "territory_must_match": "SN-PETITE-COTE",
+    "zone_id_must_exist_in_zones": true,
+    "need_id_must_exist_in_core": true,
+    "public_url_required": true,
+    "generic_public_action": "OUVRIR",
+    "commercial_level_public": false,
+    "real_professionals_stored_in_master": false,
+    "production_data_is_source_of_truth": true,
+    "production_uuid_or_legacy_zone_can_be_mapped": true
+  },
+  "adapter_note": "La production peut conserver ses UUID ou identifiants historiques. Le CORE utilise un zone_id canonique stable ; source_zone_id ou source_zone_slug servent d'adaptateur tant que la production n'expose pas directement ce canonical id.",
+  "template": {
+    "country_id": "SN",
+    "territory_id": "SN-PETITE-COTE",
+    "zone_id": "SN-PETITE-COTE-<ZONE>",
+    "need_id": "<CORE_NEED_ID>",
+    "professional_id": "<PRODUCTION_ID>",
+    "display_name": "<PUBLIC_NAME>",
+    "public_url": "https://<PUBLIC-PRESENCE>/",
+    "status": "active",
+    "capabilities": []
+  }
+}
