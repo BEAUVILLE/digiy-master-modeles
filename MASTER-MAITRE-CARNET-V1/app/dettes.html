@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="theme-color" content="#06140f">
+  <title>DIGIY CARNET — Client dû</title>
+  <script src="../master-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3"></script>
+  <script src="../assets/carnet-contract.js"></script>
+  <script src="../assets/carnet-store.js"></script>
+  <script src="../assets/carnet-debts.js"></script>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100dvh;padding:12px 12px 90px;background:radial-gradient(circle at top left,rgba(244,210,122,.13),transparent 34%),linear-gradient(180deg,#06140f,#020806);color:#fff8e8;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800}.app{width:min(620px,100%);margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:8px}.back{color:#fff;text-decoration:none;padding:10px 12px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.06)}.brand{text-align:right}.brand small{display:block;color:rgba(255,255,255,.5);font-size:10px}.brand b{color:#f4d27a}.hero{margin-top:12px;padding:18px;border-radius:28px;background:linear-gradient(135deg,#fff7df,#ead29a);color:#162016}.hero h1{margin:4px 0;font-size:clamp(38px,11vw,58px);line-height:.92;letter-spacing:-.05em}.hero p{margin:8px 0 0;line-height:1.4}.status{margin-top:12px;padding:12px;border-radius:16px;background:rgba(244,210,122,.1);border:1px solid rgba(244,210,122,.22);font-size:12px}.status.ok{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.25);color:#bbf7d0}.status.bad{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.25);color:#fecaca}.card{margin-top:12px;padding:15px;border-radius:24px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09)}.card h2{margin:0 0 5px;color:#f4d27a}.lead{margin:0 0 12px;color:rgba(255,255,255,.62);font-size:12px}.field{display:grid;gap:5px;margin-top:10px}.field label{font-size:10px;color:#fde68a}.field input,.field select,.field textarea{width:100%;min-height:50px;border-radius:15px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.22);color:#fff;padding:10px 12px;font:inherit;font-weight:900}.field textarea{min-height:70px}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.btn{width:100%;min-height:54px;margin-top:11px;border:0;border-radius:16px;background:linear-gradient(135deg,#22c55e,#f4d27a);color:#102014;font:inherit;font-weight:1100}.btn.secondary{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.12)}.debts{display:grid;gap:10px;margin-top:10px}.debt{padding:14px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}.head{display:flex;justify-content:space-between;gap:8px;align-items:start}.head b{font-size:18px}.pill{padding:5px 8px;border-radius:999px;background:rgba(244,210,122,.12);color:#fde68a;font-size:9px}.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}.num{padding:9px;border-radius:14px;background:rgba(255,255,255,.05);text-align:center}.num small{display:block;color:rgba(255,255,255,.5);font-size:9px}.num b{display:block;margin-top:3px}.history{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;color:rgba(255,255,255,.7)}.paybox{margin-top:10px;padding:10px;border-radius:16px;background:rgba(0,0,0,.16)}.empty{padding:18px;text-align:center;color:rgba(255,255,255,.55)}.dock{position:fixed;left:8px;right:8px;bottom:8px;width:min(604px,calc(100% - 16px));margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:6px;border-radius:18px;background:rgba(6,20,15,.95);border:1px solid rgba(255,255,255,.1)}.dock a{min-height:52px;display:grid;place-items:center;text-align:center;text-decoration:none;color:#fff;border-radius:13px;background:rgba(255,255,255,.07);font-size:11px}@media(max-width:440px){.row,.nums{grid-template-columns:1fr}.nums{grid-template-columns:repeat(3,1fr)}}
+  </style>
+</head>
+<body>
+<main class="app">
+  <header class="top"><a class="back" href="./index.html">← CARNET</a><div class="brand"><small>DIGIYLYFE · ADHÉRENT</small><b>🤝 CLIENT DÛ</b></div></header>
+
+  <section class="hero"><small>ÉCHÉANCIER TERRAIN</small><h1>Il doit.<br>Il rembourse.<br>Il reste.</h1><p>Une dette n’entre pas dans la caisse à sa création. <b>Chaque remboursement confirmé, lui, entre immédiatement dans CARNET.</b></p></section>
+  <div class="status" id="status">Contrôle du registre…</div>
+
+  <section class="card">
+    <h2>Nouveau client dû</h2>
+    <p class="lead">Nom + somme due. Le reste peut rester très simple.</p>
+    <div class="row"><div class="field"><label for="client">Nom du client</label><input id="client" type="text" placeholder="Ex : Mamadou"></div><div class="field"><label for="amount">Somme due</label><input id="amount" type="number" min="1" step="1" inputmode="numeric" placeholder="50000"></div></div>
+    <div class="row"><div class="field"><label for="phone">Téléphone facultatif</label><input id="phone" type="tel"></div><div class="field"><label for="due">Échéance facultative</label><input id="due" type="date"></div></div>
+    <div class="field"><label for="note">Note facultative</label><textarea id="note"></textarea></div>
+    <button class="btn" id="create" type="button">ENREGISTRER LE CLIENT DÛ</button>
+  </section>
+
+  <section class="card"><h2>Échéanciers</h2><div class="debts" id="debts"><div class="empty">Chargement…</div></div></section>
+</main>
+<nav class="dock"><a href="./index.html">📊 JOUR</a><a href="./oreille.html">🎙️ OREILLE</a><a href="./dettes.html">🤝 CLIENT DÛ</a></nav>
+<script>
+(() => {
+  "use strict";
+  const Debts=window.DIGIY_CARNET_DEBTS, Contract=window.DIGIY_CARNET_CONTRACT, C=window.DIGIY_CARNET_MASTER||{};
+  const $=id=>document.getElementById(id), money=n=>(Number(n)||0).toLocaleString("fr-FR").replace(/\u202f/g," ")+" F";
+  const esc=v=>String(v??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+  function setStatus(t,k){$("status").textContent=t;$("status").className="status "+(k||"")}
+
+  async function load(){
+    try{
+      const rows=await Debts.list();
+      setStatus("✅ Échéancier chargé.","ok");
+      if(!rows.length){$("debts").innerHTML="<div class='empty'>Aucun client dû ouvert.</div>";return}
+      const html=[];
+      for(const d of rows){
+        const pays=await Debts.payments(d.id).catch(()=>[]), remain=Math.max(0,Number(d.amount_due_xof)-Number(d.amount_paid_xof));
+        html.push(`<article class="debt" data-id="${esc(d.id)}"><div class="head"><div><b>${esc(d.client_label)}</b><div style="font-size:11px;color:rgba(255,255,255,.55);margin-top:3px">${d.due_date?"Échéance : "+esc(d.due_date):"Sans échéance imposée"}</div></div><span class="pill">${esc(d.status.toUpperCase())}</span></div><div class="nums"><div class="num"><small>DÛ</small><b>${money(d.amount_due_xof)}</b></div><div class="num"><small>REMBOURSÉ</small><b>${money(d.amount_paid_xof)}</b></div><div class="num"><small>RESTE</small><b>${money(remain)}</b></div></div><div class="history">${pays.length?pays.map(p=>`${esc(String(p.paid_at).slice(0,10))} · +${money(p.amount_xof)} · ${esc(Contract.channels[p.channel]||p.channel)}`).join("<br>"):"Aucun remboursement enregistré."}</div>${remain>0?`<div class="paybox"><div class="row"><div class="field"><label>Remboursement</label><input class="payAmount" type="number" min="1" max="${remain}" inputmode="numeric"></div><div class="field"><label>Mode reçu</label><select class="payChannel">${(C.channels||[]).filter(x=>x.active!==false).map(x=>`<option value="${esc(x.id)}">${esc(x.label)}</option>`).join("")}</select></div></div><button class="btn payBtn" type="button">+ ENREGISTRER LE REMBOURSEMENT</button></div>`:"<div class='history'>✅ Soldé</div>"}</article>`);
+      }
+      $("debts").innerHTML=html.join("");
+      document.querySelectorAll(".debt").forEach(card=>{
+        const btn=card.querySelector(".payBtn"); if(!btn)return;
+        btn.onclick=async()=>{
+          const amount=Math.round(Number(card.querySelector(".payAmount").value||0)), channel=card.querySelector(".payChannel").value;
+          if(!(amount>0)){setStatus("Indique le montant remboursé.","bad");return}
+          btn.disabled=true;
+          try{const r=await Debts.recordPayment(card.dataset.id,{amount_xof:amount,channel});setStatus(`✅ +${money(r.amount_received_xof)} entrés dans CARNET · reste ${money(r.remaining_xof)}.`,"ok");await load()}catch(err){setStatus("Remboursement non enregistré : "+(err?.message||err),"bad")}finally{btn.disabled=false}
+        };
+      });
+    }catch(err){setStatus("MASTER atelier : "+(err?.message||err),"bad");$("debts").innerHTML="<div class='empty'>Le registre s’ouvrira après pose et test du SQL échéancier.</div>"}
+  }
+
+  $("create").onclick=async()=>{
+    const label=$("client").value.trim(), amount=Math.round(Number($("amount").value||0));
+    if(!label||!(amount>0)){setStatus("Nom du client et somme due sont obligatoires.","bad");return}
+    $("create").disabled=true;
+    try{await Debts.create({client_label:label,amount_due_xof:amount,client_phone:$("phone").value,due_date:$("due").value||null,note_text:$("note").value});$("client").value="";$("amount").value="";$("phone").value="";$("due").value="";$("note").value="";setStatus("✅ Client dû enregistré. Rien n’est entré dans la caisse.","ok");await load()}catch(err){setStatus("Création impossible : "+(err?.message||err),"bad")}finally{$("create").disabled=false}
+  };
+  load();
+})();
+</script>
+</body>
+</html>
