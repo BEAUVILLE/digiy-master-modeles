@@ -24,6 +24,7 @@ Ce dossier ne doit jamais devenir une copie d'un site pays. Il décrit la struct
 - `config/languages.json` — socle multilingue commun.
 - `config/countries.json` — registre WORLD des pays actifs et planifiés.
 - `config/country-launch-contract.json` — garde d'activation d'un nouveau pays.
+- `config/pro-sovereignty-contract.json` — charte de souveraineté du professionnel.
 - `config/territories.json` — instantané de compatibilité historique ; ne doit plus être la source runtime prioritaire.
 - `config/needs.json` — familles universelles visibles au visiteur.
 - `config/capabilities.json` — capacités internes activables derrière un professionnel.
@@ -79,6 +80,14 @@ Mais il ne possède pas son propre moteur.
 **International par son architecture. Multilingue par son interface. Local par ses territoires.**
 
 Les 8 langues du CORE sont une couche d'interface commune. Elles ne créent pas automatiquement 8 marchés ni 8 pays. Un pays devient public uniquement par validation de sa configuration et activation explicite dans le runtime.
+
+## Souveraineté du professionnel
+
+**DIGIYLYFE ouvre la porte. Le professionnel garde les clés.**
+
+La montée en puissance mondiale du CORE ne doit jamais transformer DIGIYLYFE en système de captivité. La relation commerciale reste directe, les canaux propres du professionnel restent autorisés, son identité peut vivre hors de DIGIYLYFE et les contenus qu'il est en droit de récupérer doivent rester portables dans les limites de la confidentialité, de la sécurité et du droit applicable.
+
+La rétention doit venir de la valeur du service, jamais d'un verrou technique. Le principe CORE reste 0 % commission et aucune future fonction ne doit imposer une intermédiation ou une exclusivité contraire à `config/pro-sovereignty-contract.json` sans révision explicite du MASTER.
 
 ## Règle territoire
 
