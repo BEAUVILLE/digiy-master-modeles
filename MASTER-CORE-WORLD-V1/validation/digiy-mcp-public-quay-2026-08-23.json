@@ -1,0 +1,64 @@
+{
+  "validation": "DIGIYLYFE-MCP-PUBLIC-QUAY-2026-08-23",
+  "status": "pass",
+  "scope": "DIGIY-MCP-V1 public discovery quay",
+  "database": {
+    "bridge_table": "public.digiy_public_discovery_bridge",
+    "normalized_view": "public.v_digiy_public_discovery_entities",
+    "migrations": [
+      "create_digiy_public_discovery_quay_v1",
+      "harden_digiy_public_discovery_quay_v1"
+    ],
+    "rules": {
+      "adhesion_source_keeps_active_paid_public_guards": true,
+      "historical_sources_require_explicit_bridge_authorization": true,
+      "loc_master_site_requires_source_is_active": true,
+      "mcp_is_read_only": true,
+      "no_private_data_required_for_discovery": true
+    }
+  },
+  "mcp": {
+    "edge_function": "digiy-mcp",
+    "edge_function_version": 2,
+    "server_version": "1.1.0",
+    "verify_jwt": false,
+    "endpoint": "https://wesqmwjjtsefyjnluosj.supabase.co/functions/v1/digiy-mcp",
+    "tools": [
+      "list_countries",
+      "list_territories",
+      "list_zones",
+      "list_needs",
+      "search_professionals",
+      "get_professional"
+    ]
+  },
+  "sarlat_fixture": {
+    "source_kind": "loc_master_site",
+    "source_key": "8807ea87-7e5d-4beb-973e-be552c820675",
+    "public_slug": "sarlat-chez-baptiste",
+    "display_name": "SARLAT CHEZ BAPTISTE",
+    "country_id": "FR",
+    "territory_id": "FR-DORDOGNE",
+    "base_zone_id": "FR-DORDOGNE-SARLAT",
+    "services": ["location", "hébergement", "chambre privée"],
+    "public_url": "https://sarlat-chez-baptiste.digiylyfe.com/"
+  },
+  "network_test": {
+    "transport": "PostgreSQL pg_net -> public Supabase Edge Function HTTPS endpoint",
+    "server_discover_http_status": 200,
+    "tools_list_http_status": 200,
+    "search_professionals_http_status": 200,
+    "search_query": "location hébergement",
+    "search_geography": {
+      "country_id": "FR",
+      "territory_id": "FR-DORDOGNE",
+      "zone_id": "FR-DORDOGNE-SARLAT"
+    },
+    "search_count": 1,
+    "search_result_public_slug": "sarlat-chez-baptiste",
+    "get_professional_http_status": 200,
+    "returned_public_url": "https://sarlat-chez-baptiste.digiylyfe.com/",
+    "private_contact_data_returned": false
+  },
+  "result": "PUBLIC_QUAY_V1_PASS"
+}
