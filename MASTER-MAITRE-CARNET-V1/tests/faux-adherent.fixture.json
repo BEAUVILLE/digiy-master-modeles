@@ -1,0 +1,49 @@
+{
+  "fixture_id": "DIGIY-CARNET-TEST-001",
+  "purpose": "Faux adhérent neutre pour éprouver le MASTER CARNET sans donnée réelle",
+  "identity": {
+    "member_slug": "digiy-carnet-test-001",
+    "display_name": "ATELIER BAOBAB TEST",
+    "country": "SN",
+    "locale": "fr-SN",
+    "currency": "XOF"
+  },
+  "auth": {
+    "email_placeholder": "carnet-test-001@example.invalid",
+    "entitlement": "carnet",
+    "should_create_user": false,
+    "supabase_user_created": false,
+    "magic_link_sent": false
+  },
+  "world8": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+  "channels": ["wave", "orange_money", "cash", "bank", "other"],
+  "test_data": {
+    "sale": {
+      "direction": "in",
+      "kind": "sale",
+      "amount_xof": 25000,
+      "channel": "wave",
+      "label": "VENTE TEST"
+    },
+    "expense": {
+      "direction": "out",
+      "kind": "expense",
+      "amount_xof": 10000,
+      "channel": "cash",
+      "label": "GASOIL TEST"
+    },
+    "customer_due": {
+      "client_label": "CLIENT TEST A",
+      "client_phone": "",
+      "amount_due_xof": 50000
+    }
+  },
+  "guard": {
+    "real_person": false,
+    "real_business": false,
+    "real_email": false,
+    "production_sql_allowed": false,
+    "production_magic_link_allowed": false,
+    "live_pro_carnet_write_allowed": false
+  }
+}
