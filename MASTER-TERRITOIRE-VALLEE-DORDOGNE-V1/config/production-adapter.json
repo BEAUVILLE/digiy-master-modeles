@@ -1,0 +1,85 @@
+{
+  "adapter": "DIGIYLYFE-DORDOGNE-PRODUCTION-ADAPTER-V1",
+  "mode": "read-only-mapping",
+  "country_id": "FR",
+  "territory_id": "FR-DORDOGNE",
+  "purpose": "Raccorder les données de production existantes au MASTER CORE sans migrer ni recopier les professionnels.",
+  "source": {
+    "professionals_table": "digiy_annuaire_public",
+    "metiers_table": "digiy_metiers",
+    "zones_table": "digiy_zones",
+    "service_zones_table": "digiy_annuaire_public_zones"
+  },
+  "public_filters": {
+    "entry_type": "professional",
+    "is_public": true,
+    "is_active": true
+  },
+  "base_zone_resolution": {
+    "source_field": "digiy_annuaire_public.zone_id",
+    "source_lookup": "digiy_zones.id",
+    "output_field": "base_zone_id",
+    "canonical_ids": {
+      "sarlat": "FR-DORDOGNE-SARLAT"
+    },
+    "implicit_service": true
+  },
+  "service_area_resolution": {
+    "source_table": "digiy_annuaire_public_zones",
+    "source_lookup": "digiy_zones.id",
+    "zone_output_field": "service_zone_ids",
+    "territory_output_field": "service_territory_ids",
+    "pending_output_field": "pending_external_service_references",
+    "rules": {
+      "leaf_zone_slug_maps_to_canonical_zone": true,
+      "missing_service_rows_keep_base_zone_eligible": true,
+      "service_area_never_overwrites_base_zone": true,
+      "cross_territory_service_is_kept_as_coverage_not_identity": true,
+      "pending_external_service_reference_does_not_expand_public_results": true
+    }
+  },
+  "need_resolution": {
+    "metier_slug": {
+      "chauffeur": "transport",
+      "plombier": "artisan",
+      "electricien": "artisan",
+      "macon": "artisan",
+      "solaire": "artisan",
+      "logement": "accommodation",
+      "market-produits": "shopping",
+      "beaute": "beauty",
+      "soins-beaute": "beauty",
+      "onglerie": "beauty",
+      "coiffeur": "beauty",
+      "massage": "beauty",
+      "restaurant": "food",
+      "restauration": "food",
+      "jobs": "jobs",
+      "annonces": "announcements"
+    },
+    "category_fallback": {
+      "transport": "transport",
+      "artisan": "artisan",
+      "location": "accommodation",
+      "logement": "accommodation",
+      "hebergement": "accommodation",
+      "market": "shopping",
+      "commerce": "shopping",
+      "shopping": "shopping",
+      "beaute": "beauty",
+      "beauty": "beauty",
+      "restauration": "food",
+      "emploi": "jobs",
+      "annonces": "announcements"
+    }
+  },
+  "rules": {
+    "mutate_production": false,
+    "store_real_professionals_in_master": false,
+    "production_remains_source_of_truth": true,
+    "exclude_tools_and_modules_from_professional_results": true,
+    "preserve_base_zone_when_service_area_expands": true,
+    "base_zone_is_minimum_effective_coverage": true,
+    "generic_professional_action": "OUVRIR"
+  }
+}
