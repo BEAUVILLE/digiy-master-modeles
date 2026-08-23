@@ -14,7 +14,7 @@
   const KINDS = Object.freeze([
     "sale", "expense", "refund", "transfer", "saving", "withdrawal", "adjustment"
   ]);
-
+  const LEGACY_SAFE_KINDS = Object.freeze(["sale", "expense", "saving", "transfer"]);
   const SCOPES = Object.freeze(["activity", "personal"]);
 
   function uid(){
@@ -83,13 +83,26 @@
 
   function toLegacyPayload(input){
     const m = canonicalMovement(input);
-    const legacyChannel = ({orange_money:"om",card:"other",sendwave:"other"})[m.channel] || m.channel;
+    const checked = validateConfirmed(m);
+    if(!checked.ok) throw new Error("carnet_invalid:" + checked.errors.join(","));
+
+    // Le RPC PAY historique ne sait pas transporter Orange Money comme `om` :
+    // `om` serait converti en `other`, tandis que `orange_money` ferait échouer
+    // la contrainte SQL. Pendant la transition, on stocke donc le canal canonique
+    // dans meta et on utilise `other` dans la colonne legacy.
+    const legacyChannel = ["wave","cash","bank","other"].includes(m.channel) ? m.channel : "other";
+
+    // Le RPC historique convertirait refund/withdrawal/adjustment en `other`,
+    // valeur interdite par la contrainte kind. Refus explicite plutôt que corruption.
+    if(!LEGACY_SAFE_KINDS.includes(m.kind)){
+      throw new Error("legacy_kind_unsupported:" + m.kind);
+    }
+
     const legacyOrigin = ["module_sync","system"].includes(m.origin) ? m.origin : "manual";
-    const legacyKind = KINDS.includes(m.kind) ? m.kind : (m.direction === "out" ? "expense" : "sale");
     return {
       direction: m.direction,
       scope: m.scope === "personal" ? "perso" : "pro",
-      kind: legacyKind,
+      kind: m.kind,
       category: m.category,
       channel: legacyChannel,
       amount_xof: m.amount,
@@ -103,7 +116,8 @@
         carnet_client_id: m.client_id,
         carnet_channel: m.channel,
         carnet_origin: m.origin,
-        carnet_contract: "v1"
+        carnet_contract: "v1",
+        carnet_legacy_channel_fallback: legacyChannel !== m.channel
       })
     };
   }
@@ -112,7 +126,7 @@
     const meta = row?.meta || {};
     return canonicalMovement({
       id: row?.id,
-      client_id: meta.carnet_client_id || row?.source_id || null,
+      client_id: meta.carnet_client_id || row?.source_id || row?.id || null,
       member_slug: row?.slug || "",
       scope: row?.scope,
       direction: row?.direction,
@@ -159,6 +173,7 @@
     version:"v1",
     channels:CHANNELS,
     kinds:KINDS,
+    legacySafeKinds:LEGACY_SAFE_KINDS,
     scopes:SCOPES,
     canonicalMovement,
     validateConfirmed,
