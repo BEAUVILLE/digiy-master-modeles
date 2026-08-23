@@ -1,0 +1,55 @@
+{
+  "contract": "DIGIYLYFE-CORE-RUNTIME-CONTRACT-V1",
+  "purpose": "Permettre à un moteur territorial unique de découvrir pays, territoires, zones et besoins par configuration, sans liste géographique codée en dur.",
+  "entrypoint": "./runtime-registry.json",
+  "hierarchy": [
+    "country",
+    "territory",
+    "zone",
+    "need",
+    "professional"
+  ],
+  "sources": {
+    "country_registry": "runtime-registry.json",
+    "country_config": "MASTER-PAYS-*/config/country.json",
+    "territories_config": "MASTER-PAYS-*/config/territories.json",
+    "territory_config": "MASTER-TERRITOIRE-*/config/territory.json",
+    "zones_config": "MASTER-TERRITOIRE-*/config/zones.json",
+    "needs_config": "MASTER-CORE-WORLD-V1/config/needs.json",
+    "professional_data": "production adapter declared by territory"
+  },
+  "public_rules": {
+    "engine_must_not_hardcode_country_territory_or_zone_lists": true,
+    "country_must_be_enabled_in_runtime_registry": true,
+    "territory_status_must_be_active": true,
+    "zone_status_must_be_active": true,
+    "planned_territory_is_not_public": true,
+    "planned_zone_is_not_public": true,
+    "planned_zone_is_not_implied_by_territory_coverage": true,
+    "need_must_exist_in_core_needs": true,
+    "professionals_remain_in_live_data": true,
+    "configuration_failure_is_fail_closed": true
+  },
+  "resolution": {
+    "country": "id or slug -> runtime registry -> country config",
+    "territory": "slug -> country territories config -> territory MASTER",
+    "zone": "slug -> territory zones config",
+    "need": "id -> CORE needs config",
+    "professional": "territory production adapter + geographic eligibility + matching need_id"
+  },
+  "inheritance": {
+    "territory_inherits_languages_from_country_when_declared": true,
+    "territory_inherits_needs_from_core_when_declared": true,
+    "territory_inherits_capabilities_from_core_when_declared": true
+  },
+  "guards": {
+    "optional_country_guard_config": true,
+    "guard_can_freeze_active_and_planned_geography": true,
+    "runtime_must_intersect_config_with_guard_when_present": true
+  },
+  "compatibility": {
+    "legacy_core_territories_json": "compatibility snapshot only; runtime discovery must prefer country MASTER territories files",
+    "production_mutation_required": false,
+    "public_engine_change_required_for_activation": true
+  }
+}
