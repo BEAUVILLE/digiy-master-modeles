@@ -19,9 +19,14 @@
       .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
   }
 
+  function pickLang(value){
+    const v=String(value||"").toLowerCase().split("-")[0];
+    return /^(fr|en|es|pt|it|de|nl|ar)$/.test(v)?v:"fr";
+  }
+
   function extractAmount(text){
     const raw = clean(text);
-    const match = raw.match(/(?:^|\s)(\d[\d\s.,]*)(?:\s*(?:fcfa|f\s*cfa|xof|cfa|francs?))?(?=\s|$)/i);
+    const match = raw.match(/(?:^|\s)(\d[\d\s.,]*)(?:\s*(?:fcfa|f\s*cfa|xof|cfa|francs?|euros?|eur))?(?=\s|$)/i);
     if(!match) return 0;
     const normalized = String(match[1] || "")
       .replace(/\s/g,"")
@@ -35,17 +40,26 @@
     const t = lower(text);
     if(/\bwave\b|\bwav\b/.test(t)) return "wave";
     if(/orange money|\bom\b/.test(t)) return "orange_money";
-    if(/espece|cash|liquide/.test(t)) return "cash";
     if(/sendwave/.test(t)) return "sendwave";
-    if(/carte|\bcb\b/.test(t)) return "card";
-    if(/virement|banque/.test(t)) return "bank";
+    if(/espece|cash|liquide|efectivo|dinero|numerario|contanti|bargeld|\bbar\b|contant|نقد|نقدا/.test(t)) return "cash";
+    if(/carte|\bcb\b|\bcard\b|tarjeta|cartao|carta|karte|kaart|بطاقة/.test(t)) return "card";
+    if(/virement|banque|transfer|bank|transferencia|banco|transferencia|banca|uberweisung|overschrijving|تحويل|بنك/.test(t)) return "bank";
     return "other";
   }
 
   function detectDirection(text){
     const t = lower(text);
-    if(/depense|sortie|gasoil|essence|carburant|achat|fournisseur|loyer|transport|charge|facture|electricite|senelec|eau|sen.?eau/.test(t)) return "out";
-    return "in";
+    const out = [
+      /depense|sortie|gasoil|essence|carburant|achat|fournisseur|loyer|transport|charge|facture|electricite|senelec|eau|sen.?eau/,
+      /expense|outflow|fuel|petrol|gasoline|purchase|supplier|rent|transport|bill|electricity|water/,
+      /gasto|salida|combustible|gasolina|compra|proveedor|alquiler|transporte|factura|electricidad|agua/,
+      /despesa|saida|combustivel|gasolina|compra|fornecedor|aluguel|renda|transporte|fatura|eletricidade|agua/,
+      /spesa|uscita|carburante|benzina|acquisto|fornitore|affitto|trasporto|bolletta|elettricita|acqua/,
+      /ausgabe|treibstoff|benzin|kauf|lieferant|miete|transport|rechnung|strom|wasser/,
+      /uitgave|brandstof|benzine|aankoop|leverancier|huur|vervoer|factuur|elektriciteit|water/,
+      /مصروف|مصاريف|خروج|وقود|بنزين|شراء|مورد|ايجار|إيجار|نقل|فاتورة|كهرباء|ماء/
+    ];
+    return out.some(r=>r.test(t)) ? "out" : "in";
   }
 
   function removeKnownTokens(text, amount){
@@ -56,21 +70,32 @@
       out = out.replace(new RegExp(spaced,"i")," ");
     }
     out = out
-      .replace(/\b(?:wave|wav|orange money|om|cash|esp[eè]ces?|liquide|sendwave|carte|cb|virement|banque)\b/ig," ")
-      .replace(/\b(?:fcfa|f\s*cfa|xof|cfa|francs?)\b/ig," ")
-      .replace(/\b(?:entree|entrée|vente|recette|encaissement|depense|dépense|sortie)\b/ig," ")
+      .replace(/\b(?:wave|wav|orange money|om|cash|esp[eè]ces?|liquide|sendwave|carte|cb|card|efectivo|dinero|contanti|bargeld|bar|contant|tarjeta|cart[aã]o|carta|karte|kaart|virement|banque|transfer|bank|transferencia|banco|banca|[uü]berweisung|overschrijving)\b/ig," ")
+      .replace(/(?:نقد(?:ا)?|بطاقة|تحويل|بنك)/g," ")
+      .replace(/\b(?:fcfa|f\s*cfa|xof|cfa|francs?|euros?|eur)\b/ig," ")
+      .replace(/\b(?:entree|entrée|vente|recette|encaissement|depense|dépense|sortie|sale|income|revenue|expense|outflow|venta|entrada|ingreso|gasto|salida|venda|receita|despesa|saida|vendita|entrata|spesa|uscita|verkauf|einnahme|ausgabe|verkoop|inkomst|uitgave)\b/ig," ")
+      .replace(/(?:بيع|دخل|مصروف|مصاريف|خروج)/g," ")
       .replace(/\s+/g," ")
       .replace(/^[,.;:\-–—\s]+|[,.;:\-–—\s]+$/g,"")
       .trim();
     return out;
   }
 
-  function parse(text){
+  function fallbackLabel(direction,lang){
+    const L={
+      fr:{in:"Vente",out:"Dépense"}, en:{in:"Sale",out:"Expense"}, es:{in:"Venta",out:"Gasto"}, pt:{in:"Venda",out:"Despesa"},
+      it:{in:"Vendita",out:"Spesa"}, de:{in:"Verkauf",out:"Ausgabe"}, nl:{in:"Verkoop",out:"Uitgave"}, ar:{in:"بيع",out:"مصروف"}
+    };
+    const x=L[pickLang(lang)]||L.fr;
+    return direction==="out"?x.out:x.in;
+  }
+
+  function parse(text,options = {}){
     const raw = clean(text);
     const amount = extractAmount(raw);
     const channel = extractChannel(raw);
     const direction = detectDirection(raw);
-    const label = removeKnownTokens(raw, amount) || (direction === "out" ? "Dépense" : "Vente");
+    const label = removeKnownTokens(raw, amount) || fallbackLabel(direction,options.lang);
 
     return Contract.canonicalMovement({
       member_slug:C.identity?.memberSlug || "",
@@ -85,15 +110,15 @@
       note:raw,
       origin:"voice",
       status:"draft",
-      meta:{voice_text:raw}
+      meta:{voice_text:raw,voice_lang:pickLang(options.lang)}
     });
   }
 
   function readiness(draft){
     const missing = [];
-    if(!(draft?.amount > 0)) missing.push("montant");
-    if(!draft?.channel || draft.channel === "other") missing.push("mode de paiement");
-    if(!draft?.label) missing.push("motif");
+    if(!(draft?.amount > 0)) missing.push("amount");
+    if(!draft?.channel || draft.channel === "other") missing.push("mode");
+    if(!draft?.label) missing.push("reason");
     return {ok:missing.length===0,missing};
   }
 
@@ -118,7 +143,7 @@
         if(settled) return;
         settled = true;
         const text = ev?.results?.[0]?.[0]?.transcript || "";
-        resolve({text:clean(text),draft:parse(text)});
+        resolve({text:clean(text),draft:parse(text,{lang:options.lang})});
       };
       r.onend = () => {
         if(!settled){settled=true;reject(new Error("speech_recognition_no_result"));}
@@ -127,10 +152,5 @@
     });
   }
 
-  window.DIGIY_CARNET_OREILLE = Object.freeze({
-    supported,
-    parse,
-    readiness,
-    listen
-  });
+  window.DIGIY_CARNET_OREILLE = Object.freeze({supported,parse,readiness,listen});
 })();
