@@ -17,7 +17,7 @@ window.DIGIY_CARNET_MASTER = Object.freeze({
   },
 
   auth: {
-    mode: "magic_link",
+    mode: "otp",
     shouldCreateUser: false,
     supabaseUrl: "[SUPABASE_URL]",
     publishableKey: "[SUPABASE_PUBLISHABLE_KEY]",
