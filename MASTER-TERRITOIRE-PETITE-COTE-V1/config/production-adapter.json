@@ -1,5 +1,5 @@
 {
-  "adapter": "DIGIYLYFE-PETITE-COTE-PRODUCTION-ADAPTER-V1.1",
+  "adapter": "DIGIYLYFE-PETITE-COTE-PRODUCTION-ADAPTER-V1.2",
   "mode": "read-only-mapping",
   "country_id": "SN",
   "territory_id": "SN-PETITE-COTE",
@@ -28,19 +28,25 @@
       "ngaparou": "SN-PETITE-COTE-NGAPAROU",
       "saly": "SN-PETITE-COTE-SALY",
       "mbour": "SN-PETITE-COTE-MBOUR"
-    }
+    },
+    "implicit_service": true
   },
   "service_area_resolution": {
     "source_table": "digiy_annuaire_public_zones",
     "source_lookup": "digiy_zones.id",
     "zone_output_field": "service_zone_ids",
     "territory_output_field": "service_territory_ids",
+    "pending_output_field": "pending_external_service_references",
     "rules": {
       "leaf_zone_slug_maps_to_canonical_zone": true,
       "parent_territory_slug_maps_to_service_territory": true,
+      "territory_marker_is_not_a_zone": true,
+      "missing_service_rows_keep_base_zone_eligible": true,
       "service_area_never_overwrites_base_zone": true,
+      "validated_service_territory_can_cover_active_zones": true,
       "cross_territory_service_is_kept_as_coverage_not_identity": true,
-      "unknown_or_planned_external_zone_requires_validation": true
+      "unknown_or_planned_external_zone_is_preserved_pending_validation": true,
+      "pending_external_service_reference_does_not_expand_public_results": true
     }
   },
   "need_resolution": {
@@ -87,6 +93,7 @@
     "derive_need_from_metier_then_category": true,
     "exclude_tools_and_modules_from_professional_results": true,
     "preserve_base_zone_when_service_area_expands": true,
+    "base_zone_is_minimum_effective_coverage": true,
     "generic_professional_action": "OUVRIR"
   }
 }
