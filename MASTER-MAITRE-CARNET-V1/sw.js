@@ -1,11 +1,17 @@
-const CACHE = "digiy-carnet-master-v1-20260823";
+const CACHE = "digiy-carnet-master-v1-20260823-b";
 const CORE = [
   "./",
   "./index.html",
   "./master-config.js",
   "./manifest.webmanifest",
   "./README.md",
-  "./PORTAGE.md"
+  "./PORTAGE.md",
+  "./DATA-CONTRACT.md",
+  "./app/index.html",
+  "./app/oreille.html",
+  "./assets/carnet-contract.js",
+  "./assets/carnet-store.js",
+  "./assets/carnet-oreille.js"
 ];
 
 self.addEventListener("install", event => {
