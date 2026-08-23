@@ -1,0 +1,26 @@
+{
+  "freeze": "DIGIYLYFE-FRANCE-GEOGRAPHY-V1",
+  "country_id": "FR",
+  "status": "frozen-for-architecture-work",
+  "purpose": "Stabiliser le périmètre géographique V1 France afin de raccorder le CORE sans étendre la carte sans validation explicite.",
+  "active_territories": [
+    "FR-DORDOGNE"
+  ],
+  "planned_territories": [
+    "FR-BORDEAUX",
+    "FR-ARCACHON"
+  ],
+  "vallee_dordogne": {
+    "active_zones": [
+      "FR-DORDOGNE-SARLAT"
+    ],
+    "planned_zones": []
+  },
+  "rules": {
+    "no_new_geography_without_explicit_validation": true,
+    "planned_is_not_public": true,
+    "planned_is_not_implied_by_territory_coverage": true,
+    "production_remains_source_of_truth": true,
+    "next_priority_is_core_automation_not_geographic_expansion": true
+  }
+}
