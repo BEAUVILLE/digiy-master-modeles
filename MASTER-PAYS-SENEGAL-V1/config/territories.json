@@ -7,7 +7,8 @@
       "label": "Petite Côte",
       "status": "active",
       "zones": ["aibd", "ndayane", "popenguine", "somone", "ngaparou", "saly", "mbour"],
-      "planned_zones": ["nianing", "joal-fadiouth"]
+      "planned_zones": ["nianing", "joal-fadiouth"],
+      "master": "../../MASTER-TERRITOIRE-PETITE-COTE-V1/"
     },
     {
       "id": "SN-SINE-SALOUM",
@@ -15,7 +16,7 @@
       "label": "Siné-Saloum",
       "status": "planned",
       "zones": [],
-      "master": "../MASTER-TERRITOIRE-SINE-SALOUM-V1/"
+      "master": "../../MASTER-TERRITOIRE-SINE-SALOUM-V1/"
     },
     {
       "id": "SN-DAKAR",
