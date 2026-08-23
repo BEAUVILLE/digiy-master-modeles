@@ -1,0 +1,48 @@
+{
+  "validation": "AIBD-PILOT-READONLY-2026-08-23",
+  "mode": "read-only",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "target_zone_id": "SN-PETITE-COTE-AIBD",
+  "source": "Supabase production",
+  "rules": {
+    "no_production_mutation": true,
+    "no_real_professional_identity_stored": true,
+    "aggregate_only": true
+  },
+  "result": {
+    "professional_count_should_appear": 8,
+    "based_in_target_zone_count": 1,
+    "explicit_target_zone_service_count": 3,
+    "whole_territory_service_count": 8,
+    "unmapped_need_count": 0,
+    "missing_public_url_count": 0,
+    "need_counts": {
+      "artisan": 4,
+      "shopping": 1,
+      "transport": 3
+    },
+    "base_zone_distribution": {
+      "aibd": 1,
+      "dakar": 1,
+      "saly": 6
+    },
+    "transport_focus": {
+      "professionals": 3,
+      "based_in_aibd": 1,
+      "explicit_aibd": 3,
+      "whole_territory": 3,
+      "multi_reason_matches": 3
+    }
+  },
+  "interpretation": {
+    "contract_status": "pass",
+    "target_zone_eligibility_rule_validated": true,
+    "base_zone_identity_preserved": true,
+    "service_zone_does_not_rehome_professional": true,
+    "whole_territory_marker_expands_coverage": true,
+    "zone_and_need_filters_remain_distinct": true,
+    "deduplication_by_professional_id_required": true
+  },
+  "conclusion": "Le pilote AIBD confirme que les professionnels peuvent être trouvés dans une zone cible par ancrage, couverture explicite ou couverture du territoire sans changer leur zone de base. Pour le besoin transport, trois professionnels sont éligibles et cumulent plusieurs motifs d'éligibilité ; le CORE doit donc dédupliquer par professional_id et conserver la séparation entre filtre géographique et filtre de besoin."
+}
