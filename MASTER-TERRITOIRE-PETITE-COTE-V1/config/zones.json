@@ -1,13 +1,15 @@
 {
   "country_id": "SN",
   "territory_id": "SN-PETITE-COTE",
+  "zone_id_format": "SN-PETITE-COTE-{ZONE}",
+  "rule": "Le zone_id canonique est stable et mondialement non ambigu. Le slug reste la clé humaine et peut servir d'adaptateur vers une donnée de production existante.",
   "zones": [
-    {"id": "aibd", "label": "AIBD", "slug": "aibd", "status": "active"},
-    {"id": "ndayane", "label": "Ndayane", "slug": "ndayane", "status": "active"},
-    {"id": "popenguine", "label": "Popenguine", "slug": "popenguine", "status": "active"},
-    {"id": "somone", "label": "Somone", "slug": "somone", "status": "active"},
-    {"id": "ngaparou", "label": "Ngaparou", "slug": "ngaparou", "status": "active"},
-    {"id": "saly", "label": "Saly", "slug": "saly", "status": "active"},
-    {"id": "mbour", "label": "Mbour", "slug": "mbour", "status": "active"}
+    {"id": "SN-PETITE-COTE-AIBD", "label": "AIBD", "slug": "aibd", "kind": "airport", "status": "active"},
+    {"id": "SN-PETITE-COTE-NDAYANE", "label": "Ndayane", "slug": "ndayane", "kind": "locality", "status": "active"},
+    {"id": "SN-PETITE-COTE-POPENGUINE", "label": "Popenguine", "slug": "popenguine", "kind": "locality", "status": "active"},
+    {"id": "SN-PETITE-COTE-SOMONE", "label": "Somone", "slug": "somone", "kind": "locality", "status": "active"},
+    {"id": "SN-PETITE-COTE-NGAPAROU", "label": "Ngaparou", "slug": "ngaparou", "kind": "locality", "status": "active"},
+    {"id": "SN-PETITE-COTE-SALY", "label": "Saly", "slug": "saly", "kind": "locality", "status": "active", "pilot_reference": true},
+    {"id": "SN-PETITE-COTE-MBOUR", "label": "Mbour", "slug": "mbour", "kind": "locality", "status": "active"}
   ]
 }
