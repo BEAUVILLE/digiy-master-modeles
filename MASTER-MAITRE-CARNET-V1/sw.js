@@ -1,4 +1,4 @@
-const CACHE = "digiy-carnet-master-v1-20260823-c";
+const CACHE = "digiy-carnet-master-v1-20260823-d";
 const CORE = [
   "./",
   "./index.html",
@@ -7,6 +7,7 @@ const CORE = [
   "./README.md",
   "./PORTAGE.md",
   "./DATA-CONTRACT.md",
+  "./app/hub.html",
   "./app/index.html",
   "./app/oreille.html",
   "./app/dettes.html",
