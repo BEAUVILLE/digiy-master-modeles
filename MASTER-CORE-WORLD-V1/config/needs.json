@@ -1,0 +1,14 @@
+{
+  "needs": [
+    {"id": "transport", "icon": "🚗", "fr": "Se déplacer", "status": "core"},
+    {"id": "artisan", "icon": "🔧", "fr": "Trouver un artisan", "status": "core"},
+    {"id": "accommodation", "icon": "🏠", "fr": "Dormir ou louer", "status": "core"},
+    {"id": "food", "icon": "🍽️", "fr": "Manger ou réserver", "status": "core"},
+    {"id": "shopping", "icon": "🛍️", "fr": "Acheter local", "status": "core"},
+    {"id": "beauty", "icon": "💅", "fr": "Beauté & Bien-être", "status": "core"},
+    {"id": "jobs", "icon": "💼", "fr": "Emploi et missions", "status": "core"},
+    {"id": "announcements", "icon": "⚡", "fr": "Annonces", "status": "core"},
+    {"id": "guidance", "icon": "🎙️", "fr": "La Voix", "status": "core"}
+  ],
+  "rule": "Les besoins sont des catégories humaines visibles. Ils ne doivent pas être confondus avec les capacités techniques DIGIYLYFE."
+}
