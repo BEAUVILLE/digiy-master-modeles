@@ -10,6 +10,7 @@
     {"id": "SN-PETITE-COTE-SOMONE", "label": "Somone", "slug": "somone", "kind": "locality", "status": "active"},
     {"id": "SN-PETITE-COTE-NGAPAROU", "label": "Ngaparou", "slug": "ngaparou", "kind": "locality", "status": "active"},
     {"id": "SN-PETITE-COTE-SALY", "label": "Saly", "slug": "saly", "kind": "locality", "status": "active", "pilot_reference": true},
-    {"id": "SN-PETITE-COTE-MBOUR", "label": "Mbour", "slug": "mbour", "kind": "locality", "status": "active"}
+    {"id": "SN-PETITE-COTE-MBOUR", "label": "Mbour", "slug": "mbour", "kind": "locality", "status": "active"},
+    {"id": "SN-PETITE-COTE-JOAL-FADIOUTH", "label": "Joal-Fadiouth", "slug": "joal-fadiouth", "aliases": ["joal", "fadiouth"], "kind": "locality", "status": "planned", "activation_note": "Zone préparée dans le MASTER mais absente de la production Supabase au contrôle du 23 août 2026. Ne pas publier comme active avant validation terrain et raccordement production."}
   ]
 }
