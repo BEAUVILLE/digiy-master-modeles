@@ -6,7 +6,17 @@
       "slug": "petite-cote",
       "label": "Petite Côte",
       "status": "active",
-      "zones": ["aibd", "ndayane", "popenguine", "somone", "ngaparou", "saly", "mbour"]
+      "zones": ["aibd", "ndayane", "popenguine", "somone", "ngaparou", "saly", "mbour"],
+      "master": "../../MASTER-TERRITOIRE-PETITE-COTE-V1/"
+    },
+    {
+      "id": "SN-SINE-SALOUM",
+      "country_id": "SN",
+      "slug": "sine-saloum",
+      "label": "Siné-Saloum",
+      "status": "planned",
+      "zones": [],
+      "master": "../../MASTER-TERRITOIRE-SINE-SALOUM-V1/"
     },
     {
       "id": "SN-DAKAR",
@@ -36,9 +46,10 @@
       "id": "FR-DORDOGNE",
       "country_id": "FR",
       "slug": "vallee-dordogne",
-      "label": "Vallée de la Dordogne",
+      "label": "Périgord · Vallée de la Dordogne",
       "status": "active",
-      "zones": ["sarlat"]
+      "zones": ["sarlat"],
+      "master": "../../MASTER-TERRITOIRE-VALLEE-DORDOGNE-V1/"
     },
     {
       "id": "FR-BORDEAUX",
