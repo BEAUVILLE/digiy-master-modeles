@@ -7,6 +7,15 @@
 
   const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
 
+  function normalizeDigits(value){
+    const arabic="٠١٢٣٤٥٦٧٨٩", persian="۰۱۲۳۴۵۶۷۸۹";
+    return String(value||"").replace(/[٠-٩۰-۹]/g,ch=>{
+      let i=arabic.indexOf(ch);
+      if(i<0)i=persian.indexOf(ch);
+      return i>=0?String(i):ch;
+    });
+  }
+
   function clean(value){
     return String(value || "")
       .replace(/\s+/g," ")
@@ -25,13 +34,17 @@
   }
 
   function extractAmount(text){
-    const raw = clean(text);
+    const raw = normalizeDigits(clean(text));
     const match = raw.match(/(?:^|\s)(\d[\d\s.,]*)(?:\s*(?:fcfa|f\s*cfa|xof|cfa|francs?|euros?|eur))?(?=\s|$)/i);
     if(!match) return 0;
-    const normalized = String(match[1] || "")
-      .replace(/\s/g,"")
-      .replace(/\.(?=\d{3}(?:\D|$))/g,"")
-      .replace(",",".");
+    let normalized = String(match[1] || "").replace(/\s/g,"");
+    if(/^\d{1,3}(?:[.,]\d{3})+$/.test(normalized)){
+      normalized=normalized.replace(/[.,]/g,"");
+    }else if(/^\d+[.,]\d{1,2}$/.test(normalized)){
+      normalized=normalized.replace(",",".");
+    }else{
+      normalized=normalized.replace(/[.,]/g,"");
+    }
     const amount = Math.round(Number(normalized));
     return Number.isFinite(amount) && amount > 0 ? amount : 0;
   }
@@ -43,7 +56,7 @@
     if(/sendwave/.test(t)) return "sendwave";
     if(/espece|cash|liquide|efectivo|dinero|numerario|contanti|bargeld|\bbar\b|contant|نقد|نقدا/.test(t)) return "cash";
     if(/carte|\bcb\b|\bcard\b|tarjeta|cartao|carta|karte|kaart|بطاقة/.test(t)) return "card";
-    if(/virement|banque|transfer|bank|transferencia|banco|transferencia|banca|uberweisung|overschrijving|تحويل|بنك/.test(t)) return "bank";
+    if(/virement|banque|transfer|bank|transferencia|banco|banca|uberweisung|overschrijving|تحويل|بنك/.test(t)) return "bank";
     return "other";
   }
 
@@ -63,11 +76,10 @@
   }
 
   function removeKnownTokens(text, amount){
-    let out = clean(text);
+    let out = normalizeDigits(clean(text));
     if(amount){
-      const parts = String(amount).split("");
-      const spaced = parts.join("\\s*");
-      out = out.replace(new RegExp(spaced,"i")," ");
+      const grouped=String(amount).replace(/\B(?=(\d{3})+(?!\d))/g,"[\\s.,]*");
+      out = out.replace(new RegExp(grouped,"i")," ");
     }
     out = out
       .replace(/\b(?:wave|wav|orange money|om|cash|esp[eè]ces?|liquide|sendwave|carte|cb|card|efectivo|dinero|contanti|bargeld|bar|contant|tarjeta|cart[aã]o|carta|karte|kaart|virement|banque|transfer|bank|transferencia|banco|banca|[uü]berweisung|overschrijving)\b/ig," ")
