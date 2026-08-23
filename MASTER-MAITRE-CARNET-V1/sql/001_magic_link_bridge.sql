@@ -95,7 +95,9 @@ grant execute on function public.digiy_carnet_list_movements(text, integer) to a
 
 -- ---------------------------------------------------------------------------
 -- 3) Inscrire un mouvement après authentification.
--- La validation humaine reste obligatoire côté interface avant cet appel.
+-- RÈGLE : 1 client_id/source_id = 1 seul geste durable.
+-- Un double clic ou une resynchronisation renvoie l'id existant au lieu de créer
+-- une deuxième trace.
 -- ---------------------------------------------------------------------------
 create or replace function public.digiy_carnet_insert_movement(
   p_slug text,
@@ -109,6 +111,14 @@ as $function$
 declare
   v_uid uuid := auth.uid();
   v_phone text;
+  v_access jsonb;
+  v_slug text;
+  v_source_module text;
+  v_source_id text;
+  v_kind text;
+  v_direction text;
+  v_existing_id uuid;
+  v_inserted jsonb;
 begin
   if v_uid is null then
     return jsonb_build_object('ok', false, 'error', 'auth_required');
@@ -124,7 +134,68 @@ begin
     return jsonb_build_object('ok', false, 'error', 'member_profile_missing');
   end if;
 
-  return public.digiy_pay_pro_insert_movement(p_slug, v_phone, p_payload);
+  v_access := public.digiy_pay_pro_check_access(p_slug, v_phone);
+  if coalesce((v_access->>'ok')::boolean, false) is not true then
+    return v_access - 'phone';
+  end if;
+
+  v_slug := v_access->>'slug';
+  v_source_module := upper(trim(coalesce(p_payload->>'source_module','CARNET')));
+  v_source_id := nullif(trim(coalesce(p_payload->>'source_id','')), '');
+  v_kind := lower(trim(coalesce(p_payload->>'kind','other')));
+  v_direction := lower(trim(coalesce(p_payload->>'direction','')));
+
+  if v_source_id is null then
+    return jsonb_build_object('ok', false, 'error', 'source_id_required_for_idempotence');
+  end if;
+
+  select m.id
+  into v_existing_id
+  from public.digiy_pay_movements m
+  where m.phone = regexp_replace(coalesce(v_phone,''), '\D', '', 'g')
+    and m.slug = lower(trim(v_slug))
+    and m.source_module = v_source_module
+    and m.source_id = v_source_id
+    and m.kind = v_kind
+    and m.direction = v_direction
+  limit 1;
+
+  if v_existing_id is not null then
+    return jsonb_build_object(
+      'ok', true,
+      'id', v_existing_id,
+      'slug', v_slug,
+      'idempotent', true
+    );
+  end if;
+
+  v_inserted := public.digiy_pay_pro_insert_movement(v_slug, v_phone, p_payload);
+
+  if coalesce((v_inserted->>'ok')::boolean, false) is not true then
+    -- Si une requête concurrente a gagné entre le SELECT et l'INSERT,
+    -- on relit la trace par sa clé d'idempotence et on la renvoie.
+    select m.id
+    into v_existing_id
+    from public.digiy_pay_movements m
+    where m.phone = regexp_replace(coalesce(v_phone,''), '\D', '', 'g')
+      and m.slug = lower(trim(v_slug))
+      and m.source_module = v_source_module
+      and m.source_id = v_source_id
+      and m.kind = v_kind
+      and m.direction = v_direction
+    limit 1;
+
+    if v_existing_id is not null then
+      return jsonb_build_object(
+        'ok', true,
+        'id', v_existing_id,
+        'slug', v_slug,
+        'idempotent', true
+      );
+    end if;
+  end if;
+
+  return v_inserted || jsonb_build_object('idempotent', false);
 end;
 $function$;
 
@@ -134,7 +205,6 @@ grant execute on function public.digiy_carnet_insert_movement(text, jsonb) to au
 
 -- ---------------------------------------------------------------------------
 -- 4) Supprimer un mouvement appartenant au CARNET authentifié.
--- Le RPC PAY historique continue d'effectuer son contrôle slug + droit.
 -- ---------------------------------------------------------------------------
 create or replace function public.digiy_carnet_delete_movement(
   p_slug text,
@@ -173,8 +243,8 @@ grant execute on function public.digiy_carnet_delete_movement(text, uuid) to aut
 
 -- ---------------------------------------------------------------------------
 -- 5) Résumé global historique.
--- Le résumé JOUR / CA JOUR sera posé séparément dans le MASTER afin de
--- distinguer toutes les entrées des seules ventes commerciales.
+-- Le résumé JOUR / CA JOUR est recalculé côté CARNET pour distinguer toutes les
+-- entrées des seules ventes commerciales.
 -- ---------------------------------------------------------------------------
 create or replace function public.digiy_carnet_summary(p_slug text)
 returns jsonb
@@ -215,7 +285,9 @@ commit;
 -- 2. utilisateur auth sans digiy_profiles -> refus ;
 -- 3. adhérent lié sans droit PAY/CARNET -> refus ;
 -- 4. adhérent lié avec droit actif -> lecture OK ;
--- 5. insertion -> une seule ligne ;
--- 6. suppression d'une ligne d'un autre slug -> refus ;
--- 7. vérifier que le téléphone n'est jamais requis côté navigateur ;
--- 8. vérifier les droits EXECUTE : authenticated uniquement sur les nouveaux RPC.
+-- 5. insertion avec source_id neuf -> exactement 1 ligne ;
+-- 6. même source_id + même kind + même direction -> même id, idempotent=true ;
+-- 7. double requête concurrente -> exactement 1 ligne ;
+-- 8. suppression d'une ligne d'un autre slug -> refus ;
+-- 9. téléphone jamais requis côté navigateur ;
+-- 10. nouveaux RPC exécutables par authenticated uniquement.
