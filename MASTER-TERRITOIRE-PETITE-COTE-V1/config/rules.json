@@ -9,6 +9,10 @@
     "isolate_results_by_country": true,
     "isolate_results_by_territory": true,
     "publish_only_validated_zones": true,
+    "canonical_zone_ids_required": true,
+    "canonical_zone_id_format": "SN-PETITE-COTE-{ZONE}",
+    "allow_production_zone_adapter": true,
+    "professional_contract": "./professional-contract.json",
     "store_real_professionals_in_master": false,
     "reveal_commercial_level": false,
     "generic_professional_action": "OUVRIR"
