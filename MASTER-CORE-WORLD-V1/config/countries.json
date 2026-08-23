@@ -1,0 +1,30 @@
+{
+  "countries": [
+    {
+      "id": "SN",
+      "slug": "senegal",
+      "label": "Sénégal",
+      "currency": "XOF",
+      "currency_label": "FCFA",
+      "default_language": "fr",
+      "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+      "local_languages": [
+        {"code": "wo", "label": "Wolof", "status": "progressive"},
+        {"code": "ff", "label": "Pulaar", "status": "future"},
+        {"code": "srr", "label": "Sérère", "status": "future"}
+      ],
+      "status": "pilot"
+    },
+    {
+      "id": "FR",
+      "slug": "france",
+      "label": "France",
+      "currency": "EUR",
+      "currency_label": "€",
+      "default_language": "fr",
+      "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+      "local_languages": [],
+      "status": "pilot"
+    }
+  ]
+}
