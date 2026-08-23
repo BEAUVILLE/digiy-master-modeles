@@ -8,7 +8,9 @@ Date du jalon : 23 août 2026
 
 Aucune migration SQL du dossier `sql/` n’a été exécutée en production pendant ce jalon.
 
-Le moteur vivant `BEAUVILLE/pro-carnet` n’a pas été modifié par le jalon WORLD8 du MASTER.
+Contrôle base réel du 23 août 2026 : **aucun objet `public.digiy_carnet_%` présent en production**. Les migrations MASTER restent donc entièrement dormantes.
+
+Le moteur vivant `BEAUVILLE/pro-carnet` n’a pas été modifié par les jalons WORLD8 et sécurité du MASTER.
 
 ## Posé dans le MASTER
 
@@ -21,13 +23,14 @@ Le moteur vivant `BEAUVILLE/pro-carnet` n’a pas été modifié par le jalon WO
 - contrat de données canonique CARNET ;
 - adaptateur temporaire vers le backend historique PAY ;
 - idempotence générale par `client_id/source_id` ;
+- contrainte UNIQUE historique confirmée sur le moteur vivant : `(phone, source_module, source_id, kind, direction)` ;
 - file offline séquentielle avec conservation du même identifiant ;
 - Oreille MASTER : voix ou texte -> brouillon -> validation humaine -> mouvement ;
 - CLIENT DÛ : nom + téléphone facultatif + somme due + échéance facultative ;
 - remboursements successifs ;
 - DÛ / REMBOURSÉ / RESTE ;
 - chaque remboursement confirmé crée obligatoirement une vraie entrée CARNET ;
-- double appui remboursement protégé par idempotence ;
+- double appui remboursement protégé par verrou + idempotence + contraintes UNIQUE ;
 - PWA légère ;
 - WORLD8 centralisé : FR / EN / ES / PT / IT / DE / NL / AR ;
 - arabe RTL ;
@@ -40,6 +43,22 @@ Le moteur vivant `BEAUVILLE/pro-carnet` n’a pas été modifié par le jalon WO
 - faux adhérent neutre préparé dans `tests/faux-adherent.fixture.json` ;
 - identité de test : `ATELIER BAOBAB TEST` / `digiy-carnet-test-001` ;
 - aucune adresse réelle, aucun utilisateur Supabase réel et aucun magic link envoyé à ce stade.
+
+## Durcissement sécurité pré-Supabase
+
+Avant toute exécution SQL, le MASTER a été corrigé sur les points suivants :
+
+- fonctions `SECURITY DEFINER` : `search_path = ''` et objets qualifiés ;
+- révocation explicite de `EXECUTE` puis réattribution uniquement à `authenticated` pour les RPC navigateur voulus ;
+- tables Client dû et remboursements : lecture directe uniquement sur les lignes du propriétaire ;
+- aucun `INSERT` / `UPDATE` direct autorisé depuis le navigateur ;
+- création d’un Client dû via RPC contrôlé ;
+- annulation via RPC contrôlé ;
+- remboursement via RPC atomique `SECURITY DEFINER` avec contrôle `auth.uid()` et droit CARNET ;
+- lien FK entre remboursement et mouvement financier pour empêcher la disparition de la trace CARNET ;
+- second contrôle idempotence après verrou de l’échéancier pour couvrir deux clics simultanés.
+
+Ce durcissement suit la règle : **la voix prépare, l’humain confirme, la base empêche le doublon et la falsification.**
 
 ## Doctrine CLIENT DÛ validée
 
