@@ -1,0 +1,21 @@
+{
+  "country": {
+    "id": "FR",
+    "slug": "france",
+    "label": "France",
+    "iso2": "FR",
+    "iso3": "FRA",
+    "currency": {
+      "code": "EUR",
+      "label": "€"
+    },
+    "phone": {
+      "calling_code": "+33"
+    },
+    "timezone": "Europe/Paris",
+    "default_language": "fr",
+    "interface_languages": ["fr", "en", "es", "pt", "it", "de", "nl", "ar"],
+    "local_languages": [],
+    "status": "pilot"
+  }
+}
