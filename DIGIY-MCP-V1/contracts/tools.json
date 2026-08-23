@@ -1,0 +1,57 @@
+{
+  "contract": "DIGIYLYFE-MCP-TOOLS-V1",
+  "mode": "public-read-only",
+  "endpoint": "https://wesqmwjjtsefyjnluosj.supabase.co/functions/v1/digiy-mcp",
+  "tools": [
+    {
+      "name": "list_countries",
+      "purpose": "Lister uniquement les pays actifs du CORE public.",
+      "read_only": true
+    },
+    {
+      "name": "list_territories",
+      "purpose": "Lister les territoires actifs, éventuellement limités à un pays actif.",
+      "read_only": true
+    },
+    {
+      "name": "list_zones",
+      "purpose": "Lister les zones actives d'un territoire actif.",
+      "read_only": true
+    },
+    {
+      "name": "list_needs",
+      "purpose": "Lister les familles de besoins universelles déclarées dans le CORE.",
+      "read_only": true
+    },
+    {
+      "name": "search_professionals",
+      "purpose": "Rechercher les professionnels publics actifs par texte et géographie validée.",
+      "read_only": true,
+      "geography_rule": "base_zone_id + service_zone_ids + service_territory_ids",
+      "public_only": true
+    },
+    {
+      "name": "get_professional",
+      "purpose": "Retourner la fiche publique et les contacts directs déjà publics d'un professionnel actif.",
+      "read_only": true,
+      "public_only": true
+    }
+  ],
+  "forbidden_v1": [
+    "create_or_update_professional",
+    "payment",
+    "reservation_write",
+    "quote_write",
+    "subscription_write",
+    "admin_data",
+    "private_contact_data"
+  ],
+  "rules": {
+    "planned_geography_never_public": true,
+    "core_runtime_is_geography_authority": true,
+    "professional_live_data_stays_in_production": true,
+    "direct_professional_relationship": true,
+    "no_engine_fork": true,
+    "fail_closed": true
+  }
+}

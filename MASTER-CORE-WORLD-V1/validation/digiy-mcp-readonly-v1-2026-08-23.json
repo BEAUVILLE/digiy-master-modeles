@@ -1,0 +1,32 @@
+{
+  "validation_id": "DIGIYLYFE-MCP-READONLY-V1-2026-08-23",
+  "date": "2026-08-23",
+  "status": "deployed_pending_external_client_test",
+  "deployment": {
+    "platform": "Supabase Edge Functions",
+    "function": "digiy-mcp",
+    "version": 1,
+    "verify_jwt": false,
+    "reason": "public read-only data only"
+  },
+  "confirmed": [
+    "edge function reports ACTIVE after deployment",
+    "deployed source was read back from Supabase",
+    "six read-only MCP tools are present",
+    "public professional filters require validated, paid, visible and active subscription state",
+    "CORE public runtime is the geography authority",
+    "planned geography is rejected by active-only resolution",
+    "professional coverage uses base_zone_id, service_zone_ids and service_territory_ids",
+    "no production write tool exists in V1",
+    "modern 2026-07-28 and legacy MCP code paths are present"
+  ],
+  "not_yet_confirmed": [
+    "external POST server/discover round trip",
+    "external tools/list round trip",
+    "external tools/call round trip",
+    "ChatGPT/OpenAI remote MCP connection",
+    "Gemini/Google MCP connection"
+  ],
+  "blocker_note": "The current execution environment could not perform outbound DNS to the Supabase endpoint, so no end-to-end network PASS is claimed.",
+  "promotion_gate": "Do not mark production-integrated or submit to an app directory until a real external MCP client completes the six-step smoke test in DIGIY-MCP-V1/README.md."
+}
