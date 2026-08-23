@@ -1,0 +1,34 @@
+{
+  "validation": "DIGIYLYFE-ADMIN-COUNTRY-COCKPIT-ALIGNMENT-2026-08-23",
+  "mode": "production-edge-function-and-admin-dossier-alignment",
+  "result": {
+    "edge_function_multicurrency_safe": true,
+    "country_geography_exposed_to_admin": true,
+    "territory_geography_exposed_to_admin": true,
+    "base_zone_exposed_to_admin": true,
+    "service_coverage_exposed_to_admin": true,
+    "generic_membership_amount_used": true,
+    "generic_service_amount_used": true,
+    "legacy_rows_remain_supported": true,
+    "human_payment_validation_preserved": true
+  },
+  "supabase": {
+    "function": "digiy-adhesion-cockpit",
+    "version": 5,
+    "currency_rule": "stored currency_code and price_amount are authoritative when present; legacy price_xof/price_eur remain fallback only"
+  },
+  "github": {
+    "repository": "BEAUVILLE/admin-digiy",
+    "file": "dossier.html",
+    "commit": "c92d0e0da9317eb5bf2b46c787b8658c8858bc67"
+  },
+  "rules_confirmed": {
+    "france_payment_must_never_be_recorded_as_xof_by_stale_admin_ui": true,
+    "senegal_and_france_share_same_admin_decision_flow": true,
+    "base_zone_identity_is_separate_from_service_coverage": true,
+    "country_currency_is_authoritative": true,
+    "admin_decision_remains_human": true
+  },
+  "next_gate": "Aligner ensuite le cockpit complet admin index.html sur les mêmes champs multi-pays afin que la liste générale affiche exactement les mêmes informations que dossier.html.",
+  "conclusion": "Le chemin WhatsApp -> dossier admin est maintenant cohérent avec l’adhésion multi-pays. Le backend protège la devise stockée même si une interface ancienne envoie encore une devise legacy."
+}
