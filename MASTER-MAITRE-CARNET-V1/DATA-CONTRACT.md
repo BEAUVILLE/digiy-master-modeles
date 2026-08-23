@@ -105,6 +105,19 @@ scope=activity + direction=in + kind=sale + status=posted + date=jour
 
 Aucun `refund`, `transfer`, apport ou autre entrée ne gonfle le CA.
 
+### Compatibilité historique
+
+Le RPC PAY actuel ne transporte proprement que :
+
+```txt
+sale
+expense
+saving
+transfer
+```
+
+Le MASTER refuse donc explicitement `refund`, `withdrawal` ou `adjustment` à travers le bridge legacy tant qu’un backend CARNET natif ne les supporte pas. **On refuse plutôt que de les transformer silencieusement en un faux type.**
+
 ---
 
 ## 5. Channel canonique
@@ -133,15 +146,27 @@ other         -> Autre
 
 ### Adaptateur legacy actuel
 
-La table historique utilise :
+Il existe une incompatibilité réelle entre l’ancien RPC et la table :
+
+- le RPC accepte `orange_money` mais la table historique attend `om` ;
+- si le navigateur envoie `om`, le RPC le transforme en `other` ;
+- si le navigateur envoie `orange_money`, l’insertion peut heurter la contrainte SQL.
+
+Donc, **pendant la transition seulement** :
 
 ```txt
-orange_money -> om
-card         -> other
-sendwave     -> other
+wave          -> wave
+cash          -> cash
+bank          -> bank
+orange_money  -> other + meta.carnet_channel="orange_money"
+card          -> other + meta.carnet_channel="card"
+sendwave      -> other + meta.carnet_channel="sendwave"
+other         -> other
 ```
 
-Tant que le backend historique reste en place, l’adaptateur fait cette traduction. Le contrat canonique, lui, ne change pas.
+À la lecture, le MASTER restitue le canal canonique depuis `meta.carnet_channel`.
+
+Ce fallback est transitoire. Le backend CARNET final devra harmoniser la colonne SQL et supprimer cette gymnastique.
 
 ---
 
@@ -160,8 +185,8 @@ system
 Adaptateur legacy actuel :
 
 ```txt
-voice        -> manual + meta.input="voice"
-offline_sync -> manual + meta.input="offline_sync"
+voice        -> manual + meta.carnet_origin="voice"
+offline_sync -> manual + meta.carnet_origin="offline_sync"
 ```
 
 On ne modifie pas la contrainte historique avant migration testée.
