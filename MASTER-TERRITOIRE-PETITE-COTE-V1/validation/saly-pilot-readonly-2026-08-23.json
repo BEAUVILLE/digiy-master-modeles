@@ -1,0 +1,40 @@
+{
+  "validation": "SALY-PILOT-READONLY-2026-08-23",
+  "mode": "read-only",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "base_zone_id": "SN-PETITE-COTE-SALY",
+  "source": "Supabase production",
+  "rules": {
+    "no_production_mutation": true,
+    "no_real_professional_identity_stored": true,
+    "aggregate_only": true
+  },
+  "result": {
+    "professional_count": 9,
+    "contract_required_fields_resolvable": 9,
+    "need_id_resolvable": 9,
+    "public_url_present": 9,
+    "unmapped_need_count": 0,
+    "need_counts": {
+      "artisan": 3,
+      "shopping": 2,
+      "transport": 2,
+      "accommodation": 1,
+      "beauty": 1
+    },
+    "professionals_with_explicit_service_rows": 8,
+    "professionals_without_explicit_service_rows": 1,
+    "professionals_with_whole_territory_marker": 6,
+    "external_service_reference_count": 1
+  },
+  "interpretation": {
+    "contract_status": "pass",
+    "base_zone_implicit_coverage_required": true,
+    "whole_territory_marker_maps_to_service_territory_id": true,
+    "external_service_reference_status": "pending_validation",
+    "external_reference_does_not_change_base_zone": true,
+    "external_reference_does_not_expand_public_results_until_validated": true
+  },
+  "conclusion": "Le pilote Saly se raccorde au MASTER CORE sans migration immédiate de la production. Les neuf présences professionnelles publiques testées sont raccordables au contrat V1.2. Une référence de couverture extérieure reste volontairement en attente de validation territoriale."
+}
