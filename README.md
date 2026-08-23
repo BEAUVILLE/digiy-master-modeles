@@ -20,6 +20,14 @@ Ce dépôt contient les moules techniques prêts à être copiés, configurés e
 
 La doctrine complète est conservée dans `BEAUVILLE/digiy-master/MASTER-CORE.md`.
 
+## MASTER PAYS
+
+- `MASTER-PAYS-SENEGAL-V1/` — première configuration pays officielle sous le CORE mondial.
+- Le Sénégal hérite des besoins, langues communes et capacités du CORE ; il ajoute uniquement sa monnaie, ses langues locales, ses règles pays et ses territoires.
+- Petite Côte est le territoire actif de référence ; Dakar, Thiès et Saint-Louis restent préparés mais non activés.
+
+Doctrine pays : `BEAUVILLE/digiy-master/MASTER-PAYS.md`.
+
 ## Règle d'architecture
 
 **1 famille métier = 1 MASTER MAÎTRE universel.**
@@ -29,6 +37,7 @@ Le pays n'est pas un nouveau MASTER métier : Sénégal, France ou autre pays co
 ## MASTER MAÎTRES présents
 
 - `MASTER-CORE-WORLD-V1/` — configuration mondiale, pays, territoires, besoins, langues et capacités.
+- `MASTER-PAYS-SENEGAL-V1/` — configuration pays Sénégal héritée du CORE.
 - `BUILD/MASTER-MAITRE-BUILD/` — artisans, techniciens, métiers de terrain.
 - `EXPLORE/MASTER-MAITRE-EXPLORE/` — lieux, sorties, expériences, activités locales.
 - `JOB/MASTER-MAITRE-JOB/` — missions, offres et candidatures directes.
