@@ -13,7 +13,7 @@ Principes obligatoires :
 - même CORE WORLD ;
 - géographie publique active uniquement ;
 - aucune zone ou pays `planned` exposé ;
-- aucun professionnel privé, expiré, non payé ou non validé ;
+- aucune donnée privée exposée ;
 - aucune écriture V1 ;
 - aucune réservation, paiement, modification de dossier ou action propriétaire V1 ;
 - relation commerciale directe avec le professionnel ;
@@ -25,7 +25,7 @@ Serveur distant :
 
 `https://wesqmwjjtsefyjnluosj.supabase.co/functions/v1/digiy-mcp`
 
-Déploiement : Supabase Edge Function `digiy-mcp`, V1, `verify_jwt=false` car l’endpoint n’expose que des données déjà qualifiées comme publiques.
+Déploiement courant : Supabase Edge Function `digiy-mcp`, V2, serveur MCP `1.1.0`, `verify_jwt=false` car l’endpoint est strictement public et lecture seule.
 
 Le serveur annonce des outils `readOnlyHint=true` et supporte :
 
@@ -38,7 +38,16 @@ Géographie / besoins :
 
 `https://digiylyfe.com/assets/digiy-core-runtime-v1.json`
 
-Professionnels publics : `public.digiy_adhesion_requests`, filtrés strictement sur :
+Découverte publique :
+
+`public.v_digiy_public_discovery_entities`
+
+Cette vue est le **quai public normalisé**. Elle rassemble sans modifier leurs sources d’origine :
+
+1. les adhésions actives et publiées provenant de `public.digiy_adhesion_requests` ;
+2. les entités historiques ou modulaires explicitement autorisées dans `public.digiy_public_discovery_bridge`.
+
+Pour les adhésions, les gardes restent strictes :
 
 - `status = valide` ;
 - `payment_status = confirme` ;
@@ -48,6 +57,12 @@ Professionnels publics : `public.digiy_adhesion_requests`, filtrés strictement 
 - `paid_until >= now()` ;
 - `public_slug IS NOT NULL` ;
 - `final_url IS NOT NULL`.
+
+Pour une entité historique/modulaire, `is_public=true` doit être posé explicitement dans le bridge. Pour `source_kind=loc_master_site`, la vue vérifie en plus que le site source reste `is_active=true` dans `public.digiy_loc_master_sites`.
+
+Le quai normalise :
+
+`source → identité → catégorie/services → pays → territoire → zone → couverture → URL publique → contacts publics éventuels`
 
 ## Outils V1
 
@@ -62,18 +77,18 @@ Professionnels publics : `public.digiy_adhesion_requests`, filtrés strictement 
 
 `base_zone_id + service_zone_ids + service_territory_ids`
 
-et filtre la recherche métier/service sur les champs publics du professionnel.
+et recherche dans le nom, la catégorie et les services publics normalisés.
 
-## Sortie professionnelle
+## Sortie publique
 
 La passerelle peut retourner :
 
-- identité professionnelle publique ;
-- métier et services publics ;
+- identité professionnelle/établissement publique ;
+- catégorie et services publics ;
 - pays, territoire, zone de base et couverture ;
-- carte publique DIGIYLYFE ;
-- photo publique ;
-- téléphone / WhatsApp uniquement lorsqu’ils font déjà partie de la fiche publique.
+- carte ou porte publique DIGIYLYFE ;
+- photo publique lorsqu’une source la fournit explicitement ;
+- téléphone / WhatsApp uniquement lorsqu’ils sont explicitement exposés comme publics par la source normalisée.
 
 Aucune donnée d’administration, preuve de paiement, email privé, statut interne ou secret ne doit sortir du MCP public.
 
@@ -84,27 +99,49 @@ Aucune donnée d’administration, preuve de paiement, email privé, statut inte
 - pays / territoire / zone inconnus ou non actifs refusés ;
 - contrôles de cohérence géographique avant recherche ;
 - aucune confiance accordée à une géographie inventée par le client ;
+- bridge explicite pour les sources historiques ;
+- garde dynamique `is_active` pour LOC MASTER ;
 - limite de résultats ;
-- aucune mutation de production.
+- aucune mutation métier depuis le MCP.
+
+## Premier raccord quai : Sarlat
+
+Source historique : `public.digiy_loc_master_sites`
+
+- site : `sarlat-chez-baptiste` ;
+- unité : `chambre-privee` ;
+- pays : `FR` ;
+- territoire : `FR-DORDOGNE` ;
+- zone : `FR-DORDOGNE-SARLAT` ;
+- catégorie : `accommodation` ;
+- services : `location`, `hébergement`, `chambre privée` ;
+- porte publique : `https://sarlat-chez-baptiste.digiylyfe.com/`.
+
+Le site source reste la vérité métier. Le bridge ne le remplace pas : il le rend découvrable par le CORE conversationnel.
+
+## Test réseau du 23 août 2026
+
+Test HTTP de bout en bout lancé depuis PostgreSQL `pg_net` vers l’endpoint public Supabase :
+
+- `server/discover` → HTTP 200 ;
+- `tools/list` → HTTP 200 ;
+- `search_professionals(query="location hébergement", FR / FR-DORDOGNE / FR-DORDOGNE-SARLAT)` → HTTP 200, **1 résultat** ;
+- résultat : `SARLAT CHEZ BAPTISTE` ;
+- `get_professional(public_slug="sarlat-chez-baptiste")` → HTTP 200 ;
+- URL retournée : `https://sarlat-chez-baptiste.digiylyfe.com/` ;
+- aucune donnée privée retournée.
 
 ## Statut
 
-`DEPLOYED_PENDING_EXTERNAL_CLIENT_TEST`
+`PUBLIC_QUAY_V1_PASS`
 
-Le déploiement Supabase est actif et le code déployé a été relu depuis Supabase. Un test réseau MCP de bout en bout avec un client externe reste obligatoire avant soumission à un annuaire/app store ou ouverture commerciale de la passerelle.
+Le quai public est posé et le premier cas historique Sarlat passe par le MCP sans modifier sa source métier.
 
 ## Étape suivante
 
-Tester depuis un vrai client MCP distant :
+Raccorder les autres portes historiques **une par une après contrôle humain** : LOC, DRIVER, RESTAURATION, COMMERCE, etc. Aucun import massif automatique et aucune géographie inventée.
 
-1. `server/discover` ;
-2. `tools/list` ;
-3. `list_countries` ;
-4. `list_zones` sur `SN-PETITE-COTE` ;
-5. `search_professionals` sur une zone active ;
-6. `get_professional` sur un slug public réel.
-
-Après PASS : préparer l’intégration ChatGPT/OpenAI puis Gemini/Google sans modifier le CORE.
+Puis préparer le raccord ChatGPT/OpenAI et Gemini/Google sans modifier le CORE.
 
 ---
 
