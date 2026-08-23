@@ -1,0 +1,30 @@
+{
+  "validation": "SARLAT-PILOT-READONLY-2026-08-23",
+  "mode": "read-only",
+  "country_id": "FR",
+  "territory_id": "FR-DORDOGNE",
+  "target_zone_id": "FR-DORDOGNE-SARLAT",
+  "source": "Supabase production",
+  "rules": {
+    "no_production_mutation": true,
+    "no_real_professional_identity_stored": true,
+    "aggregate_only": true
+  },
+  "result": {
+    "professional_count": 3,
+    "unmapped_need_count": 0,
+    "missing_public_url_count": 0,
+    "need_counts": {
+      "accommodation": 1,
+      "food": 2
+    }
+  },
+  "interpretation": {
+    "contract_status": "pass",
+    "base_zone_resolution_validated": true,
+    "need_resolution_validated": true,
+    "public_url_contract_validated": true,
+    "production_mutation_required": false
+  },
+  "conclusion": "Le pilote Sarlat confirme que la zone active FR-DORDOGNE-SARLAT se raccorde au CORE avec trois professionnels publics actifs, tous résolvables vers un besoin CORE et tous dotés d'une URL publique, sans migration de production."
+}
