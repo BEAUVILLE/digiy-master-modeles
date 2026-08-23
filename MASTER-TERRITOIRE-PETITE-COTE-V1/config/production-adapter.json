@@ -1,0 +1,77 @@
+{
+  "adapter": "DIGIYLYFE-PETITE-COTE-PRODUCTION-ADAPTER-V1",
+  "mode": "read-only-mapping",
+  "country_id": "SN",
+  "territory_id": "SN-PETITE-COTE",
+  "purpose": "Raccorder les données de production existantes au MASTER CORE sans migrer ni recopier les professionnels.",
+  "source": {
+    "professionals_table": "digiy_annuaire_public",
+    "metiers_table": "digiy_metiers",
+    "zones_table": "digiy_zones",
+    "service_zones_table": "digiy_annuaire_public_zones"
+  },
+  "public_filters": {
+    "entry_type": "professional",
+    "is_public": true,
+    "is_active": true
+  },
+  "zone_resolution": {
+    "source_field": "zone_id",
+    "source_lookup": "digiy_zones.id",
+    "territory_parent_slug": "petite-cote",
+    "canonical_ids": {
+      "aibd": "SN-PETITE-COTE-AIBD",
+      "ndayane": "SN-PETITE-COTE-NDAYANE",
+      "popenguine": "SN-PETITE-COTE-POPENGUINE",
+      "somone": "SN-PETITE-COTE-SOMONE",
+      "ngaparou": "SN-PETITE-COTE-NGAPAROU",
+      "saly": "SN-PETITE-COTE-SALY",
+      "mbour": "SN-PETITE-COTE-MBOUR"
+    }
+  },
+  "need_resolution": {
+    "metier_slug": {
+      "chauffeur": "transport",
+      "plombier": "artisan",
+      "electricien": "artisan",
+      "macon": "artisan",
+      "solaire": "artisan",
+      "logement": "accommodation",
+      "market-produits": "shopping",
+      "beaute": "beauty",
+      "soins-beaute": "beauty",
+      "onglerie": "beauty",
+      "coiffeur": "beauty",
+      "massage": "beauty",
+      "restaurant": "food",
+      "restauration": "food",
+      "jobs": "jobs",
+      "annonces": "announcements"
+    },
+    "category_fallback": {
+      "transport": "transport",
+      "artisan": "artisan",
+      "location": "accommodation",
+      "logement": "accommodation",
+      "hebergement": "accommodation",
+      "market": "shopping",
+      "commerce": "shopping",
+      "shopping": "shopping",
+      "beaute": "beauty",
+      "beauty": "beauty",
+      "restauration": "food",
+      "emploi": "jobs",
+      "annonces": "announcements"
+    }
+  },
+  "output_contract": "./professional-contract.json",
+  "rules": {
+    "mutate_production": false,
+    "store_real_professionals_in_master": false,
+    "production_remains_source_of_truth": true,
+    "derive_country_and_territory_from_zone_hierarchy": true,
+    "derive_need_from_metier_then_category": true,
+    "exclude_tools_and_modules_from_professional_results": true,
+    "generic_professional_action": "OUVRIR"
+  }
+}
