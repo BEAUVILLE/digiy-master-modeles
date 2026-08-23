@@ -1,0 +1,34 @@
+{
+  "contract": "DIGIYLYFE-PROFESSIONAL-CONNECTION-FR-DORDOGNE-V1",
+  "country_id": "FR",
+  "territory_id": "FR-DORDOGNE",
+  "required": [
+    "professional_id",
+    "base_zone_id",
+    "need_id",
+    "public_url"
+  ],
+  "optional": [
+    "service_zone_ids",
+    "service_territory_ids",
+    "pending_external_service_references"
+  ],
+  "rules": {
+    "base_zone_is_implicitly_served": true,
+    "service_zones_are_additive": true,
+    "validated_service_territory_can_cover_active_zones": true,
+    "unvalidated_external_service_reference_is_not_public_expansion": true,
+    "service_area_never_rehomes_professional": true,
+    "deduplicate_by_professional_id": true,
+    "zone_and_need_are_distinct_filters": true
+  },
+  "template": {
+    "professional_id": "<production-id>",
+    "base_zone_id": "FR-DORDOGNE-<ZONE>",
+    "service_zone_ids": [],
+    "service_territory_ids": [],
+    "pending_external_service_references": [],
+    "need_id": "<core-need-id>",
+    "public_url": "<public-url>"
+  }
+}
