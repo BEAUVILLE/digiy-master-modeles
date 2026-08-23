@@ -1,7 +1,8 @@
 -- MASTER MAÎTRE CARNET V1
--- Modèle cible des créances / dettes clients.
+-- ÉCHÉANCIER TERRAIN — CLIENT DÛ / REMBOURSEMENTS.
 -- IMPORTANT : fichier de MASTER uniquement. NE PAS exécuter en production sans revue + test.
--- Doctrine : une créance n'est jamais de l'argent encaissé.
+-- Doctrine : une dette client n'est jamais de l'argent encaissé tant qu'un remboursement réel n'est pas enregistré.
+-- Modèle volontairement simple : CLIENT -> SOMME DUE -> REMBOURSEMENTS SUCCESSIFS -> RESTE.
 
 begin;
 
@@ -9,11 +10,12 @@ create table if not exists public.digiy_carnet_receivables (
   id uuid primary key default gen_random_uuid(),
   owner_id uuid not null references auth.users(id) on delete cascade,
   member_slug text not null,
-  client_label text,
+  client_label text not null,
   client_phone text,
   amount_due_xof bigint not null check (amount_due_xof > 0),
   amount_paid_xof bigint not null default 0 check (amount_paid_xof >= 0),
   currency_code text not null default 'XOF',
+  debt_date date not null default current_date,
   due_date date,
   status text not null default 'open' check (status in ('open','partial','paid','cancelled')),
   note_text text,
@@ -54,7 +56,7 @@ create policy carnet_receivables_update_own
   using ((select auth.uid()) = owner_id)
   with check ((select auth.uid()) = owner_id);
 
--- Pas de DELETE utilisateur en V1 : on annule la créance pour garder l'historique.
+-- Pas de DELETE utilisateur en V1 : on annule pour garder la mémoire de l'échéancier.
 
 create table if not exists public.digiy_carnet_receivable_payments (
   id uuid primary key default gen_random_uuid(),
@@ -102,7 +104,7 @@ create policy carnet_receivable_payments_insert_own
     )
   );
 
--- Fonction de recalcul : aucune somme n'est inventée.
+-- Recalcule l'échéancier après chaque remboursement.
 create or replace function public.digiy_carnet_recompute_receivable(p_receivable_id uuid)
 returns jsonb
 language plpgsql
@@ -151,6 +153,7 @@ begin
     'ok', true,
     'amount_due_xof', v_due,
     'amount_paid_xof', least(v_paid, v_due),
+    'remaining_xof', greatest(v_due - v_paid, 0),
     'status', v_status
   );
 end;
@@ -162,11 +165,22 @@ grant execute on function public.digiy_carnet_recompute_receivable(uuid) to auth
 
 commit;
 
+-- AFFICHAGE TERRAIN CIBLE :
+-- CLIENT DÛ : Mamadou
+-- SOMME INITIALE : 50 000 F
+-- 05/09 : +10 000 F remboursés · Wave
+-- 12/09 : +15 000 F remboursés · Espèces
+-- RESTE : 25 000 F
+-- STATUT : PARTIEL
+--
+-- RÈGLE : chaque remboursement réel peut créer séparément un mouvement CARNET encaissé.
+-- La dette elle-même ne touche jamais CA / Entrées / Net.
+
 -- TESTS AVANT DÉPLOIEMENT :
 -- 1. anon : zéro lecture/écriture ;
--- 2. utilisateur A ne voit jamais les créances de B ;
--- 3. création créance : aucun mouvement financier créé ;
--- 4. paiement partiel : statut partial ;
+-- 2. utilisateur A ne voit jamais les échéanciers de B ;
+-- 3. création dette : aucun mouvement financier créé ;
+-- 4. plusieurs remboursements successifs : reste correct ;
 -- 5. paiement total : statut paid ;
--- 6. paiement doit être lié séparément à un vrai mouvement CARNET encaissé ;
+-- 6. remboursement lié séparément à un vrai mouvement CARNET encaissé ;
 -- 7. CA / entrées / net ne lisent jamais directement cette table.
