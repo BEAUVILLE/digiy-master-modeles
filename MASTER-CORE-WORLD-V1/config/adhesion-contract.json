@@ -1,0 +1,50 @@
+{
+  "contract": "DIGIYLYFE-ADHESION-CONTRACT-V1",
+  "tree": "country_id -> territory_id -> base_zone_id -> service_zone_ids/service_territory_ids -> need/job -> card -> open",
+  "user_inputs": [
+    "country_id",
+    "territory_id",
+    "base_zone_id",
+    "service_zone_ids",
+    "service_territory_ids",
+    "job_label",
+    "professional_name",
+    "phone_local",
+    "whatsapp_local",
+    "services"
+  ],
+  "derived_from_country": [
+    "currency",
+    "currency_label",
+    "calling_code",
+    "timezone",
+    "default_language",
+    "interface_languages",
+    "membership_pricing",
+    "service_pricing"
+  ],
+  "rules": {
+    "country_is_selected_once": true,
+    "country_derived_values_are_not_retyped_by_user": true,
+    "territory_must_belong_to_country": true,
+    "base_zone_must_belong_to_territory": true,
+    "base_zone_is_identity_not_service_coverage": true,
+    "service_zones_are_additive": true,
+    "service_territories_are_additive": true,
+    "planned_or_unknown_geography_is_not_public": true,
+    "unknown_locality_is_pending_validation": true,
+    "pricing_is_read_from_country_config": true,
+    "form_must_not_hardcode_country_specific_pricing": true,
+    "production_schema_must_store_structured_geography_before_form_activation": true
+  },
+  "required_production_fields": [
+    "country_id",
+    "territory_id",
+    "base_zone_id",
+    "service_zone_ids",
+    "service_territory_ids",
+    "currency_code",
+    "calling_code",
+    "timezone"
+  ]
+}
