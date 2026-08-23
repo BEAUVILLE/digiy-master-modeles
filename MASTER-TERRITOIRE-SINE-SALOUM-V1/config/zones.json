@@ -1,0 +1,8 @@
+{
+  "country_id": "SN",
+  "territory_id": "SN-SINE-SALOUM",
+  "zone_id_format": "SN-SINE-SALOUM-{ZONE}",
+  "status": "planned",
+  "zones": [],
+  "rule": "Aucune zone n'est activée tant qu'elle n'a pas été validée terrain et raccordée à la production. Les futurs zone_id seront canoniques et mondialement non ambigus."
+}
