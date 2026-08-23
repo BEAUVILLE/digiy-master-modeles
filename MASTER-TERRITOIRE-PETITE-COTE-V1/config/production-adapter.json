@@ -1,5 +1,5 @@
 {
-  "adapter": "DIGIYLYFE-PETITE-COTE-PRODUCTION-ADAPTER-V1.3",
+  "adapter": "DIGIYLYFE-PETITE-COTE-PRODUCTION-ADAPTER-V1.4",
   "mode": "read-only-mapping",
   "country_id": "SN",
   "territory_id": "SN-PETITE-COTE",
@@ -30,6 +30,7 @@
       "mbour": "SN-PETITE-COTE-MBOUR"
     },
     "planned_canonical_ids": {
+      "nianing": "SN-PETITE-COTE-NIANING",
       "joal-fadiouth": "SN-PETITE-COTE-JOAL-FADIOUTH"
     },
     "aliases": {
