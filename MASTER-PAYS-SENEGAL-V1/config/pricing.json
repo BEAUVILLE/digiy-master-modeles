@@ -6,6 +6,9 @@
       "adherent-19900": {"amount": 19900, "label": "19 900 FCFA / mois"},
       "adherent-28000": {"amount": 28000, "label": "28 000 FCFA / mois"}
     },
+    "modules": {
+      "carnet_pro": {"amount": 13000, "label": "13 000 FCFA / mois"}
+    },
     "services": {
       "fiche": {"starting_amount": 100000, "label": "À partir de 100 000 FCFA"},
       "site_premium": {"starting_amount": 250000, "label": "À partir de 250 000 FCFA"},
@@ -15,6 +18,7 @@
   "rules": {
     "country_currency_is_authoritative": true,
     "membership_price_must_come_from_country_config": true,
+    "module_price_must_come_from_country_config": true,
     "service_starting_price_must_come_from_country_config": true,
     "form_must_not_hardcode_country_price": true
   }
