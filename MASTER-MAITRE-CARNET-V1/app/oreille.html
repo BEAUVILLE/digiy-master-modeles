@@ -1,152 +1,114 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
-  <meta name="theme-color" content="#06140f">
-  <title>DIGIY CARNET — Oreille MASTER</title>
-  <script src="../master-config.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3"></script>
-  <script src="../assets/carnet-contract.js"></script>
-  <script src="../assets/carnet-store.js"></script>
-  <script src="../assets/carnet-i18n.js"></script>
-  <script src="../assets/carnet-world8-ui.js"></script>
-  <script src="../assets/carnet-oreille.js"></script>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>Oreille PAY — Mon argent</title>
+  <meta name="theme-color" content="#f4ead2"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="description" content="Oreille PAY DIGIYLYFE : parler, formuler, copier et ranger une note d’argent sans confirmer automatiquement."/>
+  <meta name="digiy-build" content="pay-oreille-grand-gras-paves-20260524"/>
+
+  <script>
+    window.DIGIY_MODULE = "PAY";
+    window.DIGIY_LOGIN_URL = "./pin.html";
+  </script>
+
+  <script src="./session.js?v=pay-oreille-page-20260524"></script>
+  <script src="./assets/js/action-digiy-receiver.js?v=v4-validation-clean-20260526"></script>
   <style>
-    *{box-sizing:border-box}body{margin:0;min-height:100dvh;padding:12px 12px 90px;background:radial-gradient(circle at top left,rgba(244,210,122,.14),transparent 35%),linear-gradient(180deg,#06140f,#020806);color:#fff8e8;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800}.app{width:min(620px,100%);margin:auto}.langbar{display:flex;justify-content:flex-end;margin-bottom:8px}.langbar select{min-height:42px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);color:#fff;padding:7px 10px;font:inherit;font-size:12px;font-weight:1000}.top{display:flex;align-items:center;justify-content:space-between;gap:8px}.back{color:#fff8e8;text-decoration:none;padding:10px 12px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.06)}.brand{text-align:right}.brand small{display:block;color:rgba(255,255,255,.5);font-size:10px;letter-spacing:.1em}.brand b{color:#f4d27a}.hero{margin-top:12px;padding:18px;border-radius:28px;background:linear-gradient(135deg,#fff7df,#ead29a);color:#162016}.hero h1{margin:4px 0;font-size:clamp(42px,12vw,68px);line-height:.9;letter-spacing:-.06em}.hero p{margin:9px 0 0;line-height:1.4}.status{margin-top:12px;padding:12px;border:1px solid rgba(244,210,122,.25);border-radius:16px;background:rgba(244,210,122,.1);color:#fff4c8;font-size:12px}.status.ok{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.1);color:#bbf7d0}.status.bad{border-color:rgba(248,113,113,.3);background:rgba(248,113,113,.1);color:#fecaca}.card{margin-top:12px;padding:16px;border-radius:25px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09)}.card h2{margin:0 0 6px;color:#f4d27a}.lead{margin:0 0 12px;color:rgba(255,255,255,.62);font-size:12px;line-height:1.45}.mic{width:100%;min-height:112px;border:0;border-radius:28px;background:linear-gradient(135deg,#22c55e,#f4d27a);color:#102014;font:inherit;font-size:24px;font-weight:1100}.field{display:grid;gap:5px;margin-top:10px}.field label{font-size:10px;color:#fde68a}.field input,.field select,.field textarea{width:100%;min-height:50px;border-radius:15px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.23);color:#fff;padding:10px 12px;font:inherit;font-weight:900}.field textarea{min-height:82px}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.btn{width:100%;min-height:56px;margin-top:11px;border:0;border-radius:17px;background:linear-gradient(135deg,#22c55e,#f4d27a);color:#102014;font:inherit;font-weight:1100}.btn.secondary{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.11)}.btn:disabled{opacity:.45}.preview{display:none;margin-top:12px;padding:14px;border-radius:20px;background:#fff7df;color:#172016}.preview.show{display:block}.preview strong{display:block;font-size:17px}.preview p{margin:7px 0;font-size:13px;line-height:1.45}.dock{position:fixed;left:8px;right:8px;bottom:8px;width:min(604px,calc(100% - 16px));margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px;border-radius:18px;background:rgba(6,20,15,.95);border:1px solid rgba(255,255,255,.1)}.dock a{min-height:52px;display:grid;place-items:center;text-align:center;text-decoration:none;color:#fff;border-radius:13px;background:rgba(255,255,255,.07);font-size:12px}html[dir="rtl"] .langbar{justify-content:flex-start}html[dir="rtl"] .brand{text-align:left}html[dir="rtl"] .hero,html[dir="rtl"] .card{text-align:right}@media(max-width:440px){.row{grid-template-columns:1fr}}
+    :root{--bg:#f4ead2;--bg2:#ead9b7;--bg3:#dec99c;--bar:rgba(246,237,216,.97);--gold:#facc15;--green:#16a34a;--green2:#22c55e;--text:#1f2a1f;--muted:rgba(31,42,31,.80);--line:rgba(83,58,26,.24);--shadow:0 16px 38px rgba(77,52,22,.18);--r:22px;--hdrH:52px;--barH:78px;--max:980px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    body{margin:0;min-height:100dvh;color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:20px;font-weight:950;background:radial-gradient(circle at 10% 0%,rgba(250,204,21,.25),transparent 34%),radial-gradient(circle at 100% 100%,rgba(22,101,52,.12),transparent 30%),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg3));padding:calc(var(--hdrH) + 14px) 12px calc(var(--barH) + env(safe-area-inset-bottom,0px) + 18px)}
+    a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit}
+    .topHeader{position:fixed;top:0;left:0;right:0;height:var(--hdrH);z-index:100;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 14px;background:var(--bar);border-bottom:1px solid rgba(83,58,26,.24);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    .hdrBack{min-height:36px;display:inline-flex;align-items:center;justify-content:center;color:rgba(31,42,31,.70);font-size:14px;font-weight:1000;white-space:nowrap}.hdrTitle{font-size:15px;font-weight:1000;letter-spacing:.14em;text-transform:uppercase;color:#6b4e09;white-space:nowrap}.hdrPill{min-height:32px;display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.55);color:var(--muted);font-size:12px;font-weight:1000;white-space:nowrap;max-width:38vw;overflow:hidden;text-overflow:ellipsis}.hdrPill.ok{color:#14532d;border-color:rgba(22,101,52,.28);background:rgba(220,252,231,.72)}.hdrPill.warn{color:#6b4e09;border-color:rgba(250,204,21,.36);background:rgba(250,204,21,.18)}
+    .wrap{width:min(var(--max),100%);margin:0 auto;display:grid;gap:16px}.card,.guide{border:2px solid var(--line);border-radius:var(--r);background:rgba(255,255,255,.70);box-shadow:var(--shadow);padding:17px}.hero{border-color:rgba(250,204,21,.45);background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(250,204,21,.18))}.eyebrow{color:#6b4e09;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:1000;margin-bottom:10px}h1{margin:0 0 10px;font-size:clamp(52px,15vw,112px);font-weight:1000;line-height:.82;letter-spacing:-.075em;color:#241a0d;text-transform:uppercase}h1 span{display:block;color:#14532d;font-size:clamp(62px,18vw,132px)}.lead{color:var(--muted);font-size:clamp(20px,5vw,30px);font-weight:1000;line-height:1.16;letter-spacing:-.025em;max-width:850px}.rule{margin-top:14px;padding:14px 16px;border-radius:20px;border:1px dashed rgba(83,58,26,.28);background:rgba(255,255,255,.45);color:rgba(31,42,31,.88);font-size:16px;font-weight:1000;line-height:1.35}.rule b{color:#6b4e09}.guide{border-color:rgba(34,197,94,.34);background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(220,252,231,.56));display:grid;gap:12px}.guide h2{margin:0;font-size:clamp(32px,8.5vw,56px);line-height:.90;letter-spacing:-.055em;color:#241a0d;font-weight:1000}.guide p{margin:0;color:rgba(31,42,31,.78);font-size:18px;line-height:1.35;font-weight:1000}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}.btn{min-height:66px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.70);display:inline-flex;align-items:center;justify-content:center;text-align:center;padding:14px 18px;font-weight:1000;font-size:20px;cursor:pointer;box-shadow:0 12px 28px rgba(77,52,22,.12)}.btn.primary{background:linear-gradient(135deg,var(--green2),var(--gold));color:#102014;border:0}.btn.danger{background:rgba(239,68,68,.12);border-color:rgba(159,18,57,.30);color:#9f1239}.oreilleShell{scroll-margin-top:72px;border-color:rgba(20,83,45,.28);background:rgba(255,255,255,.78)}.oreilleShell::before{content:"🎙️ OREILLE PAY";display:block;margin:0 0 12px;color:#14532d;font-size:clamp(28px,7vw,48px);line-height:.95;font-weight:1000;letter-spacing:-.055em;text-transform:uppercase}
+    .bottomBar{position:fixed;left:0;right:0;bottom:0;height:var(--barH);z-index:100;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));background:var(--bar);border-top:1px solid rgba(83,58,26,.22);backdrop-filter:blur(18px)}.bottomInner{width:min(100%,760px);height:100%;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.bottomInner a{min-height:58px;border-radius:16px;display:grid;place-items:center;align-content:center;gap:3px;color:rgba(31,42,31,.70);font-size:12px;font-weight:1000;text-align:center;border:1px solid rgba(83,58,26,.12);background:rgba(255,255,255,.50)}.bottomInner a.active{color:#102014;background:linear-gradient(135deg,var(--green2),var(--gold));border-color:rgba(22,101,52,.24)}.bottomInner .bi{font-size:22px;line-height:1}
+    @media(max-width:520px){body{font-size:20px;padding:calc(var(--hdrH) + 12px) 10px calc(var(--barH) + env(safe-area-inset-bottom,0px) + 16px)}.card,.guide{padding:15px;border-radius:20px}.actions .btn{width:100%;font-size:20px;min-height:68px}.hdrBack{font-size:13px}.hdrTitle{font-size:13px;letter-spacing:.10em}.hdrPill{font-size:11px;padding:6px 8px;max-width:34vw}.guide p{font-size:16px}.rule{font-size:15px}}
   </style>
 </head>
+
 <body>
-<main class="app">
-  <div class="langbar"><select id="language" aria-label="Language"></select></div>
-  <header class="top"><a class="back" href="./index.html" data-w8="backCarnet">← CARNET</a><div class="brand"><small>DIGIYLYFE · <span data-i18n="member">ADHÉRENT</span></small><b data-w8="earBrand">🎙️ OREILLE CARNET</b></div></header>
+  <header class="topHeader">
+    <a class="hdrBack" href="./hub.html">← HUB</a>
+    <div class="hdrTitle">🎙️ OREILLE PAY</div>
+    <div class="hdrPill warn" id="sessionPill">session…</div>
+  </header>
 
-  <section class="hero">
-    <small data-i18n="earHeroTop">LA VOIX AU-DESSUS DE L’ACTION</small>
-    <h1 data-i18n="earHero">Parle. CARNET prépare.</h1>
-    <p data-i18n="earExample">Exemple : « Vente 25 000 Wave » ou « Gasoil 15 000 espèces ». Tu vérifies toujours avant que la trace entre dans CARNET.</p>
-  </section>
+  <main class="wrap">
+    <section class="card hero">
+      <div class="eyebrow">💳 MON ARGENT · OREILLE MÉTIER</div>
+      <h1><span>Oreille</span>PAY.</h1>
+      <div class="lead">Je parle ou je clique. DIGIY prépare la trace d’argent. Je vérifie. PAY range.</div>
+      <div class="rule"><b>Règle :</b> aucun paiement, reçu Wave, cash, dette client, dépense ou épargne n’est confirmé automatiquement.</div>
+    </section>
 
-  <div class="status" id="status" data-w8="accessMicChecking">Contrôle de l’accès et du micro…</div>
+    <section class="guide" aria-label="Lecteur guide Oreille PAY">
+      <h2>🎧 Guide PAY</h2>
+      <p>PAY prépare une note d’argent : montant, mode, lieu, client/source, téléphone, détail, preuve. Le pro valide toujours avant de compter l’argent comme reçu.</p>
+      <div class="actions">
+        <button class="btn primary" type="button" id="payGuidePlay">🎧 Écouter le guide</button>
+        <button class="btn danger" type="button" id="payGuideStop">⏹ Arrêter</button>
+      </div>
+    </section>
 
-  <section class="card">
-    <button class="mic" id="listen" type="button" data-i18n="speak">🎙️ PARLER À CARNET</button>
-    <div class="field"><label for="spoken" data-i18n="spoken">Phrase entendue / saisie</label><textarea id="spoken" data-w8-placeholder="spokenPh" placeholder="Ex : Vente 25 000 Wave"></textarea></div>
-    <button class="btn secondary" id="analyse" type="button" data-i18n="analyse">ANALYSER LA PHRASE</button>
-  </section>
+    <section class="card oreilleShell" id="oreille-pay-section">
+      <div id="digiy-oreille-pay" data-digiy-oreille data-module="PAY"></div>
+    </section>
+  </main>
 
-  <section class="card">
-    <h2 data-i18n="draftCheck">Brouillon à vérifier</h2>
-    <p class="lead" data-i18n="neverAuto">Aucune donnée n’est rangée tant que tu n’appuies pas sur CONFIRMER.</p>
-    <div class="row">
-      <div class="field"><label for="direction" data-w8="type">Type</label><select id="direction"><option value="in" data-w8="typeIn">Entrée / vente</option><option value="out" data-w8="typeOut">Dépense / sortie</option></select></div>
-      <div class="field"><label for="amount" data-i18n="amount">Montant</label><input id="amount" type="number" min="1" step="1" inputmode="numeric"></div>
+  <nav class="bottomBar" aria-label="Navigation PAY">
+    <div class="bottomInner">
+      <a href="./hub.html"><span class="bi">🧭</span><span>HUB</span></a>
+      <a href="./admin.html"><span class="bi">➕</span><span>Saisir</span></a>
+      <a href="./cockpit.html"><span class="bi">📊</span><span>Cockpit</span></a>
+      <a class="active" href="./oreille.html"><span class="bi">🎙️</span><span>Oreille</span></a>
+      <a href="./session.html"><span class="bi">🛡️</span><span>Session</span></a>
     </div>
-    <div class="row">
-      <div class="field"><label for="channel" data-i18n="mode">Mode</label><select id="channel"></select></div>
-      <div class="field"><label for="label" data-i18n="reason">Motif</label><input id="label" type="text"></div>
-    </div>
-    <div class="field"><label for="note" data-w8="note">Note</label><textarea id="note"></textarea></div>
-    <button class="btn" id="prepare" type="button" data-w8="prepareConfirm">PRÉPARER POUR CONFIRMATION →</button>
-    <div class="preview" id="preview"><strong data-w8="previewTitle">Je vais ranger :</strong><p id="previewText"></p><button class="btn" id="confirm" type="button" data-i18n="confirm">✅ JE VÉRIFIE ET JE CONFIRME</button><button class="btn secondary" id="edit" type="button" data-i18n="edit">Modifier</button></div>
-  </section>
-</main>
+  </nav>
 
-<nav class="dock"><a href="./index.html">📊 <span data-i18n="dayTitle">JOUR / CAISSE</span></a><a href="./oreille.html">🎙️ <span data-i18n="earTitle">OREILLE</span></a></nav>
+  <script>
+    (() => {
+      "use strict";
+      try { if (window.DIGIY_SESSION?.cleanVisibleUrl) window.DIGIY_SESSION.cleanVisibleUrl(); } catch (_) {}
+      const pill = document.getElementById("sessionPill");
+      let session = null;
+      try { session = window.DIGIY_SESSION?.get?.(); } catch (_) {}
+      if (pill) {
+        pill.textContent = session ? "session ouverte" : "à vérifier";
+        pill.className = session ? "hdrPill ok" : "hdrPill warn";
+      }
+      const PAY_GUIDE_TEXT = "Bienvenue dans Oreille PAY DIGIYLYFE. Ici, tu peux parler ou cliquer pour préparer une note d’argent. PAY demande le montant, le mode cash Wave ou autre, le lieu, le client ou la source, le téléphone, le détail et la preuve. PAY ne confirme jamais seul un paiement. Une dette client ne devient pas du cash tant qu’un vrai paiement n’est pas reçu et vérifié. L’Oreille prépare. DIGIY formule. Le pro relit. Le pro valide. PAY range. Le terrain garde la main.";
+      function loadVoices(callback){
+        if(!("speechSynthesis" in window)){callback([]);return;}
+        let voices = window.speechSynthesis.getVoices();
+        if(voices && voices.length){callback(voices);return;}
+        let tries = 0;
+        const timer = window.setInterval(() => {tries += 1;voices = window.speechSynthesis.getVoices();if((voices && voices.length) || tries > 12){window.clearInterval(timer);callback(voices || []);}}, 120);
+      }
+      function speakGuide(){
+        if(!("speechSynthesis" in window)){alert("Lecture vocale non disponible sur ce navigateur.");return;}
+        window.speechSynthesis.cancel();
+        loadVoices((voices) => {
+          const u = new SpeechSynthesisUtterance(PAY_GUIDE_TEXT);
+          u.lang = "fr-FR";u.rate = 0.86;u.pitch = 1.02;u.volume = 1;
+          const preferred = voices.find(v => /fr/i.test(v.lang || "") && /Google|Thomas|Daniel|Amelie|Audrey|Pauline/i.test(v.name || "")) || voices.find(v => /fr/i.test(v.lang || "")) || voices[0];
+          if(preferred) u.voice = preferred;
+          window.speechSynthesis.speak(u);
+        });
+      }
+      function stopGuide(){ if("speechSynthesis" in window) window.speechSynthesis.cancel(); }
+      document.getElementById("payGuidePlay")?.addEventListener("click", speakGuide);
+      document.getElementById("payGuideStop")?.addEventListener("click", stopGuide);
+      if("speechSynthesis" in window) window.speechSynthesis.onvoiceschanged = function(){};
+      window.addEventListener("pagehide", stopGuide);
+    })();
+  </script>
 
-<script>
-(() => {
-  "use strict";
-  const Store=window.DIGIY_CARNET_STORE, Contract=window.DIGIY_CARNET_CONTRACT, Ear=window.DIGIY_CARNET_OREILLE, C=window.DIGIY_CARNET_MASTER||{}, I18N=window.DIGIY_CARNET_I18N, UI=window.DIGIY_CARNET_WORLD8_UI;
-  const $=id=>document.getElementById(id);
-  const money=n=>UI.money(n,C.identity?.currency||"XOF");
-  let draft=null;
-  function setStatus(t,k){$("status").textContent=t;$("status").className="status "+(k||"")}
-  function fieldNames(list){return (list||[]).map(k=>I18N.t(String(k))).join(", ")}
-
-  function renderChannels(){
-    const current=$("channel").value;
-    const active=(C.channels||[]).filter(x=>x.active!==false);
-    $("channel").innerHTML=active.map(x=>`<option value="${x.id}">${UI.channelLabel(x.id,x.label)}</option>`).join("");
-    if(active.some(x=>x.id===current)) $("channel").value=current;
-  }
-
-  function renderLanguage(){UI.apply();renderChannels()}
-
-  function fill(d){
-    draft=d;
-    $("direction").value=d.direction;
-    $("amount").value=d.amount||"";
-    $("channel").value=d.channel;
-    $("label").value=d.label||"";
-    $("note").value=d.note||"";
-    const r=Ear.readiness(d);
-    setStatus(r.ok?UI.t("draftReady"):UI.format("complete",{detail:fieldNames(r.missing)}),r.ok?"ok":"");
-  }
-
-  function rebuild(){
-    draft=Contract.canonicalMovement({member_slug:C.identity?.memberSlug||"",scope:"activity",direction:$("direction").value,kind:$("direction").value==="out"?"expense":"sale",category:$("direction").value==="out"?"depense":"vente",channel:$("channel").value,amount:Math.round(Number($("amount").value||0)),currency:C.identity?.currency||"XOF",label:String($("label").value||"").trim(),note:$("note").value,origin:"voice",status:"draft",meta:{voice_text:$("spoken").value,voice_lang:I18N.current()}});
-    return draft;
-  }
-
-  async function checkAccess(){
-    try{await Store.access();setStatus(Ear.supported()?UI.t("accessMicOk"):UI.t("accessNoMic"),"ok")}
-    catch(err){setStatus(I18N.t("accessDenied")+(err?.message||err),"bad")}
-  }
-
-  $("listen").disabled=!Ear.supported();
-  $("listen").onclick=async()=>{
-    setStatus(UI.t("listening"),"");
-    $("listen").disabled=true;
-    try{
-      const result=await Ear.listen({lang:UI.speechLocale()});
-      $("spoken").value=result.text;
-      fill(result.draft);
-    }catch(err){setStatus(UI.format("microphone",{detail:err?.message||err}),"bad")}
-    finally{$("listen").disabled=!Ear.supported()}
-  };
-
-  $("analyse").onclick=()=>{
-    const text=String($("spoken").value||"").trim();
-    if(!text){setStatus(UI.t("sayFirst"),"bad");return}
-    fill(Ear.parse(text,{lang:I18N.current()}));
-  };
-
-  $("prepare").onclick=()=>{
-    const d=rebuild(), check=Contract.validateConfirmed(d);
-    if(!check.ok){setStatus(UI.format("complete",{detail:fieldNames(check.errors)}),"bad");return}
-    $("previewText").textContent=UI.t(d.direction==="out"?"movementOut":"movementIn")+" · "+money(d.amount)+" · "+UI.channelLabel(d.channel,Contract.channels[d.channel]||d.channel)+" · "+d.label;
-    $("preview").classList.add("show");
-    $("prepare").disabled=true;
-  };
-
-  $("edit").onclick=()=>{$("preview").classList.remove("show");$("prepare").disabled=false};
-
-  function networkLike(err){const m=String(err?.message||err||"").toLowerCase();return navigator.onLine===false || /fetch|network|failed to fetch|load failed/.test(m)}
-
-  $("confirm").onclick=async()=>{
-    if(!draft)return;
-    $("confirm").disabled=true;
-    try{
-      const saved=await Store.insertMovement(draft);
-      setStatus(saved.idempotent?UI.t("duplicate"):UI.t("traceSaved"),"ok");
-      $("spoken").value="";$("amount").value="";$("label").value="";$("note").value="";draft=null;$("preview").classList.remove("show");$("prepare").disabled=false;
-    }catch(err){
-      if(networkLike(err)){
-        Store.queueDraft(draft);
-        setStatus(UI.t("offline"),"");
-        $("preview").classList.remove("show");$("prepare").disabled=false;
-      }else setStatus(UI.format("traceNotStored",{detail:err?.message||err}),"bad");
-    }finally{$("confirm").disabled=false}
-  };
-
-  I18N.bindSelector($("language"));
-  I18N.apply();
-  renderLanguage();
-  checkAccess();
-  window.addEventListener("digiy:carnet-language",()=>{renderLanguage();if(draft)fill(draft);else checkAccess()});
-})();
-</script>
+  <script src="./assets/js/oreille-metier-core.js?v=pay-core-paves-tel-20260524" defer></script>
+  <script src="./assets/js/oreille-pay.js?v=pay-oreille-v2-paves-tel-20260524" defer></script>
+  <script src="./assets/js/action-digiy-receiver.js?v=20260526-v2"></script>
 </body>
 </html>
