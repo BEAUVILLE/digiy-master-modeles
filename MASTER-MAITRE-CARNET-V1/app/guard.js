@@ -13,10 +13,6 @@
     root + "assets/carnet-store.js"
   ];
 
-  for (const src of scripts) {
-    document.write('<script src="' + src + '"><\\/script>');
-  }
-
   const show = () => {
     try { document.documentElement.style.visibility = ""; } catch (_) {}
   };
@@ -25,13 +21,28 @@
     location.replace(root + "index.html");
   };
 
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = false;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error("script_load_failed:" + src));
+      document.head.appendChild(script);
+    });
+  }
+
   async function verify() {
+    for (const src of scripts) await loadScript(src);
+
     const Store = window.DIGIY_CARNET_STORE;
     if (!Store) throw new Error("carnet_store_missing");
+
     const access = await Store.access();
     if (!access?.ok) throw new Error(access?.error || "carnet_access_denied");
-    show();
+
     window.DIGIY_CARNET_GUARD = Object.freeze({ ok: true, access });
+    show();
     return access;
   }
 
