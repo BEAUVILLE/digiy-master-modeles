@@ -133,12 +133,8 @@
     const id = String(op?.client_id || "").trim();
     if(!id) return;
     let rows = readOps();
-    if(op.type === "update"){
-      rows = rows.filter(x => !(x.client_id === id && x.type === "update"));
-    }
-    if(op.type === "delete"){
-      rows = rows.filter(x => x.client_id !== id);
-    }
+    if(op.type === "update") rows = rows.filter(x => !(x.client_id === id && x.type === "update"));
+    if(op.type === "delete") rows = rows.filter(x => x.client_id !== id);
     rows.push(Object.assign({queued_at:new Date().toISOString()}, op, {client_id:id}));
     writeOps(rows);
   }
@@ -211,15 +207,12 @@
   function detect(raw){
     if(suspended) return;
     const next = mapMovements(movementsFrom(raw));
-
     for(const [id,m] of next){
       const old = baseline.get(id);
       if(!old) enqueue(() => sendInsert(m));
       else if(signature(old) !== signature(m)) enqueue(() => sendUpdate(m));
     }
-    for(const id of baseline.keys()){
-      if(!next.has(id)) enqueue(() => sendDelete(id));
-    }
+    for(const id of baseline.keys()) if(!next.has(id)) enqueue(() => sendDelete(id));
     baseline = next;
   }
 
@@ -277,6 +270,7 @@
     const raw = nativeGet.call(localStorage, STORAGE_KEY);
     const state = parse(raw);
     const locals = Array.isArray(state.movements) ? state.movements : [];
+    const beforeMovements = JSON.stringify(locals);
     const localMap = mapMovements(locals);
     const queuedIds = new Set(Store.queued().map(x => String(x?.client_id || "")).filter(Boolean));
     const opRows = readOps();
@@ -294,12 +288,14 @@
     }
 
     state.movements = [...localMap.values()];
+    const changed = JSON.stringify(state.movements) !== beforeMovements;
     suspended = true;
     try { nativeSet.call(localStorage, STORAGE_KEY, JSON.stringify(state)); }
     finally { suspended = false; }
     baseline = mapMovements(state.movements);
     writeKnown();
-    emit("digiy:carnet-hydrated", {count:remoteMap.size});
+    emit("digiy:carnet-hydrated", {count:remoteMap.size,changed});
+    if(changed) setTimeout(() => location.reload(), 30);
     return remoteMap.size;
   }
 
