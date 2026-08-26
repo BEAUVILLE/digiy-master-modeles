@@ -1,0 +1,40 @@
+{
+  "contract": "DIGIYLYFE-TERRITORY-UNIVERSAL-V1",
+  "status": "validated",
+  "inherits": {
+    "core": "MASTER-CORE-WORLD-V1",
+    "country": "MASTER-PAYS-<COUNTRY>-V1",
+    "doctrine": "BEAUVILLE/digiy-master/MASTER-TERRITOIRE.md"
+  },
+  "territory": {
+    "id": "<COUNTRY_ID>-<TERRITORY_ID>",
+    "country_id": "<COUNTRY_ID>",
+    "slug": "<territory-slug>",
+    "label": "<public label>",
+    "territory_type": "urban|seasonal|validated_other",
+    "status": "planned|pilot|active",
+    "public_route": "<territory route>",
+    "direct_route": "<optional local door>",
+    "inherit_needs_from_core": true,
+    "inherit_capabilities_from_core": true,
+    "inherit_languages_from_country": true,
+    "generic_professional_action": "OUVRIR"
+  },
+  "commercial": {
+    "inherit_membership_from_country": true,
+    "territory_specific_parallel_pricing_forbidden": true,
+    "zero_commission_public_doctrine": true
+  },
+  "routing": {
+    "professional_query": ["country", "territory", "local", "need", "lang"],
+    "real_professional_destination": "public_url",
+    "projection_destination": "demo_then_adhesion",
+    "voice_destination": "voice_search_engine"
+  },
+  "truth": {
+    "real_professionals_source": "production_supabase",
+    "master_contains_real_professionals": false,
+    "real_before_projection": true,
+    "deduplicate_by": "professional_id"
+  }
+}
