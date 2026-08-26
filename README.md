@@ -22,19 +22,22 @@ La doctrine complète est conservée dans `BEAUVILLE/digiy-master/MASTER-CORE.md
 
 ## MASTER PAYS
 
-- `MASTER-PAYS-SENEGAL-V1/` — première configuration pays officielle sous le CORE mondial.
-- Le Sénégal hérite des besoins, langues communes et capacités du CORE ; il ajoute uniquement sa monnaie, ses langues locales, ses règles pays et ses territoires.
-- Petite Côte est le territoire actif de référence ; Dakar, Thiès et Saint-Louis restent préparés mais non activés.
+- `MASTER-PAYS-SENEGAL-V1/` — configuration pays Sénégal héritée du CORE. Petite Côte et Dakar sont actifs ; les extensions futures restent soumises à validation humaine.
+- `MASTER-PAYS-FRANCE-V1/` — configuration pays France héritée du CORE. Vallée de la Dordogne et Bordeaux sont actifs ; Arcachon reste planifié.
 
 Doctrine pays : `BEAUVILLE/digiy-master/MASTER-PAYS.md`.
 
 ## MASTER TERRITOIRE
 
-- `MASTER-TERRITOIRE-PETITE-COTE-V1/` — premier territoire de référence sous le Sénégal.
-- Zones V1 : AIBD, Ndayane, Popenguine, Somone, Ngaparou, Saly, Mbour.
-- Les besoins et capacités sont hérités du CORE ; aucun moteur ni professionnel réel n'est recopié dans le MASTER territoire.
+- `MASTER-TERRITOIRE-PETITE-COTE-V1/` — territoire saisonnier de référence Sénégal. Zones V1 : AIBD, Ndayane, Popenguine, Somone, Ngaparou, Saly, Mbour.
+- `MASTER-TERRITOIRE-BORDEAUX-V1/` — territoire urbain de référence France. V1 : les 8 grands quartiers administratifs de Bordeaux.
+- `MASTER-TERRITOIRE-VALLEE-DORDOGNE-V1/` — territoire saisonnier de référence France, avec Sarlat-la-Canéda comme première zone active.
+
+Les besoins et capacités sont hérités du CORE ; aucun moteur ni professionnel réel n'est recopié dans un MASTER territoire.
 
 Doctrine territoire : `BEAUVILLE/digiy-master/MASTER-TERRITOIRE.md`.
+Doctrine projection : `BEAUVILLE/digiy-master/DOCTRINE-PROJECTION-TERRITOIRE-V1.md`.
+Règle MAÎTRE projection : `DOCTRINE-MAITRE-PROJECTION-TERRITOIRE-V1.md`.
 
 ## Règle d'architecture
 
@@ -42,11 +45,16 @@ Doctrine territoire : `BEAUVILLE/digiy-master/MASTER-TERRITOIRE.md`.
 
 Le pays n'est pas un nouveau MASTER métier : Sénégal, France ou autre pays compatible sont des configurations du même CORE et des mêmes moules.
 
+**MODULE = PORTE · SUPABASE = AIGUILLEUR · PROFESSIONNEL = SA PROPRE VITRINE · EXEMPLE = PROJECTION TEMPORAIRE · LA VOIX = RECHERCHE.**
+
 ## MASTER MAÎTRES présents
 
 - `MASTER-CORE-WORLD-V1/` — configuration mondiale, pays, territoires, besoins, langues et capacités.
 - `MASTER-PAYS-SENEGAL-V1/` — configuration pays Sénégal héritée du CORE.
-- `MASTER-TERRITOIRE-PETITE-COTE-V1/` — configuration territoire Petite Côte héritée du Sénégal et du CORE.
+- `MASTER-PAYS-FRANCE-V1/` — configuration pays France héritée du CORE.
+- `MASTER-TERRITOIRE-PETITE-COTE-V1/` — configuration territoire Petite Côte.
+- `MASTER-TERRITOIRE-VALLEE-DORDOGNE-V1/` — configuration territoire Vallée de la Dordogne.
+- `MASTER-TERRITOIRE-BORDEAUX-V1/` — configuration territoire Bordeaux.
 - `BUILD/MASTER-MAITRE-BUILD/` — artisans, techniciens, métiers de terrain.
 - `EXPLORE/MASTER-MAITRE-EXPLORE/` — lieux, sorties, expériences, activités locales.
 - `JOB/MASTER-MAITRE-JOB/` — missions, offres et candidatures directes.
@@ -92,6 +100,7 @@ Chaque MASTER opérationnel doit tendre vers :
 7. Toute évolution majeure est testée avant propagation.
 8. Avant publication d'une instance : contrôler mobile, boutons, téléphone, WhatsApp, formulaires, langues, RTL, PWA, QR et données opérationnelles.
 9. Un nouveau pays ou territoire doit passer le test MASTER CORE : configuration + données, sans copie complète du moteur.
+10. Un territoire suivant hérite de la méthode du précédent, jamais de ses données locales par copie aveugle.
 
 ---
 
