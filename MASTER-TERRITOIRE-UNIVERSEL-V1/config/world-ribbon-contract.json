@@ -1,0 +1,52 @@
+{
+  "contract": "DIGIYLYFE-WORLD-RIBBON-V1",
+  "status": "validated_not_publicly_activated",
+  "purpose": "Navigation mondiale progressive des territoires DIGIYLYFE sans liste codée en dur dans l'index public.",
+  "hierarchy": [
+    "world",
+    "country",
+    "territory_or_region",
+    "zone_or_city",
+    "need",
+    "professional"
+  ],
+  "public_labels": {
+    "world": "MONDE",
+    "country": "PAYS",
+    "territory_or_region": "RÉGION / TERRITOIRE",
+    "zone_or_city": "VILLE / ZONE"
+  },
+  "visibility": {
+    "active": true,
+    "pilot": true,
+    "planned": false,
+    "inactive": false,
+    "suspended": false,
+    "human_validation_required_before_public_visibility": true
+  },
+  "source_of_truth": {
+    "must_be_configuration_driven": true,
+    "hardcoded_country_list_forbidden": true,
+    "hardcoded_city_list_forbidden": true,
+    "derive_from_core_country_territory_zone_configuration": true
+  },
+  "interaction": {
+    "mobile_default": "horizontal_scrollable_ribbon",
+    "desktop_default": "horizontal_ribbon_or_compact_selector",
+    "progressive_drilldown": true,
+    "preserve_current_context": true,
+    "do_not_force_world_view_when_user_has_explicit_deep_link": true
+  },
+  "public_activation": {
+    "enabled_now": false,
+    "reason": "Structure préparée avant nécessité publique ; index actuel reste inchangé.",
+    "recommended_trigger": "Activation humaine lorsque plusieurs pays/territoires rendent la navigation mondiale réellement utile.",
+    "activation_requires_human_validation": true,
+    "index_pwa_must_remain_intact": true
+  },
+  "doctrine": {
+    "world_does_not_display_by_promise": true,
+    "world_displays_as_it_opens": true,
+    "canonical_sentence": "LE MONDE NE S’AFFICHE PAS PAR PROMESSE. IL S’AFFICHE À MESURE QU’IL S’OUVRE."
+  }
+}
