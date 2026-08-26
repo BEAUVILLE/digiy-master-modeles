@@ -1,0 +1,18 @@
+{
+  "territory": {
+    "id": "FR-BORDEAUX",
+    "country_id": "FR",
+    "slug": "bordeaux",
+    "label": "Bordeaux",
+    "status": "active",
+    "public_route": "https://digiylyfe.com/territoire.html?zone=bordeaux",
+    "direct_route": "https://digiylyfe.com/bordeaux.html",
+    "inherit_needs_from_core": true,
+    "inherit_capabilities_from_core": true,
+    "inherit_languages_from_country": true,
+    "generic_professional_action": "OUVRIR",
+    "membership_plan": "adherent-19900",
+    "membership_amount": 45,
+    "membership_currency": "EUR"
+  }
+}
