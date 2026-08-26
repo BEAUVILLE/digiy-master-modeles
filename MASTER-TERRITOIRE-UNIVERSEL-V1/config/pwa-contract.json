@@ -1,0 +1,23 @@
+{
+  "contract": "DIGIYLYFE-PWA-NON-REGRESSION-V1",
+  "status": "validated",
+  "scope": ["digiylyfe.com index", "installable territory surfaces when enabled"],
+  "index_invariants": {
+    "manifest_required": true,
+    "app_icons_required": true,
+    "mobile_web_app_metadata_required": true,
+    "apple_web_app_metadata_required": true,
+    "service_worker_registration_required": true,
+    "cache_versioning_required": true,
+    "installability_must_not_be_broken_by_visual_refactor": true
+  },
+  "territory_rule": {
+    "territory_may_have_local_visual_identity": true,
+    "territory_must_not_break_main_index_pwa": true,
+    "installable_territory_reuses_common_pwa_contract": true
+  },
+  "governance": {
+    "removal_requires_explicit_human_validation": true,
+    "silent_pwa_removal_forbidden": true
+  }
+}
