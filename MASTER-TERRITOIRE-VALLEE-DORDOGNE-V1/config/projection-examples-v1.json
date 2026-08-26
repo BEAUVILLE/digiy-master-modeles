@@ -1,0 +1,19 @@
+{
+  "territory_id":"FR-DORDOGNE",
+  "zone_id":"FR-DORDOGNE-SARLAT",
+  "policy":{"real_professionals_first":true,"examples_are_not_members":true,"examples_count_as_real":false,"empty_space_is_projected":true,"examples_per_need":3},
+  "needs":{
+    "transport":["Chauffeur gare / Sarlat","Transfert séjour Dordogne","Driver excursion"],
+    "artisan":["Plombier dépannage","Électricien rénovation","Artisan bois / pose"],
+    "accommodation":["Chambre de caractère","Gîte de vacances","Studio centre historique"],
+    "food":["Table périgourdine","Bistrot du centre","Café / petit déjeuner"],
+    "shopping":["Boutique artisanale","Produits du Périgord","Maison & décoration"],
+    "beauty":["Coiffure & soins","Beauté / onglerie","Bien-être / massage"],
+    "jobs":["Commerce saisonnier qui recrute","Restaurant qui recrute","Mission tourisme / accueil"],
+    "announcements":["Dépannage express","Location de matériel","Service événementiel"],
+    "guidance":["Trouver où manger par la voix","Trouver où dormir par la voix","Trouver un artisan par la voix"]
+  },
+  "voice_rule":"LA VOIX = moteur de recherche transversale, jamais une fiche métier",
+  "cta_flow":"TERRITOIRE → EXEMPLE → DÉMO → ADHÉSION",
+  "replacement_rule":"Lorsqu'un professionnel réel est actif, sa présence reste prioritaire devant les projections."
+}
