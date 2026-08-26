@@ -22,8 +22,9 @@
       "id": "SN-DAKAR",
       "slug": "dakar",
       "label": "Dakar",
-      "status": "planned",
-      "zones": []
+      "status": "active",
+      "zones": [],
+      "activation_note": "Territoire activé le 2026-08-26 après validation humaine explicite. Découpage interne à valider séparément."
     },
     {
       "id": "SN-THIES",
