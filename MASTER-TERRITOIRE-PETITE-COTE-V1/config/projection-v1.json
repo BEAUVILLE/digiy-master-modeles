@@ -1,0 +1,21 @@
+{
+  "territory_id":"SN-PETITE-COTE",
+  "pilot_door":"saly",
+  "active_zones":["aibd","ndayane","popenguine","somone","ngaparou","saly","mbour"],
+  "projection":{
+    "enabled":true,
+    "real_professionals_first":true,
+    "examples_are_never_real_members":true,
+    "examples_per_need":3,
+    "need_order":["announcements","transport","artisan","accommodation","food","shopping","beauty","jobs","guidance"],
+    "hot_door":{
+      "need":"announcements",
+      "label":"ANNONCES / BESOINS DU MOMENT",
+      "must_be_visible_near_top":true,
+      "reason":"Une annonce est temporelle et perd de sa valeur si l’utilisateur doit parcourir toute la page pour la découvrir."
+    },
+    "voice_rule":"guidance est LA VOIX, moteur de recherche transversal, jamais une fiche métier",
+    "funnel":"TERRITOIRE → EXEMPLE → DÉMO → ADHÉSION",
+    "replacement_rule":"Quand une vraie présence correspondant au besoin existe, elle reste prioritaire sur les projections."
+  }
+}
