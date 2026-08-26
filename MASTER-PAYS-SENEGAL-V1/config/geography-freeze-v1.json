@@ -29,8 +29,14 @@
   },
   "dakar": {
     "status": "active",
-    "active_zones": [],
-    "note": "Territoire ouvert le 2026-08-26 après validation humaine explicite. Les zones internes restent à valider avant publication."
+    "active_zones": [
+      "SN-DAKAR-PLATEAU",
+      "SN-DAKAR-ALMADIES-NGOR",
+      "SN-DAKAR-MERMOZ-SACRE-COEUR",
+      "SN-DAKAR-POINT-E-FANN",
+      "SN-DAKAR-YOFF-OUAKAM-MAMELLES"
+    ],
+    "note": "Territoire ouvert le 2026-08-26 après validation humaine explicite. Premier découpage commercial interne validé le 2026-08-26."
   },
   "rules": {
     "no_new_geography_without_explicit_validation": true,
