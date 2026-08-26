@@ -105,7 +105,26 @@ Une identité territoire peut configurer palette, ambiance, matières, iconograp
 
 Les couleurs de Dakar, Bordeaux, Sarlat ou Saly sont des références de validation, jamais des thèmes à recopier automatiquement.
 
-## 8. Prix et adhésion
+## 8. PWA — invariant de non-régression
+
+La vitrine principale `digiylyfe.com` reste une PWA.
+
+Toute évolution de l’index public doit préserver au minimum :
+
+- le lien vers le `manifest` ;
+- les icônes d’application ;
+- les métadonnées mobile / Apple nécessaires ;
+- l’enregistrement du service worker ;
+- la cohérence de cache/version ;
+- l’installabilité lorsque le navigateur la supporte.
+
+**Une refonte graphique, un nouveau territoire ou une nouvelle projection ne doit jamais casser le PWA de l’index principal.**
+
+Si une façade territoire est elle-même rendue installable, elle doit réutiliser le contrat PWA commun au lieu de créer une mécanique divergente.
+
+La suppression ou la désactivation volontaire d’un élément PWA exige une validation humaine explicite.
+
+## 9. Prix et adhésion
 
 Le prix public est dérivé du MASTER PAYS / runtime pays. Un territoire ne crée pas sa propre grille commerciale parallèle.
 
@@ -115,7 +134,7 @@ La route d’adhésion transmet au minimum :
 
 Aucune présence n’est publiée automatiquement après paiement : la validation humaine DIGIYLYFE reste obligatoire avant mise en ligne.
 
-## 9. Source de vérité et couverture
+## 10. Source de vérité et couverture
 
 Les professionnels réels viennent de la production. Le MASTER n’en stocke aucun.
 
@@ -125,7 +144,7 @@ Le contrat minimal reste :
 
 La couverture suit les règles du MASTER TERRITOIRE : zone de base, zones d’intervention, territoires d’intervention validés et déduplication par `professional_id`.
 
-## 10. Discipline de création d’un nouveau territoire
+## 11. Discipline de création d’un nouveau territoire
 
 1. Valider le territoire et son type.
 2. Valider ses zones avec des sources / connaissance terrain adaptées.
@@ -134,12 +153,12 @@ La couverture suit les règles du MASTER TERRITOIRE : zone de base, zones d’in
 5. Construire ses exemples depuis zéro dans le contexte local.
 6. Brancher les vrais professionnels via la production.
 7. Brancher démos et adhésion sans cul-de-sac.
-8. Vérifier mobile, langues, PWA si applicable et cache.
+8. Vérifier mobile, 8 langues lorsqu’elles sont activées, PWA, service worker et cache.
 9. Déployer.
 10. Faire la validation humaine et visuelle.
 11. Remonter dans le MASTER uniquement les règles réellement universelles découvertes sur le terrain.
 
-## 11. Interdictions
+## 12. Interdictions
 
 - ne pas copier une ville pour en fabriquer une autre ;
 - ne pas stocker de client réel dans le MASTER ;
@@ -148,7 +167,8 @@ La couverture suit les règles du MASTER TERRITOIRE : zone de base, zones d’in
 - ne pas cacher les vrais professionnels derrière les exemples ;
 - ne pas hardcoder un prix territoire qui contredit le MASTER PAYS ;
 - ne pas modifier le CORE pour une préférence purement locale ;
-- ne pas propager une innovation locale partout sans validation humaine.
+- ne pas propager une innovation locale partout sans validation humaine ;
+- ne pas casser ou retirer le PWA de `digiylyfe.com` lors d’une refonte territoriale ou de l’index.
 
 ---
 
