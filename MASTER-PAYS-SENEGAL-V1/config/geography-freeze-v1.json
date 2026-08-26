@@ -4,11 +4,11 @@
   "status": "frozen-for-architecture-work",
   "purpose": "Stabiliser le périmètre géographique V1 afin de poursuivre le raccordement automatique du CORE sans ajouter de nouvelles zones ou territoires tant qu'une nouvelle extension n'est pas explicitement validée.",
   "active_territories": [
-    "SN-PETITE-COTE"
+    "SN-PETITE-COTE",
+    "SN-DAKAR"
   ],
   "planned_territories": [
     "SN-SINE-SALOUM",
-    "SN-DAKAR",
     "SN-THIES",
     "SN-SAINT-LOUIS"
   ],
@@ -26,6 +26,11 @@
       "SN-PETITE-COTE-NIANING",
       "SN-PETITE-COTE-JOAL-FADIOUTH"
     ]
+  },
+  "dakar": {
+    "status": "active",
+    "active_zones": [],
+    "note": "Territoire ouvert le 2026-08-26 après validation humaine explicite. Les zones internes restent à valider avant publication."
   },
   "rules": {
     "no_new_geography_without_explicit_validation": true,
