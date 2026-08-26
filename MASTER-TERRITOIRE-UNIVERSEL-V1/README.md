@@ -124,7 +124,41 @@ Si une façade territoire est elle-même rendue installable, elle doit réutilis
 
 La suppression ou la désactivation volontaire d’un élément PWA exige une validation humaine explicite.
 
-## 9. Prix et adhésion
+## 9. RUBAN DU MONDE — navigation mondiale différée
+
+Le MASTER prépare une navigation mondiale progressive sans l’activer prématurément sur l’index public.
+
+Hiérarchie d’affichage :
+
+**MONDE → PAYS → RÉGION / TERRITOIRE → VILLE / ZONE → BESOIN → PROFESSIONNEL**
+
+Le Ruban du Monde doit être alimenté par la configuration du CORE / PAYS / TERRITOIRE. Il est interdit d’écrire à la main dans l’index une liste permanente de pays, régions ou villes.
+
+Règles de visibilité :
+
+- `active` = visible ;
+- `pilot` = visible seulement si validé pour le public ;
+- `planned` = invisible ;
+- `inactive` / `suspended` = invisible ;
+- toute nouvelle apparition publique exige une validation humaine.
+
+Sur mobile, la forme de référence est une **bande horizontale tactile et déroulante**. Sur écran large, elle peut devenir un ruban horizontal ou un sélecteur compact sans changer la hiérarchie.
+
+Le choix est progressif : le visiteur descend du monde vers son territoire sans perdre son contexte. Un lien profond explicite (`zone`, `local`, `need`) reste prioritaire et ne doit jamais être écrasé par un retour forcé au niveau MONDE.
+
+### Loi du Ruban du Monde
+
+**LE MONDE NE S’AFFICHE PAS PAR PROMESSE. IL S’AFFICHE À MESURE QU’IL S’OUVRE.**
+
+Le contrat technique est :
+
+`config/world-ribbon-contract.json`
+
+**Statut actuel : structure validée, activation publique différée.**
+
+L’activation future du Ruban du Monde sur `digiylyfe.com` nécessite une validation humaine explicite et doit préserver intégralement le contrat PWA de l’index.
+
+## 10. Prix et adhésion
 
 Le prix public est dérivé du MASTER PAYS / runtime pays. Un territoire ne crée pas sa propre grille commerciale parallèle.
 
@@ -134,7 +168,7 @@ La route d’adhésion transmet au minimum :
 
 Aucune présence n’est publiée automatiquement après paiement : la validation humaine DIGIYLYFE reste obligatoire avant mise en ligne.
 
-## 10. Source de vérité et couverture
+## 11. Source de vérité et couverture
 
 Les professionnels réels viennent de la production. Le MASTER n’en stocke aucun.
 
@@ -144,7 +178,7 @@ Le contrat minimal reste :
 
 La couverture suit les règles du MASTER TERRITOIRE : zone de base, zones d’intervention, territoires d’intervention validés et déduplication par `professional_id`.
 
-## 11. Discipline de création d’un nouveau territoire
+## 12. Discipline de création d’un nouveau territoire
 
 1. Valider le territoire et son type.
 2. Valider ses zones avec des sources / connaissance terrain adaptées.
@@ -156,9 +190,10 @@ La couverture suit les règles du MASTER TERRITOIRE : zone de base, zones d’in
 8. Vérifier mobile, 8 langues lorsqu’elles sont activées, PWA, service worker et cache.
 9. Déployer.
 10. Faire la validation humaine et visuelle.
-11. Remonter dans le MASTER uniquement les règles réellement universelles découvertes sur le terrain.
+11. Rendre le territoire éligible au Ruban du Monde uniquement après validation publique.
+12. Remonter dans le MASTER uniquement les règles réellement universelles découvertes sur le terrain.
 
-## 12. Interdictions
+## 13. Interdictions
 
 - ne pas copier une ville pour en fabriquer une autre ;
 - ne pas stocker de client réel dans le MASTER ;
@@ -168,8 +203,10 @@ La couverture suit les règles du MASTER TERRITOIRE : zone de base, zones d’in
 - ne pas hardcoder un prix territoire qui contredit le MASTER PAYS ;
 - ne pas modifier le CORE pour une préférence purement locale ;
 - ne pas propager une innovation locale partout sans validation humaine ;
-- ne pas casser ou retirer le PWA de `digiylyfe.com` lors d’une refonte territoriale ou de l’index.
+- ne pas casser ou retirer le PWA de `digiylyfe.com` lors d’une refonte territoriale ou de l’index ;
+- ne pas afficher dans le Ruban du Monde un pays, territoire ou zone seulement planifié ;
+- ne pas coder en dur dans l’index la croissance géographique future.
 
 ---
 
-**DIGIYLYFE — Un moteur commun. Une empreinte par territoire. Une vitrine par professionnel.**
+**DIGIYLYFE — Un moteur commun. Une empreinte par territoire. Une vitrine par professionnel. Un monde qui s’affiche à mesure qu’il s’ouvre.**
