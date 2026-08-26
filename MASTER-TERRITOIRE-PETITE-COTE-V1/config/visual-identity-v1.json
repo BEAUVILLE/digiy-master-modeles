@@ -1,0 +1,24 @@
+{
+  "territory_id":"SN-PETITE-COTE",
+  "visual_identity":{
+    "name":"SALY · PETITE CÔTE",
+    "principle":"MÊME MOTEUR · MÊME ADN DIGIYLYFE · EMPREINTE LOCALE DISTINCTE",
+    "palette":{
+      "sand":"#E8C890",
+      "atlantic":"#2EA7AD",
+      "lagoon":"#76C7C2",
+      "mangrove":"#244F3B",
+      "coral":"#E98663",
+      "digiy_gold":"#F6C453",
+      "cream":"#FFF7E8",
+      "deep":"#082E35"
+    },
+    "semantic_sources":["sable de la Petite Côte","Atlantique","lagune et mangrove de Somone","lumière corail du littoral","or DIGIYLYFE"],
+    "rules":{
+      "presentation_only":true,
+      "core_logic_unchanged":true,
+      "pwa_preserved":true,
+      "local_identity_must_not_be_copied_to_other_territories":true
+    }
+  }
+}
