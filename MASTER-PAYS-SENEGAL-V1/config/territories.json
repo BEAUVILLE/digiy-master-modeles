@@ -23,8 +23,8 @@
       "slug": "dakar",
       "label": "Dakar",
       "status": "active",
-      "zones": [],
-      "activation_note": "Territoire activé le 2026-08-26 après validation humaine explicite. Découpage interne à valider séparément."
+      "zones": ["plateau", "almadies-ngor", "mermoz-sacre-coeur", "point-e-fann", "yoff-ouakam-mamelles"],
+      "activation_note": "Territoire activé le 2026-08-26 après validation humaine explicite. Premier découpage commercial interne validé le 2026-08-26."
     },
     {
       "id": "SN-THIES",
