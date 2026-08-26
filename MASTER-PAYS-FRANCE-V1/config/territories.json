@@ -14,8 +14,19 @@
       "id": "FR-BORDEAUX",
       "slug": "bordeaux",
       "label": "Bordeaux",
-      "status": "planned",
-      "zones": []
+      "status": "active",
+      "zones": [
+        "bordeaux-maritime",
+        "chartrons-grand-parc-jardin-public",
+        "bordeaux-centre",
+        "saint-augustin-tauzin-alphonse-dupeux",
+        "nansouty-saint-genes",
+        "bordeaux-sud",
+        "la-bastide",
+        "cauderan"
+      ],
+      "planned_zones": [],
+      "master": "../../MASTER-TERRITOIRE-BORDEAUX-V1/"
     },
     {
       "id": "FR-ARCACHON",
