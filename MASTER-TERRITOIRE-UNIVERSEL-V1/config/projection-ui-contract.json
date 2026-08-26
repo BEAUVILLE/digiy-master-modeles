@@ -1,0 +1,31 @@
+{
+  "contract": "DIGIYLYFE-TERRITORY-PROJECTION-UI-V1",
+  "status": "validated",
+  "rules": {
+    "empty_space_policy": "project_not_blank",
+    "default_projection_count_per_need": 3,
+    "real_professionals_first": true,
+    "projection_badge_required": true,
+    "projection_badge_examples": ["EXEMPLE", "PAS ENCORE UN ADHÉRENT", "PLACE À PRENDRE"],
+    "fake_identity_forbidden": true,
+    "fake_phone_forbidden": true,
+    "fake_review_forbidden": true,
+    "fake_availability_forbidden": true,
+    "demo_before_adhesion": true,
+    "announcements_hot": true,
+    "announcements_above_fold_preferred": true,
+    "explicit_need_filter_has_priority": true,
+    "voice_is_search_not_profession": true
+  },
+  "journeys": {
+    "professional": ["territory", "projection", "demo", "adhesion", "human_validation", "real_presence"],
+    "customer": ["territory", "need", "zone", "real_professional", "showcase", "direct_contact"],
+    "voice": ["voice_query", "intent", "territory_zone_need", "real_professionals", "open"]
+  },
+  "local_identity": {
+    "same_engine": true,
+    "same_digiylyfe_dna": true,
+    "distinct_local_footprint": true,
+    "copy_previous_territory_palette": false
+  }
+}
