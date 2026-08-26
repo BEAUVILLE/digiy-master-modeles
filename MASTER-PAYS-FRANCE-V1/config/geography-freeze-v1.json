@@ -4,10 +4,10 @@
   "status": "frozen-for-architecture-work",
   "purpose": "Stabiliser le périmètre géographique V1 France afin de raccorder le CORE sans étendre la carte sans validation explicite.",
   "active_territories": [
-    "FR-DORDOGNE"
+    "FR-DORDOGNE",
+    "FR-BORDEAUX"
   ],
   "planned_territories": [
-    "FR-BORDEAUX",
     "FR-ARCACHON"
   ],
   "vallee_dordogne": {
@@ -15,6 +15,20 @@
       "FR-DORDOGNE-SARLAT"
     ],
     "planned_zones": []
+  },
+  "bordeaux": {
+    "active_zones": [
+      "FR-BORDEAUX-MARITIME",
+      "FR-BORDEAUX-CHARTRONS-GRAND-PARC-JARDIN-PUBLIC",
+      "FR-BORDEAUX-CENTRE",
+      "FR-BORDEAUX-SAINT-AUGUSTIN-TAUZIN-ALPHONSE-DUPEUX",
+      "FR-BORDEAUX-NANSOUTY-SAINT-GENES",
+      "FR-BORDEAUX-SUD",
+      "FR-BORDEAUX-BASTIDE",
+      "FR-BORDEAUX-CAUDERAN"
+    ],
+    "planned_zones": [],
+    "source": "Ville de Bordeaux — 8 grands quartiers administratifs"
   },
   "rules": {
     "no_new_geography_without_explicit_validation": true,
