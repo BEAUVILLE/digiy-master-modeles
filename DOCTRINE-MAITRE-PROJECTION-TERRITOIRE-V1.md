@@ -23,6 +23,12 @@ Chaque professionnel réel possède sa propre présence publique et sa propre ro
 
 Un territoire en lancement peut contenir des cartes exemples pour éviter un écran vide et permettre au prospect de se projeter.
 
+### Loi maître
+
+**LE VIDE NE S’AFFICHE PAS. IL SE PROJETTE.**
+
+Une catégorie sans professionnel réel ne doit pas donner l'impression d'un territoire abandonné. Elle peut montrer une projection commerciale neutre, clairement identifiée, qui explique la place disponible sans fabriquer un faux adhérent.
+
 Chaque exemple doit :
 
 - être clairement marqué `EXEMPLE` / `PAS ENCORE UN ADHÉRENT` ;
@@ -42,7 +48,7 @@ Structure cible :
 
 Il est préférable de mutualiser la mécanique de démo et de varier les données de configuration plutôt que de dupliquer intégralement le même code pour chaque exemple.
 
-Pour un lancement urbain, la référence commerciale validée est :
+Pour un lancement de territoire, la référence commerciale validée est :
 
 **3 configurations exemple par module / besoin**, lorsque cela aide réellement à la compréhension du métier.
 
@@ -82,9 +88,10 @@ Elle ne doit produire aucune fiche de « professionnel LA VOIX ».
 
 Ses exemples servent uniquement à illustrer des intentions de recherche telles que :
 
-- chauffeur AIBD ;
+- chauffeur ou transfert ;
 - restaurant dans une zone ;
 - artisan urgent ;
+- hébergement ;
 - autre besoin humain exprimé naturellement.
 
 Sa sortie cible est :
@@ -93,9 +100,27 @@ Sa sortie cible est :
 
 Son CTA est **ESSAYER LA RECHERCHE PAR LA VOIX** ou équivalent.
 
-## 7. Territoires urbains futurs
+## 7. Identité visuelle territoriale
 
-Un territoire urbain suivant ne doit pas recopier aveuglément les exemples d'un territoire précédent.
+Le moteur reste commun, mais chaque territoire peut porter une empreinte visuelle locale immédiatement reconnaissable.
+
+Cette identité ne doit jamais modifier les règles fonctionnelles du CORE. Elle agit uniquement sur la présentation : palette, matières visuelles, ambiance, textes de territoire et iconographie locale.
+
+Règle :
+
+**MÊME MOTEUR · MÊME ADN DIGIYLYFE · EMPREINTE LOCALE DISTINCTE.**
+
+Références validées :
+
+- Dakar : énergie urbaine verte ;
+- Bordeaux : lie-de-vin · crème · or ;
+- Sarlat / Vallée de la Dordogne : pierre blonde · vert forêt · rivière Dordogne · or.
+
+Un futur territoire doit construire sa propre identité à partir de son contexte, sans recopier automatiquement celle d'un territoire précédent.
+
+## 8. Territoires futurs
+
+Un territoire suivant ne doit pas recopier aveuglément les exemples d'un territoire précédent.
 
 Il hérite du moule et des règles, puis reconstruit :
 
@@ -104,11 +129,12 @@ Il hérite du moule et des règles, puis reconstruit :
 - ses cas d'usage ;
 - ses textes ;
 - ses routes locales ;
+- son identité visuelle locale ;
 - ses paramètres commerciaux autorisés.
 
 Le laboratoire précédent apporte l'expérience, pas les données locales.
 
-## 8. Règle de propagation
+## 9. Règle de propagation
 
 Cette doctrine doit guider les évolutions futures de :
 
@@ -124,9 +150,11 @@ Cette doctrine doit guider les évolutions futures de :
 
 Elle ne déclenche aucune modification automatique des MASTER existants sans contrôle humain.
 
-## 9. Formule maître
+## 10. Formule maître
 
 **LE MODULE OUVRE. SUPABASE AIGUILLE. LE PRO POSSÈDE SA VITRINE. L'EXEMPLE PROJETTE. LA VOIX CHERCHE.**
+
+**LE VIDE NE S’AFFICHE PAS. IL SE PROJETTE.**
 
 ---
 
