@@ -1,0 +1,19 @@
+{
+  "territory_id":"FR-DORDOGNE",
+  "visual_identity":{
+    "name":"SARLAT · PÉRIGORD NOIR · VALLÉE DE LA DORDOGNE",
+    "principle":"MÊME MOTEUR · MÊME ADN DIGIYLYFE · EMPREINTE LOCALE DISTINCTE",
+    "palette":{
+      "stone_blonde":"#EAD6B2",
+      "stone_warm":"#D4B989",
+      "forest":"#294535",
+      "forest_light":"#3B5F48",
+      "river":"#5B9AA0",
+      "digiy_gold":"#C99543",
+      "cream":"#FFF8EA",
+      "deep":"#17251D"
+    },
+    "semantic_sources":["pierre blonde de Sarlat","forêt du Périgord Noir","rivière Dordogne","or DIGIYLYFE"],
+    "rules":{"presentation_only":true,"core_logic_unchanged":true,"pwa_preserved":true,"local_identity_must_not_be_copied_to_other_territories":true}
+  }
+}
