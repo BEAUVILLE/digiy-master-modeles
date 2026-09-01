@@ -20,6 +20,17 @@ Ce dépôt contient les moules techniques prêts à être copiés, configurés e
 
 La doctrine complète est conservée dans `BEAUVILLE/digiy-master/MASTER-CORE.md`.
 
+## MASTER CARTE ADHÉRENT
+
+- `MASTER-CARTE-ADHERENT-V1/` — socle minimal universel de l’adhérent.
+- Parcours : **QR STABLE → CARTE ADHÉRENT / PWA → ACTION DIRECTE → RELATION CLIENT**.
+- La carte reste distincte d’une fiche enrichie, d’un catalogue, d’une boutique ou d’un site.
+- Le QR physique encode l’URL canonique stable de la carte et ne doit pas être remplacé lorsque la présence s’enrichit.
+- Actions de référence : numéro public visible, Appeler, WhatsApp, Copier le numéro, Partager et ajout volontaire à l’écran d’accueil lorsque supporté.
+- Signature canonique : **DIGIYLYFE.COM · L’empreinte numérique du professionnel**.
+
+La carte est le socle. La fiche et le site restent des choix.
+
 ## MASTER PAYS
 
 - `MASTER-PAYS-SENEGAL-V1/` — configuration pays Sénégal héritée du CORE. Petite Côte et Dakar sont actifs ; les extensions futures restent soumises à validation humaine.
@@ -43,6 +54,8 @@ Règle MAÎTRE projection : `DOCTRINE-MAITRE-PROJECTION-TERRITOIRE-V1.md`.
 
 **1 famille métier = 1 MASTER MAÎTRE universel.**
 
+Le `MASTER-CARTE-ADHERENT-V1` constitue le socle transversal minimal de l’adhérent ; il ne remplace pas les MASTER métiers et n’oblige pas l’adhérent à en activer un.
+
 Le pays n'est pas un nouveau MASTER métier : Sénégal, France ou autre pays compatible sont des configurations du même CORE et des mêmes moules.
 
 **MODULE = PORTE · SUPABASE = AIGUILLEUR · PROFESSIONNEL = SA PROPRE VITRINE · EXEMPLE = PROJECTION TEMPORAIRE · LA VOIX = RECHERCHE.**
@@ -50,6 +63,7 @@ Le pays n'est pas un nouveau MASTER métier : Sénégal, France ou autre pays co
 ## MASTER MAÎTRES présents
 
 - `MASTER-CORE-WORLD-V1/` — configuration mondiale, pays, territoires, besoins, langues et capacités.
+- `MASTER-CARTE-ADHERENT-V1/` — carte de visite adhérent, QR stable, PWA et contact direct.
 - `MASTER-PAYS-SENEGAL-V1/` — configuration pays Sénégal héritée du CORE.
 - `MASTER-PAYS-FRANCE-V1/` — configuration pays France héritée du CORE.
 - `MASTER-TERRITOIRE-PETITE-COTE-V1/` — configuration territoire Petite Côte.
@@ -76,8 +90,7 @@ Chaque MASTER opérationnel doit tendre vers :
 - `README.md` neutre ;
 - `manifest.webmanifest` ;
 - `sw.js` ;
-- `icon-192.png` ;
-- `icon-512.png` ;
+- icônes applicatives adaptées au support ;
 - PWA légère ;
 - mode atelier / `noindex,nofollow` dans le coffre ;
 - configuration centralisée ;
@@ -99,9 +112,10 @@ Chaque MASTER opérationnel doit tendre vers :
 6. DIGIYLYFE publie la présence numérique ; il ne certifie pas administrativement le professionnel et ne prélève pas de commission sur la prestation ou la vente présentée.
 7. Toute évolution majeure est testée avant propagation.
 8. Avant publication d'une instance : contrôler mobile, boutons, téléphone, WhatsApp, formulaires, langues, RTL, PWA, QR et données opérationnelles.
-9. Un nouveau pays ou territoire doit passer le test MASTER CORE : configuration + données, sans copie complète du moteur.
-10. Un territoire suivant hérite de la méthode du précédent, jamais de ses données locales par copie aveugle.
+9. Pour une carte adhérent : contrôler aussi URL canonique stable, QR correspondant exactement à cette URL, numéro visible, Copier, Partager et signature DIGIYLYFE canonique.
+10. Un nouveau pays ou territoire doit passer le test MASTER CORE : configuration + données, sans copie complète du moteur.
+11. Un territoire suivant hérite de la méthode du précédent, jamais de ses données locales par copie aveugle.
 
 ---
 
-**DIGIYLYFE — Le CORE est mondial. Le pays organise. Le territoire rapproche.**
+**DIGIYLYFE.COM · L’empreinte numérique du professionnel**
