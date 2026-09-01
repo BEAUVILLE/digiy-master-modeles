@@ -2,9 +2,13 @@
 
 ## Rôle
 
-Modèle universel DIGIYLYFE pour les **professionnels qui vendent principalement une prestation** : beauté, onglerie, coiffure, bien-être, photographie, accompagnement, entretien, service local, activité sur rendez-vous et **services professionnels**.
+Modèle universel DIGIYLYFE pour les **professionnels qui vendent principalement une prestation** : beauté, onglerie, coiffure, bien-être, photographie, accompagnement, entretien, service local, activité sur rendez-vous, **services professionnels** et certaines présences de **santé & soins**.
 
 Le besoin public **Services professionnels** peut notamment orienter vers ce MASTER pour : avocat, architecte, comptable / expert-comptable, géomètre, assureur / courtier en assurance, consultant ou bureau d'études. Cette orientation n'emporte aucune certification, agrément ni validation réglementaire par DIGIYLYFE.
+
+Le besoin public **Santé & soins** peut orienter vers ce MASTER pour une présence numérique simple de : médecin, infirmier / infirmière, sage-femme ou aide à la personne. Pour l'aide à la personne, la prestation peut être médicale ou non médicale selon le professionnel concerné et le droit local applicable.
+
+Pour les professions de santé, ce MASTER reste uniquement une **surface de présence et de contact direct**. Il ne réalise aucun diagnostic, triage, acte de soin, prescription, téléconsultation médicale ni prise en charge d'urgence. DIGIYLYFE ne valide ni diplôme, ni autorisation d'exercer, ni compétence clinique : ces éléments doivent être vérifiés selon le pays et la profession avant publication lorsqu'ils sont requis.
 
 Ce Master reste une **vitrine / présence numérique**. Ce n’est ni une caisse, ni un logiciel métier, ni un moteur de réservation centralisé.
 
