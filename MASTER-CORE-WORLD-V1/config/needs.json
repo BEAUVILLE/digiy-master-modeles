@@ -3,6 +3,7 @@
     {"id": "announcements", "icon": "⚡", "fr": "Annonces", "status": "core"},
     {"id": "transport", "icon": "🚗", "fr": "Se déplacer", "status": "core"},
     {"id": "artisan", "icon": "🔧", "fr": "Trouver un artisan", "status": "core"},
+    {"id": "professional_services", "icon": "🧑‍💼", "fr": "Services professionnels", "status": "core"},
     {"id": "accommodation", "icon": "🏠", "fr": "Dormir ou louer", "status": "core"},
     {"id": "food", "icon": "🍽️", "fr": "Manger ou réserver", "status": "core"},
     {"id": "shopping", "icon": "🛍️", "fr": "Acheter local", "status": "core"},
