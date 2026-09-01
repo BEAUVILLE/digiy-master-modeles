@@ -2,7 +2,9 @@
 
 ## Rôle
 
-Modèle universel DIGIYLYFE pour les **professionnels qui vendent principalement une prestation** : beauté, onglerie, coiffure, bien-être, photographie, accompagnement, entretien, service local ou activité sur rendez-vous.
+Modèle universel DIGIYLYFE pour les **professionnels qui vendent principalement une prestation** : beauté, onglerie, coiffure, bien-être, photographie, accompagnement, entretien, service local, activité sur rendez-vous et **services professionnels**.
+
+Le besoin public **Services professionnels** peut notamment orienter vers ce MASTER pour : avocat, architecte, comptable / expert-comptable, géomètre, assureur / courtier en assurance, consultant ou bureau d'études. Cette orientation n'emporte aucune certification, agrément ni validation réglementaire par DIGIYLYFE.
 
 Ce Master reste une **vitrine / présence numérique**. Ce n’est ni une caisse, ni un logiciel métier, ni un moteur de réservation centralisé.
 
