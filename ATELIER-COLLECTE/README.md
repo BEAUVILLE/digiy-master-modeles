@@ -17,8 +17,9 @@ Ordre de travail :
 3. ouvrir la fiche de collecte correspondante ;
 4. marquer ce qui est déjà disponible ;
 5. demander uniquement les éléments manquants ;
-6. fabriquer sur une copie du MASTER métier adapté ;
-7. faire contrôler humainement avant publication.
+6. choisir le moule : `MASTER-CARTE-ADHERENT-V1` pour une CARTE, ou le MASTER métier adapté pour FICHE / SITE ;
+7. fabriquer sur une copie du MASTER choisi ;
+8. faire contrôler humainement avant publication.
 
 ## Les 4 niveaux de collecte
 
@@ -50,14 +51,16 @@ Selon le dossier, l’Atelier peut déjà disposer de :
 
 - Le client ne doit pas remplir un questionnaire de site s’il commande seulement une carte.
 - Une donnée facultative ne doit jamais bloquer une carte si la matière minimale est suffisante.
+- Une CARTE part du `MASTER-CARTE-ADHERENT-V1`, pas d’un MASTER métier enrichi.
+- Une FICHE ou un SITE utilise le MASTER métier adapté lorsque sa richesse le justifie.
 - L’Atelier peut reformuler et structurer un contenu, mais ne doit pas inventer des tarifs, horaires, garanties, disponibilités, certifications, adresses, prestations ou obligations.
 - Tout contenu complété ou reformulé par l’Atelier doit être contrôlé avant publication.
 - Les données réelles du client restent dans son dossier / son instance ; elles ne sont jamais intégrées au MASTER MAÎTRE.
-- Le MASTER métier reste le moule ; la collecte fournit la matière propre au professionnel.
+- Le MASTER reste le moule ; la collecte fournit la matière propre au professionnel.
 
 ## Décision simple
 
-**CARTE** : identité + métier + zone + contacts + services + visuel principal = fabrication possible.
+**CARTE** : identité + métier + zone + contacts + services + visuel principal = fabrication possible sur `MASTER-CARTE-ADHERENT-V1`.
 
 **FICHE** : base CARTE + présentation courte + matière visuelle complémentaire si nécessaire.
 
@@ -67,4 +70,4 @@ Selon le dossier, l’Atelier peut déjà disposer de :
 
 ---
 
-**DIGIYLYFE — Le formulaire ouvre le dossier. L’Atelier récupère seulement ce qui manque.**
+**DIGIYLYFE.COM · L’empreinte numérique du professionnel**
