@@ -6,12 +6,14 @@ Il sert à préparer la création d'une instance client à partir d'un MASTER MA
 
 ## Règle
 
-1. Choisir le MASTER métier adapté.
-2. Copier ce gabarit dans le coffre privé des clients abonnés.
-3. Renommer la copie avec un identifiant client lisible et stable.
-4. Renseigner `DOSSIER.md`.
-5. Utiliser `CHECKLIST.md` pendant la fabrication.
-6. Compléter `LIVRAISON.md` au moment de la publication.
+1. Identifier le produit réellement commandé.
+2. Pour une **CARTE**, utiliser `MASTER-CARTE-ADHERENT-V1` comme socle.
+3. Pour une **FICHE / SITE**, choisir le MASTER métier adapté.
+4. Copier ce gabarit dans le coffre privé des clients abonnés.
+5. Renommer la copie avec un identifiant client lisible et stable.
+6. Renseigner `DOSSIER.md`.
+7. Utiliser `CHECKLIST.md` pendant la fabrication.
+8. Compléter `LIVRAISON.md` au moment de la publication.
 
 ## Ne jamais mettre ici
 
@@ -34,6 +36,8 @@ Il sert à préparer la création d'une instance client à partir d'un MASTER MA
 
 `nom-client.digiylyfe.com` = interface publique.
 
+Pour une carte adhérent, l’URL publique attribuée devient la porte canonique à conserver afin que le QR physique reste stable dans le temps.
+
 ---
 
-**DIGIYLYFE — le MASTER reste propre, chaque client garde son instance.**
+**DIGIYLYFE.COM · L’empreinte numérique du professionnel**
