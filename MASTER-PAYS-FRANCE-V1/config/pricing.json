@@ -3,7 +3,16 @@
     "country_id": "FR",
     "currency": "EUR",
     "membership": {
-      "adherent-19900": {"amount": 45, "label": "45 € / mois"},
+      "adherent-19900": {
+        "amount": 450,
+        "label": "450 € / an",
+        "billing_period": "year",
+        "billing_months": 12,
+        "welcome_months": 2,
+        "first_cycle_months": 14,
+        "first_renewal_amount": 450,
+        "first_renewal_months": 12
+      },
       "adherent-28000": {"amount": 75, "label": "75 € / mois"}
     },
     "modules": {
