@@ -1,0 +1,38 @@
+{
+  "pricing": {
+    "country_id": "US",
+    "currency": "USD",
+    "membership": {
+      "adherent-19900": {
+        "amount": 29,
+        "label": "$29 / month",
+        "billing_period": "month",
+        "billing_months": 1,
+        "annual_amount": 290,
+        "annual_label": "$290 / year"
+      }
+    },
+    "modules": {
+      "loc": {
+        "billing_period": "year",
+        "commission_rate": 0,
+        "tiers": [
+          {"max": 3, "label": "1–3", "amount": 790},
+          {"max": 10, "label": "4–10", "amount": 990},
+          {"max": 15, "label": "11–15", "amount": 1290},
+          {"max": 20, "label": "16–20", "amount": 1590}
+        ],
+        "above_20": "quote"
+      }
+    },
+    "services": {}
+  },
+  "rules": {
+    "country_currency_is_authoritative": true,
+    "membership_price_must_come_from_country_config": true,
+    "module_price_must_come_from_country_config": true,
+    "service_starting_price_must_come_from_country_config": true,
+    "form_must_not_hardcode_country_price": true,
+    "unpriced_services_are_not_public": true
+  }
+}
