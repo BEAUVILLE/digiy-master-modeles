@@ -1,0 +1,22 @@
+{
+  "country": {
+    "id": "US",
+    "slug": "united-states",
+    "label": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "currency": {
+      "code": "USD",
+      "label": "$"
+    },
+    "phone": {
+      "calling_code": "+1"
+    },
+    "timezone": "America/New_York",
+    "default_language": "en",
+    "interface_languages": ["en", "es", "fr", "pt", "it", "de", "nl", "ar"],
+    "local_languages": ["en", "es"],
+    "pricing_config": "./pricing.json",
+    "status": "pilot"
+  }
+}
