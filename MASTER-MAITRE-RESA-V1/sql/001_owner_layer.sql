@@ -8,6 +8,12 @@ create index if not exists idx_digiy_resa_profiles_auth_user
   on public.digiy_resa_profiles(auth_user_id)
   where auth_user_id is not null;
 
+create index if not exists idx_digiy_resa_profiles_owner_id
+  on public.digiy_resa_profiles(owner_id);
+
+create index if not exists idx_digiy_resa_bookings_owner_id
+  on public.digiy_resa_bookings(owner_id);
+
 grant select on table public.digiy_resa_profiles to authenticated;
 grant select, update on table public.digiy_resa_bookings to authenticated;
 
