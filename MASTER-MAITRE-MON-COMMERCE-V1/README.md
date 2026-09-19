@@ -7,6 +7,7 @@ MON COMMERCE reste une **vitrine commerciale / présence numérique directe**.
 Ce MASTER ne devient ni une caisse, ni un panier centralisé, ni un logiciel métier, ni un système de paiement DIGIYLYFE.
 
 ## Doctrine
+- **MARKET est hors service : MON COMMERCE est la brique active pour les commerces.**
 - contact direct avec le commerçant ;
 - paiement direct au commerçant ;
 - 0 % commission DIGIYLYFE ;
@@ -61,12 +62,12 @@ Un visiteur curieux ne doit jamais rester bloqué :
 - touche `Échap` ;
 - dans `gestion-produits.html` : **Retour au commerce** et **Déconnexion**.
 
-## Backend attendu
-Le MASTER prévoit, sans créer le schéma dans ce push :
-- `digiy_commerce_sites` : `slug`, `name`, propriétaire autorisé ;
+## Backend réel
+Le MASTER est désormais raccordé au projet Supabase DIGIY CORE :
+- `digiy_commerce_sites` : `slug`, `name`, `auth_user_id`, statut public ;
 - `digiy_commerce_products` : `site_slug`, `name`, `description`, `price_label`, `stock_label`, `image_url`, `position`, `is_active`.
 
-RLS attendue :
+RLS active :
 - lecture publique uniquement des produits actifs nécessaires au site public ;
 - lecture/écriture propriétaire uniquement sur son commerce ;
 - `UPDATE` avec `USING` et `WITH CHECK` ;
@@ -90,7 +91,7 @@ Manifest, service worker et icônes 192/512 inclus. `gestion-produits.html` fait
 ## Règle atelier
 1. Toujours partir d’une copie du MASTER.
 2. Garder `masterMode:true` et `noindex,nofollow` dans le coffre.
-3. Configurer `siteSlug`, URL Supabase et clé publishable dans l’instance.
+3. Configurer uniquement `siteSlug` dans l’instance ; le projet Supabase DIGIY CORE et la clé publishable sont déjà posés.
 4. Ne jamais inventer prix, stock, paiement ou livraison.
 5. Tester WhatsApp, magic link, retour au commerce, CRUD produits, URLs photos, mobile, 8 langues, RTL et PWA.
 6. Ne publier une instance qu’après validation humaine.
