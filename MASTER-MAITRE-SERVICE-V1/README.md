@@ -12,6 +12,22 @@ Pour les professions de santé, ce MASTER reste uniquement une **surface de pré
 
 Ce Master reste une **vitrine / présence numérique**. Ce n’est ni une caisse, ni un logiciel métier, ni un moteur de réservation centralisé.
 
+## Valeur territoriale des professions de service
+
+Pour un architecte, comptable / expert-comptable, avocat, géomètre, assureur, consultant, bureau d’études ou autre compétence reconnue, la présence DIGIYLYFE ne doit jamais être présentée comme une simple inscription dans un annuaire.
+
+La valeur est territoriale :
+
+**besoin réel → compétence identifiable → contact direct**
+
+Le professionnel apparaît pour être trouvé lorsqu’un besoin concret naît dans le territoire : projet, gestion, conseil, expertise, assurance, construction ou accompagnement.
+
+Sa présence renforce aussi la profondeur économique du territoire DIGIYLYFE : le réseau ne rassemble pas seulement commerces, chauffeurs ou hébergements ; il relie également les compétences de conseil, d’expertise et de réalisation nécessaires à la vie locale.
+
+Formulation de référence :
+
+**« Vous n’apparaissez pas sur DIGIYLYFE pour faire de la publicité. Vous apparaissez pour être présent lorsque le territoire a besoin de votre compétence. »**
+
 ## Doctrine
 
 - contact direct avec le professionnel ;
