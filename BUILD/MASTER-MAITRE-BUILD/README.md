@@ -2,7 +2,7 @@
 
 ## Statut
 
-**MASTER MAÎTRE DIGIY BUILD — V2 SITE PRO**
+**MASTER MAÎTRE DIGIY BUILD — V3 SITE PRO + OWNER**
 
 Ce dossier est un **moule de fabrication** destiné à produire le **site professionnel personnel d’un artisan ou technicien**.
 
@@ -62,6 +62,20 @@ Les textes métier validés pour un client ne doivent jamais être remplacés au
 - DIGIYLYFE ne réalise pas les travaux, ne fixe pas le devis final et ne perçoit pas le paiement de la prestation.
 - `Adhérent DIGIYLYFE` ne vaut ni certification ni agrément.
 
+## Couche propriétaire
+
+Le MASTER comprend désormais `gestion.html` :
+
+- connexion Supabase Auth par email avec `shouldCreateUser:false` ;
+- rattachement au professionnel via `digiy_build_pros.owner_id = auth.uid()` ;
+- lecture uniquement des demandes réellement assignées à ce professionnel ;
+- contact direct client par SMS / WhatsApp ;
+- statuts simples : contacté, accepté, refusé, terminé ;
+- note privée `pro_note` ;
+- aucun accès aux demandes d’un autre professionnel grâce à la RLS.
+
+**DIGIY transmet le besoin. L’artisan garde le diagnostic, le devis, la décision et le paiement.**
+
 ## PWA
 
 - `manifest.webmanifest`
@@ -75,13 +89,13 @@ La PWA est une couche légère de présence, jamais un logiciel métier.
 
 1. Toujours créer une copie avant déclinaison client.
 2. Ne jamais laisser une donnée réelle d’un autre client.
-3. Aucun backend obligatoire.
-4. Aucun moteur métier ou cockpit n’est inclus.
+3. Le site public reste léger ; la couche propriétaire utilise le backend BUILD réel déjà présent dans DIGIY CORE.
+4. Ne jamais recréer un second moteur BUILD : `gestion.html` pilote seulement les demandes assignées.
 5. Aucun push d’une instance client dans le coffre MASTER.
 6. Tester mobile, langues, RTL, WhatsApp, QR, images et formulaire avant publication.
 
 ---
 
-**DIGIYLYFE · MASTER MAÎTRE BUILD V2 SITE PRO**
+**DIGIYLYFE · MASTER MAÎTRE BUILD V3 SITE PRO + OWNER**
 
 Le savoir-faire pour le savoir-être.
