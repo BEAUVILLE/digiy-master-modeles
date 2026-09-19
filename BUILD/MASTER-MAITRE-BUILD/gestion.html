@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#103a2d">
+<title>Gestion BUILD — [NOM ARTISAN]</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--g:#103a2d;--g2:#1b5b47;--gold:#d8ad46;--bg:#f4f0e6;--ink:#18352d;--mut:#6b7a75;--line:#dbe5df;--red:#9d2923}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(#f4f0e6,#e9f0eb);color:var(--ink);font:15px system-ui,-apple-system,Segoe UI,sans-serif}button,input,textarea{font:inherit}.wrap{width:min(880px,calc(100% - 22px));margin:auto;padding:16px 0 44px}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.brand{font-weight:1000;color:var(--g)}.brand small{display:block;color:var(--mut);font-size:11px}.back{padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--g);text-decoration:none;font-weight:900;font-size:12px}.master{padding:10px 12px;border:1px solid #ead28a;background:#fff8df;border-radius:14px;font-size:12px;font-weight:850;color:#5e5124}.panel{margin-top:13px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(16px,4vw,26px);box-shadow:0 15px 38px #103a2d16}.hidden{display:none!important}h1,h2,h3{margin:6px 0;color:var(--g)}h1{font-size:clamp(31px,7vw,46px);line-height:1}.ey{font-size:10px;font-weight:1000;letter-spacing:.12em;text-transform:uppercase;color:#8b6818}.muted{color:var(--mut);font-weight:700;line-height:1.5}.field{display:grid;gap:6px;margin-top:10px}.field label{font-size:11px;font-weight:950;text-transform:uppercase;color:var(--mut)}input,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;padding:11px;background:#fff}textarea{min-height:78px;resize:vertical}.btn{border:0;border-radius:999px;min-height:40px;padding:8px 13px;font-weight:1000;cursor:pointer}.primary{background:var(--g);color:#fff}.gold{background:var(--gold);color:#18352d}.ghost{background:#fff;color:var(--g);border:1px solid #bfd0c7}.danger{background:#fde8e7;color:#8d201a}.status{min-height:18px;margin-top:8px;font-size:12px;font-weight:900;color:var(--g)}.error{color:var(--red)}.session{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;background:#edf5ef;border-radius:13px;padding:10px 12px;margin:10px 0;font-size:12px;font-weight:900}.session button{border:0;background:#fff;border-radius:999px;padding:7px 10px;font-weight:900}.identity{border:1px solid var(--line);background:#fbfdfb;border-radius:14px;padding:11px 12px;font-size:12px;font-weight:850;line-height:1.5}.head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}.search{margin-top:10px}.list{display:grid;gap:10px;margin-top:12px}.item{border:1px solid var(--line);border-radius:16px;padding:13px;background:#fbfdfb}.itemhead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}.name{font-size:17px;font-weight:1000}.badge{padding:5px 8px;border-radius:999px;background:#fff1bf;color:#6d5200;font-size:10px;font-weight:1000}.badge.accepted,.badge.done{background:#e0f4e7;color:#21553b}.badge.declined{background:#fde8e7;color:#8d201a}.badge.contacted{background:#e5f2ff;color:#174b86}.meta{margin-top:5px;color:var(--mut);font-size:12px;font-weight:750;line-height:1.55}.desc{margin-top:8px;font-weight:750;line-height:1.5}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.actions a{text-decoration:none;display:inline-flex;align-items:center;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:950;background:#e5f2ff;color:#174b86}.count{margin-top:10px;font-size:12px;font-weight:1000}.empty{padding:14px 0;color:var(--mut);font-weight:750;font-size:12px}
+</style>
+</head>
+<body><div class="wrap">
+<div class="master"><strong>MASTER :</strong> page privée BUILD. Ne jamais publier une instance sans propriétaire Auth réel.</div>
+<header class="top"><div class="brand">🛠️ [NOM ARTISAN] · DIGIY BUILD<small>Demandes privées · décision artisan</small></div><a class="back" href="./">← Mon site</a></header>
+
+<section class="panel" id="login"><span class="ey">Accès propriétaire</span><h1>Mes demandes BUILD.</h1><p class="muted">DIGIY transmet le besoin. Vous gardez le diagnostic, le devis, la décision et la relation client.</p>
+<div class="field"><label>Email adhérent</label><input id="email" type="email" autocomplete="email"></div><button id="send" class="btn primary" style="margin-top:10px">Recevoir mon code →</button>
+<div id="otpbox" class="hidden"><div class="field"><label>Code reçu</label><input id="otp" inputmode="numeric" autocomplete="one-time-code"></div><button id="verify" class="btn gold" style="margin-top:10px">Ouvrir mon espace →</button></div><p id="loginMsg" class="status"></p></section>
+
+<section class="panel hidden" id="app"><span class="ey">Espace artisan</span><h2>🧰 Mes demandes</h2><div class="session"><span id="who"></span><button id="logout">Déconnexion</button></div><div id="identity" class="identity">Chargement…</div>
+<div class="head" style="margin-top:14px"><div><h3>Besoins qui me sont assignés</h3><p class="muted" style="font-size:12px;margin:3px 0">Une demande n’est pas un devis accepté. Vous confirmez directement avec le client.</p></div><button id="refresh" class="btn ghost">↻ Rafraîchir</button></div>
+<input id="search" class="search" type="search" placeholder="🔎 Client, métier, zone, description"><div id="count" class="count"></div><div id="list" class="list"></div><p id="msg" class="status"></p></section>
+</div>
+<script>
+(()=>{'use strict';
+const db=supabase.createClient('https://wesqmwjjtsefyjnluosj.supabase.co','sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3',{auth:{persistSession:true,detectSessionInUrl:true}});
+const $=id=>document.getElementById(id);let pro=null,rows=[];
+const msg=(el,t,b=false)=>{el.textContent=t||'';el.classList.toggle('error',b)};
+const fmt=d=>d?new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'}):'—';
+const money=v=>v==null?'':Number(v).toLocaleString('fr-FR')+' FCFA';
+function showLogin(){$('app').classList.add('hidden');$('login').classList.remove('hidden')}
+function showApp(email){$('login').classList.add('hidden');$('app').classList.remove('hidden');$('who').textContent='Connecté : '+(email||'adhérent')}
+async function enter(session){
+ if(!session)return showLogin();
+ const {data,error}=await db.from('digiy_build_pros').select('id,slug,business_name,phone,city,trades,is_active').eq('owner_id',session.user.id).eq('is_active',true).maybeSingle();
+ if(error||!data){await db.auth.signOut();showLogin();return msg($('loginMsg'),'⚠️ Aucun espace BUILD propriétaire n’est rattaché à ce compte.',true)}
+ pro=data;showApp(session.user.email);$('identity').textContent=(data.business_name||'[NOM ARTISAN]')+(data.city?' · '+data.city:'')+(Array.isArray(data.trades)&&data.trades.length?' · '+data.trades.join(', '):'');await load();
+}
+async function load(){
+ const {data,error}=await db.from('digiy_build_requests').select('id,created_at,status,city,zone,trade,description,budget_min,budget_max,urgency,desired_date,client_name,client_phone,contact_pref,pro_note').eq('assigned_pro_id',pro.id).order('created_at',{ascending:false});
+ if(error){rows=[];render();return msg($('msg'),'⚠️ Demandes indisponibles : '+error.message,true)}rows=data||[];render();
+}
+function label(s){return s==='accepted'?'Acceptée':s==='declined'?'Refusée':s==='contacted'?'Contacté':s==='done'?'Terminée':(s||'Nouvelle')}
+function render(){
+ const q=String($('search').value||'').trim().toLowerCase(),arr=rows.filter(r=>!q||[r.client_name,r.client_phone,r.trade,r.city,r.zone,r.description].some(v=>String(v||'').toLowerCase().includes(q)));
+ $('count').textContent=arr.length+' demande'+(arr.length===1?'':'s')+' affichée'+(arr.length===1?'':'s');$('list').innerHTML='';
+ if(!arr.length){$('list').innerHTML='<div class="empty">Aucune demande assignée.</div>';return}
+ arr.forEach(r=>{const c=document.createElement('article');c.className='item';const budget=[r.budget_min!=null?money(r.budget_min):'',r.budget_max!=null?money(r.budget_max):''].filter(Boolean).join(' → ');
+ c.innerHTML='<div class="itemhead"><div class="name">👤 '+(r.client_name||'Client')+'</div><span class="badge '+(r.status||'new')+'">'+label(r.status)+'</span></div><div class="meta">'+fmt(r.created_at)+(r.trade?' · '+r.trade:'')+(r.zone||r.city?' · '+(r.zone||r.city):'')+(r.urgency?' · '+r.urgency:'')+(r.desired_date?' · souhait : '+fmt(r.desired_date):'')+(budget?' · '+budget:'')+'</div><div class="desc">'+(r.description||'Sans description')+'</div>';
+ const note=document.createElement('textarea');note.value=r.pro_note||'';note.placeholder='Note privée de suivi';c.appendChild(note);const a=document.createElement('div');a.className='actions';
+ const ph=String(r.client_phone||'').trim();if(ph){const sms=document.createElement('a');sms.href='sms:'+ph;sms.textContent='📩 SMS';a.appendChild(sms);const d=ph.replace(/\D/g,'');if(d){const wa=document.createElement('a');wa.href='https://wa.me/'+d;wa.target='_blank';wa.rel='noopener';wa.textContent='💬 WhatsApp';a.appendChild(wa)}}
+ [['contacted','Contacté','ghost'],['accepted','Accepter','primary'],['declined','Refuser','danger'],['done','Terminé','gold']].forEach(([st,tx,cl])=>{const b=document.createElement('button');b.className='btn '+cl;b.textContent=tx;b.onclick=()=>update(r,st,note.value,b);a.appendChild(b)});
+ const n=document.createElement('button');n.className='btn ghost';n.textContent='💾 Note';n.onclick=()=>update(r,r.status,note.value,n);a.appendChild(n);c.appendChild(a);$('list').appendChild(c)});
+}
+async function update(r,status,note,b){b.disabled=true;const {error}=await db.from('digiy_build_requests').update({status,pro_note:String(note||'').trim()||null}).eq('id',r.id).eq('assigned_pro_id',pro.id);b.disabled=false;if(error)return msg($('msg'),'⚠️ Mise à jour impossible : '+error.message,true);r.status=status;r.pro_note=String(note||'').trim()||null;render();msg($('msg'),'✓ Demande mise à jour.')}
+$('send').onclick=async()=>{const email=$('email').value.trim();if(!email)return msg($('loginMsg'),'⚠️ Entrez votre email.',true);$('send').disabled=true;const redirect=new URL('./gestion.html',location.href).href;const {error}=await db.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:redirect}});$('send').disabled=false;if(error)return msg($('loginMsg'),'⚠️ '+error.message,true);$('otpbox').classList.remove('hidden');msg($('loginMsg'),'✓ Email envoyé. Utilisez le code ou le lien magique.')};
+$('verify').onclick=async()=>{const {data,error}=await db.auth.verifyOtp({email:$('email').value.trim(),token:$('otp').value.trim(),type:'email'});if(error)return msg($('loginMsg'),'⚠️ Code invalide ou expiré.',true);await enter(data.session)};
+$('logout').onclick=async()=>{await db.auth.signOut();pro=null;rows=[];showLogin()};$('refresh').onclick=load;$('search').oninput=render;
+db.auth.onAuthStateChange((e,s)=>{if(e==='SIGNED_OUT')showLogin();else if(s)setTimeout(()=>enter(s),0)});db.auth.getSession().then(({data})=>enter(data.session));
+})();
+</script></body></html>
