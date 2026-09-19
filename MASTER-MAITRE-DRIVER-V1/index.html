@@ -7,7 +7,8 @@
 <meta name="description" content="MASTER MAÎTRE DRIVER · site personnel professionnel pour chauffeur avec véhicule, services, zones et demande de trajet directe.">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0b1d18">
-<meta name="digiy-master" content="DRIVER-V3-OWNER-20260919">\n<meta name="digiy-driver-slug" content="[DRIVER_SLUG]">
+<meta name="digiy-master" content="DRIVER-V3-OWNER-20260919">
+<meta name="digiy-driver-slug" content="[DRIVER_SLUG]">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="./icon-192.png">
@@ -26,6 +27,15 @@ nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-f
 <div class="masterbar">MASTER MAÎTRE DRIVER · V2 SITE PERSONNEL · NE PAS PUBLIER TEL QUEL</div>
 <nav><div class="wrap"><div class="navin"><div class="brand"><span id="navName">[NOM CHAUFFEUR]</span><small id="navSub">[CHAUFFEUR PRIVÉ] · [ZONE]</small></div><div class="links"><a href="#services" data-i18n="services">Services</a><a href="#vehicule" data-i18n="vehicle">Véhicule</a><a href="#galerie" data-i18n="gallery">Galerie</a><a href="#contact" data-i18n="trip">Trajet</a></div><div class="nav-actions"><a class="owner-access" href="./gestion.html" rel="nofollow">🔐 ACCÈS PROPRIÉTAIRE</a><a class="cta" href="#contact" data-i18n="request">DEMANDER UN TRAJET</a></div></div><div class="langs" id="langs"></div></div></nav>
 <section class="hero"><div class="wrap hero-grid"><div><div class="ey" id="heroEy">[CHAUFFEUR PRIVÉ] · [ZONE]</div><h1 id="heroTitle">[NOM CHAUFFEUR]</h1><p id="heroLead">[PRÉSENTATION DU CHAUFFEUR ET DE SES PRESTATIONS]</p><div class="actions"><a class="btn gold" href="#contact" data-i18n="request">DEMANDER UN TRAJET</a><a class="btn ghost" href="#vehicule" data-i18n="viewVehicle">VOIR LE VÉHICULE</a></div></div><div class="hero-card"><div class="photo placeholder" id="driverPhoto">👨🏾‍✈️</div><div class="quick"><div><b id="quickSeats">[PLACES]</b><span data-i18n="seats">passagers</span></div><div><b id="quickBags">[BAGAGES]</b><span data-i18n="bags">bagages</span></div><div><b id="quickComfort">[CONFORT]</b><span data-i18n="comfort">confort</span></div></div></div></div></section>
+<section class="section alt" id="live-driver">
+  <div class="wrap">
+    <div class="label">LIVE DRIVER</div>
+    <h2 id="liveTitle">Disponibilité maintenant</h2>
+    <div id="liveStatus" style="font-size:clamp(28px,5vw,46px);font-weight:950;color:var(--green);margin:10px 0">⚪ À confirmer</div>
+    <p class="lead"><strong id="liveSectorLabel">Secteur actuel</strong> · <span id="liveSector">Secteur à confirmer</span></p>
+    <p class="lead" id="liveNote" style="font-size:13px">Statut déclaré par le chauffeur. Après 4 heures sans mise à jour, la fiche revient automatiquement à « À confirmer ».</p>
+  </div>
+</section>
 <section class="section" id="services"><div class="wrap"><div class="label" data-i18n="services">Services</div><h2 data-i18n="servicesTitle">Un chauffeur professionnel, plusieurs usages.</h2><div class="grid3" id="servicesGrid"></div></div></section>
 <section class="section alt" id="vehicule"><div class="wrap two"><div class="vehicle placeholder" id="vehiclePhoto">🚙</div><div><div class="label" data-i18n="vehicle">Véhicule</div><h2 data-i18n="vehicleTitle">Le client sait avec quoi il voyage.</h2><div class="list"><div class="row"><b data-i18n="category">Catégorie</b><span id="vehicleCategory">[VOITURE / MINIBUS / BUS]</span></div><div class="row"><b data-i18n="model">Modèle</b><span id="vehicleModel">[MODÈLE]</span></div><div class="row"><b data-i18n="seats">Places</b><span id="vehicleSeats">[PLACES]</span></div><div class="row"><b data-i18n="bags">Bagages</b><span id="vehicleBags">[BAGAGES]</span></div><div class="row"><b data-i18n="comfort">Confort</b><span id="vehicleComfort">[CONFORT]</span></div><div class="row"><b>Langues</b><span id="driverLanguages">[LANGUES]</span></div><div class="row"><b>Tarifs indicatifs</b><span id="indicativeRates">À confirmer directement</span></div><div class="row"><b>Réseau professionnel</b><span id="proNetworkStatus">Selon disponibilité du chauffeur</span></div></div></div></div></section>
 <section class="section" id="galerie"><div class="wrap"><div class="label" data-i18n="gallery">Galerie</div><h2 data-i18n="galleryTitle">Chauffeur, véhicule, intérieur, bagages.</h2><div class="gallery" id="galleryGrid"></div></div></section>
@@ -51,4 +61,5 @@ function applyLang(code){currentLang=I18N[code]?code:"fr";document.documentEleme
 pickupRow.addEventListener("click",()=>openPicker("pickup"));dropoffRow.addEventListener("click",()=>openPicker("dropoff"));closeLocationBtn.addEventListener("click",closePicker);locationOverlay.addEventListener("click",e=>{if(e.target===locationOverlay)closePicker()});sendBtn.addEventListener("click",()=>{if(!val(CFG.whatsapp)){alert("WhatsApp à configurer dans CFG.whatsapp");return}if(!booking.pickupName||!booking.dropoffName){alert(I18N[currentLang].choosePickup+" / "+I18N[currentLang].chooseDropoff);return}const msg=[I18N[currentLang].waIntro,"","Départ: "+booking.pickupName,"Destination: "+booking.dropoffName,"Date / heure: "+tripDate.value,"Passagers: "+passengers.value,"Bagages: "+luggage.value,"Prestation: "+serviceType.value,"Précisions: "+details.value].join("\n");location.href="https://wa.me/"+CFG.whatsapp.replace(/\D/g,"")+"?text="+encodeURIComponent(msg)});buildLangs();render();applyLang("fr");if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 })();
 </script>
+<script src="./assets/driver-public-profile-v1.js?v=20260919-v1"></script>
 </body></html>
