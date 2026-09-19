@@ -83,11 +83,22 @@ Le pays n'est pas un nouveau MASTER métier : Sénégal, France ou autre pays co
 
 - `MASTER-MAITRE-CARNET-V1/` — futur moule universel DIGIY CARNET : trace financière terrain, entrées/sorties/net du jour, modes Wave/Orange Money/espèces, Oreille/voix et accès adhérent par magic link. **Ne pas déployer avant validation de la source de vérité Supabase, du bridge d’authentification et de la parité avec le moteur vivant.**
 
+## Couche propriétaire commune
+
+Les MASTER **LOC · DRIVER · RESA · MON COMMERCE · BUILD · JOB · EXPLORE** disposent désormais d’une porte propriétaire selon le même contrat :
+
+**TARIF ADHÉRENT → activation DIGIY PRO → capacité métier → propriétaire authentifié → espace privé → données publiques autorisées.**
+
+La page publique reste lisible par le visiteur. Le professionnel ne pilote que ses données métier vivantes ; identité, rattachement propriétaire, statut adhérent et architecture restent sous contrôle DIGIY.
+
+**MARKET est legacy / hors service. MON COMMERCE est la brique active pour les commerces.**
+
 ## Standard technique commun
 
 Chaque MASTER opérationnel doit tendre vers :
 
 - `index.html` autonome ;
+- `gestion.html` ou page propriétaire dédiée lorsqu’une capacité métier doit être pilotée par le professionnel ;
 - `README.md` neutre ;
 - `manifest.webmanifest` ;
 - `sw.js` ;
