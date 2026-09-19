@@ -2,16 +2,17 @@
 
 ## Statut
 
-**MASTER MAÎTRE universel DIGIY EXPLORE — V1**
+**MASTER MAÎTRE universel DIGIY EXPLORE — V2 OWNER**
 
 Référence de conception : la fiche publique visiteur EXPLORE actuellement en production, neutralisée pour devenir un moule réutilisable.
 
-Ce dossier n'est ni le cockpit EXPLORE, ni un logiciel métier. C'est un **moule public de découverte** destiné aux lieux, sorties, expériences, activités, adresses locales et initiatives de terrain.
+Ce dossier n'est ni un gros cockpit EXPLORE, ni un logiciel métier. Il réunit un **moule public de découverte** et une **page propriétaire légère** destinée à faire vivre disponibilité, horaires, prix indicatif, créneaux et demandes.
 
 ## Fichiers
 
 - `index.html` : moule public autonome ;
 - `README.md` : règles d'utilisation et de protection ;
+- `gestion.html` : espace privé du propriétaire ;
 - `manifest.webmanifest` : manifeste PWA neutre ;
 - `sw.js` : service worker du MASTER ;
 - `icon-192.png` et `icon-512.png` : icônes PWA génériques.
@@ -64,6 +65,24 @@ Le bloc `CFG` pilote notamment :
 - `photos` ;
 - `showLanguages`.
 
+## Couche propriétaire
+
+`gestion.html` ajoute uniquement les gestes vivants :
+
+- disponibilité : disponible, limitée, indisponible, à confirmer ;
+- message court de disponibilité ;
+- horaires et prix indicatif ;
+- créneaux datés ;
+- capacité facultative ;
+- demandes reçues ;
+- confirmer / refuser / terminer ;
+- note privée ;
+- contact direct SMS / WhatsApp.
+
+Le propriétaire est lié à `digiy_explore_places.auth_user_id`. Les créneaux utilisent `digiy_explore_slots`, les demandes `digiy_explore_requests`. La RLS empêche un propriétaire de piloter le lieu d’un autre.
+
+Le public `index.html` reste une présence légère ; l’authentification appartient uniquement à `gestion.html`.
+
 ## Langues
 
 Le MASTER prévoit le standard DIGIYLYFE à 8 langues :
@@ -86,8 +105,8 @@ La PWA est une couche légère de présence :
 - installation sur téléphone compatible ;
 - cache du cœur du MASTER ;
 - repli vers `index.html` lorsque le réseau disparaît ;
-- aucune authentification requise ;
-- aucune dépendance obligatoire à Supabase ou à un moteur cloud.
+- aucune authentification requise pour la page publique ;
+- l’espace propriétaire `gestion.html` utilise Supabase Auth et RLS.
 
 Le service worker met uniquement en cache :
 
@@ -102,7 +121,7 @@ Le service worker met uniquement en cache :
 1. Ne jamais ajouter de `CNAME` dans ce dossier.
 2. Ne jamais conserver un nom, téléphone, adresse, photo, QR ou domaine client réel dans le MASTER.
 3. Ne jamais stocker de mot de passe, PIN, clé privée ou secret.
-4. Ne jamais rendre le MASTER dépendant d'un cockpit, d'une authentification ou de Supabase.
+4. Ne jamais rendre la page publique dépendante d’un cockpit privé ; l’authentification et Supabase restent confinés à `gestion.html`.
 5. Toujours créer une copie avant adaptation client.
 6. Ne jamais inventer tarif, horaire, disponibilité, sécurité, condition d'accès ou prestation.
 7. Le QR final doit pointer vers l'URL publique réelle validée du lieu.
@@ -143,6 +162,6 @@ Adapter principalement : ville/zone, adresse ou repère, téléphone local, euro
 
 ---
 
-**MASTER MAÎTRE EXPLORE — DIGIYLYFE**
+**MASTER MAÎTRE EXPLORE V2 OWNER — DIGIYLYFE**
 
 Le local prépare. Le cloud renforce. Le professionnel décide.
