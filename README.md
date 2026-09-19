@@ -74,6 +74,7 @@ Le pays n'est pas un nouveau MASTER métier : Sénégal, France ou autre pays co
 - `JOB/MASTER-MAITRE-JOB/` — missions, offres et candidatures directes.
 - `LOC/MASTER-MAITRE-LOC/` — hébergements et location directe.
 - `MASTER-MAITRE-DRIVER-V1/` — chauffeurs privés, transferts et transport sur réservation.
+- `MASTER-MAITRE-RESA-V1/` — rendez-vous et réservations multi-métiers, créneaux et demandes pilotés par le propriétaire.
 - `MASTER-MAITRE-MON-COMMERCE-V1/` — commerces locaux et vitrines produits.
 - `MASTER-MAITRE-SERVICE-V1/` — prestations, beauté, bien-être et services sur rendez-vous.
 - `MASTER-MAITRE-RESTO-V2-SITE/` — site restaurant complet.
