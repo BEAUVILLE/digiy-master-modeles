@@ -1,0 +1,46 @@
+{
+  "contract": "DIGIYLYFE-ORCHESTRATOR-CONTRACT-V1",
+  "mode": "read-only",
+  "doctrine": "LE CORE VOIT · LES CAPACITES FONT · L'IA RELIE · L'HUMAIN GOUVERNE",
+  "role": "cross-core-observer",
+  "authority": {
+    "master_core": "MASTER-CORE-WORLD-V1",
+    "public_mcp": "DIGIY-MCP-V1",
+    "professional_live_data": "production adapters only",
+    "human_final_authority": true
+  },
+  "inputs": [
+    "MASTER-CORE-WORLD-V1/config/runtime-registry.json",
+    "MASTER-CORE-WORLD-V1/config/runtime-contract.json",
+    "MASTER-CORE-WORLD-V1/config/capabilities.json",
+    "MASTER-CORE-WORLD-V1/config/needs.json",
+    "MASTER-CORE-WORLD-V1/config/pro-sovereignty-contract.json",
+    "DIGIY-MCP-V1/contracts/tools.json"
+  ],
+  "outputs": [
+    "state",
+    "alerts",
+    "relations",
+    "priorities"
+  ],
+  "forbidden_v1": [
+    "supabase_write",
+    "professional_write",
+    "owner_action",
+    "payment",
+    "reservation_write",
+    "subscription_write",
+    "master_auto_patch",
+    "private_data",
+    "invented_geography"
+  ],
+  "guards": {
+    "fail_closed": true,
+    "public_only_by_default": true,
+    "planned_geography_never_public": true,
+    "market_legacy_must_not_be_active": true,
+    "human_approval_before_any_future_mutation": true,
+    "capability_is_not_navigation_root": true,
+    "no_engine_fork": true
+  }
+}

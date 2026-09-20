@@ -3,7 +3,7 @@
     {"id": "DRIVER", "label": "Transport / chauffeur"},
     {"id": "LOC", "label": "Location / hébergement"},
     {"id": "RESA", "label": "Réservation / rendez-vous"},
-    {"id": "MARKET", "label": "Commerce / produits"},
+    {"id": "COMMERCE", "label": "Mon Commerce / produits"},
     {"id": "BUILD", "label": "Artisans / chantier"},
     {"id": "JOB", "label": "Emploi / missions"},
     {"id": "EXPLORE", "label": "Lieux / activités"},
