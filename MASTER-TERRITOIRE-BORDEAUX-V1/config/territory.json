@@ -12,7 +12,6 @@
     "inherit_languages_from_country": true,
     "generic_professional_action": "OUVRIR",
     "membership_plan": "adherent-19900",
-    "membership_amount": 45,
-    "membership_currency": "EUR"
+    "membership_pricing_source": "../../MASTER-PAYS-FRANCE-V1/config/pricing.json"
   }
 }
