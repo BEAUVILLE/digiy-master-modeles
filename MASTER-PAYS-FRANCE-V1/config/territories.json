@@ -6,7 +6,9 @@
       "slug": "vallee-dordogne",
       "label": "Périgord · Vallée de la Dordogne",
       "status": "active",
-      "zones": ["sarlat"],
+      "zones": [
+        "sarlat"
+      ],
       "planned_zones": [],
       "master": "../../MASTER-TERRITOIRE-VALLEE-DORDOGNE-V1/"
     },
@@ -27,6 +29,36 @@
       ],
       "planned_zones": [],
       "master": "../../MASTER-TERRITOIRE-BORDEAUX-V1/"
+    },
+    {
+      "id": "FR-PARIS",
+      "slug": "paris",
+      "label": "Paris · Île-de-France",
+      "status": "active",
+      "zones": [
+        "paris-1",
+        "paris-2",
+        "paris-3",
+        "paris-4",
+        "paris-5",
+        "paris-6",
+        "paris-7",
+        "paris-8",
+        "paris-9",
+        "paris-10",
+        "paris-11",
+        "paris-12",
+        "paris-13",
+        "paris-14",
+        "paris-15",
+        "paris-16",
+        "paris-17",
+        "paris-18",
+        "paris-19",
+        "paris-20"
+      ],
+      "planned_zones": [],
+      "master": "../../MASTER-TERRITOIRE-PARIS-V1/"
     },
     {
       "id": "FR-ARCACHON",
