@@ -130,7 +130,7 @@ function carnetHarness({v2=[],v1=[],cancelReply={data:{ok:true,status:'cancelled
     throw new Error('Unexpected RPC: '+name);
   }};
   const context={
-    $,db,document:{createElement:fakeNode},
+    db,document:{createElement:fakeNode},
     window:{confirm:()=>true},
     today:()=>new Date(2026,9,8,12),
     iso:()=> '2026-10-08',
