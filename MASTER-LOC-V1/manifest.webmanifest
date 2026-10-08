@@ -1,0 +1,10 @@
+{
+  "name": "DIGIY LOC — MASTER (non publié)",
+  "short_name": "DIGIY LOC",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f5f2",
+  "theme_color": "#073c2b",
+  "description": "Moule de démonstration non configuré DIGIY LOC"
+}
