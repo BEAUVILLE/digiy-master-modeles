@@ -27,6 +27,10 @@ La carte n’est ni une fiche enrichie, ni un site individuel, ni une boutique. 
 - aucune installation automatique ;
 - signature de maison : **DIGIYLYFE.COM · L’empreinte numérique du professionnel**.
 
+## Priorité mobile — contact avant navigation technique
+
+Sur une carte réelle, **Appeler** (`tel:`) et **WhatsApp direct** (si disponible) sont les actions prioritaires sur téléphone. Le numéro doit rester visible et copiable. Les actions secondaires (partage, copie, outils métier, accès propriétaire) ne doivent pas concurrencer l'appel et le message dans la zone d'action principale. Aucun formulaire n'est exigé pour appeler ou écrire. Adapter les libellés aux langues activées et préserver QR stable, URL canonique et PWA.
+
 ## Configuration
 
 Dans `index.html`, modifier uniquement l’objet `CFG` de l’instance copiée :
