@@ -227,6 +227,11 @@ test('MASTER V30 owner booking uses RPC and does not contact client',async()=>{
  assert.equal(h.el('guestPhone').value,'');
 });
 
+test('MASTER buttons are connected to reservation save and refresh actions',()=>{
+ assert.match(html,/\$\("saveReservation"\)\.onclick=savePrivateReservation/);
+ assert.match(html,/\$\("refreshReservations"\)\.onclick=async/);
+});
+
 test('MASTER template remains configurable and does not hardcode existing territory',()=>{
  assert.match(html,/SITE_SLUG="\[SITE-SLUG-A-CONFIGURER\]"/);
  assert.doesNotMatch(html,/const SITE_SLUG=["'](?:saly|sarlat)/);
