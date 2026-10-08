@@ -190,3 +190,7 @@ Toujours créer une instance depuis une copie du Master. Ne jamais publier le Ma
 ---
 
 **DIGIYLYFE · MASTER MAÎTRE DRIVER V3 OWNER · 19/09/2026**
+
+## Contact mobile prioritaire
+
+Renseigner `phoneE164` (numéro confirmé au format international) pour activer **Appeler** en haut de page. `whatsapp` active **WhatsApp direct**. Le formulaire de trajet reste disponible, mais n'est pas obligatoire pour contacter le chauffeur. Tester huit langues, PWA et accès propriétaire avant publication.

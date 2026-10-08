@@ -95,3 +95,7 @@ Manifest, service worker et icônes 192/512 inclus. `gestion-produits.html` fait
 4. Ne jamais inventer prix, stock, paiement ou livraison.
 5. Tester WhatsApp, magic link, retour au commerce, CRUD produits, URLs photos, mobile, 8 langues, RTL et PWA.
 6. Ne publier une instance qu’après validation humaine.
+
+## Contact mobile prioritaire
+
+Renseigner `C.business.phoneE164` (numéro confirmé au format international) pour activer **Appeler** dans le hero, le contact et le dock mobile. `C.business.whatsapp` active WhatsApp direct. Les raccourcis Produits et Galerie restent disponibles. Sans numéro, l'appel est désactivé. Tester avant publication.
