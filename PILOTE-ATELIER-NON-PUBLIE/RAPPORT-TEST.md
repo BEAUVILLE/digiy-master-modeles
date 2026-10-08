@@ -39,3 +39,9 @@
 - Traductions du retour réseau en huit langues, dont arabe RTL.
 - Test syntaxique JavaScript statique réussi ; pas encore de contrôle visuel réel sur téléphone.
 - Le MASTER d'origine reste inchangé ; la branche pilote n'est pas fusionnée ni publiée.
+
+## Essai visuel 45 % — 8 octobre 2026
+- Couverture portée à `45vh` avec bornes de sécurité sur mobile.
+- Si `CFG.image` contient une vraie image, un clic/toucher sur la couverture ouvre l'image entière dans une visionneuse (`object-fit: contain`). Fermeture par ×, fond sombre ou Échap ; focus restauré.
+- **Limite :** `CFG.image` est vide dans ce pilote fictif ; l'agrandissement ne peut pas être testé visuellement tant qu'une photo autorisée n'est pas fournie. Aucun visuel réel n'a été inventé.
+- Syntaxe JavaScript contrôlée ; aucun test tactile sur appareil réel à ce stade.
