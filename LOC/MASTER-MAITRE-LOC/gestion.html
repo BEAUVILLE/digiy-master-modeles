@@ -253,6 +253,8 @@ async function savePrivateReservation(){
   finally{button.disabled=false}
 }
 
+$("saveReservation").onclick=savePrivateReservation;
+$("refreshReservations").onclick=async()=>{await loadReservationCarnet();render()};
 $("sendCode").onclick=sendCode;$("verifyCode").onclick=verifyCode;$("prev").onclick=()=>{current=new Date(current.getFullYear(),current.getMonth()-1,1,12);render()};$("next").onclick=()=>{current=new Date(current.getFullYear(),current.getMonth()+1,1,12);render()};$("unitSelect").onchange=async e=>{unitId=e.target.value;states.clear();resetSelection();await loadStates();await loadReservationCarnet();render()};$("makeAvailable").onclick=()=>applyState("available");$("makeOccupied").onclick=()=>applyState("occupied");$("makeClosed").onclick=()=>applyState("closed");$("logout").onclick=async()=>{await db.auth.signOut();siteId=null;units=[];unitId=null;states.clear();reservations=[];ownerCancelV30Enabled=false;resetSelection();showLogin();setMsg(loginStatus,"✓ Déconnecté.")};db.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_IN"&&session)setTimeout(()=>enter(session),0);if(event==="SIGNED_OUT")showLogin()});db.auth.getSession().then(({data})=>{if(data.session)enter(data.session)});
 })();
 </script>
