@@ -9,16 +9,42 @@
 <section id="request"><h2>Demander une disponibilité</h2><label>Arrivée<input type="date" id="arrival"></label><label>Départ<input type="date" id="departure"></label><label>Voyageurs<input type="number" min="1" value="2" id="guests"></label><p id="estimate" class="muted">Tarif final confirmé par le propriétaire.</p><div class="buttons"><a class="btn primary" id="wa" aria-disabled="true">💬 Demander sur WhatsApp</a><a class="btn" id="call" aria-disabled="true">📞 Appeler</a></div><p class="muted">Une demande ne bloque pas automatiquement le logement.</p></section>
 <section id="photos"><h2 id="galleryTitle">📷 Photos du logement</h2><div class="gallery-grid" id="gallery"></div><p id="galleryEmpty" class="gallery-empty muted">Photos à ajouter par le propriétaire.</p></section>
 <section id="details"><h2>À savoir</h2><div id="rules"></div><h2>🎥 Voir le logement</h2><a class="btn" id="video" aria-disabled="true">▶️ Voir la vidéo</a><h2>Paiement direct</h2><p id="payment"></p><p class="muted">Après confirmation, règlement direct au propriétaire. Aucun paiement collecté par DIGIYLYFE.</p></section>
+<section id="feedbackEntry" hidden><h2 id="feedbackHeading">⭐ Votre expérience</h2><p id="feedbackIntro">Vous avez séjourné ici ? Votre retour est libre et facultatif. Il sera transmis directement à DIGIYLYFE. Un témoignage ne constitue pas automatiquement un séjour vérifié.</p><a class="btn" id="feedbackLink" rel="noopener noreferrer">⭐ Donner mon avis sur mon séjour</a></section>
 <section id="networkReturn"><a class="btn primary" href="https://digiylyfe.com/">🌍 RETOUR AU RÉSEAU DIGIYLYFE</a></section>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Photo agrandie"><button class="close" id="close" type="button" aria-label="Fermer">×</button><button class="modal-nav prev" id="photoPrev" type="button" aria-label="Photo précédente">‹</button><img id="full" alt="Photo du logement"><button class="modal-nav next" id="photoNext" type="button" aria-label="Photo suivante">›</button><span class="modal-caption" id="photoCaption"></span></div>
 </main><script>
 /* Remplir la configuration par logement. Ne jamais recopier l'ID de Chez Baptiste. */
-const CFG={name:"[NOM DU LOGEMENT]",zone:"[VILLE · PAYS]",description:"[DESCRIPTION]",image:"",photos:[],tags:["[CAPACITÉ]","[ATOUT]","CONTACT DIRECT"],rules:["[RÈGLE DU SÉJOUR]"],priceNight:0,priceWeek:0,priceMonth:0,currency:"FCFA",maxGuests:1,phoneE164:"",whatsappDigits:"",ownerAccessUrl:"",videoUrl:"",paymentText:"[MOYEN DE PAIEMENT DIRECT]",supabaseUrl:"",supabaseAnonKey:"",unitId:""};
+const CFG={name:"[NOM DU LOGEMENT]",zone:"[VILLE · PAYS]",description:"[DESCRIPTION]",image:"",photos:[],tags:["[CAPACITÉ]","[ATOUT]","CONTACT DIRECT"],rules:["[RÈGLE DU SÉJOUR]"],priceNight:0,priceWeek:0,priceMonth:0,currency:"FCFA",maxGuests:1,phoneE164:"",whatsappDigits:"",ownerAccessUrl:"",videoUrl:"",paymentText:"[MOYEN DE PAIEMENT DIRECT]",supabaseUrl:"",supabaseAnonKey:"",unitId:"",feedbackUrl:""};
 const $=id=>document.getElementById(id), money=n=>Number(n||0).toLocaleString("fr-FR");
 const runtime=(key,fr)=>window.DIGIY_LOC_RUNTIME?.[key]||fr;
 let calendarError=false;
 $("name").textContent=CFG.name;$("zone").textContent="📍 "+CFG.zone;$("description").textContent=CFG.description;$("tags").replaceChildren(...CFG.tags.map(t=>{let x=document.createElement("span");x.className="tag";x.textContent=t;return x}));$("price").textContent=CFG.priceNight?money(CFG.priceNight):"À configurer";$("priceOther").textContent=[CFG.priceWeek&&money(CFG.priceWeek)+" / semaine",CFG.priceMonth&&money(CFG.priceMonth)+" / mois"].filter(Boolean).join(" · ");$("rules").replaceChildren(...CFG.rules.map(t=>{let p=document.createElement("p");p.textContent="• "+t;return p}));$("payment").textContent=CFG.paymentText;
 function link(id,url){if(url){$(id).href=url;$(id).removeAttribute("aria-disabled")}}
+/* Feedback is intentionally absent unless a reviewed, property-specific HTTPS intake URL is configured.
+   No query-string PII, no implied stay verification, no inactive visible CTA. */
+const feedbackText={
+fr:["⭐ Votre expérience","Vous avez séjourné ici ? Votre retour est libre et facultatif. Il sera transmis directement à DIGIYLYFE. Un témoignage ne constitue pas automatiquement un séjour vérifié.","⭐ Donner mon avis sur mon séjour"],
+en:["⭐ Your experience","Stayed here? Sharing feedback is optional. Your response goes directly to DIGIYLYFE and does not automatically count as a verified stay.","⭐ Share feedback on my stay"],
+es:["⭐ Tu experiencia","¿Te alojaste aquí? Tu opinión es voluntaria y llega directamente a DIGIYLYFE. No implica una estancia verificada.","⭐ Dar mi opinión"],
+pt:["⭐ Sua experiência","Ficou aqui? Sua opinião é opcional e vai diretamente para DIGIYLYFE. Não comprova automaticamente a estadia.","⭐ Avaliar minha estadia"],
+it:["⭐ La tua esperienza","Hai soggiornato qui? La risposta è facoltativa e arriva direttamente a DIGIYLYFE. Non verifica automaticamente il soggiorno.","⭐ Lascia un'opinione"],
+de:["⭐ Ihre Erfahrung","Hier übernachtet? Feedback ist freiwillig und geht direkt an DIGIYLYFE. Es bestätigt keinen verifizierten Aufenthalt.","⭐ Aufenthalt bewerten"],
+nl:["⭐ Uw ervaring","Hier verbleven? Feedback is vrijwillig en gaat rechtstreeks naar DIGIYLYFE. Het bewijst geen geverifieerd verblijf.","⭐ Deel uw ervaring"],
+ar:["⭐ تجربتك","هل أقمت هنا؟ المشاركة اختيارية وتصل مباشرة إلى DIGIYLYFE ولا تثبت الإقامة تلقائياً.","⭐ شارك رأيك"]
+};
+function renderFeedbackLanguage(){
+ const lang=$("language").value,words=feedbackText[lang]||feedbackText.fr;
+ $("feedbackHeading").textContent=words[0];$("feedbackIntro").textContent=words[1];$("feedbackLink").textContent=words[2];
+}
+try{
+ const u=new URL(CFG.feedbackUrl);
+ if(u.protocol==="https:"&&u.username===""&&u.password===""&&u.search===""&&u.hash===""&&CFG.feedbackUrl.trim()===u.href){
+   $("feedbackLink").href=u.href;
+   $("feedbackEntry").hidden=false;
+   renderFeedbackLanguage();
+   $("language").addEventListener("change",renderFeedbackLanguage);
+ }
+}catch(_){/* Unconfigured: keep the entire feedback entry hidden. */}
 link("owner",CFG.ownerAccessUrl);link("call",/^\+[1-9]\d{6,14}$/.test(CFG.phoneE164)?"tel:"+CFG.phoneE164:"");link("video",CFG.videoUrl);
 /* Optional gallery: CFG.photos = [{src:"https://...",alt:"Salon"}, ...].
    No remote sample imagery and no reuse of another owner's photos. */
