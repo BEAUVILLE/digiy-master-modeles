@@ -7,7 +7,7 @@ const path=require('node:path');
 
 const html=fs.readFileSync(path.join(__dirname,'../LOC/MASTER-MAITRE-LOC/gestion.html'),'utf8');
 const start=html.indexOf('async function applyState(status){');
-const end=html.indexOf('$("sendCode").onclick=sendCode;',start);
+const end=html.indexOf('/* V30: privileged reservation operations',start);
 assert(start>0&&end>start,'expected MASTER calendar handler');
 const handler=html.slice(start,end);
 
