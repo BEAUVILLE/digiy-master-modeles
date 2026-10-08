@@ -40,6 +40,7 @@ Principaux champs :
 - `area`
 - `availability`
 - `phoneDisplay`
+- `phoneE164` (numéro d'appel international confirmé, sans espaces ; active **Appeler** en haut de page)
 - `whatsapp`
 - `cardUrl`
 - `heroLead`
