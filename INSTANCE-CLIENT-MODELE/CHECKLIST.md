@@ -33,6 +33,19 @@
 - [ ] aucun secret exposé
 - [ ] aucune donnée d'un autre client conservée
 
+## Parcours client mobile — contrôle obligatoire avant livraison
+
+- [ ] le métier, le territoire et l'identité réelle se comprennent dès l'ouverture
+- [ ] **Appeler** (`tel:`) avec le numéro public confirmé est accessible immédiatement lorsqu'un téléphone est fourni
+- [ ] **WhatsApp direct** ouvre le bon contact lorsqu'il est utilisé, sans formulaire obligatoire
+- [ ] les CTA client **Appeler / WhatsApp** passent avant les raccourcis de module technique (BUILD, DRIVER, etc.)
+- [ ] numéro affiché, numéro `tel:` et destinataire WhatsApp concordent avec les données validées
+- [ ] formulaire métier facultatif : pas d'obstacle au contact direct
+- [ ] test tactile sur vrai téléphone, sans imposer une performance non mesurée
+- [ ] traduction des libellés et RTL vérifiés selon les langues effectivement incluses
+- [ ] accès propriétaire, QR, PWA, liens existants et sécurité non régressés
+- [ ] validation humaine avant publication ; aucune mise à jour automatique des anciennes instances
+
 ## Technique — CARTE ADHÉRENT
 
 - [ ] numéro public affiché lisiblement
