@@ -64,6 +64,11 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 </div>
 <div class="actions"><button class="btn primary" id="saveSlot" type="button">💾 Enregistrer le créneau</button><button class="btn ghost" id="refreshSlots" type="button">↻ Rafraîchir</button></div>
 <p id="slotMsg" class="status"></p>
+<div class="head" style="margin:17px 0 10px"><div><h3>📅 Vue sur 7 jours</h3><p class="hint">Lecture des créneaux enregistrés. Cliquez sur un jour pour le préparer ci-dessus.</p></div>
+<div class="actions"><button type="button" class="btn ghost" id="weekBack">←</button><button type="button" class="btn ghost" id="weekForward">→</button></div></div>
+<p id="weekLabel" class="hint"></p>
+<div id="weekBoard" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:8px"></div>
+<p class="hint">🟢 ouvert · ⚫ fermé · les demandes doivent être confirmées par le professionnel.</p>
 <div id="slotCount" class="count"></div><div id="slots" class="list"></div>
 </div>
 
@@ -83,7 +88,7 @@ const URL='https://wesqmwjjtsefyjnluosj.supabase.co';
 const KEY='sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3';
 const db=supabase.createClient(URL,KEY,{auth:{persistSession:true,detectSessionInUrl:true}});
 const $=id=>document.getElementById(id);
-let profile=null,slots=[],bookings=[];
+let profile=null,slots=[],bookings=[],weekOffset=0;
 
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const fmtDate=s=>{if(!s)return'—';const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12).toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short',year:'numeric'})};
@@ -110,7 +115,32 @@ async function loadSlots(){
   slots=data||[];renderSlots();
 }
 
+function renderWeekBoard(){
+ const box=$('weekBoard');if(!box)return;
+ box.replaceChildren();
+ const first=new Date();first.setHours(12,0,0,0);first.setDate(first.getDate()+7*weekOffset);
+ const dates=[];
+ for(let i=0;i<7;i++){
+  const d=new Date(first);d.setDate(first.getDate()+i);
+  const key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  dates.push(key);
+  const rows=slots.filter(s=>s.slot_date===key);
+  const count=rows.filter(s=>s.status==='open').length;
+  const day=document.createElement('button');day.type='button';day.className='btn ghost';
+  day.style.cssText='display:block;width:100%;text-align:left;white-space:normal;min-height:110px;padding:10px;border-radius:14px';
+  day.textContent=d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'})+' · '+count+' ouvert(s) / '+rows.length+' créneau(x)';
+  day.onclick=()=>{$('slotDate').value=key;$('slotDate').focus();$('slotDate').scrollIntoView({block:'center',behavior:'smooth'});};
+  box.append(day);
+ }
+ $('weekBack').disabled=weekOffset<=0;
+ $('weekForward').disabled=weekOffset>=7;
+ $('weekLabel').textContent=fmtDate(dates[0])+' → '+fmtDate(dates[6]);
+}
+$('weekBack').onclick=()=>{weekOffset=Math.max(0,weekOffset-1);renderWeekBoard()};
+$('weekForward').onclick=()=>{weekOffset=Math.min(7,weekOffset+1);renderWeekBoard()};
+
 function renderSlots(){
+  renderWeekBoard();
   const box=$('slots');box.innerHTML='';$('slotCount').textContent=slots.length+' créneau'+(slots.length===1?'':'x')+' à venir';
   if(!slots.length){box.innerHTML='<div class="empty">Aucun créneau à venir.</div>';return}
   slots.forEach(s=>{
