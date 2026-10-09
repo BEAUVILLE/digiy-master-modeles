@@ -1,6 +1,30 @@
 # RÉSA MULTI — RÈGLE MAÎTRE DU PLANNING V2
 **9 octobre 2026 · Règle transversale des activités sur rendez-vous · Référence générique**
 
+## Doctrine validée — Réservation automatique universelle et exceptions métier (09/10/2026)
+
+**Orientation produit : la réservation automatique constitue le socle commun par défaut des activités sur rendez-vous compatibles.** Le professionnel définit ses jours, heures, durée, capacité éventuelle, fermetures et mode de confirmation. Le client choisit une disponibilité vérifiée ; une transaction serveur atomique enregistre sa réservation ou sa demande et empêche de réserver deux fois une place indisponible. Selon le métier et le choix du professionnel, la réservation peut être confirmée automatiquement si toutes les conditions sont remplies, ou rester `en attente` de confirmation humaine. **Ne jamais présenter une demande en attente comme confirmée.**
+
+**Exception : aucun moteur spécialisé ne doit être remplacé par cette réservation automatique générique.**
+
+| Parcours | Moteur de référence | Règle |
+|---|---|---|
+| Rendez-vous simples (beauté, services, cours, consultations compatibles, prestations sur créneau…) | **RÉSA UNIVERSEL** | Automatisation commune, puis paramètres métier |
+| Restaurant | **RESTO** | Gestion propre des tables, services, places, capacités, no-show et commandes |
+| Hébergement / location de séjour | **LOC** | Nuits, disponibilités de logement, séjours et règles propres |
+| Chauffeur, VTC, transferts / excursions | **DRIVER** | Trajet, départ, destination, durée et validation chauffeur |
+| Autres cas particuliers détectés sur le terrain | **À qualifier** | Ne pas les forcer dans le moteur commun ; créer une règle/adaptation ou conserver leur moteur autonome après observation |
+
+**Décision terrain :** aucun inventaire des cas particuliers n'est figé à l'avance. Les rencontres avec les professionnels déterminent ce qui doit être ajouté au moteur commun et ce qui mérite une spécialisation. Le modèle générique doit être configurable, pas une contrainte.
+
+### Mise en œuvre et état vérifiable
+
+- **Déjà présent dans le MASTER :** planning sept jours, jours/heures configurables par le propriétaire, ouverture groupée, visibilité des créneaux autorisés et contact direct.
+- **À construire et valider avant une réservation automatique générique en production :** RPC transactionnelle de réservation, gestion de capacité simultanée et anti-chevauchements, attribution au bon propriétaire, transitions d'état, annulation/libération, protections RLS, scénarios clients/propriétaires A/B, tests réels mobile.
+- **BEAUTY** a son propre pilote avec RPC de réservation et contrôle des créneaux ; ce pilote ne prouve pas que la RPC universelle existe déjà.
+- **Aucune activation implicite :** adopter cette doctrine n'installe pas de RPC et n'ouvre aucun créneau réel, ne confirme aucune réservation et ne déploie aucun moteur métier.
+- Paiement et contact directs ; **0 % commission, pas de caisse DIGIYLYFE**.
+
 ## Une expérience comparable à LOC, mais fondée sur l'heure
 
 **Besoin → fiche du professionnel → prestation → 7 jours → créneau effectivement ouvert → contact direct → confirmation humaine.**
@@ -9,7 +33,7 @@ Tous les métiers qui fonctionnent par rendez-vous doivent hériter de cette cap
 
 ### Frontières métier
 
-- **RÉSA MULTI générique** : planning sur 7 jours, uniquement les créneaux réellement ouverts du propriétaire actif ET publié, exclusion des rendez-vous en attente/confirmés et des chevauchements, sélection, contact direct. **Sélectionner ≠ réserver ≠ confirmer.**
+- **RÉSA MULTI générique** : planning sur 7 jours et socle de réservation automatique **à généraliser sous contrôle transactionnel** ; en l'état, l'interface générique montre les vrais créneaux, permet leur sélection et le contact direct. **Sélectionner ≠ réserver ≠ confirmer** tant que la transaction serveur générique n'est pas en service.
 - **BEAUTY** : horaires par prestations, consultation de 7 jours, demande RPC V1 validée côté serveur (prix du catalogue, créneaux non réservés), décision du propriétaire ; ouverture facultative de la semaine au moyen d'une RPC propriétaire. **Aucune ouverture automatique.**
 - **RESTO** : réservation de tables, services, zones/capacité, no-show et modes réservables dans son moteur spécialisé ; ne PAS le remplacer par le planning universel.
 - **LOC** : nuits/séjours, calendriers et paiements directs selon son moteur spécialisé.
