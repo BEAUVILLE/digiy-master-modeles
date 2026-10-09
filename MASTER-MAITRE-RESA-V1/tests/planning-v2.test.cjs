@@ -38,3 +38,49 @@ test('MAÎTRE décrit les limites et les tests opérationnels',()=>{
    assert.ok(doc.includes(word),word);
  assert.match(readme,/REGLE-PLANNING-V2.md/);
 });
+
+test('planning propriétaire : jours et heures entièrement choisis, sans horaires par défaut',()=>{
+ assert.match(gestion,/id="bulkMonday"/);
+ assert.match(gestion,/id="bulkDuration"/);
+ assert.match(gestion,/function weekDraft/);
+ assert.match(gestion,/ignoreDuplicates:true/);
+ assert.match(gestion,/onConflict:'slug,slot_date,start_time'/);
+ assert.doesNotMatch(gestion,/data-bulk-day="[1-7]" checked/);
+ const times=[...gestion.matchAll(/<input type="time" class="bulkHour"(?: value="([^"]*)")?>/g)];
+ assert.equal(times.length,6);
+ assert.ok(times.every(x=>!x[1]));
+ assert.match(gestion,/id="openPublicPlanning"/);
+ assert.match(gestion,/\[SUPABASE_URL\]/);
+ assert.match(gestion,/\[SUPABASE_PUBLISHABLE_KEY\]/);
+ assert.doesNotMatch(page,/https:\/\/resa\.digiylyfe\.com\/fiche\.html/);
+});
+test('semaine propriétaire : vrais choix, chevauchements évités, fermetures conservées',()=>{
+ const begin=gestion.indexOf('function weekDraft(){');
+ const end=gestion.indexOf('async function openBulkWeek(){',begin);
+ assert.ok(begin>=0&&end>begin);
+ const extracted=gestion.slice(begin,end);
+ const current=new Date();current.setHours(12,0,0,0);
+ const monday=new Date(current);monday.setDate(monday.getDate()+((8-monday.getDay())%7));
+ const fmt=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+ const day=fmt(monday);
+ const values={bulkMonday:day,bulkDuration:'30'};
+ const state={
+  '$':id=>({value:values[id]}),
+  'document':{querySelectorAll:selector=>selector.includes('bulk-day')?[{dataset:{bulkDay:'1'}},{dataset:{bulkDay:'3'}}]:[{value:'09:00'},{value:'10:00'},{value:''}]},
+  slots:[],
+  RESA_SLUG:'test-private-professional',
+  today:()=>fmt(current),
+  todayFromDate:fmt,
+  Date,Number,Array,Set
+ };
+ const fresh=vm.runInNewContext(extracted+';weekDraft()',state);
+ assert.equal(fresh.error,undefined);
+ assert.equal(fresh.rows.length,4);
+ assert.ok(fresh.rows.every(r=>r.status==='open'&&r.end_time==='09:30'||r.status==='open'&&r.end_time==='10:30'));
+ assert.ok(fresh.rows.every(r=>r.slug==='test-private-professional'));
+ const closed={slot_date:day,start_time:'09:00:00',end_time:'09:30:00',status:'closed'};
+ const guarded=vm.runInNewContext(extracted+';weekDraft()',{...state,slots:[closed]});
+ assert.equal(guarded.rows.length,3);
+ const duplicated=vm.runInNewContext(extracted+';weekDraft()',{...state,document:{querySelectorAll:s=>s.includes('bulk-day')?[{dataset:{bulkDay:'1'}}]:[{value:'09:00'},{value:'09:00'}]}});
+ assert.match(duplicated.error,/différente/);
+});
