@@ -8,7 +8,8 @@ const vm=require('node:vm');
 
 const html=fs.readFileSync(path.resolve(__dirname,'../LOC/MASTER-MAITRE-LOC/gestion.html'),'utf8');
 const begin=html.indexOf('async function applyState(status){');
-const end=html.indexOf('$("sendCode").onclick=sendCode;',begin);
+const v30Start=html.indexOf('/* V30: privileged reservation operations',begin);
+const end=v30Start>begin?v30Start:html.indexOf('$("sendCode").onclick=sendCode;',begin);
 assert.ok(begin>=0 && end>begin,'MAITRE owner calendar function and event binding must exist');
 const unit=html.slice(begin,end);
 
