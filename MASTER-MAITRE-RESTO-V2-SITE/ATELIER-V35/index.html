@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
+<title>MASTER RESTO V35 · Atelier de préparation non connecté</title>
+<style>
+:root{color-scheme:light;--green:#073f32;--gold:#d8ad46;--ink:#173c32;--line:#c9dccf}
+*{box-sizing:border-box}
+body{font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;margin:0;background:#f3f1e9;color:var(--ink)}
+header{background:var(--green);color:#fff;padding:22px 17px}header>div,main{max-width:1040px;margin:auto}header strong{color:#ffe29a;font-size:12px;letter-spacing:.12em}h1{font-size:clamp(25px,4vw,34px);margin:9px 0}
+main{padding:15px 12px 35px}.notice{border:1px solid #dec174;border-left:5px solid var(--gold);background:#fff7db;padding:13px 15px;border-radius:12px;font-size:13px}
+.controls{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}button{font:800 14px system-ui;padding:12px 15px;border:2px solid var(--green);border-radius:999px;min-height:46px;color:var(--green);background:#fff;cursor:pointer}button[aria-pressed="true"]{background:var(--green);color:#fff}button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.frame{border:1px solid var(--line);background:#fff;border-radius:18px;padding:8px;overflow:hidden}
+iframe{width:100%;min-height:920px;border:0;border-radius:11px;background:#fff;display:block}
+iframe[hidden]{display:none}
+small{font-size:12px;color:#526c5f}
+@media(max-width:680px){iframe{min-height:1270px}button{flex:1 1 100%}}
+</style></head>
+<body>
+<header><div><strong>DIGIYLYFE · MASTER MAÎTRE RESTO V2 + V35</strong><h1>🍽️ Atelier : mes plats et ma carte</h1><p>Deux préparations séparées pour respecter chaque métier et chaque restaurateur.</p></div></header>
+<main>
+<div class="notice" role="status"><strong>ATELIER DE DÉMONSTRATION · NON CONNECTÉ.</strong> Ceci n'est pas un espace propriétaire authentifié. Aucun restaurant réel n'est associé à ces brouillons. Rien n'est enregistré, transmis à Supabase, publié sur une fiche ou transformé en commande. Les photos restent locales à cette page. Ne pas utiliser cet atelier public comme une gestion propriétaire.</div>
+<div class="controls" role="group" aria-label="Choisir l'éditeur de démonstration">
+<button type="button" id="weekBtn" aria-pressed="true">📅 MES PLATS DU JOUR · 7 JOURS</button>
+<button type="button" id="carteBtn" aria-pressed="false">🥗 MES PLATS &amp; SALADES</button>
+</div>
+<p id="help">La semaine affiche les plats du jour selon leur date, sans reconduire automatiquement un plat ancien.</p>
+<div class="frame">
+<iframe id="week" title="Atelier local des plats du jour sur sept jours" src="./plats-du-jour.html" loading="eager" referrerpolicy="no-referrer"></iframe>
+<iframe id="carte" title="Atelier local des plats et salades à la carte" src="./plats-salades.html" loading="lazy" referrerpolicy="no-referrer" hidden></iframe>
+</div>
+<p><small>Deux brouillons indépendants, conservés uniquement tant que cet onglet reste ouvert. Aucun menu composé, aucune formule ni caisse. Pour les vraies réservations, utiliser le moteur RESTO propriétaire après rattachement Auth et vérification d'accès.</small></p>
+</main>
+<script>
+(()=>{'use strict';
+const week=document.getElementById('week'),carte=document.getElementById('carte'),
+ weekBtn=document.getElementById('weekBtn'),carteBtn=document.getElementById('carteBtn'),
+ help=document.getElementById('help');
+function show(mode){
+ const isWeek=mode!=='carte';
+ week.hidden=!isWeek;carte.hidden=isWeek;
+ weekBtn.setAttribute('aria-pressed',String(isWeek));
+ carteBtn.setAttribute('aria-pressed',String(!isWeek));
+ help.textContent=isWeek
+  ?'La semaine affiche les plats du jour selon leur date, sans reconduire automatiquement un plat ancien.'
+  :'La carte habituelle contient uniquement des plats individuels et des salades ; elle est distincte des plats du jour.';
+}
+weekBtn.addEventListener('click',()=>show('semaine'));
+carteBtn.addEventListener('click',()=>show('carte'));
+show('semaine');
+})();
+</script></body></html>
