@@ -1,0 +1,26 @@
+name: MASTER MAÎTRE RÉSA MULTI inheritance
+on:
+  pull_request:
+    paths:
+      - 'MASTER-MAITRE-RESA-V1/**'
+      - '.github/workflows/resa-multi-maitre-inheritance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'MASTER-MAITRE-RESA-V1/**'
+      - '.github/workflows/resa-multi-maitre-inheritance.yml'
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check node test syntax
+        run: node --check MASTER-MAITRE-RESA-V1/tests/resa-multi-inheritance.test.cjs
+      - name: Validate inheritance contract and safety
+        run: node --test MASTER-MAITRE-RESA-V1/tests/resa-multi-inheritance.test.cjs

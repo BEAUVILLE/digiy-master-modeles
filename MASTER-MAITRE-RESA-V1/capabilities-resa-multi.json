@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0.0",
+  "snapshot_date": "2026-10-09",
+  "purpose": "Référence vérifiée des capacités RÉSA MULTI et de leur état de portage, sans activation fictive",
+  "source_repository": "BEAUVILLE/digiy-resa-table-resto",
+  "source_branch": "main",
+  "source_prs_merged": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "catalogue_source_inventory": {
+    "real_driver_entries": 3,
+    "demo_entries": 7,
+    "published_label_examples_claim": 6,
+    "requires_label_correction": true
+  },
+  "capabilities": [
+    {
+      "id": "driver_profile_router",
+      "module": "DRIVER",
+      "proof_prs": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "source_code_merged": true,
+      "production_e2e_verified": false,
+      "master_portage": "routing_contract_only",
+      "requires": [
+        "verified_professional_profile",
+        "public_link_review",
+        "owner_private_access_isolation"
+      ]
+    },
+    {
+      "id": "resto_specialist_handoff",
+      "module": "RESTO",
+      "proof_prs": [
+        1,
+        2
+      ],
+      "source_code_merged": true,
+      "production_e2e_verified": false,
+      "master_portage": "refer_to_RESTO_master",
+      "requires": [
+        "site_slug_specific",
+        "owner_authorization",
+        "no_duplicate_booking_engine"
+      ]
+    },
+    {
+      "id": "beauty_week_booking",
+      "module": "BEAUTY",
+      "proof_prs": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "source_code_merged": true,
+      "production_e2e_verified": false,
+      "master_portage": "review_before_adoption",
+      "requires": [
+        "tenant_specific_auth",
+        "RLS_and_RPC_audit",
+        "race_condition_test",
+        "7_day_mobile_test",
+        "direct_owner_confirmation"
+      ]
+    },
+    {
+      "id": "real_only_structured_service_metadata",
+      "module": "PORTAL",
+      "proof_prs": [
+        16
+      ],
+      "source_code_merged": true,
+      "production_e2e_verified": false,
+      "master_portage": "documentation",
+      "requires": [
+        "exclude_DEMO",
+        "verify_REAL_claims"
+      ]
+    }
+  ],
+  "business_rules": {
+    "zero_commission": true,
+    "direct_professional_confirmation": true,
+    "direct_payment": true,
+    "universal_checkout": false,
+    "universal_restaurant_table_engine": false,
+    "loc_housing_in_scope": false
+  },
+  "migration_included": false,
+  "secrets_included": false,
+  "owner_data_included": false
+}

@@ -108,3 +108,19 @@ Contact direct. Paiement direct lorsque applicable. 0 % commission DIGIYLYFE.
 La capacité RÉSA V1 de ce dossier reste **transversale** pour les rendez-vous et demandes. Elle ne remplace ni les règles de tables/zones/services/no-show du moteur spécialisé `BEAUVILLE/digiy-resto` ni la préparation des plats.
 
 Pour un restaurant, les nouveautés validées V31–V35 sont documentées et portées dans [MASTER-MAITRE-RESTO-V2-SITE/CONTRAT-RESTO-V31-V35.md](../MASTER-MAITRE-RESTO-V2-SITE/CONTRAT-RESTO-V31-V35.md) ; les deux éditeurs locaux sont dans son [ATELIER-V35](../MASTER-MAITRE-RESTO-V2-SITE/ATELIER-V35/index.html). **Aucune migration ou RPC serveur n'est implicite**. Le propriétaire réel doit être vérifié dans sa propre instance.
+
+
+## Héritage RÉSA MULTI · 09/10/2026
+
+Le moteur propriétaire RÉSA V1 reste un **socle transversal** : il ne remplace pas les expériences spécialisées des restaurateurs, chauffeurs ou salons BEAUTY.
+
+Les acquis des **16 PR fusionnées** du portail `BEAUVILLE/digiy-resa-table-resto` sont désormais transmis par deux références :
+
+- [CONTRAT-RESA-MULTI-20261009.md](./CONTRAT-RESA-MULTI-20261009.md) — règles par métier, identifiants Auth, vérifications RPC/RLS, confirmation humaine, statut de publication et séparation RESTO / LOC / BEAUTY / DRIVER.
+- [capabilities-resa-multi.json](./capabilities-resa-multi.json) — registre des capacités avec `source_code_merged`, `production_e2e_verified`, exigences avant activation et preuve PR.
+
+**Statut : portage documentaire uniquement, aucune fonctionnalité activée depuis ce dépôt.**
+
+Particularités importantes : `digiy_resa_profiles.auth_user_id` rattache techniquement le propriétaire Auth, alors que l'ancien `owner_id` conserve un rôle commercial historique ; ne jamais les confondre. La vitrine compte actuellement 3 entrées DRIVER `REAL` et 7 `DEMO` selon le code vérifié, avec un libellé « 6 exemples » restant à corriger.
+
+Aucune URL TEST SALY, clé privée ou configuration de membre réel n'est transférée au MASTER. Un prochain adhérent requiert l'audit serveur, les tests propriétaires A/B, les tests métier et la validation humaine avant publication.
