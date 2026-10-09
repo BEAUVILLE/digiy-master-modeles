@@ -102,3 +102,9 @@ Contact direct. Paiement direct lorsque applicable. 0 % commission DIGIYLYFE.
 ---
 
 **DIGIYLYFE · MASTER MAÎTRE RESA V1 OWNER · 19/09/2026**
+
+## Spécialisation RESTO — ne pas confondre les deux MAÎTRES
+
+La capacité RÉSA V1 de ce dossier reste **transversale** pour les rendez-vous et demandes. Elle ne remplace ni les règles de tables/zones/services/no-show du moteur spécialisé `BEAUVILLE/digiy-resto` ni la préparation des plats.
+
+Pour un restaurant, les nouveautés validées V31–V35 sont documentées et portées dans [MASTER-MAITRE-RESTO-V2-SITE/CONTRAT-RESTO-V31-V35.md](../MASTER-MAITRE-RESTO-V2-SITE/CONTRAT-RESTO-V31-V35.md) ; les deux éditeurs locaux sont dans son [ATELIER-V35](../MASTER-MAITRE-RESTO-V2-SITE/ATELIER-V35/index.html). **Aucune migration ou RPC serveur n'est implicite**. Le propriétaire réel doit être vérifié dans sa propre instance.

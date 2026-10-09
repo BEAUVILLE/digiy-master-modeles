@@ -131,3 +131,10 @@ Chaque MASTER opérationnel doit tendre vers :
 ---
 
 **DIGIYLYFE.COM · L’empreinte numérique du professionnel**
+
+## RESTO MASTER / MAÎTRE — héritage V31–V35 (09/10/2026)
+
+- **Site V2 complet conservé** : [MASTER-MAITRE-RESTO-V2-SITE](./MASTER-MAITRE-RESTO-V2-SITE/README.md).
+- **Deux éditeurs V35 portés** (brouillons en mémoire uniquement) : [ATELIER-V35](./MASTER-MAITRE-RESTO-V2-SITE/ATELIER-V35/index.html), plats du jour sur 7 jours et carte habituelle Plats & Salades approuvée.
+- **Règles MAÎTRE de sécurité et de diffusion** : [CONTRAT-RESTO-V31-V35](./MASTER-MAITRE-RESTO-V2-SITE/CONTRAT-RESTO-V31-V35.md). Les PR de sécurité non fusionnées et l'emporter non activé restent clairement identifiés.
+- Ne jamais propager les slugs TEST SALY/SARLAT, mots de passe, données clients ou clés privées dans le modèle. Les instances héritent des capacités **après** contrôle propriétaire, permissions serveur, approbation restaurateur et essais réels.

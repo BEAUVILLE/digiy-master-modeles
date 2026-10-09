@@ -95,3 +95,23 @@ Fichiers conservés :
 
 Toujours instancier depuis une copie.  
 Ne jamais publier le MASTER lui-même tel quel.
+
+## Héritage terrain RESTO V31–V35 · 09/10/2026
+
+Le MASTER RESTO V2 est **toujours le site restaurant complet** (8 langues et PWA). Les améliorations récentes ont désormais un portage explicite, **sans modifier ni publier automatiquement le site vitrine**.
+
+### 🍽️ Atelier double V35 — à utiliser sur une copie
+
+Ouvrir [ATELIER-V35/index.html](./ATELIER-V35/index.html) :
+
+- **📅 Plats du jour** sur sept jours, midi/soir, photos, prix éventuels, fuseaux France/Sénégal ;
+- **🥗 Plats & Salades** individuels, carte habituelle indépendante, sans menus composés ni formules imposées ;
+- deux boutons séparés, aperçu local non publié, sauvegarde **absente**, aucun contact ni paiement déclenché.
+
+Les deux moteurs de préparation sont portés depuis les sources fusionnées de `BEAUVILLE/digiy-resto`, notamment les PR #31, #32 et #33. La carte Plats & Salades est **la maquette réellement approuvée**. Le portage est une référence d'atelier, **pas encore une installation propriétaire autonome**.
+
+### 🔐 Le contrat du MAÎTRE
+
+Lire impérativement [CONTRAT-RESTO-V31-V35.md](./CONTRAT-RESTO-V31-V35.md) avant toute duplication : vérification Auth et `owner_id`, RLS/RPC serveur, conservation distincte des brouillons et versions publiées, photos isolées, restauration des réservations, séparation RESTO/RÉSA générique, service à emporter volontaire **sans caisse et sans commission**.
+
+La vitrine `index.html` reste inchangée : ses anciens placeholders `CFG.menu` ne sont pas alimentés par l'atelier non authentifié. Aucun `site` TEST SALY, téléphone, prix ou compte réel n'entre dans le MASTER.
