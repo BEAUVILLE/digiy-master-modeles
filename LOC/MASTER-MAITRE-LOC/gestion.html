@@ -49,7 +49,43 @@ async function enter(session){if(!session)return showLogin();if(SITE_SLUG.starts
 async function loadStates(){if(!unitId)return;const from=iso(new Date(today().getFullYear(),today().getMonth(),1,12));const {data,error}=await db.from("digiy_loc_master_unit_calendar").select("day,status").eq("unit_id",unitId).gte("day",from).order("day");if(error)return setMsg(saveStatus,"⚠️ Lecture calendrier impossible : "+error.message,true);states=new Map((data||[]).map(r=>[r.day,r.status]))}
 function resetSelection(){start=null;end=null;updateSelection()}function updateSelection(){if(!start)return $("selectionLabel").textContent="Sélection : aucune date";$("selectionLabel").textContent=end&&iso(end)!==iso(start)?"Sélection : "+fmt(start)+" → "+fmt(end):"Sélection : "+fmt(start)}function choose(date){if(date<today())return;if(!start||end){start=date;end=null}else{if(date<start){end=start;start=date}else end=date}updateSelection();render()}
 function render(){const y=current.getFullYear(),m=current.getMonth();$("monthLabel").textContent=current.toLocaleDateString("fr-FR",{month:"long",year:"numeric"});const grid=$("calendarGrid");grid.innerHTML="";["Lu","Ma","Me","Je","Ve","Sa","Di"].forEach(x=>{const e=document.createElement("div");e.className="dow";e.textContent=x;grid.appendChild(e)});const first=new Date(y,m,1,12),offset=(first.getDay()+6)%7,last=new Date(y,m+1,0,12).getDate(),sel=new Set(selectedDates());for(let i=0;i<offset;i++)grid.appendChild(document.createElement("div"));for(let d=1;d<=last;d++){const date=new Date(y,m,d,12),key=iso(date),b=document.createElement("button");b.type="button";b.className="day";b.textContent=d;if(date<today())b.disabled=true;const state=states.get(key);if(state)b.classList.add(state);if(sel.has(key))b.classList.add("selected");b.onclick=()=>choose(date);grid.appendChild(b)}}
-async function applyState(status){const dates=selectedDates();if(!dates.length)return setMsg(saveStatus,"⚠️ Sélectionnez une date ou une période.",true);if(!unitId)return;setMsg(saveStatus,"Enregistrement…");let error=null;if(status==="available")({error}=await db.from("digiy_loc_master_unit_calendar").delete().eq("unit_id",unitId).in("day",dates));else{const rows=dates.map(day=>({unit_id:unitId,day,status,updated_at:new Date().toISOString()}));({error}=await db.from("digiy_loc_master_unit_calendar").upsert(rows,{onConflict:"unit_id,day"}))}if(error)return setMsg(saveStatus,"⚠️ Enregistrement refusé : "+error.message,true);await loadStates();resetSelection();render();setMsg(saveStatus,"✓ Calendrier enregistré. Le site public utilise maintenant cet état.")}
+async function applyState(status){
+  const dates=selectedDates();
+  if(!dates.length)return setMsg(saveStatus,"⚠️ Sélectionnez une date ou une période.",true);
+  if(!unitId)return setMsg(saveStatus,"⚠️ Aucun hébergement sélectionné.",true);
+  setMsg(saveStatus,"Enregistrement…");
+  try{
+    // The existing server v2 RPC verifies the authenticated owner and serializes writes.
+    // NEVER write directly to MASTER calendar: it bypasses booking guards.
+    const {data,error}=await db.rpc("digiy_loc_set_unit_calendar_state_v2",{
+      p_unit_id:unitId,p_days:dates,p_status:status
+    });
+    if(error){
+      const protectedBooking=/BOOKING_DATES_PROTECTED_USE_CANCELLATION/.test(error.message||"");
+      return setMsg(saveStatus,protectedBooking
+        ?"⚠️ Dates réservées : action interdite. Vérifiez la réservation avec le propriétaire."
+        :"⚠️ Enregistrement refusé : "+error.message,true);
+    }
+    const expected=new Set(dates);
+    const reported=new Set(Array.isArray(data)?data.map(row=>String(row.day||"")):[]);
+    if(reported.size!==expected.size||dates.some(day=>!reported.has(day))){
+      return setMsg(saveStatus,"⚠️ Confirmation serveur incomplète. Vérifiez le calendrier.",true);
+    }
+    const {data:rows,error:readError}=await db.from("digiy_loc_master_unit_calendar")
+      .select("day,status").eq("unit_id",unitId).in("day",dates);
+    if(readError)return setMsg(saveStatus,"⚠️ Relecture du calendrier impossible : "+readError.message,true);
+    const persisted=new Map((Array.isArray(rows)?rows:[]).map(row=>[String(row.day),String(row.status)]));
+    if(dates.some(day=>status==="available"?persisted.has(day):persisted.get(day)!==status)){
+      return setMsg(saveStatus,"⚠️ État enregistré non confirmé. Rechargez le calendrier.",true);
+    }
+    await loadStates();
+    resetSelection();
+    render();
+    setMsg(saveStatus,"✓ Calendrier confirmé par le serveur.");
+  }catch(_){
+    setMsg(saveStatus,"⚠️ Confirmation indisponible. Réessayez après vérification.",true);
+  }
+}
 $("sendCode").onclick=sendCode;$("verifyCode").onclick=verifyCode;$("prev").onclick=()=>{current=new Date(current.getFullYear(),current.getMonth()-1,1,12);render()};$("next").onclick=()=>{current=new Date(current.getFullYear(),current.getMonth()+1,1,12);render()};$("unitSelect").onchange=async e=>{unitId=e.target.value;states.clear();resetSelection();await loadStates();render()};$("makeAvailable").onclick=()=>applyState("available");$("makeOccupied").onclick=()=>applyState("occupied");$("makeClosed").onclick=()=>applyState("closed");$("logout").onclick=async()=>{await db.auth.signOut();siteId=null;units=[];unitId=null;states.clear();resetSelection();showLogin();setMsg(loginStatus,"✓ Déconnecté.")};db.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_IN"&&session)setTimeout(()=>enter(session),0);if(event==="SIGNED_OUT")showLogin()});db.auth.getSession().then(({data})=>{if(data.session)enter(data.session)});
 })();
 </script>

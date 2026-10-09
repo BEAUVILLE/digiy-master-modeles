@@ -1,0 +1,23 @@
+name: DIGIY LOC MAITRE guarded calendar regression
+on:
+  pull_request:
+    paths:
+      - 'LOC/MASTER-MAITRE-LOC/gestion.html'
+      - 'tests/loc-maitre-calendar-guard.test.cjs'
+      - '.github/workflows/loc-maitre-calendar-guard.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  calendar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run isolated DOM calendar contract tests, synthetic-only
+        run: node --test tests/loc-maitre-calendar-guard.test.cjs
