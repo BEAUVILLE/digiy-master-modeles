@@ -1,0 +1,28 @@
+name: MAITRE LOC PWA owner HTML freshness
+on:
+  pull_request:
+    paths:
+      - 'LOC/MASTER-MAITRE-LOC/sw.js'
+      - 'tests/loc-maitre-sw-owner-freshness.test.cjs'
+      - '.github/workflows/loc-maitre-owner-pwa-safety.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'LOC/MASTER-MAITRE-LOC/sw.js'
+      - 'tests/loc-maitre-sw-owner-freshness.test.cjs'
+      - '.github/workflows/loc-maitre-owner-pwa-safety.yml'
+permissions:
+  contents: read
+jobs:
+  no-stale-owner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test service worker network-only owner pages
+        run: node --test tests/loc-maitre-sw-owner-freshness.test.cjs
