@@ -101,37 +101,37 @@ async function applyState(status){
   const dates=selectedDates();
   if(!dates.length)return setMsg(saveStatus,"⚠️ Sélectionnez une date ou une période.",true);
   if(!unitId)return setMsg(saveStatus,"⚠️ Aucun hébergement sélectionné.",true);
-  const buttons=["makeAvailable","makeOccupied","makeClosed"].map($).filter(Boolean);
-  buttons.forEach(button=>button.disabled=true);
   setMsg(saveStatus,"Enregistrement…");
   try{
+    // The existing server v2 RPC verifies the authenticated owner and serializes writes.
+    // NEVER write directly to MASTER calendar: it bypasses booking guards.
     const {data,error}=await db.rpc("digiy_loc_set_unit_calendar_state_v2",{
       p_unit_id:unitId,p_days:dates,p_status:status
     });
     if(error){
       const protectedBooking=/BOOKING_DATES_PROTECTED_USE_CANCELLATION/.test(error.message||"");
       return setMsg(saveStatus,protectedBooking
-        ?"⚠️ Dates réservées : annulez la réservation depuis le carnet propriétaire avant de les modifier."
+        ?"⚠️ Dates réservées : action interdite. Vérifiez la réservation avec le propriétaire."
         :"⚠️ Enregistrement refusé : "+error.message,true);
     }
-    const resultDays=new Set(Array.isArray(data)?data.map(row=>String(row.day||"")):[]);
-    if(resultDays.size!==new Set(dates).size||dates.some(day=>!resultDays.has(day))){
-      return setMsg(saveStatus,"⚠️ Réponse serveur incomplète : vérifiez le calendrier avant de continuer.",true);
+    const expected=new Set(dates);
+    const reported=new Set(Array.isArray(data)?data.map(row=>String(row.day||"")):[]);
+    if(reported.size!==expected.size||dates.some(day=>!reported.has(day))){
+      return setMsg(saveStatus,"⚠️ Confirmation serveur incomplète. Vérifiez le calendrier.",true);
     }
-    // Re-read persisted state: RPC success alone is not sufficient evidence.
     const {data:rows,error:readError}=await db.from("digiy_loc_master_unit_calendar")
       .select("day,status").eq("unit_id",unitId).in("day",dates);
-    if(readError)return setMsg(saveStatus,"⚠️ Écriture effectuée, relecture impossible : "+readError.message,true);
-    const verified=new Map((rows||[]).map(row=>[String(row.day),row.status]));
-    const good=dates.every(day=>status==="available"?!verified.has(day):verified.get(day)===status);
-    if(!good)return setMsg(saveStatus,"⚠️ Vérification calendrier non conforme : actualisez avant toute autre action.",true);
+    if(readError)return setMsg(saveStatus,"⚠️ Relecture du calendrier impossible : "+readError.message,true);
+    const persisted=new Map((Array.isArray(rows)?rows:[]).map(row=>[String(row.day),String(row.status)]));
+    if(dates.some(day=>status==="available"?persisted.has(day):persisted.get(day)!==status)){
+      return setMsg(saveStatus,"⚠️ État enregistré non confirmé. Rechargez le calendrier.",true);
+    }
     await loadStates();
-    resetSelection();render();
-    setMsg(saveStatus,"✓ Calendrier confirmé côté serveur et synchronisé.");
-  }catch(e){
-    setMsg(saveStatus,"⚠️ Action non confirmée : "+(e?.message||"erreur de connexion"),true);
-  }finally{
-    buttons.forEach(button=>button.disabled=false);
+    resetSelection();
+    render();
+    setMsg(saveStatus,"✓ Calendrier confirmé par le serveur.");
+  }catch(_){
+    setMsg(saveStatus,"⚠️ Confirmation indisponible. Réessayez après vérification.",true);
   }
 }
 
