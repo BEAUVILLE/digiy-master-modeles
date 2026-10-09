@@ -111,3 +111,23 @@ test('bouton ouvrir semaine : uniquement insertions sans écraser les créneaux 
  assert.equal(controls.bulkOpen.disabled,false);
  assert.match(controls.bulkMsg.textContent,/Semaine préparée/);
 });
+
+test('Doctrine universelle validée : exceptions métier explicites et sécurité pré-activation',()=>{
+ const registry=JSON.parse(read('capabilities-resa-multi.json'));
+ const contract=read('CONTRAT-RESA-MULTI-20261009.md');
+ const ids=registry.target_architecture.specialist_exceptions.map(x=>x.module);
+ assert.deepEqual(ids,['RESTO','LOC','DRIVER','OTHER_FIELD_CASES']);
+ assert.equal(registry.target_architecture.universal_appointment_booking.status,'planned_not_production_ready');
+ assert.equal(registry.target_architecture.universal_appointment_booking.never_claim_automatic_confirmation_without_server_commit,true);
+ assert.ok(registry.target_architecture.universal_appointment_booking.requires.includes('atomic_server_booking'));
+ assert.equal(registry.business_rules.zero_commission,true);
+ assert.equal(registry.business_rules.direct_payment,true);
+ assert.equal(registry.business_rules.universal_checkout,false);
+ for(const word of ['RESTO','LOC','DRIVER','terrain','atomique']){
+  assert.ok(doc.includes(word),'MAÎTRE: '+word);
+  assert.ok(contract.includes(word),'CONTRAT: '+word);
+ }
+ assert.match(readme,/réservation automatique universelle/);
+ assert.match(doc,/pas encore déclaré|pas encore|À construire/);
+ assert.doesNotMatch(doc,/réservation automatique générique déjà opérationnelle/i);
+});
