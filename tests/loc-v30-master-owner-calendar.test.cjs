@@ -55,13 +55,13 @@ test('occupied dates are written by RPC, verified by readback, and controls unlo
  assert.equal(h.rpcCalls[0].name,'digiy_loc_set_unit_calendar_state_v2');
  assert.equal(h.fromCalls.length,1);
  assert.deepEqual(h.events,['reload','reset','render']);
- assert.match(h.responses.at(-1).message,/confirmé côté serveur/);
+ assert.match(h.responses.at(-1).message,/Calendrier confirmé par le serveur/);
  assert(Object.values(h.buttons).every(x=>!x.disabled));
 });
 
 test('opening available dates confirms absent calendar rows',async()=>{
  const h=harness({status:'available'});await h.applyState('available');
- assert.match(h.responses.at(-1).message,/confirmé côté serveur/);
+ assert.match(h.responses.at(-1).message,/Calendrier confirmé par le serveur/);
  assert.deepEqual(h.events,['reload','reset','render']);
 });
 
@@ -86,7 +86,7 @@ test('RPC success but inconsistent readback stops without confirming availabilit
  const h=harness({rows:[{day:'2026-12-20',status:'occupied'}]});
  await h.applyState('occupied');
  assert.deepEqual(h.events,[]);
- assert.match(h.responses.at(-1).message,/non conforme/);
+ assert.match(h.responses.at(-1).message,/non confirmé/);
  assert(Object.values(h.buttons).every(x=>!x.disabled));
 });
 
