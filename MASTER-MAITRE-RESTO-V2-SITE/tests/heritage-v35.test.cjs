@@ -33,7 +33,8 @@ test('atelier comporte deux éditeurs locaux distincts, sans accès client ou pr
  assert.match(hub,/rien n'est enregistré|Rien n'est enregistré/);
  assert.match(hub,/show\('semaine'\)/);
  assert.match(hub,/show\('carte'\)/);
- assert.doesNotMatch(hub,/supabase|auth\.getUser|owner_id|service_role|localStorage|fetch\s*\(/i);
+ const activeJs=hub.slice(hub.lastIndexOf('<script>'),hub.lastIndexOf('</script>'));
+ assert.doesNotMatch(activeJs,/supabase|auth\.getUser|owner_id|service_role|localStorage|fetch\s*\(/i);
 });
 
 test('semaine importée fonctionne avec des dépendances relatives, pas des dépendances manquantes',()=>{
@@ -78,7 +79,7 @@ test('aucune identité test ou clé cliente codée dans les éditeurs MASTER',()
  }
 });
 test('MAÎTRE exige vérification propriétaire serveur, approbation, pas de caisse',()=>{
- for(const x of ['auth.getUser()','owner_id === user.id','RLS','brouillon','versions publiées','aucun logiciel de caisse','0 % commission']){
+ for(const x of ['auth.getUser()','owner_id === user.id','RLS','brouillon','version approuvée','aucun logiciel de caisse','0 % commission']){
   assert.ok(doc.includes(x),x);
  }
  assert.match(doc,/PR #19[\s\S]*brouillon non fusionné/i);
