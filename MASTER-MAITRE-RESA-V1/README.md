@@ -1,5 +1,13 @@
 # MASTER MAÎTRE RESA — V1 OWNER
 
+## Doctrine cible — réservation automatique universelle · 09/10/2026
+
+**Le moteur commun de RÉSA doit pouvoir réserver automatiquement pour les professions à rendez-vous compatibles**, en partant des disponibilités réellement ouvertes par le professionnel. Le contrôle serveur doit être atomique : identifier le bon professionnel, vérifier disponibilité/capacité/conflits, enregistrer la réservation ou la demande, retourner un état exact, et gérer annulations/libération. La confirmation peut être automatique uniquement lorsque les conditions métier et le mode choisi par le professionnel le permettent ; sinon elle reste humaine.
+
+**Exclusions du moteur générique** : RESTO (tables, services, capacités), LOC (nuitées/séjours), DRIVER (trajets et disponibilité chauffeur). **Autres cas particuliers : à découvrir et qualifier sur le terrain**, sans inventer une liste définitive. Chaque moteur spécialisé conserve ses règles. DIGIYLYFE : 0 % commission, pas de caisse, paiement et relation directs.
+
+**État réel :** les pages génériques `planning.html` et `gestion.html` constituent déjà un socle de calendrier et de gestion. Elles ne constituent **pas encore** un moteur universel de réservation atomique. Il faut une RPC dédiée, des tests anti-double-réservation/RLS et un BAT de bout en bout avant activation. Voir [REGLE-PLANNING-V2.md](./REGLE-PLANNING-V2.md) et [capabilities-resa-multi.json](./capabilities-resa-multi.json).
+
 ## Statut
 
 **MASTER MAÎTRE RESA — V1 PROPRIÉTAIRE**

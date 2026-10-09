@@ -6,6 +6,8 @@ on:
       - 'MASTER-MAITRE-RESA-V1/gestion.html'
       - 'MASTER-MAITRE-RESA-V1/REGLE-PLANNING-V2.md'
       - 'MASTER-MAITRE-RESA-V1/README.md'
+      - 'MASTER-MAITRE-RESA-V1/CONTRAT-RESA-MULTI-20261009.md'
+      - 'MASTER-MAITRE-RESA-V1/capabilities-resa-multi.json'
       - 'MASTER-MAITRE-RESA-V1/tests/planning-v2.test.cjs'
       - '.github/workflows/resa-master-planning.yml'
   push:

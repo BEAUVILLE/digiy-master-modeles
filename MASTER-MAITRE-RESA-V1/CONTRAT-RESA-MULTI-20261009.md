@@ -7,7 +7,9 @@ Le portail RÉSA MULTI vit dans [BEAUVILLE/digiy-resa-table-resto](https://githu
 Le **MASTER propriétaire transversal** est `MASTER-MAITRE-RESA-V1/`. Il conserve son rail tarif adhérent → DIGIY PRO → capacité RÉSA → propriétaire authentifié → visibilité publique approuvée. Sa liaison Auth utilise `digiy_resa_profiles.auth_user_id`. L'ancien champ `owner_id` a une fonction de rattachement commercial distincte : ne jamais les confondre ni modifier leur sens sans audit SQL.
 
 ### Doctrine
-**RÉSA MULTI est une porte de découverte et de transmission vers le moteur métier, pas une caisse ni un moteur universel.** Une demande ne vaut pas réservation confirmée. Paiement et contact directs, 0 % commission.
+**RÉSA MULTI est aujourd'hui une porte de découverte et de contact, dont la cible validée est le moteur commun de réservation automatique pour tous les rendez-vous compatibles.** Ce moteur universel n'est pas encore déclaré opérationnel ; sa transaction serveur atomique doit être construite, testée et activée avant d'émettre des réservations confirmées. Paiement et contact directs, 0 % commission, aucune caisse DIGIYLYFE.
+
+**Exceptions hors moteur générique : RESTO** (tables, services, capacités), **LOC** (nuits/séjours), **DRIVER** (trajets/disponibilité chauffeur), et **autres exceptions découvertes et qualifiées sur le terrain**. Ces métiers conservent leurs moteurs spécialisés ; aucune adaptation fictive ne sera inventée. Le mode de confirmation automatique ou humaine est paramétré et appliqué par le serveur selon le métier et l'accord du professionnel.
 
 ## Éléments métier et limites
 
@@ -40,10 +42,14 @@ Un contrôle ciblé du code `MASTER-MAITRE-RESA-V1/gestion.html` montre une sess
 - LOC : hébergement/location avec ses propres calendriers et règles.
 - DRIVER : fiche, trajet et contact direct ; aucune réservation payante ni tarif routier inventé.
 - BEAUTY : prestations, tarifs, disponibilités, rendez-vous et confirmation/refus.
-- RÉSA MULTI : porte commune multi-métiers avec modèle de présence, sans caisse, sans collecte de paiement et sans commission.
+- RÉSA MULTI : portail commun et **futur socle de réservation automatique des activités de rendez-vous compatibles** ; pas de caisse, pas de paiement collecté, 0 % commission. En production aujourd'hui, ne pas confondre consultation des créneaux et réservation automatique générique. Les exceptions RESTO, LOC, DRIVER et les autres cas terrain sont acheminées vers leur moteur approprié.
 - WORLD8 sur la vitrine selon les traductions effectivement fournies ; ne pas en déduire que chaque cockpit métier est traduit.
 
 ## Statut d'activation
 Le présent **portage est documentaire et réutilisable** : il n'installe aucun nouveau RPC, aucune migration, aucun script Supabase, aucune instance BEAUTY ni commande client. Les états exacts machine-lisibles figurent dans `capabilities-resa-multi.json`.
 
 **Avant toute généralisation** : audit de sécurité réel, tests mobiles E2E, vérification des URLs DRIVER et RESTO, anti-double-réservation, validation propriétaire et approbation humaine. La fusion de ce contrat n'est **pas** une mise en production de ces fonctionnalités.
+
+## Décision fondateur — 09/10/2026
+
+La réservation automatique **universelle** est une capacité cible du MASTER MAÎTRE pour les rendez-vous compatibles, **pas un remplacement obligatoire des logiciels métier**. RESTO / LOC / DRIVER sont des exceptions explicites, et la liste des autres cas spécifiques reste **ouverte à l'observation terrain**. Le contrat opérationnel détaillé est dans [REGLE-PLANNING-V2.md](./REGLE-PLANNING-V2.md). Cette évolution documentaire ne change ni les droits SQL ni les réservations existantes.
