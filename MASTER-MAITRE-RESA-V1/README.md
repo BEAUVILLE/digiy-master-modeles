@@ -124,3 +124,13 @@ Les acquis des **16 PR fusionnées** du portail `BEAUVILLE/digiy-resa-table-rest
 Particularités importantes : `digiy_resa_profiles.auth_user_id` rattache techniquement le propriétaire Auth, alors que l'ancien `owner_id` conserve un rôle commercial historique ; ne jamais les confondre. La vitrine compte actuellement 3 entrées DRIVER `REAL` et 7 `DEMO` selon le code vérifié, avec un libellé « 6 exemples » restant à corriger.
 
 Aucune URL TEST SALY, clé privée ou configuration de membre réel n'est transférée au MASTER. Un prochain adhérent requiert l'audit serveur, les tests propriétaires A/B, les tests métier et la validation humaine avant publication.
+
+## RÈGLE MAÎTRE · PLANNING DE RENDEZ-VOUS V2 (09/10/2026)
+
+Le calendrier de recherche sur **sept jours** est désormais une capacité transverse du MASTER RÉSA, applicable aux activités sur rendez-vous sans substituer leurs moteurs spécialisés :
+
+- [planning.html](./planning.html) — modèle public des disponibilités **réellement ouvertes**, choix jour/heure, demande directe WhatsApp si le professionnel a publié son numéro ; ne crée jamais une réservation automatique.
+- [gestion.html](./gestion.html) — vue propriétaire sur sept jours, nourrie des vrais créneaux existants et conservant leur formulaire de gestion.
+- [REGLE-PLANNING-V2.md](./REGLE-PLANNING-V2.md) — doctrine MAÎTRE, différences BEAUTY / RESTO / LOC / DRIVER, contrôle SQL/RLS, dépendances, BAT et refus des créneaux inventés.
+
+**Attention :** cette référence n'active aucun métier ni aucun SQL de production par elle-même. Les RPC de lecture et d'ouverture des semaines sont préparées dans `BEAUVILLE/digiy-resa-table-resto` avec tests PostgreSQL isolés ; seuls les créneaux ouverts par le professionnel pourront apparaître au client.
