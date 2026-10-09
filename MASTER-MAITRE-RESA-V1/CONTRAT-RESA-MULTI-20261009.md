@@ -22,6 +22,9 @@ Le **MASTER propriétaire transversal** est `MASTER-MAITRE-RESA-V1/`. Il conserv
 
 Sur `digiy-resa-table-resto/index.html` au 9 octobre, **3 entrées chauffeurs REAL** et **7 objets DEMO** ont été constatés. Un libellé traduit annonce encore « 6 exemples » : corriger séparément ce décalage après vérification, sans inventer de professionnels ou changer artificiellement le nombre de fiches.
 
+### Vigilance sur le gestionnaire propriétaire V1 existant
+Un contrôle ciblé du code `MASTER-MAITRE-RESA-V1/gestion.html` montre une session Auth et des requêtes filtrées par `slug`, **sans contrôle explicite `auth_user_id` dans ce JavaScript**. Cela ne prouve pas une vulnérabilité (les règles RLS peuvent faire le contrôle), mais ne permet pas non plus de conclure que l'isolation entre propriétaires est vérifiée. **Obligation avant instanciation :** contrôler les politiques RLS et les droits SQL exécutés réellement pour `digiy_resa_profiles`, `digiy_resa_slots`, `digiy_resa_bookings`, avec sessions owner A/B et accès anonyme. Aucun changement de sécurité prod n'est effectué ici.
+
 ## Instructions de clonage et de validation
 
 1. Vérifier d'abord l'identité et le métier réels, l'abonnement et les prestations autorisées.
