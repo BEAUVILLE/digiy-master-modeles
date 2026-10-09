@@ -1,0 +1,28 @@
+name: MASTER RÉSA planning V2
+on:
+  pull_request:
+    paths:
+      - 'MASTER-MAITRE-RESA-V1/planning.html'
+      - 'MASTER-MAITRE-RESA-V1/gestion.html'
+      - 'MASTER-MAITRE-RESA-V1/REGLE-PLANNING-V2.md'
+      - 'MASTER-MAITRE-RESA-V1/README.md'
+      - 'MASTER-MAITRE-RESA-V1/tests/planning-v2.test.cjs'
+      - '.github/workflows/resa-master-planning.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'MASTER-MAITRE-RESA-V1/**'
+      - '.github/workflows/resa-master-planning.yml'
+permissions:
+  contents: read
+jobs:
+  template:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate reusable templates and user-facing limitations
+        run: node --test MASTER-MAITRE-RESA-V1/tests/planning-v2.test.cjs

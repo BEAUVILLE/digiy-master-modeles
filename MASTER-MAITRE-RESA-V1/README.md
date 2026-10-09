@@ -124,3 +124,36 @@ Les acquis des **16 PR fusionnées** du portail `BEAUVILLE/digiy-resa-table-rest
 Particularités importantes : `digiy_resa_profiles.auth_user_id` rattache techniquement le propriétaire Auth, alors que l'ancien `owner_id` conserve un rôle commercial historique ; ne jamais les confondre. La vitrine compte actuellement 3 entrées DRIVER `REAL` et 7 `DEMO` selon le code vérifié, avec un libellé « 6 exemples » restant à corriger.
 
 Aucune URL TEST SALY, clé privée ou configuration de membre réel n'est transférée au MASTER. Un prochain adhérent requiert l'audit serveur, les tests propriétaires A/B, les tests métier et la validation humaine avant publication.
+
+## RÈGLE MAÎTRE · PLANNING DE RENDEZ-VOUS V2 (09/10/2026)
+
+Le calendrier de recherche sur **sept jours** est désormais une capacité transverse du MASTER RÉSA, applicable aux activités sur rendez-vous sans substituer leurs moteurs spécialisés :
+
+- [planning.html](./planning.html) — modèle public des disponibilités **réellement ouvertes**, choix jour/heure, demande directe WhatsApp si le professionnel a publié son numéro ; ne crée jamais une réservation automatique.
+- [gestion.html](./gestion.html) — vue propriétaire sur sept jours, nourrie des vrais créneaux existants et conservant leur formulaire de gestion.
+- [REGLE-PLANNING-V2.md](./REGLE-PLANNING-V2.md) — doctrine MAÎTRE, différences BEAUTY / RESTO / LOC / DRIVER, contrôle SQL/RLS, dépendances, BAT et refus des créneaux inventés.
+
+**Attention :** le MASTER ne crée aucun profil ni adhésion automatiquement. Au 9 octobre 2026, la RPC publique `digiy_resa_public_week_v1` est installée et ses droits `anon` contrôlés dans `digiy-core`. L'ouverture groupée des semaines du MASTER utilise les insertions PostgREST existantes, protégées par les politiques RLS propriétaires et l'unicité SQL sur `(slug, slot_date, start_time)`. Aucune donnée professionnelle n'est créée par la fusion du MASTER.
+
+### Kit de pose rapide RÉSA — sans nouveaux développements
+
+Le MASTER comprend deux fichiers HTML autonomes (après configuration) :
+
+- `gestion.html` — accès propriétaire, calendrier sept jours, ouverture groupée des jours et heures **librement choisis**, modification/fermeture des créneaux et traitement des demandes ;
+- `planning.html` — affichage public de sept jours, heures issues du SQL réel, demande WhatsApp directe si numéro publié. Le choix d'un horaire **ne crée pas automatiquement** de demande ou réservation dans le moteur générique.
+
+Pour installer une instance, recopier ces deux fichiers dans le dossier destiné à **ce professionnel** et renseigner uniquement les paramètres suivants, sans laisser aucun crochet :
+
+| Repère dans les fichiers | Valeur à renseigner |
+|---|---|
+| `[RESA_SLUG]` (gestion seulement) | Slug réel de la fiche RÉSA autorisée |
+| `[NOM PROFESSIONNEL]` (gestion seulement) | Nom du professionnel |
+| `[SUPABASE_URL]` (les deux fichiers) | URL du projet Supabase en HTTPS |
+| `[SUPABASE_PUBLISHABLE_KEY]` (les deux fichiers) | Clé **publique** Supabase, jamais `service_role` |
+| `[PUBLIC_RESA_MULTI_URL]` (planning seulement) | Lien public vérifié vers le portail RÉSA |
+
+**Verrou d'activation préalable** : contrôler le dossier adhérent et `digiy_resa_profiles` (`is_active`, `is_published`, `auth_user_id` du vrai propriétaire, coordonnées publiables), autoriser l'URL exacte du magic-link dans les Redirect URLs, puis vérifier les policies RLS sur profils/créneaux/réservations. Le MASTER générique n'avait pas encore de profil réel dans `digiy-core` au contrôle du 9 octobre : il faut donc créer et autoriser la première fiche professionnelle avant toute démonstration de réservation réelle.
+
+**BAT terrain minimal** : connexion du propriétaire, choix libre d'un lundi/jours/heures/durée, enregistrement groupé, fermeture d'un créneau, rechargement de la semaine publique, vérification des heures bloquées et du contact direct sur téléphone. Ne pas valider une véritable réservation sans contrôle de la RPC de réservation métier et des droits croisés propriétaire A/B.
+
+**Limite d'architecture** : la détection des chevauchements à l'ouverture groupée utilise la liste chargée dans l'interface ; elle n'est pas une transaction SQL de verrouillage entre deux sessions simultanées. L'unicité SQL protège seulement les horaires de début identiques. En cas de besoin métier de réservations atomiques, ajouter et tester une RPC transactionnelle spécifique **avant l'activation client**. Une fiche RÉSA générique n'est pas une caisse.

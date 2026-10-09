@@ -18,7 +18,7 @@ button,input,select,textarea{font:inherit}.wrap{width:min(860px,calc(100% - 22px
 .hidden{display:none!important}.eyebrow{font-size:10px;font-weight:1000;letter-spacing:.12em;text-transform:uppercase;color:#8d6b19}
 h1,h2,h3{color:var(--g);margin:7px 0}h1{font-size:clamp(30px,7vw,45px);line-height:1}.muted,.hint{color:var(--muted);font-weight:700;line-height:1.5}.hint{font-size:12px;margin:3px 0 9px}
 .field{display:grid;gap:6px;margin-top:10px}.field label{font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--muted)}
-input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;padding:11px 12px;background:#fff;color:var(--ink)}input,select{min-height:46px}textarea{min-height:78px;resize:vertical}
+input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;padding:11px 12px;background:#fff;color:var(--ink)}input,select{min-height:46px}input[type=checkbox]{width:19px;height:19px;min-height:0;padding:0;margin:0;accent-color:var(--g);flex:0 0 19px}fieldset label{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:750;cursor:pointer}textarea{min-height:78px;resize:vertical}
 .btn{border:0;border-radius:999px;min-height:42px;padding:9px 14px;font-weight:1000;cursor:pointer}.primary{background:var(--g);color:#fff}.gold{background:var(--gold);color:#173f35}.ghost{background:#fff;color:var(--g);border:1px solid #b9cdc2}.danger{background:#fde8e7;color:#8f201a}
 .status{min-height:18px;margin-top:9px;font-size:12px;font-weight:900;color:var(--g)}.error{color:var(--red)}
 .session{display:flex;justify-content:space-between;align-items:center;gap:9px;flex-wrap:wrap;background:#edf5ef;border-radius:14px;padding:10px 12px;margin:11px 0;font-size:12px;font-weight:900}.session button{border:0;background:#fff;border-radius:999px;padding:7px 10px;font-weight:900}
@@ -35,7 +35,7 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 <body>
 <div class="wrap">
 <div class="master"><strong>MASTER :</strong> renseigner <code>[RESA_SLUG]</code> et <code>[NOM PROFESSIONNEL]</code> lors de la déclinaison. Ne jamais publier ce fichier sans configuration.</div>
-<header class="top"><div class="brand">📅 [NOM PROFESSIONNEL] · DIGIY RESA<small>Accès adhérent · créneaux et demandes</small></div><a class="back" href="./">← Ma fiche</a></header>
+<header class="top"><div class="brand">📅 [NOM PROFESSIONNEL] · DIGIY RESA<small>Accès adhérent · créneaux et demandes</small></div><a class="back" id="openPublicPlanning" href="./planning.html?slug=[RESA_SLUG]" target="_blank" rel="noopener">📅 Planning client</a></header>
 
 <section class="panel" id="login">
 <span class="eyebrow">Accès privé adhérent</span>
@@ -64,6 +64,35 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 </div>
 <div class="actions"><button class="btn primary" id="saveSlot" type="button">💾 Enregistrer le créneau</button><button class="btn ghost" id="refreshSlots" type="button">↻ Rafraîchir</button></div>
 <p id="slotMsg" class="status"></p>
+<div class="head" style="margin:24px 0 8px"><div><h3>📆 Préparer une semaine en une opération</h3><p class="hint">Vous choisissez librement vos jours, vos heures et la durée des rendez-vous. Aucune disponibilité prédéfinie, aucune réservation existante modifiée.</p></div></div>
+<div class="field"><label for="bulkMonday">Lundi de la semaine à préparer</label><input id="bulkMonday" type="date"></div>
+<fieldset style="border:1px solid #d9d5c9;border-radius:14px;margin:12px 0;padding:12px">
+<legend>Jours où vous souhaitez recevoir</legend>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<label><input type="checkbox" data-bulk-day="1"> Lundi</label><label><input type="checkbox" data-bulk-day="2"> Mardi</label>
+<label><input type="checkbox" data-bulk-day="3"> Mercredi</label><label><input type="checkbox" data-bulk-day="4"> Jeudi</label>
+<label><input type="checkbox" data-bulk-day="5"> Vendredi</label><label><input type="checkbox" data-bulk-day="6"> Samedi</label>
+<label><input type="checkbox" data-bulk-day="7"> Dimanche</label>
+</div></fieldset>
+<p class="hint">Vos heures de début (au maximum six, au choix, sans horaires imposés)</p>
+<div class="grid">
+<div class="field"><label>Heure 1</label><input type="time" class="bulkHour"></div>
+<div class="field"><label>Heure 2</label><input type="time" class="bulkHour"></div>
+<div class="field"><label>Heure 3</label><input type="time" class="bulkHour"></div>
+<div class="field"><label>Heure 4</label><input type="time" class="bulkHour"></div>
+<div class="field"><label>Heure 5</label><input type="time" class="bulkHour"></div>
+<div class="field"><label>Heure 6</label><input type="time" class="bulkHour"></div>
+</div>
+<div class="field" style="margin-top:12px"><label for="bulkDuration">Durée de chaque rendez-vous (minutes)</label>
+<input id="bulkDuration" type="number" min="5" max="480" step="5" placeholder="À définir par le professionnel"></div>
+<div class="actions"><button type="button" class="btn primary" id="bulkOpen">📅 Ouvrir les créneaux choisis</button></div>
+<p id="bulkMsg" class="status" role="status" aria-live="polite"></p>
+<p class="hint">Les créneaux déjà ouverts, fermés ou réservés sont conservés. Une demande ne vaut pas confirmation : vous validez directement avec le client.</p>
+<div class="head" style="margin:17px 0 10px"><div><h3>📅 Vue sur 7 jours</h3><p class="hint">Lecture des créneaux enregistrés. Cliquez sur un jour pour le préparer ci-dessus.</p></div>
+<div class="actions"><button type="button" class="btn ghost" id="weekBack">←</button><button type="button" class="btn ghost" id="weekForward">→</button></div></div>
+<p id="weekLabel" class="hint"></p>
+<div id="weekBoard" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:8px"></div>
+<p class="hint">🟢 ouvert · ⚫ fermé · les demandes doivent être confirmées par le professionnel.</p>
 <div id="slotCount" class="count"></div><div id="slots" class="list"></div>
 </div>
 
@@ -79,11 +108,11 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 <script>
 (()=>{'use strict';
 const RESA_SLUG='[RESA_SLUG]';
-const URL='https://wesqmwjjtsefyjnluosj.supabase.co';
-const KEY='sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3';
+const URL='[SUPABASE_URL]';
+const KEY='[SUPABASE_PUBLISHABLE_KEY]';
 const db=supabase.createClient(URL,KEY,{auth:{persistSession:true,detectSessionInUrl:true}});
 const $=id=>document.getElementById(id);
-let profile=null,slots=[],bookings=[];
+let profile=null,slots=[],bookings=[],weekOffset=0;
 
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const fmtDate=s=>{if(!s)return'—';const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12).toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short',year:'numeric'})};
@@ -99,7 +128,9 @@ async function enter(session){
   profile=data;
   $('identity').textContent=(data.display_name||'[NOM PROFESSIONNEL]')+' · '+(data.business_type||'activité sur rendez-vous')+(data.city?' · '+data.city:'');
   showManager(session.user.email);
+  $('openPublicPlanning').href='./planning.html?slug='+encodeURIComponent(RESA_SLUG);
   $('slotDate').value=today();
+  if(!$('bulkMonday').value)$('bulkMonday').value=upcomingMonday();
   await Promise.all([loadSlots(),loadBookings()]);
 }
 
@@ -110,7 +141,32 @@ async function loadSlots(){
   slots=data||[];renderSlots();
 }
 
+function renderWeekBoard(){
+ const box=$('weekBoard');if(!box)return;
+ box.replaceChildren();
+ const first=new Date();first.setHours(12,0,0,0);first.setDate(first.getDate()+7*weekOffset);
+ const dates=[];
+ for(let i=0;i<7;i++){
+  const d=new Date(first);d.setDate(first.getDate()+i);
+  const key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  dates.push(key);
+  const rows=slots.filter(s=>s.slot_date===key);
+  const count=rows.filter(s=>s.status==='open').length;
+  const day=document.createElement('button');day.type='button';day.className='btn ghost';
+  day.style.cssText='display:block;width:100%;text-align:left;white-space:normal;min-height:110px;padding:10px;border-radius:14px';
+  day.textContent=d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'})+' · '+count+' ouvert(s) / '+rows.length+' créneau(x)';
+  day.onclick=()=>{$('slotDate').value=key;$('slotDate').focus();$('slotDate').scrollIntoView({block:'center',behavior:'smooth'});};
+  box.append(day);
+ }
+ $('weekBack').disabled=weekOffset<=0;
+ $('weekForward').disabled=weekOffset>=7;
+ $('weekLabel').textContent=fmtDate(dates[0])+' → '+fmtDate(dates[6]);
+}
+$('weekBack').onclick=()=>{weekOffset=Math.max(0,weekOffset-1);renderWeekBoard()};
+$('weekForward').onclick=()=>{weekOffset=Math.min(7,weekOffset+1);renderWeekBoard()};
+
 function renderSlots(){
+  renderWeekBoard();
   const box=$('slots');box.innerHTML='';$('slotCount').textContent=slots.length+' créneau'+(slots.length===1?'':'x')+' à venir';
   if(!slots.length){box.innerHTML='<div class="empty">Aucun créneau à venir.</div>';return}
   slots.forEach(s=>{
@@ -123,6 +179,70 @@ function renderSlots(){
     a.append(toggle,del);c.appendChild(a);box.appendChild(c);
   });
 }
+
+function upcomingMonday(){
+ const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+((8-d.getDay())%7));
+ return todayFromDate(d);
+}
+const todayFromDate=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function weekDraft(){
+ const monday=$('bulkMonday').value;
+ if(!monday)return {error:'Choisissez le lundi de la semaine.'};
+ const d=new Date(monday+'T12:00:00');
+ if(Number.isNaN(d.getTime())||d.getDay()!==1)return {error:'La semaine doit commencer un lundi.'};
+ const current=new Date();current.setHours(12,0,0,0);
+ const offsetDays=Math.round((d-current)/86400000);
+ if(offsetDays < -6 || offsetDays > 56)return {error:'Choisissez cette semaine ou une semaine dans les huit prochaines.'};
+ const weekdays=Array.from(document.querySelectorAll('[data-bulk-day]:checked'),x=>Number(x.dataset.bulkDay));
+ const hours=Array.from(document.querySelectorAll('.bulkHour'),x=>x.value).filter(Boolean).sort();
+ const minutes=Number($('bulkDuration').value);
+ if(!weekdays.length||!hours.length)return {error:'Choisissez au moins un jour et une heure.'};
+ if(new Set(hours).size!==hours.length)return {error:'Chaque heure doit être différente.'};
+ if(!Number.isInteger(minutes)||minutes<5||minutes>480||minutes%5!==0)return {error:'Précisez une durée comprise entre 5 et 480 minutes, par pas de 5.'};
+ const periods=hours.map(h=>{
+  const [hh,mm]=h.split(':').map(Number),begin=hh*60+mm,end=begin+minutes;
+  return {begin,end,start_time:h,end_time:('0'+Math.floor(end/60)).slice(-2)+':'+('0'+end%60).slice(-2)};
+ });
+ if(periods.some(p=>p.end>=1440))return {error:'Un rendez-vous ne peut pas dépasser minuit.'};
+ if(periods.some((p,i)=>i>0&&p.begin<periods[i-1].end))
+  return {error:'Les horaires que vous proposez se chevauchent : espacez-les ou réduisez la durée.'};
+ const rows=[];
+ for(let i=0;i<7;i++){
+  const day=new Date(d);day.setDate(d.getDate()+i);
+  if(!weekdays.includes(i+1))continue;
+  const date=todayFromDate(day);
+  if(date<today())continue;
+  for(const p of periods){
+   // Preserve any existing open/closed slot, even with a different start hour.
+   const overlaps=slots.some(s=>s.slot_date===date&&
+    (Number(String(s.start_time).slice(0,2))*60+Number(String(s.start_time).slice(3,5)))<p.end&&
+    (s.end_time?(Number(String(s.end_time).slice(0,2))*60+Number(String(s.end_time).slice(3,5))):
+     (Number(String(s.start_time).slice(0,2))*60+Number(String(s.start_time).slice(3,5))+30))>p.begin);
+   if(!overlaps)rows.push({slug:RESA_SLUG,slot_date:date,start_time:p.start_time,end_time:p.end_time,status:'open'});
+  }
+ }
+ return {rows,countRequested:weekdays.length*hours.length};
+}
+async function openBulkWeek(){
+ if(!profile)return msg($('bulkMsg'),'⚠️ Accès propriétaire requis.',true);
+ const draft=weekDraft();
+ if(draft.error)return msg($('bulkMsg'),'⚠️ '+draft.error,true);
+ if(!draft.rows.length)return msg($('bulkMsg'),'Aucun nouveau créneau : journées déjà remplies ou passées.');
+ $('bulkOpen').disabled=true;msg($('bulkMsg'),'Création des seuls créneaux nouveaux…');
+ try{
+   // SQL uniqueness plus ignoreDuplicates preserve existing closed/open slots.
+   // PostgreSQL RLS verifies the authenticated profile for each insert.
+   const {error}=await db.from('digiy_resa_slots').upsert(draft.rows,{
+     onConflict:'slug,slot_date,start_time',ignoreDuplicates:true
+   });
+   if(error)throw error;
+   await loadSlots();
+   msg($('bulkMsg'),'✓ Semaine préparée : '+draft.rows.length+
+       ' créneau(x) proposés. Créneaux existants conservés. Contrôlez la vue sur 7 jours.');
+ }catch(err){msg($('bulkMsg'),'⚠️ Impossible de préparer la semaine : '+(err.message||'erreur serveur'),true);}
+ finally{$('bulkOpen').disabled=false}
+}
+$('bulkOpen').onclick=openBulkWeek;
 
 async function saveSlot(){
   const row={slug:RESA_SLUG,slot_date:$('slotDate').value,start_time:$('slotStart').value,end_time:$('slotEnd').value||null,status:$('slotStatus').value,capacity:$('slotCapacity').value?Number($('slotCapacity').value):null,note:$('slotNote').value.trim()||null,updated_at:new Date().toISOString()};
