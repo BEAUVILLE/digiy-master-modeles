@@ -91,5 +91,5 @@ test('updating service worker purges previous MAITRE caches on activation',async
 });
 test('network-only owner rule is pinned to secure version',()=>{
   assert.match(source,/const CACHE='digiy-master-loc-v30-network-first-20261009'/);
-  assert.doesNotMatch(source,/caches.match\(request\).*fetch\(request\)/s);
+  assert.match(source,/if\(ownerHtml\)\{[\s\S]*?fetch\(request,\{cache:'no-store'\}\)[\s\S]*?return;\s*\}/);
 });
