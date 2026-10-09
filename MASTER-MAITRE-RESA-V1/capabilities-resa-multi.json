@@ -109,9 +109,66 @@
     "direct_payment": true,
     "universal_checkout": false,
     "universal_restaurant_table_engine": false,
-    "loc_housing_in_scope": false
+    "loc_housing_in_scope": false,
+    "universal_appointment_booking_policy": "default_for_compatible_professions_not_yet_implemented",
+    "specialized_booking_exceptions": [
+      "RESTO",
+      "LOC",
+      "DRIVER",
+      "OTHER_FIELD_CASES"
+    ],
+    "extras_identified_on_site_only": true
   },
   "migration_included": false,
   "secrets_included": false,
-  "owner_data_included": false
+  "owner_data_included": false,
+  "target_architecture": {
+    "universal_appointment_booking": {
+      "policy": "default_for_compatible_appointment_professions",
+      "status": "planned_not_production_ready",
+      "requires": [
+        "atomic_server_booking",
+        "availability_recheck_and_concurrency_guard",
+        "owner_auth_and_tenant_isolation",
+        "configurable_confirmation_mode",
+        "cancel_and_release",
+        "real_mobile_owner_and_customer_E2E"
+      ],
+      "never_claim_automatic_confirmation_without_server_commit": true
+    },
+    "specialist_exceptions": [
+      {
+        "module": "RESTO",
+        "route": "dedicated_restaurant_tables_services_capacity_engine",
+        "reuse_generic_engine": false
+      },
+      {
+        "module": "LOC",
+        "route": "dedicated_lodging_nights_stays_engine",
+        "reuse_generic_engine": false
+      },
+      {
+        "module": "DRIVER",
+        "route": "dedicated_trip_driver_availability_engine",
+        "reuse_generic_engine": false
+      },
+      {
+        "module": "OTHER_FIELD_CASES",
+        "route": "evaluate_individually_from_real_professional_needs",
+        "reuse_generic_engine": null
+      }
+    ],
+    "owner_controls": [
+      "working_days",
+      "opening_hours",
+      "duration",
+      "closures",
+      "confirmation_policy"
+    ],
+    "business_guards": [
+      "zero_commission",
+      "direct_payment",
+      "no_DIGIY_POS"
+    ]
+  }
 }
