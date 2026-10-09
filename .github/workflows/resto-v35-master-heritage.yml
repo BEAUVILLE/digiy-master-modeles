@@ -1,0 +1,33 @@
+name: MASTER MAÎTRE RESTO V35 inheritance
+on:
+  pull_request:
+    paths:
+      - 'MASTER-MAITRE-RESTO-V2-SITE/**'
+      - 'MASTER-MAITRE-RESA-V1/README.md'
+      - 'README.md'
+      - '.github/workflows/resto-v35-master-heritage.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'MASTER-MAITRE-RESTO-V2-SITE/**'
+      - 'MASTER-MAITRE-RESA-V1/README.md'
+      - 'README.md'
+      - '.github/workflows/resto-v35-master-heritage.yml'
+permissions:
+  contents: read
+jobs:
+  heritage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate cloned JavaScript syntax
+        run: |
+          node --check MASTER-MAITRE-RESTO-V2-SITE/ATELIER-V35/weekly-core.js
+          node --check MASTER-MAITRE-RESTO-V2-SITE/ATELIER-V35/plats-du-jour.js
+          node --check MASTER-MAITRE-RESTO-V2-SITE/tests/heritage-v35.test.cjs
+      - name: Master inheritance and security tests
+        run: node --test MASTER-MAITRE-RESTO-V2-SITE/tests/heritage-v35.test.cjs
