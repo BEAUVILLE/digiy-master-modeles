@@ -35,7 +35,7 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 <body>
 <div class="wrap">
 <div class="master"><strong>MASTER :</strong> renseigner <code>[RESA_SLUG]</code> et <code>[NOM PROFESSIONNEL]</code> lors de la déclinaison. Ne jamais publier ce fichier sans configuration.</div>
-<header class="top"><div class="brand">📅 [NOM PROFESSIONNEL] · DIGIY RESA<small>Accès adhérent · créneaux et demandes</small></div><a class="back" href="./">← Ma fiche</a></header>
+<header class="top"><div class="brand">📅 [NOM PROFESSIONNEL] · DIGIY RESA<small>Accès adhérent · créneaux et demandes</small></div><a class="back" id="openPublicPlanning" href="./planning.html?slug=[RESA_SLUG]" target="_blank" rel="noopener">📅 Planning client</a></header>
 
 <section class="panel" id="login">
 <span class="eyebrow">Accès privé adhérent</span>
@@ -108,8 +108,8 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 <script>
 (()=>{'use strict';
 const RESA_SLUG='[RESA_SLUG]';
-const URL='https://wesqmwjjtsefyjnluosj.supabase.co';
-const KEY='sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3';
+const URL='[SUPABASE_URL]';
+const KEY='[SUPABASE_PUBLISHABLE_KEY]';
 const db=supabase.createClient(URL,KEY,{auth:{persistSession:true,detectSessionInUrl:true}});
 const $=id=>document.getElementById(id);
 let profile=null,slots=[],bookings=[],weekOffset=0;
@@ -128,6 +128,7 @@ async function enter(session){
   profile=data;
   $('identity').textContent=(data.display_name||'[NOM PROFESSIONNEL]')+' · '+(data.business_type||'activité sur rendez-vous')+(data.city?' · '+data.city:'');
   showManager(session.user.email);
+  $('openPublicPlanning').href='./planning.html?slug='+encodeURIComponent(RESA_SLUG);
   $('slotDate').value=today();
   if(!$('bulkMonday').value)$('bulkMonday').value=upcomingMonday();
   await Promise.all([loadSlots(),loadBookings()]);
