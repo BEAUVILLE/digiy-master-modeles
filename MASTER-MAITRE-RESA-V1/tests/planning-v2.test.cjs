@@ -84,3 +84,30 @@ test('semaine propriétaire : vrais choix, chevauchements évités, fermetures c
  const duplicated=vm.runInNewContext(extracted+';weekDraft()',{...state,document:{querySelectorAll:s=>s.includes('bulk-day')?[{dataset:{bulkDay:'1'}}]:[{value:'09:00'},{value:'09:00'}]}});
  assert.match(duplicated.error,/différente/);
 });
+
+test('bouton ouvrir semaine : uniquement insertions sans écraser les créneaux existants',async()=>{
+ const begin=gestion.indexOf('async function openBulkWeek(){');
+ const end=gestion.indexOf("$('bulkOpen').onclick=openBulkWeek;",begin);
+ assert.ok(begin>=0&&end>begin);
+ const snippet=gestion.slice(begin,end);
+ const rows=[{slug:'my-pro',slot_date:'2026-10-12',start_time:'09:00',end_time:'09:45',status:'open'}];
+ const calls=[];
+ const controls={bulkOpen:{disabled:false},bulkMsg:{textContent:''}};
+ const ctx={
+  profile:{slug:'my-pro'},weekDraft:()=>({rows}),
+  '$':key=>controls[key],
+  msg:(el,message)=>{el.textContent=message},
+  db:{from:table=>{
+   assert.equal(table,'digiy_resa_slots');
+   return {upsert:async(payload,options)=>{calls.push({payload,options});return {error:null}}};
+  }},
+  loadSlots:async()=>{calls.push({refreshed:true})}
+ };
+ await vm.runInNewContext(snippet+';openBulkWeek()',ctx);
+ assert.equal(calls.length,2);
+ assert.equal(calls[0].payload.length,1);
+ assert.equal(calls[0].options.onConflict,'slug,slot_date,start_time');
+ assert.equal(calls[0].options.ignoreDuplicates,true);
+ assert.equal(controls.bulkOpen.disabled,false);
+ assert.match(controls.bulkMsg.textContent,/Semaine préparée/);
+});
