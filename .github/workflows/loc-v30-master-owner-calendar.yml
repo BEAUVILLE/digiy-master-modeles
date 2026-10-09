@@ -1,0 +1,23 @@
+name: LOC V30 MASTER owner calendar contract
+on:
+  pull_request:
+    paths:
+      - 'LOC/MASTER-MAITRE-LOC/gestion.html'
+      - 'tests/loc-v30-master-owner-calendar.test.cjs'
+      - '.github/workflows/loc-v30-master-owner-calendar.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  owner-calendar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Exercise MASTER owner calendar with synthetic RPC responses
+        run: node --test tests/loc-v30-master-owner-calendar.test.cjs
