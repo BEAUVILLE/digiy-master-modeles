@@ -53,6 +53,8 @@ test('MAÎTRE protégé et aucune activation ni caisse ni migration ajoutée',()
 test('gestion propriétaire MASTER existante préservée',()=>{
  assert.match(owner,/digiy_resa_profiles/);
  assert.match(owner,/signInWithOtp/);
- assert.match(owner,/auth_user_id|auth\.uid/);
+ assert.match(owner,/db\.auth\.getSession\(\)/);
+ assert.match(owner,/eq\('slug',RESA_SLUG\)/);
+ assert.match(owner,/shouldCreateUser:false/);
  assert.doesNotMatch(owner,/test-resa-beauty-saly/);
 });
