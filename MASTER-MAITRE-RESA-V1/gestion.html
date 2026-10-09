@@ -64,6 +64,30 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 </div>
 <div class="actions"><button class="btn primary" id="saveSlot" type="button">💾 Enregistrer le créneau</button><button class="btn ghost" id="refreshSlots" type="button">↻ Rafraîchir</button></div>
 <p id="slotMsg" class="status"></p>
+<div class="head" style="margin:24px 0 8px"><div><h3>📆 Préparer une semaine en une opération</h3><p class="hint">Vous choisissez librement vos jours, vos heures et la durée des rendez-vous. Aucune disponibilité prédéfinie, aucune réservation existante modifiée.</p></div></div>
+<div class="field"><label for="bulkMonday">Lundi de la semaine à préparer</label><input id="bulkMonday" type="date"></div>
+<fieldset style="border:1px solid #d9d5c9;border-radius:14px;margin:12px 0;padding:12px">
+<legend>Jours où vous souhaitez recevoir</legend>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<label><input type="checkbox" data-bulk-day="1"> Lundi</label><label><input type="checkbox" data-bulk-day="2"> Mardi</label>
+<label><input type="checkbox" data-bulk-day="3"> Mercredi</label><label><input type="checkbox" data-bulk-day="4"> Jeudi</label>
+<label><input type="checkbox" data-bulk-day="5"> Vendredi</label><label><input type="checkbox" data-bulk-day="6"> Samedi</label>
+<label><input type="checkbox" data-bulk-day="7"> Dimanche</label>
+</div></fieldset>
+<p class="hint">Vos heures de début (au maximum six, au choix, sans horaires imposés)</p>
+<div class="grid">
+<div class="field"><label>Heure 1</label><input type="time" class="bulkHour"></div>
+<div class="field"><label>Heure 2</label><input type="time" class="bulkHour"></div>
+<div class="field"><label>Heure 3</label><input type="time" class="bulkHour"></div>
+<div class="field"><label>Heure 4</label><input type="time" class="bulkHour"></div>
+<div class="field"><label>Heure 5</label><input type="time" class="bulkHour"></div>
+<div class="field"><label>Heure 6</label><input type="time" class="bulkHour"></div>
+</div>
+<div class="field" style="margin-top:12px"><label for="bulkDuration">Durée de chaque rendez-vous (minutes)</label>
+<input id="bulkDuration" type="number" min="5" max="480" step="5" placeholder="À définir par le professionnel"></div>
+<div class="actions"><button type="button" class="btn primary" id="bulkOpen">📅 Ouvrir les créneaux choisis</button></div>
+<p id="bulkMsg" class="status" role="status" aria-live="polite"></p>
+<p class="hint">Les créneaux déjà ouverts, fermés ou réservés sont conservés. Une demande ne vaut pas confirmation : vous validez directement avec le client.</p>
 <div class="head" style="margin:17px 0 10px"><div><h3>📅 Vue sur 7 jours</h3><p class="hint">Lecture des créneaux enregistrés. Cliquez sur un jour pour le préparer ci-dessus.</p></div>
 <div class="actions"><button type="button" class="btn ghost" id="weekBack">←</button><button type="button" class="btn ghost" id="weekForward">→</button></div></div>
 <p id="weekLabel" class="hint"></p>
@@ -105,6 +129,7 @@ async function enter(session){
   $('identity').textContent=(data.display_name||'[NOM PROFESSIONNEL]')+' · '+(data.business_type||'activité sur rendez-vous')+(data.city?' · '+data.city:'');
   showManager(session.user.email);
   $('slotDate').value=today();
+  if(!$('bulkMonday').value)$('bulkMonday').value=upcomingMonday();
   await Promise.all([loadSlots(),loadBookings()]);
 }
 
@@ -153,6 +178,70 @@ function renderSlots(){
     a.append(toggle,del);c.appendChild(a);box.appendChild(c);
   });
 }
+
+function upcomingMonday(){
+ const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+((8-d.getDay())%7));
+ return todayFromDate(d);
+}
+const todayFromDate=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function weekDraft(){
+ const monday=$('bulkMonday').value;
+ if(!monday)return {error:'Choisissez le lundi de la semaine.'};
+ const d=new Date(monday+'T12:00:00');
+ if(Number.isNaN(d.getTime())||d.getDay()!==1)return {error:'La semaine doit commencer un lundi.'};
+ const current=new Date();current.setHours(12,0,0,0);
+ const offsetDays=Math.round((d-current)/86400000);
+ if(offsetDays < -6 || offsetDays > 56)return {error:'Choisissez cette semaine ou une semaine dans les huit prochaines.'};
+ const weekdays=Array.from(document.querySelectorAll('[data-bulk-day]:checked'),x=>Number(x.dataset.bulkDay));
+ const hours=Array.from(document.querySelectorAll('.bulkHour'),x=>x.value).filter(Boolean).sort();
+ const minutes=Number($('bulkDuration').value);
+ if(!weekdays.length||!hours.length)return {error:'Choisissez au moins un jour et une heure.'};
+ if(new Set(hours).size!==hours.length)return {error:'Chaque heure doit être différente.'};
+ if(!Number.isInteger(minutes)||minutes<5||minutes>480||minutes%5!==0)return {error:'Précisez une durée comprise entre 5 et 480 minutes, par pas de 5.'};
+ const periods=hours.map(h=>{
+  const [hh,mm]=h.split(':').map(Number),begin=hh*60+mm,end=begin+minutes;
+  return {begin,end,start_time:h,end_time:('0'+Math.floor(end/60)).slice(-2)+':'+('0'+end%60).slice(-2)};
+ });
+ if(periods.some(p=>p.end>=1440))return {error:'Un rendez-vous ne peut pas dépasser minuit.'};
+ if(periods.some((p,i)=>i>0&&p.begin<periods[i-1].end))
+  return {error:'Les horaires que vous proposez se chevauchent : espacez-les ou réduisez la durée.'};
+ const rows=[];
+ for(let i=0;i<7;i++){
+  const day=new Date(d);day.setDate(d.getDate()+i);
+  if(!weekdays.includes(i+1))continue;
+  const date=todayFromDate(day);
+  if(date<today())continue;
+  for(const p of periods){
+   // Preserve any existing open/closed slot, even with a different start hour.
+   const overlaps=slots.some(s=>s.slot_date===date&&
+    (Number(String(s.start_time).slice(0,2))*60+Number(String(s.start_time).slice(3,5)))<p.end&&
+    (s.end_time?(Number(String(s.end_time).slice(0,2))*60+Number(String(s.end_time).slice(3,5))):
+     (Number(String(s.start_time).slice(0,2))*60+Number(String(s.start_time).slice(3,5))+30))>p.begin);
+   if(!overlaps)rows.push({slug:RESA_SLUG,slot_date:date,start_time:p.start_time,end_time:p.end_time,status:'open'});
+  }
+ }
+ return {rows,countRequested:weekdays.length*hours.length};
+}
+async function openBulkWeek(){
+ if(!profile)return msg($('bulkMsg'),'⚠️ Accès propriétaire requis.',true);
+ const draft=weekDraft();
+ if(draft.error)return msg($('bulkMsg'),'⚠️ '+draft.error,true);
+ if(!draft.rows.length)return msg($('bulkMsg'),'Aucun nouveau créneau : journées déjà remplies ou passées.');
+ $('bulkOpen').disabled=true;msg($('bulkMsg'),'Création des seuls créneaux nouveaux…');
+ try{
+   // SQL uniqueness plus ignoreDuplicates preserve existing closed/open slots.
+   // PostgreSQL RLS verifies the authenticated profile for each insert.
+   const {error}=await db.from('digiy_resa_slots').upsert(draft.rows,{
+     onConflict:'slug,slot_date,start_time',ignoreDuplicates:true
+   });
+   if(error)throw error;
+   await loadSlots();
+   msg($('bulkMsg'),'✓ Semaine préparée : '+draft.rows.length+
+       ' créneau(x) proposés. Créneaux existants conservés. Contrôlez la vue sur 7 jours.');
+ }catch(err){msg($('bulkMsg'),'⚠️ Impossible de préparer la semaine : '+(err.message||'erreur serveur'),true);}
+ finally{$('bulkOpen').disabled=false}
+}
+$('bulkOpen').onclick=openBulkWeek;
 
 async function saveSlot(){
   const row={slug:RESA_SLUG,slot_date:$('slotDate').value,start_time:$('slotStart').value,end_time:$('slotEnd').value||null,status:$('slotStatus').value,capacity:$('slotCapacity').value?Number($('slotCapacity').value):null,note:$('slotNote').value.trim()||null,updated_at:new Date().toISOString()};
