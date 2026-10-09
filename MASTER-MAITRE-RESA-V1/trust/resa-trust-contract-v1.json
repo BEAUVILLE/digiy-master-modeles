@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0.0",
+  "source_reference": {
+    "repository": "BEAUVILLE/digiy-loc",
+    "paths": [
+      "docs/DIGIY_TRUST_CONTRAT_V1.md",
+      "trust/eligibility.mjs",
+      "trust/ATTESTATION_CONTRACT_V2.md"
+    ],
+    "inheritance": "service_completion_and_verified_client_eligibility_only"
+  },
+  "status": "REFERENCE_READY_NOT_DEPLOYED",
+  "module": "resa_universal",
+  "specialized_engines": [
+    "RESTO",
+    "LOC",
+    "DRIVER"
+  ],
+  "one_booking_one_review": true,
+  "scoring_type": "stars_1_to_5",
+  "comments_allowed": false,
+  "client_rating_after_verified_completed_service_only": true,
+  "common_criteria": [
+    {
+      "id": "punctuality",
+      "label": "Ponctualité / fiabilité",
+      "required": false,
+      "include_in_overall": true
+    },
+    {
+      "id": "quality",
+      "label": "Qualité de la prestation",
+      "required": true,
+      "include_in_overall": true
+    },
+    {
+      "id": "welcome",
+      "label": "Accueil / attitude",
+      "required": false,
+      "include_in_overall": true
+    },
+    {
+      "id": "availability",
+      "label": "Disponibilité",
+      "required": false,
+      "include_in_overall": true
+    },
+    {
+      "id": "proximity",
+      "label": "Proximité / accessibilité",
+      "required": false,
+      "include_in_overall": true
+    },
+    {
+      "id": "followup",
+      "label": "Suivi / fidélité",
+      "required": false,
+      "include_in_overall": true
+    }
+  ],
+  "separate_criterion": {
+    "id": "value_for_money",
+    "label": "Rapport qualité-prix",
+    "required": true,
+    "include_in_overall": false,
+    "interpretation": "Valeur perçue de la prestation en regard du montant réellement payé, pas le prix le plus bas"
+  },
+  "public_display": {
+    "overall": {
+      "label": "Note générale",
+      "source": "verified_completed_client_ratings_only",
+      "method": "equal_mean_per_review_on_non_price_scored_criteria_then_average",
+      "precision": 1
+    },
+    "quality_price": {
+      "label": "Rapport qualité-prix",
+      "source": "verified_completed_client_ratings_only",
+      "method": "separate_mean_value_for_money",
+      "precision": 1
+    },
+    "count_label": "avis vérifiés",
+    "detail_expands_by_click": true,
+    "unknown_score": null,
+    "empty_state": "Pas encore d’évaluation vérifiée",
+    "no_fake_default_stars": true,
+    "no_client_names_or_notes": true
+  },
+  "booking_evidence": {
+    "source_module": "resa",
+    "booking_state_alone_not_proof": true,
+    "completion_verified_by_trusted_server": true,
+    "independent_client_verification": true,
+    "self_review_denied": true,
+    "once_per_verified_service_event": true,
+    "one_time_hashed_invitation": true,
+    "transactional_submission": true
+  },
+  "no_activation": {
+    "no_sql_applied": true,
+    "no_public_feedback_enabled": true,
+    "no_public_aggregates_assumed": true,
+    "no_service_role_in_browser": true,
+    "review_completion_does_not_trigger_PAY": true
+  },
+  "future_specializations": [
+    "SERVICES_PRO",
+    "BEAUTY",
+    "ARTISANS",
+    "COACHING",
+    "EDUCATION",
+    "autres métiers admissibles validés sur le terrain"
+  ]
+}
