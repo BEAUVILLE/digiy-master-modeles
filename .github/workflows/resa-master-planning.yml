@@ -9,6 +9,9 @@ on:
       - 'MASTER-MAITRE-RESA-V1/CONTRAT-RESA-MULTI-20261009.md'
       - 'MASTER-MAITRE-RESA-V1/capabilities-resa-multi.json'
       - 'MASTER-MAITRE-RESA-V1/tests/planning-v2.test.cjs'
+      - 'MASTER-MAITRE-RESA-V1/CONTRAT-DIGIY-TRUST-RESA-V1.md'
+      - 'MASTER-MAITRE-RESA-V1/trust/**'
+      - 'MASTER-MAITRE-RESA-V1/tests/resa-trust-contract.test.cjs'
       - '.github/workflows/resa-master-planning.yml'
   push:
     branches: [main]
@@ -27,4 +30,4 @@ jobs:
         with:
           node-version: '22'
       - name: Validate reusable templates and user-facing limitations
-        run: node --test MASTER-MAITRE-RESA-V1/tests/planning-v2.test.cjs
+        run: node --test MASTER-MAITRE-RESA-V1/tests/planning-v2.test.cjs MASTER-MAITRE-RESA-V1/tests/resa-trust-contract.test.cjs
