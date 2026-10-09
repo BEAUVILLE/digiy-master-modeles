@@ -8,6 +8,23 @@
 
 **État réel :** les pages génériques `planning.html` et `gestion.html` constituent déjà un socle de calendrier et de gestion. Elles ne constituent **pas encore** un moteur universel de réservation atomique. Il faut une RPC dédiée, des tests anti-double-réservation/RLS et un BAT de bout en bout avant activation. Voir [REGLE-PLANNING-V2.md](./REGLE-PLANNING-V2.md) et [capabilities-resa-multi.json](./capabilities-resa-multi.json).
 
+## DIGIY TRUST — évaluations héritées de LOC (préparé, non activé)
+
+**La fiche RÉSA doit apporter deux bénéfices : obtenir des rendez-vous et valoriser la qualité réelle des prestations.** Nous réutilisons le **contrat d'éligibilité DIGIY TRUST de LOC**, pas son ancien formulaire libre.
+
+Après prestation effectivement réalisée et vérifiée côté serveur, le client authentifié peut donner **des étoiles rapides, sans commentaire**, en une seule évaluation par prestation. Moyenne des critères métier visible sur la fiche ; **rapport qualité-prix affiché séparément**, non mélangé à la moyenne générale, avec détail par clic.
+
+Pour les avocats, experts-comptables, architectes et autres professionnels : aucun motif de dossier ni donnée sensible dans les notes publiques. Une simple réservation confirmée **ne vaut pas** prestation réalisée ni avis vérifié.
+
+Le contrat opérationnel, les critères, le widget réutilisable, l'aperçu vide honnête et les tests sont dans :
+
+- [CONTRAT-DIGIY-TRUST-RESA-V1.md](./CONTRAT-DIGIY-TRUST-RESA-V1.md)
+- [trust/resa-trust-contract-v1.json](./trust/resa-trust-contract-v1.json)
+- [trust/resa-trust-public-widget.mjs](./trust/resa-trust-public-widget.mjs)
+- [trust/resa-trust-empty-preview.html](./trust/resa-trust-empty-preview.html)
+
+**IMPORTANT : aucun avis RÉSA vérifié n'est encore publié par ce portage.** L'intégration serveur, l'attestation indépendante, l'invitation à usage unique et l'agrégat public doivent passer tests/RLS et BAT avant toute activation. Les données privées LOC et le CORE restent inchangés.
+
 ## Statut
 
 **MASTER MAÎTRE RESA — V1 PROPRIÉTAIRE**

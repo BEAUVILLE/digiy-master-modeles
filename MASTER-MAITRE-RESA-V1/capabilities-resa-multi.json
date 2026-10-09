@@ -169,6 +169,21 @@
       "zero_commission",
       "direct_payment",
       "no_DIGIY_POS"
-    ]
+    ],
+    "verified_trust_ratings": {
+      "status": "reference_ready_not_deployed",
+      "inherits": "BEAUVILLE/digiy-loc/docs/DIGIY_TRUST_CONTRAT_V1.md",
+      "criteria_contract": "MASTER-MAITRE-RESA-V1/trust/resa-trust-contract-v1.json",
+      "client_stars_only": true,
+      "comments": false,
+      "completed_verified_service_required": true,
+      "value_for_money_separate": true,
+      "quality_price_in_overall_average": false,
+      "public_counts_verified_only": true,
+      "no_fake_default_ratings": true,
+      "independent_client_proof_required": true,
+      "transactional_one_per_service": true,
+      "isolated_from_reservation_activation": true
+    }
   }
 }

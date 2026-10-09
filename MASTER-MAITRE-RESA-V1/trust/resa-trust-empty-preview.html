@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>DIGIY TRUST RÉSA — aperçu sans données</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#16392e;background:#edf4ef}
+*{box-sizing:border-box}body{margin:0;padding:24px 14px}main{max-width:650px;margin:auto}
+h1{font-size:clamp(22px,5vw,30px)}h3{font-size:20px;margin:0 0 12px}.eyebrow{font-weight:900;color:#516b5a;letter-spacing:.08em;font-size:11px;text-transform:uppercase}
+.note{font-size:13px;line-height:1.5;color:#53675d}.preview{border:1px solid #b3c6bb;background:white;border-radius:20px;padding:22px;box-shadow:0 9px 25px #16392e16}
+.digiy-trust{min-height:140px}.trust-empty{border-radius:12px;background:#f3f6f3;color:#577065;padding:14px;font-size:14px}
+.trust-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.trust-metric{border:1px solid #dce8e0;padding:14px;border-radius:12px;min-width:0}
+.trust-price{border-color:#d1b879;background:#faf7e9}
+.trust-metric strong{font-size:13px}.trust-score{font-size:24px;font-weight:900;margin:8px 0}
+.trust-metric small{color:#637469;display:block}.trust-breakdown{margin-top:12px;padding:12px;border:1px solid #dce8e0;border-radius:12px}
+.trust-breakdown summary{cursor:pointer;font-weight:800}.trust-breakdown li{margin:9px 0}
+@media(max-width:420px){.trust-metrics{grid-template-columns:1fr}}
+</style></head>
+<body><main>
+<p class="eyebrow">DIGIYLYFE · MASTER & MAÎTRE</p>
+<h1>Évaluations RÉSA — aperçu technique</h1>
+<p class="note">Référence héritée de LOC, sans aucune donnée réelle ni fictive. Ce fichier n'est pas une fiche professionnelle publiée et n'accepte aucun avis.</p>
+<div class="preview"><div id="trust-preview" aria-live="polite"></div></div>
+<p class="note">Lorsque l'attestation serveur et les agrégats vérifiés seront activés, la note générale et le rapport qualité-prix seront affichés séparément, avec les critères détaillés par clic. Aucune étoile ne sera inventée en attendant.</p>
+</main>
+<script type="module">
+import {mountResaTrustPublic} from './resa-trust-public-widget.mjs';
+mountResaTrustPublic(document.getElementById('trust-preview'),null);
+</script></body></html>
