@@ -110,6 +110,11 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 const RESA_SLUG='[RESA_SLUG]';
 const URL='[SUPABASE_URL]';
 const KEY='[SUPABASE_PUBLISHABLE_KEY]';
+/* MASTER migration gate: OFF in every published copy by default.
+   Enable only in an approved STAGING build AFTER V0/V1/V5 SQL,
+   real A/B identity tests, PAY and restoration proof.
+   Never enable via URL, localStorage, or a client-provided flag. */
+const RESA_V5_STAGING_ENABLED=false;
 const db=supabase.createClient(URL,KEY,{auth:{persistSession:true,detectSessionInUrl:true}});
 const $=id=>document.getElementById(id);
 let profile=null,slots=[],bookings=[],weekOffset=0;
@@ -271,9 +276,49 @@ async function saveSlot(){
 
 async function loadBookings(){
   if(!profile)return;
-  const {data,error}=await db.from('digiy_resa_bookings').select('id,customer_name,customer_phone,booking_date,booking_time,guests_count,note_text,status,service_name,duration_minutes,price,price_fcfa').eq('slug',RESA_SLUG).order('booking_date',{ascending:true}).order('booking_time',{ascending:true});
+  // Before V0 migrations the client_request_id column does NOT exist.
+  // Keep legacy SELECT unchanged until explicit staging activation.
+  const columns='id,customer_name,customer_phone,booking_date,booking_time,guests_count,note_text,status,service_name,duration_minutes,price,price_fcfa'+
+    (RESA_V5_STAGING_ENABLED?',client_request_id':'');
+  const {data,error}=await db.from('digiy_resa_bookings').select(columns).eq('slug',RESA_SLUG).order('booking_date',{ascending:true}).order('booking_time',{ascending:true});
   if(error){bookings=[];renderBookings();return msg($('bookingMsg'),'⚠️ Demandes indisponibles : '+error.message,true)}
   bookings=data||[];renderBookings();
+}
+
+// New V0 requests must use the server-verified V5 RPC exclusively.
+function usesOwnerV5(row){
+  return RESA_V5_STAGING_ENABLED &&
+    typeof row.client_request_id==='string' &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(row.client_request_id);
+}
+function allowedOwnerV5Status(row,next){
+  return row.status==='pending'?['confirmed','cancelled'].includes(next):
+    row.status==='confirmed'?['cancelled','done','no_show'].includes(next):false;
+}
+async function executeOwnerV5(row,status,note){
+  const action=status===row.status?'note':status;
+  if(action==='note' && String(note||'').length>1000)throw new Error('Note trop longue (maximum 1000 caractères).');
+  if(action!=='note'){
+    if(!allowedOwnerV5Status(row,action))throw new Error('Transition non autorisée.');
+    if(String(note||'').trim()!==String(row.note_text||'').trim())
+      throw new Error('Enregistrez d’abord la note privée avec le bouton Note.');
+  }
+  // A failed/missing RPC must NEVER fall back to direct table UPDATE.
+  const {data,error}=await db.rpc('digiy_resa_universal_owner_manage_v2',{
+    p_booking_id:row.id,p_action:action,
+    p_note_text:action==='note'?(String(note||'').trim()||null):null
+  });
+  if(error)throw new Error('Gestion sécurisée indisponible : '+(error.message||'RPC indisponible'));
+  if(data?.ok!==true||data.booking_id!==row.id||data.action!==action||
+    (action==='note'?data.status!==row.status:data.status!==action))
+    throw new Error('Réponse propriétaire invalide ou refusée : '+(data?.error||'aucune modification confirmée'));
+  // Update the visible row only AFTER the confirmed server result.
+  if(action==='note')row.note_text=String(note||'').trim()||null;
+  else row.status=data.status;
+  return action==='note'?'✓ Note privée enregistrée.':
+    action==='confirmed'?'✓ Rendez-vous confirmé (aucun paiement supposé).':
+    action==='cancelled'?'✓ Rendez-vous annulé.':
+    '✓ Statut modifié (sans preuve automatique DIGIY TRUST).';
 }
 
 function statusLabel(s){return s==='confirmed'?'Confirmée':s==='cancelled'?'Refusée':s==='done'?'Terminée':s==='no_show'?'Absent':'À confirmer'}
@@ -290,7 +335,9 @@ function renderBookings(){
     c.appendChild(note);
     const a=document.createElement('div');a.className='itemactions';
     const phone=String(r.customer_phone||'').trim();if(phone){const sms=document.createElement('a');sms.className='sms';sms.href='sms:'+phone;sms.textContent='📩 SMS';a.appendChild(sms);const digits=phone.replace(/\D/g,'');if(digits){const wa=document.createElement('a');wa.className='wa';wa.href='https://wa.me/'+digits;wa.target='_blank';wa.rel='noopener';wa.textContent='💬 WhatsApp';a.appendChild(wa)}}
-    [['confirmed','✓ Confirmer','primary'],['cancelled','Refuser','danger'],['done','Terminé','ghost'],['no_show','Absent','ghost']].forEach(([st,label,cls])=>{const b=document.createElement('button');b.className='btn '+cls;b.textContent=label;b.onclick=()=>updateBooking(r,st,note.value,b);a.appendChild(b)});
+    [['confirmed','✓ Confirmer','primary'],['cancelled','Refuser','danger'],['done','Terminé','ghost'],['no_show','Absent','ghost']]
+      .filter(([st])=>!usesOwnerV5(r)||allowedOwnerV5Status(r,st))
+      .forEach(([st,label,cls])=>{const b=document.createElement('button');b.className='btn '+cls;b.textContent=label;b.onclick=()=>updateBooking(r,st,note.value,b);a.appendChild(b)});
     const saveNote=document.createElement('button');saveNote.className='btn gold';saveNote.textContent='💾 Note';saveNote.onclick=()=>updateBooking(r,r.status,note.value,saveNote);a.appendChild(saveNote);
     c.appendChild(a);box.appendChild(c);
   });
@@ -298,9 +345,20 @@ function renderBookings(){
 
 async function updateBooking(r,status,note,button){
   button.disabled=true;msg($('bookingMsg'),'Mise à jour…');
-  const {error}=await db.from('digiy_resa_bookings').update({status,note_text:String(note||'').trim()||null,updated_at:new Date().toISOString()}).eq('id',r.id).eq('slug',RESA_SLUG);
-  button.disabled=false;if(error)return msg($('bookingMsg'),'⚠️ Demande non modifiée : '+error.message,true);
-  r.status=status;r.note_text=String(note||'').trim()||null;renderBookings();msg($('bookingMsg'),'✓ Demande mise à jour.');
+  try{
+    if(usesOwnerV5(r)){
+      const feedback=await executeOwnerV5(r,status,note);
+      renderBookings();msg($('bookingMsg'),feedback);
+      return;
+    }
+    // LEGACY PATH: intentionally preserved for historical records ONLY.
+    // Do not revoke authenticated table UPDATE before the owner UI and
+    // every old consumer are migrated and end-to-end verified.
+    const {error}=await db.from('digiy_resa_bookings').update({status,note_text:String(note||'').trim()||null,updated_at:new Date().toISOString()}).eq('id',r.id).eq('slug',RESA_SLUG);
+    if(error)throw error;
+    r.status=status;r.note_text=String(note||'').trim()||null;renderBookings();msg($('bookingMsg'),'✓ Demande historique mise à jour.');
+  }catch(err){msg($('bookingMsg'),'⚠️ Demande non modifiée : '+(err.message||'erreur propriétaire'),true)}
+  finally{button.disabled=false;}
 }
 
 $('send').onclick=async()=>{const email=$('email').value.trim();if(!email)return msg($('loginstatus'),'⚠️ Entrez votre email.',true);$('send').disabled=true;msg($('loginstatus'),'Envoi…');const redirect=new URL('./gestion.html',location.href).href;const {error}=await db.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:redirect}});$('send').disabled=false;if(error)return msg($('loginstatus'),'⚠️ '+error.message,true);$('otpbox').classList.remove('hidden');msg($('loginstatus'),'✓ Email envoyé. Utilisez le code reçu ou le lien magique.')};
