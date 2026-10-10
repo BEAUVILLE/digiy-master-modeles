@@ -165,13 +165,28 @@ function renderWeekBoard(){
 $('weekBack').onclick=()=>{weekOffset=Math.max(0,weekOffset-1);renderWeekBoard()};
 $('weekForward').onclick=()=>{weekOffset=Math.min(7,weekOffset+1);renderWeekBoard()};
 
+// Customer names, services and owner notes are untrusted text. Never place
+// those fields into innerHTML: render DOM nodes and set textContent instead.
+function ownerSummary(title,statusCode,statusText,details){
+  const head=document.createElement('div');head.className='itemhead';
+  const name=document.createElement('div');name.className='name';name.textContent=title;
+  const badge=document.createElement('span');
+  const allowed=['open','closed','pending','confirmed','cancelled','done','no_show'];
+  badge.className='badge '+(allowed.includes(statusCode)?statusCode:'pending');
+  badge.textContent=statusText;
+  head.append(name,badge);
+  const meta=document.createElement('div');meta.className='meta';meta.textContent=details;
+  const fragment=document.createDocumentFragment();fragment.append(head,meta);
+  return fragment;
+}
+
 function renderSlots(){
   renderWeekBoard();
   const box=$('slots');box.innerHTML='';$('slotCount').textContent=slots.length+' créneau'+(slots.length===1?'':'x')+' à venir';
   if(!slots.length){box.innerHTML='<div class="empty">Aucun créneau à venir.</div>';return}
   slots.forEach(s=>{
     const c=document.createElement('article');c.className='item';
-    c.innerHTML='<div class="itemhead"><div class="name">🕒 '+fmtDate(s.slot_date)+' · '+t(s.start_time)+(s.end_time?' → '+t(s.end_time):'')+'</div><span class="badge '+s.status+'">'+(s.status==='open'?'OUVERT':'FERMÉ')+'</span></div><div class="meta">'+(s.capacity?'Capacité : '+s.capacity+' · ':'')+(s.note?'Note privée : '+s.note:'Sans note')+'</div>';
+    c.append(ownerSummary('🕒 '+fmtDate(s.slot_date)+' · '+t(s.start_time)+(s.end_time?' → '+t(s.end_time):''),s.status,s.status==='open'?'OUVERT':'FERMÉ',(s.capacity?'Capacité : '+s.capacity+' · ':'')+(s.note?'Note privée : '+s.note:'Sans note')));
     const a=document.createElement('div');a.className='itemactions';
     const toggle=document.createElement('button');toggle.className='btn ghost';toggle.textContent=s.status==='open'?'Fermer':'Ouvrir';
     toggle.onclick=async()=>{toggle.disabled=true;const next=s.status==='open'?'closed':'open';const {error}=await db.from('digiy_resa_slots').update({status:next,updated_at:new Date().toISOString()}).eq('id',s.id).eq('slug',RESA_SLUG);toggle.disabled=false;if(error)return msg($('slotMsg'),'⚠️ Statut non modifié.',true);s.status=next;renderSlots();msg($('slotMsg'),'✓ Créneau mis à jour.')};
@@ -270,7 +285,7 @@ function renderBookings(){
   arr.forEach(r=>{
     const c=document.createElement('article');c.className='item';
     const amount=r.price_fcfa!=null?r.price_fcfa:r.price;
-    c.innerHTML='<div class="itemhead"><div class="name">👤 '+(r.customer_name||'Client')+'</div><span class="badge '+r.status+'">'+statusLabel(r.status)+'</span></div><div class="meta">'+fmtDate(r.booking_date)+' · '+t(r.booking_time)+(r.service_name?' · '+r.service_name:'')+(r.duration_minutes?' · '+r.duration_minutes+' min':'')+(r.guests_count?' · '+r.guests_count+' pers.':'')+(amount!=null?' · '+Number(amount).toLocaleString('fr-FR')+' FCFA':'')+'</div>';
+    c.append(ownerSummary('👤 '+(r.customer_name||'Client'),r.status,statusLabel(r.status),fmtDate(r.booking_date)+' · '+t(r.booking_time)+(r.service_name?' · '+r.service_name:'')+(r.duration_minutes?' · '+r.duration_minutes+' min':'')+(r.guests_count?' · '+r.guests_count+' pers.':'')+(amount!=null?' · '+Number(amount).toLocaleString('fr-FR')+' FCFA':'')));
     const note=document.createElement('textarea');note.className='note';note.value=r.note_text||'';note.placeholder='Note privée sur cette demande';
     c.appendChild(note);
     const a=document.createElement('div');a.className='itemactions';
