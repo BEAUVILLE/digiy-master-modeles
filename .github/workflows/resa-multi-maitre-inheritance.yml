@@ -24,5 +24,6 @@ jobs:
         run: |
           node --check MASTER-MAITRE-RESA-V1/tests/resa-multi-inheritance.test.cjs
           node --check MASTER-MAITRE-RESA-V1/tests/owner-safe-render.test.cjs
+          node --check MASTER-MAITRE-RESA-V1/tests/owner-v5-guarded-transition.test.cjs
       - name: Validate inheritance contract and safety
-        run: node --test MASTER-MAITRE-RESA-V1/tests/resa-multi-inheritance.test.cjs MASTER-MAITRE-RESA-V1/tests/owner-safe-render.test.cjs
+        run: node --test MASTER-MAITRE-RESA-V1/tests/resa-multi-inheritance.test.cjs MASTER-MAITRE-RESA-V1/tests/owner-safe-render.test.cjs MASTER-MAITRE-RESA-V1/tests/owner-v5-guarded-transition.test.cjs
