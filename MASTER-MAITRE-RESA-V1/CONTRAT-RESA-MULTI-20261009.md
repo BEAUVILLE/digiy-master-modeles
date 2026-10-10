@@ -53,3 +53,13 @@ Le présent **portage est documentaire et réutilisable** : il n'installe aucun 
 ## Décision fondateur — 09/10/2026
 
 La réservation automatique **universelle** est une capacité cible du MASTER MAÎTRE pour les rendez-vous compatibles, **pas un remplacement obligatoire des logiciels métier**. RESTO / LOC / DRIVER sont des exceptions explicites, et la liste des autres cas spécifiques reste **ouverte à l'observation terrain**. Le contrat opérationnel détaillé est dans [REGLE-PLANNING-V2.md](./REGLE-PLANNING-V2.md). Cette évolution documentaire ne change ni les droits SQL ni les réservations existantes.
+
+---
+
+## Actualisation d'héritage du 10 octobre 2026 — source RÉSA V6
+
+Le paragraphe initial ci-dessus documente l'inventaire arrêté aux PR #1–16 du **9 octobre**. Il constitue une preuve historique conservée, **pas** l'état de toute la source au 10 octobre. La source RÉSA [PR #17 à #30](https://github.com/BEAUVILLE/digiy-resa-table-resto/pulls?q=is%3Apr+is%3Amerged) a désormais préparé les candidates V0/V1/V2/V3, les adaptateurs V4/V5 et un parcours intégré V6 **sur PostgreSQL jetable**, en plus des spécialisations métiers.
+
+Le MASTER/MAÎTRE inclut la transition propriétaire V5 issue de sa PR #20 (désactivée par défaut). Le registre `capabilities-resa-multi.json` référence explicitement les **30 PR fusionnées**, sans élargir les permissions production. Voir [ALIGNEMENT-MASTER-MAITRE-RESA-V6-20261010.md](./ALIGNEMENT-MASTER-MAITRE-RESA-V6-20261010.md) pour la matrice de parité et les blocages de mise en service.
+
+Le portage est documentaire et réutilisable ; le contrat source n'est pas un reçu de paiement, un rendez-vous client ni une autorisation d'exécuter du SQL sur `digiy-core`.
