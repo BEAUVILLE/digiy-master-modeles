@@ -9,9 +9,12 @@ const readme=fs.readFileSync(path.join(folder,'README.md'),'utf8');
 const data=JSON.parse(fs.readFileSync(path.join(folder,'capabilities-resa-multi.json'),'utf8'));
 const owner=fs.readFileSync(path.join(folder,'gestion.html'),'utf8');
 
-test('provenance réelle et toutes les seize PR référencées',()=>{
+test('provenance source et 30 PR fusionnées, dont le rail V6 isolé',()=>{
  assert.equal(data.source_repository,'BEAUVILLE/digiy-resa-table-resto');
- assert.deepEqual(data.source_prs_merged,Array.from({length:16},(_,i)=>i+1));
+ assert.deepEqual(data.source_prs_merged,Array.from({length:30},(_,i)=>i+1));
+ assert.equal(data.universal_booking_track.last_merged_pr,30);
+ assert.equal(data.universal_booking_track.end_to_end_pg17_ci_passed,true);
+ assert.equal(data.universal_booking_track.automatic_booking_production_ready,false);
  assert.match(contract,/portage est documentaire et réutilisable/);
  assert.match(readme,/CONTRAT-RESA-MULTI-20261009\.md/);
  assert.match(readme,/capabilities-resa-multi\.json/);

@@ -1,5 +1,13 @@
 # MASTER MAÎTRE RESA — V1 OWNER
 
+## Situation actualisée · 10 octobre 2026 — RÉSA V6
+
+**Contrat MASTER/MAÎTRE maintenant aligné sur les preuves fusionnées de RÉSA #1 à #30**, dont V0–V6 en tests PostgreSQL jetables. Voir [ALIGNEMENT-MASTER-MAITRE-RESA-V6-20261010.md](./ALIGNEMENT-MASTER-MAITRE-RESA-V6-20261010.md) et le registre [capabilities-resa-multi.json](./capabilities-resa-multi.json).
+
+**Ne pas confondre cet alignement avec un déploiement réel :** le cockpit propriétaire V5 reste désactivé par défaut, le planning public est en lecture seule, les candidates SQL V0/V2/V5 ne sont pas installées dans DIGIY CORE. Le lancement du pilote Saly est limité à la préparation de staging, à la preuve de restauration récente, au BAT du premier professionnel et aux tests de deux comptes propriétaires réels. Aucun rendez-vous réel n'est activé par la fusion de ces fichiers.
+
+
+
 ## Doctrine cible — réservation automatique universelle · 09/10/2026
 
 **Le moteur commun de RÉSA doit pouvoir réserver automatiquement pour les professions à rendez-vous compatibles**, en partant des disponibilités réellement ouvertes par le professionnel. Le contrôle serveur doit être atomique : identifier le bon professionnel, vérifier disponibilité/capacité/conflits, enregistrer la réservation ou la demande, retourner un état exact, et gérer annulations/libération. La confirmation peut être automatique uniquement lorsque les conditions métier et le mode choisi par le professionnel le permettent ; sinon elle reste humaine.
