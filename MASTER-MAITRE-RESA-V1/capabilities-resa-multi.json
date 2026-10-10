@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "snapshot_date": "2026-10-09",
-  "purpose": "Référence vérifiée des capacités RÉSA MULTI et de leur état de portage, sans activation fictive",
+  "snapshot_date": "2026-10-10",
+  "purpose": "Contrat d'héritage RÉSA MULTI + rails universels V0-V6 vérifiés au code et en CI isolée; aucune mise en production implicite",
   "source_repository": "BEAUVILLE/digiy-resa-table-resto",
   "source_branch": "main",
   "source_prs_merged": [
@@ -20,7 +20,21 @@
     13,
     14,
     15,
-    16
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
   ],
   "catalogue_source_inventory": {
     "real_driver_entries": 3,
@@ -184,6 +198,112 @@
       "independent_client_proof_required": true,
       "transactional_one_per_service": true,
       "isolated_from_reservation_activation": true
+    }
+  },
+  "legacy_catalogue_source_inventory_date": "2026-10-09",
+  "universal_booking_track": {
+    "source_repository": "BEAUVILLE/digiy-resa-table-resto",
+    "source_main_merged_commit": "38770f95232be480735790651f4ef3178faac4e6",
+    "last_merged_pr": 30,
+    "stages": [
+      {
+        "stage": "pre_sql_security_audit",
+        "proof_pr": 22,
+        "scope": "inventory_only",
+        "production_activated": false
+      },
+      {
+        "stage": "v0_atomic_booking",
+        "proof_pr": 23,
+        "scope": "postgres17_isolated_sql_only",
+        "production_activated": false
+      },
+      {
+        "stage": "v1_owner_status_pay_neutral",
+        "proof_pr": 25,
+        "scope": "postgres17_isolated_sql_only",
+        "production_activated": false
+      },
+      {
+        "stage": "v2_public_options",
+        "proof_pr": 26,
+        "scope": "postgres17_isolated_sql_only",
+        "production_activated": false
+      },
+      {
+        "stage": "v3_client_contract_iana",
+        "proof_pr": 27,
+        "scope": "client_module_and_pg17_time_conversion_isolated",
+        "production_activated": false
+      },
+      {
+        "stage": "v4_staging_client_flow",
+        "proof_pr": 28,
+        "scope": "module_disabled_by_default_mock_transport",
+        "production_activated": false
+      },
+      {
+        "stage": "v5_owner_notes_actions",
+        "proof_pr": 29,
+        "scope": "postgres17_isolated_sql_and_disabled_client",
+        "production_activated": false
+      },
+      {
+        "stage": "v6_end_to_end",
+        "proof_pr": 30,
+        "scope": "pg17_synthetic_anon_authenticated_A_B_only",
+        "production_activated": false
+      }
+    ],
+    "end_to_end_pg17_ci_passed": true,
+    "source_pages_user_booking_activated": false,
+    "live_owner_login_A_B_tested": false,
+    "live_client_owner_e2e_verified": false,
+    "real_staging_environment_confirmed": false,
+    "real_professional_BAT_approved": false,
+    "backup_recent_restore_verified": false,
+    "production_sql_authorized": false,
+    "automatic_booking_production_ready": false
+  },
+  "master_maitre_alignment": {
+    "master_repository": "BEAUVILLE/digiy-master-modeles",
+    "master_reuse_path": "MASTER-MAITRE-RESA-V1/",
+    "master_owner_v5_proof_pr": 20,
+    "owner_html_guard": "const RESA_V5_STAGING_ENABLED=false;",
+    "owner_new_bookings_rpc": "digiy_resa_universal_owner_manage_v2",
+    "owner_rpc_disabled_by_default": true,
+    "legacy_bookings_direct_update_preserved": true,
+    "public_planning_read_only": true,
+    "source_v4_client_module_copied_to_master": false,
+    "backend_v0_v1_v2_v5_deployed_to_core": false,
+    "state": "reference_and_owner_client_contract_aligned__runtime_not_at_same_level"
+  },
+  "release_decision": {
+    "phase": "pilot_readiness_only",
+    "permitted": [
+      "sync_master_maitre_contract",
+      "run_isolated_ci",
+      "prepare_non_prod_staging",
+      "collect_restoration_proof",
+      "prepare_professional_BAT"
+    ],
+    "forbidden": [
+      "apply_SQL_to_digiy_core",
+      "enable_real_public_booking",
+      "enable_master_v5_in_production",
+      "revoke_legacy_update_without_migration",
+      "create_fake_professional_or_booking",
+      "claim_client_payment_from_booking_state"
+    ],
+    "gates": {
+      "ci_source_main": "PASS_ISOLATED",
+      "ci_master_main": "PASS",
+      "backup_latest_archive_restore": "BLOCKED",
+      "supabase_staging_real_A_B": "BLOCKED",
+      "non_destructive_migration_review": "BLOCKED",
+      "owner_legacy_RPC_impact": "BLOCKED",
+      "first_real_professional_BAT": "BLOCKED",
+      "production_launch": "NO_GO"
     }
   }
 }
