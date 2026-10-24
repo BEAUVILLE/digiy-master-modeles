@@ -17,9 +17,28 @@ Le Master DRIVER n’est pas une porte d’inscription.
 
 Le rail commercial unique reste :
 
-**TARIF ADHÉRENT → activation DIGIY PRO → module DRIVER → création du propriétaire → fiche publique + espace privé.**
+**TARIF ADHÉRENT → renseignements reçus et vérifiés → BAT → paiement confirmé → activation DIGIY PRO → module DRIVER → création du propriétaire → fiche publique + espace privé.**
 
 Ne jamais recréer un formulaire d’inscription DRIVER dans ce Master.
+
+### Déclinaison DIGIY DRIVER France — formulaire en amont
+
+La porte commerciale est `digiylyfe.com/driver-france-renseignements.html`, accessible depuis la vitrine `tarifs-adherents-1.html?country=fr&module=driver`. Elle recueille les renseignements dans une fiche mobile, puis ouvre **sur action du candidat** un message prérempli à destination du WhatsApp DIGIY. Le candidat **appuie lui-même sur Envoyer** puis joint une photo du chauffeur et du véhicule. Aucune photo n'est automatiquement transmise par le lien WhatsApp.
+
+À la réception, vérifier avant création :
+1. identité professionnelle, numéro/WhatsApp, email et zone de base France ;
+2. services, type de véhicule, capacité passagers/bagages, langues et tarifs indicatifs ;
+3. portrait et véhicule reçus, droit d'utilisation des photos et pièces nécessaires à la conformité de l'activité ;
+4. formule France `driver-fr-45` : **45 €/mois, carte QR + fiche chauffeur + logiciel inclus, sans frais de fiche** ;
+5. BAT approuvé et paiement vérifié avant activation du propriétaire.
+
+**Production contrôlée après validation :**
+- carte professionnelle / QR stable depuis `MASTER-CARTE-ADHERENT-V1/` ;
+- fiche personnelle + PWA + `gestion.html` depuis `MASTER-MAITRE-DRIVER-V1/` ;
+- rattachement propriétaire authentifié par email, règles RLS et vérification sur mobile ;
+- réponse au chauffeur avec les liens de sa carte et de sa fiche.
+
+Ce formulaire ne crée ni réservation LOC, ni pilote gratuit, ni activation automatique. **Sénégal inchangé.**
 
 ## Architecture propriétaire
 
