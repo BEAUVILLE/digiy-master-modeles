@@ -30,6 +30,24 @@ Ce dossier configure la France sous le **MASTER CORE WORLD**. Il ne contient pas
 - Bordeaux
 - Arcachon
 
+## Offre métier spéciale — DIGIY DRIVER France
+
+La **référence tarifaire maître France** prévoit un plan spécifique `driver-fr-45` :
+
+- **45 € par mois**, et non 45 € de supplément à une autre formule ;
+- **fiche professionnelle du chauffeur, QR et logiciel métier inclus** ;
+- **0 € de frais de création de fiche**, **0 € de supplément logiciel** ;
+- **0 % de commission** sur les prestations ;
+- **aucun pilote gratuit LOC** ou renvoi à un formulaire d'hébergement ;
+- l'adhésion DRIVER reste un dossier identifié, contrôlé et validé par un humain avant activation ;
+- le dossier ne doit **pas déclencher un message WhatsApp au numéro personnel administrateur**.
+
+Le reste de la grille France, notamment la formule professionnelle générique et les sites sur mesure, n'est pas modifié. La formule DRIVER France ne modifie **aucun tarif Sénégal**.
+
+Rail officiel : `TARIFS ADHÉRENTS FRANCE (DRIVER) → DOSSIER DRIVER FRANCE → VALIDATION → ACTIVATION DIGIY PRO → FICHE PUBLIQUE + LOGICIEL DRIVER`.
+
+Le MASTER MAÎTRE DRIVER fournit la fiche et l'espace propriétaire ; il ne doit pas créer un deuxième formulaire d'inscription. Le formulaire de production doit lire le plan `driver-fr-45` depuis le runtime France.
+
 ## Discipline
 
 1. Un seul moteur territorial commun.
