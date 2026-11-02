@@ -1,0 +1,18 @@
+name: MASTER — 10 langues WO 中文
+on:
+  pull_request:
+    paths:
+      - MASTER-CARTE-ADHERENT-V1/index.html
+      - BUILD/MASTER-MAITRE-BUILD/index.html
+      - MASTER-CORE-WORLD-V1/config/languages.json
+      - tests/test_master_languages.py
+      - .github/workflows/master-10-lang.yml
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate public templates and links
+        run: python3 -m unittest discover -s tests -p 'test_master_languages.py' -v
