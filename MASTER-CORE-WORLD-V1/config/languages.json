@@ -1,15 +1,64 @@
 {
   "default": "fr",
-  "rtl": ["ar"],
-  "languages": [
-    {"code": "fr", "label": "Français", "status": "core"},
-    {"code": "en", "label": "English", "status": "core"},
-    {"code": "es", "label": "Español", "status": "core"},
-    {"code": "pt", "label": "Português", "status": "core"},
-    {"code": "it", "label": "Italiano", "status": "core"},
-    {"code": "de", "label": "Deutsch", "status": "core"},
-    {"code": "nl", "label": "Nederlands", "status": "core"},
-    {"code": "ar", "label": "العربية", "status": "core", "written_variant": "Modern Standard Arabic"}
+  "rtl": [
+    "ar"
   ],
-  "rule": "Les langues locales supplémentaires sont activées par pays uniquement lorsque leur qualité est suffisante."
+  "languages": [
+    {
+      "code": "fr",
+      "label": "Français",
+      "status": "core"
+    },
+    {
+      "code": "en",
+      "label": "English",
+      "status": "core"
+    },
+    {
+      "code": "es",
+      "label": "Español",
+      "status": "core"
+    },
+    {
+      "code": "pt",
+      "label": "Português",
+      "status": "core"
+    },
+    {
+      "code": "it",
+      "label": "Italiano",
+      "status": "core"
+    },
+    {
+      "code": "de",
+      "label": "Deutsch",
+      "status": "core"
+    },
+    {
+      "code": "nl",
+      "label": "Nederlands",
+      "status": "core"
+    },
+    {
+      "code": "ar",
+      "label": "العربية",
+      "status": "core",
+      "written_variant": "Modern Standard Arabic"
+    },
+    {
+      "code": "wo",
+      "label": "Wolof",
+      "status": "pilot_local",
+      "country": "SN",
+      "written_variant": "Wolof latin, relecture native nécessaire"
+    },
+    {
+      "code": "zh",
+      "label": "简体中文",
+      "status": "pilot_international",
+      "language_tag": "zh-CN",
+      "written_variant": "Simplified Chinese, relecture native recommandée"
+    }
+  ],
+  "rule": "Les deux nouveaux dictionnaires wo et zh sont disponibles dans les modèles publics de carte et BUILD. Les contenus spécifiques des adhérents et les interfaces privées ne sont pas traduits automatiquement. Révision humaine du wolof et du chinois avant diffusion généralisée. En aucun cas la langue ne modifie les flux de contact ou de paiement."
 }
