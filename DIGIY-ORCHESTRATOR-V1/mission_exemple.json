@@ -1,0 +1,11 @@
+{
+  "mission_id": "DIGIY-CONTROLES-001",
+  "mode": "lecture_seule",
+  "budget_supplementaire": 0,
+  "actions_autorisees": [],
+  "validation_maitre": false,
+  "controles": [
+    {"capacite": "LOC", "controle": "LOC-GATE", "statut": "inconnu", "preuve": "non_fournie"},
+    {"capacite": "RESA", "controle": "RESA-LINKS", "statut": "ok", "preuve": "reference_locale_non_verifiee"}
+  ]
+}
