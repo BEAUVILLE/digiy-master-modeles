@@ -35,34 +35,46 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 <body>
 <div class="wrap">
 <div class="master"><strong>MASTER :</strong> renseigner <code>[RESA_SLUG]</code> et <code>[NOM PROFESSIONNEL]</code> lors de la déclinaison. Ne jamais publier ce fichier sans configuration.</div>
-<header class="top"><div class="brand">📅 [NOM PROFESSIONNEL] · DIGIY RESA<small>Accès adhérent · créneaux et demandes</small></div><a class="back" id="openPublicPlanning" href="./planning.html?slug=[RESA_SLUG]" target="_blank" rel="noopener">📅 Planning client</a></header>
+<header class="top"><div class="brand">📅 [NOM PROFESSIONNEL] · DIGIY RESA<small data-resa-text="0">Accès adhérent · créneaux et demandes</small></div><a class="back" id="openPublicPlanning" href="./planning.html?slug=[RESA_SLUG]" target="_blank" rel="noopener" data-resa-text="1">📅 Planning client</a></header>
 
+<nav aria-label="Langue / Language" style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0">
+<button class="btn ghost" type="button" data-resa-lang="fr">FR</button>
+<button class="btn ghost" type="button" data-resa-lang="en">EN</button>
+<button class="btn ghost" type="button" data-resa-lang="es">ES</button>
+<button class="btn ghost" type="button" data-resa-lang="pt">PT</button>
+<button class="btn ghost" type="button" data-resa-lang="it">IT</button>
+<button class="btn ghost" type="button" data-resa-lang="de">DE</button>
+<button class="btn ghost" type="button" data-resa-lang="nl">NL</button>
+<button class="btn ghost" type="button" data-resa-lang="ar">AR</button>
+<button class="btn ghost" type="button" data-resa-lang="wo">WO</button>
+<button class="btn ghost" type="button" data-resa-lang="zh">ZH</button>
+</nav>
 <section class="panel" id="login">
-<span class="eyebrow">Accès privé adhérent</span>
-<h1>Mon espace RESA.</h1>
-<p class="muted">Ouvrez vos créneaux, suivez vos demandes et confirmez vous-même. DIGIY prépare le contact ; vous gardez la décision.</p>
-<div class="field"><label>Email adhérent</label><input id="email" type="email" autocomplete="email" placeholder="votre@email.com"></div>
-<button class="btn primary" id="send" type="button" style="margin-top:11px">Recevoir mon code →</button>
-<div id="otpbox" class="hidden"><div class="field"><label>Code reçu par email</label><input id="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="8"></div><button class="btn gold" id="verify" type="button" style="margin-top:10px">Ouvrir mon espace →</button></div>
+<span class="eyebrow" data-resa-text="2">Accès privé adhérent</span>
+<h1 data-resa-text="3">Mon espace RESA.</h1>
+<p class="muted" data-resa-text="4">Ouvrez vos créneaux, suivez vos demandes et confirmez vous-même. DIGIY prépare le contact ; vous gardez la décision.</p>
+<div class="field"><label data-resa-text="5">Email adhérent</label><input id="email" type="email" autocomplete="email" placeholder="votre@email.com"></div>
+<button class="btn primary" id="send" type="button" style="margin-top:11px" data-resa-text="6">Recevoir mon code →</button>
+<div id="otpbox" class="hidden"><div class="field"><label data-resa-text="7">Code reçu par email</label><input id="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="8"></div><button class="btn gold" id="verify" type="button" style="margin-top:10px" data-resa-text="8">Ouvrir mon espace →</button></div>
 <p id="loginstatus" class="status"></p>
 </section>
 
 <section class="panel hidden" id="manager">
-<span class="eyebrow">Espace adhérent</span><h2>📅 Mon RESA</h2>
-<div class="session"><span id="who"></span><button id="logout">Déconnexion</button></div>
-<div class="identity" id="identity">Chargement de votre fiche…</div>
+<span class="eyebrow" data-resa-text="9">Espace adhérent</span><h2 data-resa-text="10">📅 Mon RESA</h2>
+<div class="session"><span id="who"></span><button id="logout" data-resa-text="11">Déconnexion</button></div>
+<div class="identity" id="identity" data-resa-text="12">Chargement de votre fiche…</div>
 
 <div class="box">
-<div class="head"><div><h3>🕒 Mes créneaux</h3><p class="hint">Ouvrez ou fermez uniquement les créneaux utiles. Pas de planning compliqué.</p></div></div>
+<div class="head"><div><h3 data-resa-text="13">🕒 Mes créneaux</h3><p class="hint">Ouvrez ou fermez uniquement les créneaux utiles. Pas de planning compliqué.</p></div></div>
 <div class="grid">
-<div class="field"><label>Date</label><input id="slotDate" type="date"></div>
-<div class="field"><label>Début</label><input id="slotStart" type="time"></div>
-<div class="field"><label>Fin · facultatif</label><input id="slotEnd" type="time"></div>
-<div class="field"><label>Statut</label><select id="slotStatus"><option value="open">🟢 Ouvert</option><option value="closed">⚫ Fermé</option></select></div>
-<div class="field"><label>Capacité · facultatif</label><input id="slotCapacity" type="number" min="1" inputmode="numeric" placeholder="Ex : 1, 4, 20"></div>
-<div class="field"><label>Note privée · facultatif</label><input id="slotNote" placeholder="Ex : seulement sur confirmation"></div>
+<div class="field"><label data-resa-text="14">Date</label><input id="slotDate" type="date"></div>
+<div class="field"><label data-resa-text="15">Début</label><input id="slotStart" type="time"></div>
+<div class="field"><label data-resa-text="16">Fin · facultatif</label><input id="slotEnd" type="time"></div>
+<div class="field"><label data-resa-text="17">Statut</label><select id="slotStatus"><option value="open" data-resa-text="18">🟢 Ouvert</option><option value="closed" data-resa-text="19">⚫ Fermé</option></select></div>
+<div class="field"><label data-resa-text="20">Capacité · facultatif</label><input id="slotCapacity" type="number" min="1" inputmode="numeric" placeholder="Ex : 1, 4, 20"></div>
+<div class="field"><label data-resa-text="21">Note privée · facultatif</label><input id="slotNote" placeholder="Ex : seulement sur confirmation"></div>
 </div>
-<div class="actions"><button class="btn primary" id="saveSlot" type="button">💾 Enregistrer le créneau</button><button class="btn ghost" id="refreshSlots" type="button">↻ Rafraîchir</button></div>
+<div class="actions"><button class="btn primary" id="saveSlot" type="button" data-resa-text="22">💾 Enregistrer le créneau</button><button class="btn ghost" id="refreshSlots" type="button" data-resa-text="23">↻ Rafraîchir</button></div>
 <p id="slotMsg" class="status"></p>
 <div class="head" style="margin:24px 0 8px"><div><h3>📆 Préparer une semaine en une opération</h3><p class="hint">Vous choisissez librement vos jours, vos heures et la durée des rendez-vous. Aucune disponibilité prédéfinie, aucune réservation existante modifiée.</p></div></div>
 <div class="field"><label for="bulkMonday">Lundi de la semaine à préparer</label><input id="bulkMonday" type="date"></div>
@@ -88,7 +100,7 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 <div class="actions"><button type="button" class="btn primary" id="bulkOpen">📅 Ouvrir les créneaux choisis</button></div>
 <p id="bulkMsg" class="status" role="status" aria-live="polite"></p>
 <p class="hint">Les créneaux déjà ouverts, fermés ou réservés sont conservés. Une demande ne vaut pas confirmation : vous validez directement avec le client.</p>
-<div class="head" style="margin:17px 0 10px"><div><h3>📅 Vue sur 7 jours</h3><p class="hint">Lecture des créneaux enregistrés. Cliquez sur un jour pour le préparer ci-dessus.</p></div>
+<div class="head" style="margin:17px 0 10px"><div><h3 data-resa-text="24">📅 Vue sur 7 jours</h3><p class="hint">Lecture des créneaux enregistrés. Cliquez sur un jour pour le préparer ci-dessus.</p></div>
 <div class="actions"><button type="button" class="btn ghost" id="weekBack">←</button><button type="button" class="btn ghost" id="weekForward">→</button></div></div>
 <p id="weekLabel" class="hint"></p>
 <div id="weekBoard" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:8px"></div>
@@ -97,9 +109,9 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 </div>
 
 <div class="box">
-<div class="head"><div><h3>📥 Demandes de réservation</h3><p class="hint">Demande préparée ≠ réservation confirmée. Vous confirmez ou refusez directement.</p></div><button class="btn ghost" id="refreshBookings" type="button">↻ Rafraîchir</button></div>
-<input id="search" type="search" placeholder="🔎 Rechercher client, téléphone ou service">
-<div id="bookingCount" class="count">Chargement…</div><div id="bookings" class="list"></div>
+<div class="head"><div><h3 data-resa-text="25">📥 Demandes de réservation</h3><p class="hint">Demande préparée ≠ réservation confirmée. Vous confirmez ou refusez directement.</p></div><button class="btn ghost" id="refreshBookings" type="button">↻ Rafraîchir</button></div>
+<input id="search" type="search" placeholder="🔎 Rechercher client, téléphone ou service" data-resa-text="26">
+<div id="bookingCount" class="count" data-resa-text="27">Chargement…</div><div id="bookings" class="list"></div>
 <p id="bookingMsg" class="status"></p>
 </div>
 </section>
@@ -108,19 +120,65 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 <script>
 (()=>{'use strict';
 const RESA_SLUG='[RESA_SLUG]';
-const URL='[SUPABASE_URL]';
+const SUPABASE_URL='[SUPABASE_URL]';
 const KEY='[SUPABASE_PUBLISHABLE_KEY]';
 /* MASTER migration gate: OFF in every published copy by default.
    Enable only in an approved STAGING build AFTER V0/V1/V5 SQL,
    real A/B identity tests, PAY and restoration proof.
    Never enable via URL, localStorage, or a client-provided flag. */
 const RESA_V5_STAGING_ENABLED=false;
-const db=supabase.createClient(URL,KEY,{auth:{persistSession:true,detectSessionInUrl:true}});
+const db=supabase.createClient(SUPABASE_URL,KEY,{auth:{persistSession:true,detectSessionInUrl:true}});
 const $=id=>document.getElementById(id);
+const languages={
+ en: "Member access · slots and requests|Client schedule|Private member access|My RESA workspace|Open time slots, track requests and confirm them directly.|Member email|Send my code →|Code received by email|Open workspace →|Member workspace|📅 My RESA|Sign out|Loading your profile…|🕒 My time slots|Date|Start|End · optional|Status|🟢 Open|⚫ Closed|Capacity · optional|Private note · optional|💾 Save time slot|↻ Refresh|📅 7-day view|📥 Booking requests|Search by customer, phone or service|Loading…|Confirm|Decline|Completed|No-show|Save note|Confirmed|Declined|Pending|Enter your email.|Sending…|Email sent. Use the code or the sign-in link.|Email and code are required.|Invalid or expired code.|You do not have access to this RESA profile.|Private note for this request|Close|Open|Delete",
+ es: "Acceso de miembros · horarios y solicitudes|Agenda del cliente|Acceso privado de miembros|Mi espacio RESA|Abre horarios, revisa solicitudes y confírmalas directamente.|Correo de miembro|Recibir mi código →|Código recibido por correo|Abrir mi espacio →|Espacio de miembros|📅 Mi RESA|Cerrar sesión|Cargando tu ficha…|🕒 Mis horarios|Fecha|Inicio|Fin · opcional|Estado|🟢 Abierto|⚫ Cerrado|Capacidad · opcional|Nota privada · opcional|💾 Guardar horario|↻ Actualizar|📅 Vista de 7 días|📥 Solicitudes de reserva|Buscar por cliente, teléfono o servicio|Cargando…|Confirmar|Rechazar|Finalizado|Ausente|Guardar nota|Confirmada|Rechazada|Pendiente|Introduce tu correo.|Enviando…|Correo enviado. Usa el código o el enlace de acceso.|Es necesario indicar correo y código.|Código inválido o caducado.|No tienes acceso a esta ficha RESA.|Nota privada de esta solicitud|Cerrar|Abrir|Eliminar",
+ pt: "Acesso de membros · horários e pedidos|Agenda do cliente|Acesso privado de membros|Meu espaço RESA|Abra horários, acompanhe pedidos e confirme diretamente.|E-mail do membro|Receber meu código →|Código recebido por e-mail|Abrir meu espaço →|Espaço de membros|📅 Meu RESA|Sair|Carregando seu perfil…|🕒 Meus horários|Data|Início|Fim · opcional|Estado|🟢 Aberto|⚫ Fechado|Capacidade · opcional|Nota privada · opcional|💾 Salvar horário|↻ Atualizar|📅 Visão de 7 dias|📥 Pedidos de reserva|Buscar por cliente, telefone ou serviço|Carregando…|Confirmar|Recusar|Concluído|Ausente|Salvar nota|Confirmado|Recusado|Pendente|Digite seu e-mail.|Enviando…|E-mail enviado. Use o código ou o link de acesso.|Informe o e-mail e o código.|Código inválido ou expirado.|Você não tem acesso a este perfil RESA.|Nota privada deste pedido|Fechar|Abrir|Excluir",
+ it: "Accesso membri · orari e richieste|Agenda cliente|Accesso privato membri|Il mio spazio RESA|Apri gli orari, segui le richieste e confermale direttamente.|Email del membro|Ricevi il mio codice →|Codice ricevuto via email|Apri il mio spazio →|Spazio membri|📅 Il mio RESA|Esci|Caricamento del profilo…|🕒 I miei orari|Data|Inizio|Fine · facoltativa|Stato|🟢 Aperto|⚫ Chiuso|Capacità · facoltativa|Nota privata · facoltativa|💾 Salva orario|↻ Aggiorna|📅 Vista di 7 giorni|📥 Richieste di prenotazione|Cerca per cliente, telefono o servizio|Caricamento…|Conferma|Rifiuta|Completato|Assente|Salva nota|Confermata|Rifiutata|In attesa|Inserisci la tua email.|Invio…|Email inviata. Usa il codice o il link di accesso.|Email e codice sono obbligatori.|Codice non valido o scaduto.|Non hai accesso a questo profilo RESA.|Nota privata per questa richiesta|Chiudi|Apri|Elimina",
+ de: "Mitgliederzugang · Termine und Anfragen|Kundenkalender|Privater Mitgliederzugang|Mein RESA-Bereich|Öffne Termine, prüfe Anfragen und bestätige sie direkt.|E-Mail des Mitglieds|Code anfordern →|Code aus der E-Mail|Bereich öffnen →|Mitgliederbereich|📅 Mein RESA|Abmelden|Profil wird geladen…|🕒 Meine Termine|Datum|Beginn|Ende · optional|Status|🟢 Offen|⚫ Geschlossen|Kapazität · optional|Private Notiz · optional|💾 Termin speichern|↻ Aktualisieren|📅 7-Tage-Ansicht|📥 Buchungsanfragen|Nach Kunde, Telefon oder Leistung suchen|Wird geladen…|Bestätigen|Ablehnen|Abgeschlossen|Nicht erschienen|Notiz speichern|Bestätigt|Abgelehnt|Ausstehend|Gib deine E-Mail-Adresse ein.|Wird gesendet…|E-Mail gesendet. Nutze den Code oder Anmeldelink.|E-Mail und Code sind erforderlich.|Code ungültig oder abgelaufen.|Du hast keinen Zugriff auf dieses RESA-Profil.|Private Notiz zu dieser Anfrage|Schließen|Öffnen|Löschen",
+ nl: "Ledentoegang · tijden en aanvragen|Klantplanning|Privétoegang voor leden|Mijn RESA-omgeving|Open tijden, volg aanvragen en bevestig ze rechtstreeks.|E-mailadres van lid|Stuur mijn code →|Code ontvangen per e-mail|Open mijn omgeving →|Ledenomgeving|📅 Mijn RESA|Afmelden|Je profiel wordt geladen…|🕒 Mijn tijden|Datum|Begin|Einde · optioneel|Status|🟢 Open|⚫ Gesloten|Capaciteit · optioneel|Privénotitie · optioneel|💾 Tijd opslaan|↻ Vernieuwen|📅 7 dagen|📥 Reserveringsaanvragen|Zoek op klant, telefoon of dienst|Laden…|Bevestigen|Weigeren|Afgerond|Afwezig|Notitie opslaan|Bevestigd|Geweigerd|In afwachting|Voer je e-mailadres in.|Verzenden…|E-mail verzonden. Gebruik de code of aanmeldlink.|E-mailadres en code zijn verplicht.|Code ongeldig of verlopen.|Je hebt geen toegang tot dit RESA-profiel.|Privénotitie bij deze aanvraag|Sluiten|Openen|Verwijderen",
+ ar: "دخول الأعضاء · المواعيد والطلبات|جدول العميل|دخول خاص بالأعضاء|مساحتي في RESA|افتح أوقاتًا وتابع الطلبات وأكّدها مباشرة.|بريد العضو الإلكتروني|إرسال الرمز ←|الرمز الوارد بالبريد الإلكتروني|افتح مساحتي ←|مساحة الأعضاء|📅 RESA الخاص بي|تسجيل الخروج|جارٍ تحميل ملفك…|🕒 أوقاتي|التاريخ|البداية|النهاية · اختياري|الحالة|🟢 مفتوح|⚫ مغلق|السعة · اختياري|ملاحظة خاصة · اختياري|💾 حفظ الوقت|↻ تحديث|📅 عرض 7 أيام|📥 طلبات الحجز|البحث باسم العميل أو الهاتف أو الخدمة|جارٍ التحميل…|تأكيد|رفض|مكتمل|غياب|حفظ الملاحظة|مؤكد|مرفوض|قيد الانتظار|أدخل بريدك الإلكتروني.|جارٍ الإرسال…|تم إرسال البريد. استخدم الرمز أو رابط الدخول.|البريد الإلكتروني والرمز مطلوبان.|الرمز غير صالح أو منتهي الصلاحية.|لا يمكنك الوصول إلى ملف RESA هذا.|ملاحظة خاصة بهذا الطلب|إغلاق|فتح|حذف",
+ wo: "Duggukaayu bokk yi · waxtu ak laaj|Palaanu kiliyaan bi|Duggukaay bu nëbbu bu bokk yi|Sama bérabu RESA|Ubbil waxtu yi, topp laaj yi te dëggal leen ci sa bopp.|Imeelu ki bokk|Jot sama kood →|Kood bi ñu yónnee ci imeel|Ubbi sama bérab →|Bérabu bokk yi|📅 Sama RESA|Génn|Ñu ngi sëf sa kart…|🕒 Sama waxtu yi|Bés|Tambali|Jeex · boo bëggee|Tolluwaay|🟢 Ubbeeku|⚫ Tëju|Limu nit · boo bëggee|Kàddu bu nëbbu · boo bëggee|💾 Denc waxtu wi|↻ Yeesal|📅 Xool 7 fan|📥 Laaji ndaje|Seet kiliyaan, telefon walla sarwiis|Ñu ngi sëf…|Dëggal|Nanguwul|Jeex na|Ñëwul|Denc kàddu bi|Dëggal nañu ko|Nanguwuñu ko|Xaar dëggal|Dugal sa imeel.|Ñu ngi yónnee…|Yónnee nañu imeel. Jëfandikoo kood bi walla lëkkalekaayu dugg bi.|Imeel ak kood dañu koy soxla.|Kood bi baaxul walla weesu na.|Mënoo dugg ci kartu RESA bii.|Kàddu bu nëbbu ci laaj bii|Tëj|Ubbi|Far",
+ zh: "会员入口 · 时段和请求|客户日程|会员专用入口|我的 RESA 工作台|开放预约时段、跟踪请求并直接确认。|会员邮箱|获取验证码 →|邮件中的验证码|进入我的工作台 →|会员工作台|📅 我的 RESA|退出登录|正在加载您的档案…|🕒 我的时段|日期|开始|结束 · 选填|状态|🟢 已开放|⚫ 已关闭|人数上限 · 选填|私密备注 · 选填|💾 保存时段|↻ 刷新|📅 七天视图|📥 预约请求|按客户、电话或服务搜索|正在加载…|确认|拒绝|已完成|未到场|保存备注|已确认|已拒绝|待确认|请输入邮箱。|正在发送…|邮件已发送。请使用验证码或登录链接。|请输入邮箱和验证码。|验证码无效或已过期。|您无权访问此 RESA 档案。|此请求的私密备注|关闭|开放|删除",
+};
+const pageUrl=new URL(location.href);
+const requestedLang=(pageUrl.searchParams.get('lang')||'').toLowerCase();
+const lang=Object.hasOwn(languages,requestedLang)?requestedLang:'fr';
+const copy=languages[lang]?.split('|');
+const tr=(index,french)=>copy?.[index]??french;
+function localizedUrl(path){
+ const target=new URL(path,location.href);
+ if(requestedLang)target.searchParams.set('lang',lang);
+ return target;
+}
+document.documentElement.lang=lang;
+document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+if(copy){
+ document.title=copy[3]+' — [NOM PROFESSIONNEL]';
+ document.querySelectorAll('[data-resa-text]').forEach(element=>{
+  const index=Number(element.dataset.resaText);
+  if(index===26)element.placeholder=copy[index];
+  else element.textContent=copy[index];
+ });
+ $('refreshBookings').textContent=copy[23];
+}
+document.querySelectorAll('[data-resa-lang]').forEach(button=>{
+ button.setAttribute('aria-pressed',String(button.dataset.resaLang===lang));
+ button.addEventListener('click',()=>{
+  const target=new URL(location.href);
+  target.searchParams.set('lang',button.dataset.resaLang);
+  location.assign(target.href);
+ });
+});
+function publicPlanningUrl(){
+ const target=localizedUrl('./planning.html');
+ target.searchParams.set('slug',RESA_SLUG);
+ return target.href;
+}
+$('openPublicPlanning').href=publicPlanningUrl();
 let profile=null,slots=[],bookings=[],weekOffset=0;
 
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
-const fmtDate=s=>{if(!s)return'—';const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12).toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short',year:'numeric'})};
+const fmtDate=s=>{if(!s)return'—';const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12).toLocaleDateString(lang,{weekday:'short',day:'numeric',month:'short',year:'numeric'})};
 const t=v=>String(v||'').slice(0,5);
 const msg=(el,text,bad=false)=>{el.textContent=text||'';el.classList.toggle('error',bad)};
 const showLogin=()=>{$('manager').classList.add('hidden');$('login').classList.remove('hidden')};
@@ -129,11 +187,11 @@ const showManager=email=>{$('login').classList.add('hidden');$('manager').classL
 async function enter(session){
   if(!session)return showLogin();
   const {data,error}=await db.from('digiy_resa_profiles').select('slug,display_name,business_type,city,is_active').eq('slug',RESA_SLUG).eq('is_active',true).maybeSingle();
-  if(error||!data){await db.auth.signOut();showLogin();return msg($('loginstatus'),'⚠️ Ce compte adhérent n’est pas autorisé pour cette fiche RESA.',true)}
+  if(error||!data){await db.auth.signOut();showLogin();return msg($('loginstatus'),tr(41,'⚠️ Ce compte adhérent n’est pas autorisé pour cette fiche RESA.'),true)}
   profile=data;
   $('identity').textContent=(data.display_name||'[NOM PROFESSIONNEL]')+' · '+(data.business_type||'activité sur rendez-vous')+(data.city?' · '+data.city:'');
   showManager(session.user.email);
-  $('openPublicPlanning').href='./planning.html?slug='+encodeURIComponent(RESA_SLUG);
+  $('openPublicPlanning').href=publicPlanningUrl();
   $('slotDate').value=today();
   if(!$('bulkMonday').value)$('bulkMonday').value=upcomingMonday();
   await Promise.all([loadSlots(),loadBookings()]);
@@ -159,7 +217,7 @@ function renderWeekBoard(){
   const count=rows.filter(s=>s.status==='open').length;
   const day=document.createElement('button');day.type='button';day.className='btn ghost';
   day.style.cssText='display:block;width:100%;text-align:left;white-space:normal;min-height:110px;padding:10px;border-radius:14px';
-  day.textContent=d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'})+' · '+count+' ouvert(s) / '+rows.length+' créneau(x)';
+  day.textContent=d.toLocaleDateString(lang,{weekday:'short',day:'numeric',month:'short'})+' · '+count+' ouvert(s) / '+rows.length+' créneau(x)';
   day.onclick=()=>{$('slotDate').value=key;$('slotDate').focus();$('slotDate').scrollIntoView({block:'center',behavior:'smooth'});};
   box.append(day);
  }
@@ -193,9 +251,9 @@ function renderSlots(){
     const c=document.createElement('article');c.className='item';
     c.append(ownerSummary('🕒 '+fmtDate(s.slot_date)+' · '+t(s.start_time)+(s.end_time?' → '+t(s.end_time):''),s.status,s.status==='open'?'OUVERT':'FERMÉ',(s.capacity?'Capacité : '+s.capacity+' · ':'')+(s.note?'Note privée : '+s.note:'Sans note')));
     const a=document.createElement('div');a.className='itemactions';
-    const toggle=document.createElement('button');toggle.className='btn ghost';toggle.textContent=s.status==='open'?'Fermer':'Ouvrir';
+    const toggle=document.createElement('button');toggle.className='btn ghost';toggle.textContent=s.status==='open'?tr(43,'Fermer'):tr(44,'Ouvrir');
     toggle.onclick=async()=>{toggle.disabled=true;const next=s.status==='open'?'closed':'open';const {error}=await db.from('digiy_resa_slots').update({status:next,updated_at:new Date().toISOString()}).eq('id',s.id).eq('slug',RESA_SLUG);toggle.disabled=false;if(error)return msg($('slotMsg'),'⚠️ Statut non modifié.',true);s.status=next;renderSlots();msg($('slotMsg'),'✓ Créneau mis à jour.')};
-    const del=document.createElement('button');del.className='btn danger';del.textContent='Supprimer';del.onclick=async()=>{if(!confirm('Supprimer ce créneau ?'))return;del.disabled=true;const {error}=await db.from('digiy_resa_slots').delete().eq('id',s.id).eq('slug',RESA_SLUG);if(error){del.disabled=false;return msg($('slotMsg'),'⚠️ Créneau non supprimé.',true)}await loadSlots();msg($('slotMsg'),'✓ Créneau supprimé.')};
+    const del=document.createElement('button');del.className='btn danger';del.textContent=tr(45,'Supprimer');del.onclick=async()=>{if(!confirm('Supprimer ce créneau ?'))return;del.disabled=true;const {error}=await db.from('digiy_resa_slots').delete().eq('id',s.id).eq('slug',RESA_SLUG);if(error){del.disabled=false;return msg($('slotMsg'),'⚠️ Créneau non supprimé.',true)}await loadSlots();msg($('slotMsg'),'✓ Créneau supprimé.')};
     a.append(toggle,del);c.appendChild(a);box.appendChild(c);
   });
 }
@@ -321,7 +379,7 @@ async function executeOwnerV5(row,status,note){
     '✓ Statut modifié (sans preuve automatique DIGIY TRUST).';
 }
 
-function statusLabel(s){return s==='confirmed'?'Confirmée':s==='cancelled'?'Refusée':s==='done'?'Terminée':s==='no_show'?'Absent':'À confirmer'}
+function statusLabel(s){return s==='confirmed'?tr(33,'Confirmée'):s==='cancelled'?tr(34,'Refusée'):s==='done'?tr(30,'Terminée'):s==='no_show'?tr(31,'Absent'):tr(35,'À confirmer')}
 function renderBookings(){
   const box=$('bookings'),q=String($('search').value||'').trim().toLowerCase();box.innerHTML='';
   const arr=bookings.filter(r=>!q||[r.customer_name,r.customer_phone,r.service_name,r.note_text].some(v=>String(v||'').toLowerCase().includes(q)));
@@ -330,15 +388,15 @@ function renderBookings(){
   arr.forEach(r=>{
     const c=document.createElement('article');c.className='item';
     const amount=r.price_fcfa!=null?r.price_fcfa:r.price;
-    c.append(ownerSummary('👤 '+(r.customer_name||'Client'),r.status,statusLabel(r.status),fmtDate(r.booking_date)+' · '+t(r.booking_time)+(r.service_name?' · '+r.service_name:'')+(r.duration_minutes?' · '+r.duration_minutes+' min':'')+(r.guests_count?' · '+r.guests_count+' pers.':'')+(amount!=null?' · '+Number(amount).toLocaleString('fr-FR')+' FCFA':'')));
-    const note=document.createElement('textarea');note.className='note';note.value=r.note_text||'';note.placeholder='Note privée sur cette demande';
+    c.append(ownerSummary('👤 '+(r.customer_name||'Client'),r.status,statusLabel(r.status),fmtDate(r.booking_date)+' · '+t(r.booking_time)+(r.service_name?' · '+r.service_name:'')+(r.duration_minutes?' · '+r.duration_minutes+' min':'')+(r.guests_count?' · '+r.guests_count+' pers.':'')+(amount!=null?' · '+Number(amount).toLocaleString(lang)+' FCFA':'')));
+    const note=document.createElement('textarea');note.className='note';note.value=r.note_text||'';note.placeholder=tr(42,'Note privée sur cette demande');
     c.appendChild(note);
     const a=document.createElement('div');a.className='itemactions';
     const phone=String(r.customer_phone||'').trim();if(phone){const sms=document.createElement('a');sms.className='sms';sms.href='sms:'+phone;sms.textContent='📩 SMS';a.appendChild(sms);const digits=phone.replace(/\D/g,'');if(digits){const wa=document.createElement('a');wa.className='wa';wa.href='https://wa.me/'+digits;wa.target='_blank';wa.rel='noopener';wa.textContent='💬 WhatsApp';a.appendChild(wa)}}
-    [['confirmed','✓ Confirmer','primary'],['cancelled','Refuser','danger'],['done','Terminé','ghost'],['no_show','Absent','ghost']]
+    [['confirmed',tr(28,'✓ Confirmer'),'primary'],['cancelled',tr(29,'Refuser'),'danger'],['done',tr(30,'Terminé'),'ghost'],['no_show',tr(31,'Absent'),'ghost']]
       .filter(([st])=>!usesOwnerV5(r)||allowedOwnerV5Status(r,st))
       .forEach(([st,label,cls])=>{const b=document.createElement('button');b.className='btn '+cls;b.textContent=label;b.onclick=()=>updateBooking(r,st,note.value,b);a.appendChild(b)});
-    const saveNote=document.createElement('button');saveNote.className='btn gold';saveNote.textContent='💾 Note';saveNote.onclick=()=>updateBooking(r,r.status,note.value,saveNote);a.appendChild(saveNote);
+    const saveNote=document.createElement('button');saveNote.className='btn gold';saveNote.textContent=tr(32,'💾 Note');saveNote.onclick=()=>updateBooking(r,r.status,note.value,saveNote);a.appendChild(saveNote);
     c.appendChild(a);box.appendChild(c);
   });
 }
@@ -361,8 +419,8 @@ async function updateBooking(r,status,note,button){
   finally{button.disabled=false;}
 }
 
-$('send').onclick=async()=>{const email=$('email').value.trim();if(!email)return msg($('loginstatus'),'⚠️ Entrez votre email.',true);$('send').disabled=true;msg($('loginstatus'),'Envoi…');const redirect=new URL('./gestion.html',location.href).href;const {error}=await db.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:redirect}});$('send').disabled=false;if(error)return msg($('loginstatus'),'⚠️ '+error.message,true);$('otpbox').classList.remove('hidden');msg($('loginstatus'),'✓ Email envoyé. Utilisez le code reçu ou le lien magique.')};
-$('verify').onclick=async()=>{const email=$('email').value.trim(),token=$('otp').value.trim();if(!email||!token)return msg($('loginstatus'),'⚠️ Email et code requis.',true);$('verify').disabled=true;const {data,error}=await db.auth.verifyOtp({email,token,type:'email'});$('verify').disabled=false;if(error)return msg($('loginstatus'),'⚠️ Code invalide ou expiré.',true);await enter(data.session)};
+$('send').onclick=async()=>{const email=$('email').value.trim();if(!email)return msg($('loginstatus'),tr(36,'⚠️ Entrez votre email.'),true);$('send').disabled=true;msg($('loginstatus'),tr(37,'Envoi…'));const redirect=localizedUrl('./gestion.html').href;const {error}=await db.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:redirect}});$('send').disabled=false;if(error)return msg($('loginstatus'),'⚠️ '+error.message,true);$('otpbox').classList.remove('hidden');msg($('loginstatus'),tr(38,'✓ Email envoyé. Utilisez le code reçu ou le lien magique.'))};
+$('verify').onclick=async()=>{const email=$('email').value.trim(),token=$('otp').value.trim();if(!email||!token)return msg($('loginstatus'),tr(39,'⚠️ Email et code requis.'),true);$('verify').disabled=true;const {data,error}=await db.auth.verifyOtp({email,token,type:'email'});$('verify').disabled=false;if(error)return msg($('loginstatus'),tr(40,'⚠️ Code invalide ou expiré.'),true);await enter(data.session)};
 $('logout').onclick=async()=>{await db.auth.signOut();profile=null;slots=[];bookings=[];showLogin()};
 $('saveSlot').onclick=saveSlot;$('refreshSlots').onclick=loadSlots;$('refreshBookings').onclick=loadBookings;$('search').oninput=renderBookings;
 db.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT')showLogin();else if(session)setTimeout(()=>enter(session),0)});
