@@ -76,30 +76,30 @@ input,select,textarea{width:100%;border:1px solid #cbd9d1;border-radius:13px;pad
 </div>
 <div class="actions"><button class="btn primary" id="saveSlot" type="button" data-resa-text="22">💾 Enregistrer le créneau</button><button class="btn ghost" id="refreshSlots" type="button" data-resa-text="23">↻ Rafraîchir</button></div>
 <p id="slotMsg" class="status"></p>
-<div class="head" style="margin:24px 0 8px"><div><h3>📆 Préparer une semaine en une opération</h3><p class="hint">Vous choisissez librement vos jours, vos heures et la durée des rendez-vous. Aucune disponibilité prédéfinie, aucune réservation existante modifiée.</p></div></div>
-<div class="field"><label for="bulkMonday">Lundi de la semaine à préparer</label><input id="bulkMonday" type="date"></div>
+<div class="head" style="margin:24px 0 8px"><div><h3 data-bulk-text="0">📆 Préparer une semaine en une opération</h3><p class="hint" data-bulk-text="1">Vous choisissez librement vos jours, vos heures et la durée des rendez-vous. Aucune disponibilité prédéfinie, aucune réservation existante modifiée.</p></div></div>
+<div class="field"><label for="bulkMonday" data-bulk-text="2">Lundi de la semaine à préparer</label><input id="bulkMonday" type="date"></div>
 <fieldset style="border:1px solid #d9d5c9;border-radius:14px;margin:12px 0;padding:12px">
-<legend>Jours où vous souhaitez recevoir</legend>
+<legend data-bulk-text="3">Jours où vous souhaitez recevoir</legend>
 <div style="display:flex;flex-wrap:wrap;gap:12px">
-<label><input type="checkbox" data-bulk-day="1"> Lundi</label><label><input type="checkbox" data-bulk-day="2"> Mardi</label>
-<label><input type="checkbox" data-bulk-day="3"> Mercredi</label><label><input type="checkbox" data-bulk-day="4"> Jeudi</label>
-<label><input type="checkbox" data-bulk-day="5"> Vendredi</label><label><input type="checkbox" data-bulk-day="6"> Samedi</label>
-<label><input type="checkbox" data-bulk-day="7"> Dimanche</label>
+<label><input type="checkbox" data-bulk-day="1"> <span data-weekday="1">Lundi</span></label><label><input type="checkbox" data-bulk-day="2"> <span data-weekday="2">Mardi</span></label>
+<label><input type="checkbox" data-bulk-day="3"> <span data-weekday="3">Mercredi</span></label><label><input type="checkbox" data-bulk-day="4"> <span data-weekday="4">Jeudi</span></label>
+<label><input type="checkbox" data-bulk-day="5"> <span data-weekday="5">Vendredi</span></label><label><input type="checkbox" data-bulk-day="6"> <span data-weekday="6">Samedi</span></label>
+<label><input type="checkbox" data-bulk-day="7"> <span data-weekday="7">Dimanche</span></label>
 </div></fieldset>
-<p class="hint">Vos heures de début (au maximum six, au choix, sans horaires imposés)</p>
+<p class="hint" data-bulk-text="4">Vos heures de début (au maximum six, au choix, sans horaires imposés)</p>
 <div class="grid">
-<div class="field"><label>Heure 1</label><input type="time" class="bulkHour"></div>
-<div class="field"><label>Heure 2</label><input type="time" class="bulkHour"></div>
-<div class="field"><label>Heure 3</label><input type="time" class="bulkHour"></div>
-<div class="field"><label>Heure 4</label><input type="time" class="bulkHour"></div>
-<div class="field"><label>Heure 5</label><input type="time" class="bulkHour"></div>
-<div class="field"><label>Heure 6</label><input type="time" class="bulkHour"></div>
+<div class="field"><label data-bulk-text="5" data-hour="1">Heure 1</label><input type="time" class="bulkHour"></div>
+<div class="field"><label data-bulk-text="5" data-hour="2">Heure 2</label><input type="time" class="bulkHour"></div>
+<div class="field"><label data-bulk-text="5" data-hour="3">Heure 3</label><input type="time" class="bulkHour"></div>
+<div class="field"><label data-bulk-text="5" data-hour="4">Heure 4</label><input type="time" class="bulkHour"></div>
+<div class="field"><label data-bulk-text="5" data-hour="5">Heure 5</label><input type="time" class="bulkHour"></div>
+<div class="field"><label data-bulk-text="5" data-hour="6">Heure 6</label><input type="time" class="bulkHour"></div>
 </div>
-<div class="field" style="margin-top:12px"><label for="bulkDuration">Durée de chaque rendez-vous (minutes)</label>
-<input id="bulkDuration" type="number" min="5" max="480" step="5" placeholder="À définir par le professionnel"></div>
-<div class="actions"><button type="button" class="btn primary" id="bulkOpen">📅 Ouvrir les créneaux choisis</button></div>
+<div class="field" style="margin-top:12px"><label for="bulkDuration" data-bulk-text="6">Durée de chaque rendez-vous (minutes)</label>
+<input id="bulkDuration" type="number" min="5" max="480" step="5" placeholder="À définir par le professionnel" data-bulk-text="7"></div>
+<div class="actions"><button type="button" class="btn primary" id="bulkOpen" data-bulk-text="8">📅 Ouvrir les créneaux choisis</button></div>
 <p id="bulkMsg" class="status" role="status" aria-live="polite"></p>
-<p class="hint">Les créneaux déjà ouverts, fermés ou réservés sont conservés. Une demande ne vaut pas confirmation : vous validez directement avec le client.</p>
+<p class="hint" data-bulk-text="9">Les créneaux déjà ouverts, fermés ou réservés sont conservés. Une demande ne vaut pas confirmation : vous validez directement avec le client.</p>
 <div class="head" style="margin:17px 0 10px"><div><h3 data-resa-text="24">📅 Vue sur 7 jours</h3><p class="hint">Lecture des créneaux enregistrés. Cliquez sur un jour pour le préparer ci-dessus.</p></div>
 <div class="actions"><button type="button" class="btn ghost" id="weekBack">←</button><button type="button" class="btn ghost" id="weekForward">→</button></div></div>
 <p id="weekLabel" class="hint"></p>
@@ -145,6 +145,33 @@ const requestedLang=(pageUrl.searchParams.get('lang')||'').toLowerCase();
 const lang=Object.hasOwn(languages,requestedLang)?requestedLang:'fr';
 const copy=languages[lang]?.split('|');
 const tr=(index,french)=>copy?.[index]??french;
+const bulkLanguages={
+ en: "Prepare a week at once|Choose your days, start times and appointment length. Existing bookings stay in place.|Monday of the week to prepare|Days you want to receive clients|Choose up to six start times|Time|Appointment length (minutes)|Set by the professional|Open selected slots|Existing slots are preserved. Confirm requests directly with clients.|No new slots to open.|Opening new slots…|Week prepared. Check the 7-day view.|The week could not be prepared.|Owner access required.|Choose Monday.|The week must start on Monday.|Choose this week or one of the next eight.|Choose at least one day and time.|Choose distinct start times.|Enter 5 to 480 minutes in steps of 5.|Appointments must end before midnight.|Times overlap. Space them out or shorten the appointments.",
+ es: "Preparar una semana de una vez|Elige los días, las horas de inicio y la duración. Se conservan las reservas existentes.|Lunes de la semana que quieres preparar|Días en los que quieres atender|Elige hasta seis horas de inicio|Hora|Duración de la cita (minutos)|A definir por el profesional|Abrir los horarios elegidos|Se conservan los horarios. Confirma las solicitudes directamente con los clientes.|No hay horarios nuevos.|Abriendo horarios nuevos…|Semana preparada. Revisa la vista de 7 días.|No se pudo preparar la semana.|Se requiere acceso de propietario.|Elige el lunes.|La semana debe empezar un lunes.|Elige esta semana o una de las ocho siguientes.|Elige al menos un día y una hora.|Elige horas de inicio distintas.|Indica de 5 a 480 minutos, en pasos de 5.|Las citas deben acabar antes de medianoche.|Hay solapamientos. Separa las horas o reduce la duración.",
+ pt: "Preparar uma semana de uma vez|Escolha os dias, os horários e a duração. As reservas existentes ficam preservadas.|Segunda-feira da semana a preparar|Dias em que deseja atender|Escolha até seis horários de início|Hora|Duração do atendimento (minutos)|Definida pelo profissional|Abrir os horários escolhidos|Os horários existentes são preservados. Confirme os pedidos diretamente com os clientes.|Nenhum horário novo.|Abrindo novos horários…|Semana preparada. Confira a visão de 7 dias.|Não foi possível preparar a semana.|Acesso do proprietário necessário.|Escolha a segunda-feira.|A semana deve começar numa segunda-feira.|Escolha esta semana ou uma das próximas oito.|Escolha pelo menos um dia e um horário.|Escolha horários de início diferentes.|Informe de 5 a 480 minutos, em passos de 5.|Os atendimentos devem terminar antes da meia-noite.|Os horários se sobrepõem. Separe-os ou reduza a duração.",
+ it: "Prepara una settimana in una volta|Scegli giorni, orari di inizio e durata. Le prenotazioni esistenti vengono mantenute.|Lunedì della settimana da preparare|Giorni in cui vuoi ricevere i clienti|Scegli fino a sei orari di inizio|Ora|Durata dell’appuntamento (minuti)|Da definire dal professionista|Apri gli orari scelti|Gli orari esistenti vengono mantenuti. Conferma le richieste direttamente con i clienti.|Nessun nuovo orario.|Apertura dei nuovi orari…|Settimana preparata. Controlla la vista di 7 giorni.|Impossibile preparare la settimana.|È richiesto l’accesso del titolare.|Scegli il lunedì.|La settimana deve iniziare di lunedì.|Scegli questa settimana o una delle otto successive.|Scegli almeno un giorno e un orario.|Scegli orari di inizio diversi.|Indica da 5 a 480 minuti, in multipli di 5.|Gli appuntamenti devono finire prima di mezzanotte.|Gli orari si sovrappongono. Distanziali o riduci la durata.",
+ de: "Eine Woche auf einmal vorbereiten|Wähle Tage, Startzeiten und Termindauer. Bestehende Buchungen bleiben erhalten.|Montag der gewünschten Woche|Tage, an denen du Kunden empfangen möchtest|Wähle bis zu sechs Startzeiten|Uhrzeit|Termindauer (Minuten)|Vom Anbieter festzulegen|Ausgewählte Termine öffnen|Bestehende Zeiten bleiben erhalten. Bestätige Anfragen direkt mit Kunden.|Keine neuen Termine.|Neue Termine werden geöffnet…|Woche vorbereitet. Prüfe die 7-Tage-Ansicht.|Die Woche konnte nicht vorbereitet werden.|Inhaberzugang erforderlich.|Wähle den Montag.|Die Woche muss am Montag beginnen.|Wähle diese oder eine der nächsten acht Wochen.|Wähle mindestens einen Tag und eine Uhrzeit.|Wähle unterschiedliche Startzeiten.|Gib 5 bis 480 Minuten in 5er-Schritten ein.|Termine müssen vor Mitternacht enden.|Zeiten überschneiden sich. Vergrößere den Abstand oder verkürze die Dauer.",
+ nl: "Bereid een week in één keer voor|Kies dagen, begintijden en afspraakduur. Bestaande reserveringen blijven behouden.|Maandag van de gewenste week|Dagen waarop je klanten wilt ontvangen|Kies maximaal zes begintijden|Tijd|Duur van de afspraak (minuten)|In te stellen door de dienstverlener|Open de gekozen tijden|Bestaande tijden blijven behouden. Bevestig aanvragen rechtstreeks bij klanten.|Geen nieuwe tijden.|Nieuwe tijden worden geopend…|Week voorbereid. Bekijk de 7-daagse planning.|De week kon niet worden voorbereid.|Toegang als eigenaar vereist.|Kies maandag.|De week moet op maandag beginnen.|Kies deze week of een van de volgende acht.|Kies minstens één dag en tijd.|Kies verschillende begintijden.|Vul 5 tot 480 minuten in, in stappen van 5.|Afspraken moeten vóór middernacht eindigen.|Tijden overlappen. Kies ruimere tussenpozen of verkort de duur.",
+ ar: "جهّز أسبوعًا دفعة واحدة|اختر الأيام وأوقات البدء والمدة. تبقى الحجوزات الحالية محفوظة.|يوم الاثنين من الأسبوع المطلوب|الأيام التي ترغب في استقبال العملاء فيها|اختر حتى ستة أوقات للبدء|الوقت|مدة الموعد (بالدقائق)|يحددها مقدم الخدمة|فتح الأوقات المختارة|تبقى الأوقات الحالية محفوظة. أكّد الطلبات مباشرة مع العملاء.|لا توجد أوقات جديدة.|جارٍ فتح الأوقات الجديدة…|تم إعداد الأسبوع. راجع عرض الأيام السبعة.|تعذّر إعداد الأسبوع.|يلزم دخول صاحب الحساب.|اختر يوم الاثنين.|يجب أن يبدأ الأسبوع يوم الاثنين.|اختر هذا الأسبوع أو أحد الأسابيع الثمانية القادمة.|اختر يومًا ووقتًا واحدًا على الأقل.|اختر أوقات بدء مختلفة.|أدخل مدة من 5 إلى 480 دقيقة بزيادات قدرها 5.|يجب أن تنتهي المواعيد قبل منتصف الليل.|الأوقات متداخلة. باعد بينها أو قلّل المدة.",
+ wo: "Waajal ayu-bés bépp benn yoon|Tànnal fan yi, waxtu yi ak diiru ndaje yi. Ndaje yi am ba noppi dañuy des.|Altine ci ayu-bés bi ngay waajal|Fan yi nga bëgg a teeru kiliyaan yi|Tànnal ba ci juróom-benn waxtu yu tàmbali|Waxtu|Diiru ndaje bi (simili)|Ki di liggéey moo koy tëral|Ubbi waxtu yi nga tànn|Waxtu yi am ba noppi dañuy des. Dëggalal laaj yi ak kiliyaan yi.|Amul waxtu wu bees.|Ñu ngi ubbi waxtu yu bees…|Waajal nañu ayu-bés bi. Xoolal palaanu 7 fan.|Mënuñu waajal ayu-bés bi.|Boroom kart bi rekk moo man a dugg.|Tànnal Altine.|Ayu-bés bi war naa tàmbali Altine.|Tànnal ayu-bés bii walla benn ci juróom-ñetti yi di ñëw.|Tànnal benn fan ak benn waxtu lu néew.|Tànnal waxtu yu wuute.|Dugal 5 ba 480 simili, ci ay lim yu ñuy yokk 5.|Ndaje yi war nañu jeex bala xaaju guddi.|Waxtu yi dafa jaxasoo. Soreel leen walla gàttal diir bi.",
+ zh: "一次安排整周|选择日期、开始时间和预约时长。已有预约会保留。|要安排的一周的星期一|希望接待客户的日期|最多选择六个开始时间|时间|每次预约时长（分钟）|由服务人员设定|开放所选时段|已有时段会保留。请直接与客户确认请求。|没有可新增的时段。|正在开放新时段…|已安排本周。请查看七天日程。|无法安排本周。|需要所有者权限。|请选择星期一。|一周必须从星期一开始。|请选择本周或接下来的八周之一。|请至少选择一天和一个时间。|请选择不同的开始时间。|请输入 5 到 480 分钟，以 5 分钟为单位。|预约必须在午夜前结束。|时段有重叠。请拉开间隔或缩短时长。",
+};
+const bulkCopy=bulkLanguages[lang]?.split('|');
+const bulkText=(index,french)=>bulkCopy?.[index]??french;
+if(bulkCopy){
+ document.querySelectorAll('[data-bulk-text]').forEach(element=>{
+  const index=Number(element.dataset.bulkText);
+  if(index===7)element.placeholder=bulkCopy[index];
+  else if(index===5)element.textContent=bulkCopy[index]+' '+element.dataset.hour;
+  else element.textContent=bulkCopy[index];
+ });
+ const weekdaysWo=['Altine','Talaata','Àllarba','Alxames','Àjjuma','Gaawu','Dibéer'];
+ const weekdayFormat=new Intl.DateTimeFormat(lang,{weekday:'long',timeZone:'UTC'});
+ document.querySelectorAll('[data-weekday]').forEach(element=>{
+  const day=Number(element.dataset.weekday);
+  element.textContent=lang==='wo'?weekdaysWo[day-1]:weekdayFormat.format(new Date(Date.UTC(2026,0,4+day)));
+ });
+}
 function localizedUrl(path){
  const target=new URL(path,location.href);
  if(requestedLang)target.searchParams.set('lang',lang);
@@ -265,25 +292,25 @@ function upcomingMonday(){
 const todayFromDate=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 function weekDraft(){
  const monday=$('bulkMonday').value;
- if(!monday)return {error:'Choisissez le lundi de la semaine.'};
+ if(!monday)return {error:bulkText(15,'Choisissez le lundi de la semaine.')};
  const d=new Date(monday+'T12:00:00');
- if(Number.isNaN(d.getTime())||d.getDay()!==1)return {error:'La semaine doit commencer un lundi.'};
+ if(Number.isNaN(d.getTime())||d.getDay()!==1)return {error:bulkText(16,'La semaine doit commencer un lundi.')};
  const current=new Date();current.setHours(12,0,0,0);
  const offsetDays=Math.round((d-current)/86400000);
- if(offsetDays < -6 || offsetDays > 56)return {error:'Choisissez cette semaine ou une semaine dans les huit prochaines.'};
+ if(offsetDays < -6 || offsetDays > 56)return {error:bulkText(17,'Choisissez cette semaine ou une semaine dans les huit prochaines.')};
  const weekdays=Array.from(document.querySelectorAll('[data-bulk-day]:checked'),x=>Number(x.dataset.bulkDay));
  const hours=Array.from(document.querySelectorAll('.bulkHour'),x=>x.value).filter(Boolean).sort();
  const minutes=Number($('bulkDuration').value);
- if(!weekdays.length||!hours.length)return {error:'Choisissez au moins un jour et une heure.'};
- if(new Set(hours).size!==hours.length)return {error:'Chaque heure doit être différente.'};
- if(!Number.isInteger(minutes)||minutes<5||minutes>480||minutes%5!==0)return {error:'Précisez une durée comprise entre 5 et 480 minutes, par pas de 5.'};
+ if(!weekdays.length||!hours.length)return {error:bulkText(18,'Choisissez au moins un jour et une heure.')};
+ if(new Set(hours).size!==hours.length)return {error:bulkText(19,'Chaque heure doit être différente.')};
+ if(!Number.isInteger(minutes)||minutes<5||minutes>480||minutes%5!==0)return {error:bulkText(20,'Précisez une durée comprise entre 5 et 480 minutes, par pas de 5.')};
  const periods=hours.map(h=>{
   const [hh,mm]=h.split(':').map(Number),begin=hh*60+mm,end=begin+minutes;
   return {begin,end,start_time:h,end_time:('0'+Math.floor(end/60)).slice(-2)+':'+('0'+end%60).slice(-2)};
  });
- if(periods.some(p=>p.end>=1440))return {error:'Un rendez-vous ne peut pas dépasser minuit.'};
+ if(periods.some(p=>p.end>=1440))return {error:bulkText(21,'Un rendez-vous ne peut pas dépasser minuit.')};
  if(periods.some((p,i)=>i>0&&p.begin<periods[i-1].end))
-  return {error:'Les horaires que vous proposez se chevauchent : espacez-les ou réduisez la durée.'};
+  return {error:bulkText(22,'Les horaires que vous proposez se chevauchent : espacez-les ou réduisez la durée.')};
  const rows=[];
  for(let i=0;i<7;i++){
   const day=new Date(d);day.setDate(d.getDate()+i);
@@ -302,11 +329,11 @@ function weekDraft(){
  return {rows,countRequested:weekdays.length*hours.length};
 }
 async function openBulkWeek(){
- if(!profile)return msg($('bulkMsg'),'⚠️ Accès propriétaire requis.',true);
+ if(!profile)return msg($('bulkMsg'),bulkText(14,'⚠️ Accès propriétaire requis.'),true);
  const draft=weekDraft();
  if(draft.error)return msg($('bulkMsg'),'⚠️ '+draft.error,true);
- if(!draft.rows.length)return msg($('bulkMsg'),'Aucun nouveau créneau : journées déjà remplies ou passées.');
- $('bulkOpen').disabled=true;msg($('bulkMsg'),'Création des seuls créneaux nouveaux…');
+ if(!draft.rows.length)return msg($('bulkMsg'),bulkText(10,'Aucun nouveau créneau : journées déjà remplies ou passées.'));
+ $('bulkOpen').disabled=true;msg($('bulkMsg'),bulkText(11,'Création des seuls créneaux nouveaux…'));
  try{
    // SQL uniqueness plus ignoreDuplicates preserve existing closed/open slots.
    // PostgreSQL RLS verifies the authenticated profile for each insert.
@@ -315,9 +342,9 @@ async function openBulkWeek(){
    });
    if(error)throw error;
    await loadSlots();
-   msg($('bulkMsg'),'✓ Semaine préparée : '+draft.rows.length+
-       ' créneau(x) proposés. Créneaux existants conservés. Contrôlez la vue sur 7 jours.');
- }catch(err){msg($('bulkMsg'),'⚠️ Impossible de préparer la semaine : '+(err.message||'erreur serveur'),true);}
+   msg($('bulkMsg'),bulkText(12,'✓ Semaine préparée : '+draft.rows.length+
+       ' créneau(x) proposés. Créneaux existants conservés. Contrôlez la vue sur 7 jours.'));
+ }catch(err){msg($('bulkMsg'),bulkText(13,'⚠️ Impossible de préparer la semaine : '+(err.message||'erreur serveur')),true);}
  finally{$('bulkOpen').disabled=false}
 }
 $('bulkOpen').onclick=openBulkWeek;
