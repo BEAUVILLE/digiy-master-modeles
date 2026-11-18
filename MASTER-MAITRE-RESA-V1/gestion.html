@@ -172,6 +172,25 @@ if(bulkCopy){
   element.textContent=lang==='wo'?weekdaysWo[day-1]:weekdayFormat.format(new Date(Date.UTC(2026,0,4+day)));
  });
 }
+const managementLanguages={
+ en: "Time slots unavailable.|Status could not be changed.|Time slot updated.|Delete this time slot?|Time slot could not be deleted.|Time slot deleted.|Date and start time are required.|Saving…|Time slot could not be saved.|Time slot saved.|Requests unavailable.|Updating…|Request updated.|Request could not be changed.|No results.|No requests yet.|No upcoming time slots.",
+ es: "Horarios no disponibles.|No se pudo cambiar el estado.|Horario actualizado.|¿Eliminar este horario?|No se pudo eliminar el horario.|Horario eliminado.|La fecha y la hora de inicio son obligatorias.|Guardando…|No se pudo guardar el horario.|Horario guardado.|Solicitudes no disponibles.|Actualizando…|Solicitud actualizada.|No se pudo modificar la solicitud.|Sin resultados.|Aún no hay solicitudes.|No hay horarios próximos.",
+ pt: "Horários indisponíveis.|Não foi possível mudar o estado.|Horário atualizado.|Excluir este horário?|Não foi possível excluir o horário.|Horário excluído.|A data e a hora de início são obrigatórias.|Salvando…|Não foi possível salvar o horário.|Horário salvo.|Pedidos indisponíveis.|Atualizando…|Pedido atualizado.|Não foi possível alterar o pedido.|Nenhum resultado.|Ainda não há pedidos.|Nenhum horário futuro.",
+ it: "Orari non disponibili.|Impossibile modificare lo stato.|Orario aggiornato.|Eliminare questo orario?|Impossibile eliminare l’orario.|Orario eliminato.|Data e ora di inizio sono obbligatorie.|Salvataggio…|Impossibile salvare l’orario.|Orario salvato.|Richieste non disponibili.|Aggiornamento…|Richiesta aggiornata.|Impossibile modificare la richiesta.|Nessun risultato.|Non ci sono ancora richieste.|Nessun orario futuro.",
+ de: "Termine nicht verfügbar.|Status konnte nicht geändert werden.|Termin aktualisiert.|Diesen Termin löschen?|Termin konnte nicht gelöscht werden.|Termin gelöscht.|Datum und Beginn sind erforderlich.|Wird gespeichert…|Termin konnte nicht gespeichert werden.|Termin gespeichert.|Anfragen nicht verfügbar.|Wird aktualisiert…|Anfrage aktualisiert.|Anfrage konnte nicht geändert werden.|Keine Ergebnisse.|Noch keine Anfragen.|Keine kommenden Termine.",
+ nl: "Tijden niet beschikbaar.|Status kon niet worden gewijzigd.|Tijd bijgewerkt.|Deze tijd verwijderen?|Tijd kon niet worden verwijderd.|Tijd verwijderd.|Datum en begintijd zijn verplicht.|Opslaan…|Tijd kon niet worden opgeslagen.|Tijd opgeslagen.|Aanvragen niet beschikbaar.|Bijwerken…|Aanvraag bijgewerkt.|Aanvraag kon niet worden gewijzigd.|Geen resultaten.|Nog geen aanvragen.|Geen aankomende tijden.",
+ ar: "الأوقات غير متاحة.|تعذّر تغيير الحالة.|تم تحديث الوقت.|هل تريد حذف هذا الوقت؟|تعذّر حذف الوقت.|تم حذف الوقت.|التاريخ ووقت البدء مطلوبان.|جارٍ الحفظ…|تعذّر حفظ الوقت.|تم حفظ الوقت.|الطلبات غير متاحة.|جارٍ التحديث…|تم تحديث الطلب.|تعذّر تعديل الطلب.|لا توجد نتائج.|لا توجد طلبات بعد.|لا توجد أوقات قادمة.",
+ wo: "Waxtu yi jàppandiku wuñu.|Mënuñu soppi tolluwaay bi.|Yeesal nañu waxtu wi.|Ndax da ngay far waxtu wii?|Mënuñu far waxtu wi.|Far nañu waxtu wi.|Dugalal bés bi ak waxtu bu tambali bi.|Ñu ngi denc…|Mënuñu denc waxtu wi.|Denc nañu waxtu wi.|Laaj yi jàppandiku wuñu.|Ñu ngi yeesal…|Yeesal nañu laaj bi.|Mënuñu soppi laaj bi.|Gisuñu dara.|Amagul laaj.|Amul waxtu wu ñëw.",
+ zh: "暂时无法查看时段。|无法更改状态。|时段已更新。|要删除此时段吗？|无法删除时段。|时段已删除。|请填写日期和开始时间。|正在保存…|无法保存时段。|时段已保存。|暂时无法查看请求。|正在更新…|请求已更新。|无法修改请求。|没有结果。|暂无请求。|暂无即将到来的时段。",
+};
+const managementCopy=managementLanguages[lang]?.split('|');
+const managementText=(index,french)=>managementCopy?.[index]??french;
+function showEmpty(container,text){
+ const element=document.createElement('div');
+ element.className='empty';
+ element.textContent=text;
+ container.appendChild(element);
+}
 function localizedUrl(path){
  const target=new URL(path,location.href);
  if(requestedLang)target.searchParams.set('lang',lang);
@@ -227,7 +246,7 @@ async function enter(session){
 async function loadSlots(){
   if(!profile)return;
   const {data,error}=await db.from('digiy_resa_slots').select('id,slot_date,start_time,end_time,status,capacity,note').eq('slug',RESA_SLUG).gte('slot_date',today()).order('slot_date',{ascending:true}).order('start_time',{ascending:true});
-  if(error){slots=[];renderSlots();return msg($('slotMsg'),'⚠️ Créneaux indisponibles : '+error.message,true)}
+  if(error){slots=[];renderSlots();return msg($('slotMsg'),managementText(0,'⚠️ Créneaux indisponibles : '+error.message),true)}
   slots=data||[];renderSlots();
 }
 
@@ -273,14 +292,14 @@ function ownerSummary(title,statusCode,statusText,details){
 function renderSlots(){
   renderWeekBoard();
   const box=$('slots');box.innerHTML='';$('slotCount').textContent=slots.length+' créneau'+(slots.length===1?'':'x')+' à venir';
-  if(!slots.length){box.innerHTML='<div class="empty">Aucun créneau à venir.</div>';return}
+  if(!slots.length){showEmpty(box,managementText(16,'Aucun créneau à venir.'));return}
   slots.forEach(s=>{
     const c=document.createElement('article');c.className='item';
     c.append(ownerSummary('🕒 '+fmtDate(s.slot_date)+' · '+t(s.start_time)+(s.end_time?' → '+t(s.end_time):''),s.status,s.status==='open'?'OUVERT':'FERMÉ',(s.capacity?'Capacité : '+s.capacity+' · ':'')+(s.note?'Note privée : '+s.note:'Sans note')));
     const a=document.createElement('div');a.className='itemactions';
     const toggle=document.createElement('button');toggle.className='btn ghost';toggle.textContent=s.status==='open'?tr(43,'Fermer'):tr(44,'Ouvrir');
-    toggle.onclick=async()=>{toggle.disabled=true;const next=s.status==='open'?'closed':'open';const {error}=await db.from('digiy_resa_slots').update({status:next,updated_at:new Date().toISOString()}).eq('id',s.id).eq('slug',RESA_SLUG);toggle.disabled=false;if(error)return msg($('slotMsg'),'⚠️ Statut non modifié.',true);s.status=next;renderSlots();msg($('slotMsg'),'✓ Créneau mis à jour.')};
-    const del=document.createElement('button');del.className='btn danger';del.textContent=tr(45,'Supprimer');del.onclick=async()=>{if(!confirm('Supprimer ce créneau ?'))return;del.disabled=true;const {error}=await db.from('digiy_resa_slots').delete().eq('id',s.id).eq('slug',RESA_SLUG);if(error){del.disabled=false;return msg($('slotMsg'),'⚠️ Créneau non supprimé.',true)}await loadSlots();msg($('slotMsg'),'✓ Créneau supprimé.')};
+    toggle.onclick=async()=>{toggle.disabled=true;const next=s.status==='open'?'closed':'open';const {error}=await db.from('digiy_resa_slots').update({status:next,updated_at:new Date().toISOString()}).eq('id',s.id).eq('slug',RESA_SLUG);toggle.disabled=false;if(error)return msg($('slotMsg'),managementText(1,'⚠️ Statut non modifié.'),true);s.status=next;renderSlots();msg($('slotMsg'),managementText(2,'✓ Créneau mis à jour.'))};
+    const del=document.createElement('button');del.className='btn danger';del.textContent=tr(45,'Supprimer');del.onclick=async()=>{if(!confirm(managementText(3,'Supprimer ce créneau ?')))return;del.disabled=true;const {error}=await db.from('digiy_resa_slots').delete().eq('id',s.id).eq('slug',RESA_SLUG);if(error){del.disabled=false;return msg($('slotMsg'),managementText(4,'⚠️ Créneau non supprimé.'),true)}await loadSlots();msg($('slotMsg'),managementText(5,'✓ Créneau supprimé.'))};
     a.append(toggle,del);c.appendChild(a);box.appendChild(c);
   });
 }
@@ -351,12 +370,12 @@ $('bulkOpen').onclick=openBulkWeek;
 
 async function saveSlot(){
   const row={slug:RESA_SLUG,slot_date:$('slotDate').value,start_time:$('slotStart').value,end_time:$('slotEnd').value||null,status:$('slotStatus').value,capacity:$('slotCapacity').value?Number($('slotCapacity').value):null,note:$('slotNote').value.trim()||null,updated_at:new Date().toISOString()};
-  if(!row.slot_date||!row.start_time)return msg($('slotMsg'),'⚠️ Date et heure de début sont obligatoires.',true);
-  $('saveSlot').disabled=true;msg($('slotMsg'),'Enregistrement…');
+  if(!row.slot_date||!row.start_time)return msg($('slotMsg'),managementText(6,'⚠️ Date et heure de début sont obligatoires.'),true);
+  $('saveSlot').disabled=true;msg($('slotMsg'),managementText(7,'Enregistrement…'));
   const {error}=await db.from('digiy_resa_slots').upsert(row,{onConflict:'slug,slot_date,start_time'});
   $('saveSlot').disabled=false;
-  if(error)return msg($('slotMsg'),'⚠️ Créneau non enregistré : '+error.message,true);
-  $('slotEnd').value='';$('slotCapacity').value='';$('slotNote').value='';await loadSlots();msg($('slotMsg'),'✓ Créneau enregistré.');
+  if(error)return msg($('slotMsg'),managementText(8,'⚠️ Créneau non enregistré : '+error.message),true);
+  $('slotEnd').value='';$('slotCapacity').value='';$('slotNote').value='';await loadSlots();msg($('slotMsg'),managementText(9,'✓ Créneau enregistré.'));
 }
 
 async function loadBookings(){
@@ -366,7 +385,7 @@ async function loadBookings(){
   const columns='id,customer_name,customer_phone,booking_date,booking_time,guests_count,note_text,status,service_name,duration_minutes,price,price_fcfa'+
     (RESA_V5_STAGING_ENABLED?',client_request_id':'');
   const {data,error}=await db.from('digiy_resa_bookings').select(columns).eq('slug',RESA_SLUG).order('booking_date',{ascending:true}).order('booking_time',{ascending:true});
-  if(error){bookings=[];renderBookings();return msg($('bookingMsg'),'⚠️ Demandes indisponibles : '+error.message,true)}
+  if(error){bookings=[];renderBookings();return msg($('bookingMsg'),managementText(10,'⚠️ Demandes indisponibles : '+error.message),true)}
   bookings=data||[];renderBookings();
 }
 
@@ -411,7 +430,7 @@ function renderBookings(){
   const box=$('bookings'),q=String($('search').value||'').trim().toLowerCase();box.innerHTML='';
   const arr=bookings.filter(r=>!q||[r.customer_name,r.customer_phone,r.service_name,r.note_text].some(v=>String(v||'').toLowerCase().includes(q)));
   $('bookingCount').textContent=arr.length+' demande'+(arr.length===1?'':'s')+' affichée'+(arr.length===1?'':'s')+' · '+bookings.length+' au total';
-  if(!arr.length){box.innerHTML='<div class="empty">'+(bookings.length?'Aucun résultat.':'Aucune demande enregistrée.')+'</div>';return}
+  if(!arr.length){showEmpty(box,bookings.length?managementText(14,'Aucun résultat.'):managementText(15,'Aucune demande enregistrée.'));return}
   arr.forEach(r=>{
     const c=document.createElement('article');c.className='item';
     const amount=r.price_fcfa!=null?r.price_fcfa:r.price;
@@ -429,7 +448,7 @@ function renderBookings(){
 }
 
 async function updateBooking(r,status,note,button){
-  button.disabled=true;msg($('bookingMsg'),'Mise à jour…');
+  button.disabled=true;msg($('bookingMsg'),managementText(11,'Mise à jour…'));
   try{
     if(usesOwnerV5(r)){
       const feedback=await executeOwnerV5(r,status,note);
@@ -441,8 +460,8 @@ async function updateBooking(r,status,note,button){
     // every old consumer are migrated and end-to-end verified.
     const {error}=await db.from('digiy_resa_bookings').update({status,note_text:String(note||'').trim()||null,updated_at:new Date().toISOString()}).eq('id',r.id).eq('slug',RESA_SLUG);
     if(error)throw error;
-    r.status=status;r.note_text=String(note||'').trim()||null;renderBookings();msg($('bookingMsg'),'✓ Demande historique mise à jour.');
-  }catch(err){msg($('bookingMsg'),'⚠️ Demande non modifiée : '+(err.message||'erreur propriétaire'),true)}
+    r.status=status;r.note_text=String(note||'').trim()||null;renderBookings();msg($('bookingMsg'),managementText(12,'✓ Demande historique mise à jour.'));
+  }catch(err){msg($('bookingMsg'),managementText(13,'⚠️ Demande non modifiée : '+(err.message||'erreur propriétaire')),true)}
   finally{button.disabled=false;}
 }
 
