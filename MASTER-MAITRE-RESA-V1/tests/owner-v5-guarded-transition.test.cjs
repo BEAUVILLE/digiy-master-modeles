@@ -42,6 +42,7 @@ function setup({v5=true,rpc,legacyUpdate}={}){
   '$':()=>element,
   msg:(el,message,bad=false)=>{notices.push({message,bad})},
   renderBookings:()=>{render++},
+  managementText:(_index,french)=>french,
   Date,Error,String
  };
  vm.runInNewContext(helpers+'\n'+update,ctx);
