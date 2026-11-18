@@ -4,6 +4,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
 const path=require('node:path');
+const bulkText=(_index,french)=>french;
 const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const page=read('planning.html'),gestion=read('gestion.html'),
@@ -71,6 +72,7 @@ test('semaine propriétaire : vrais choix, chevauchements évités, fermetures c
   RESA_SLUG:'test-private-professional',
   today:()=>fmt(current),
   todayFromDate:fmt,
+  bulkText,
   Date,Number,Array,Set
  };
  const fresh=vm.runInNewContext(extracted+';weekDraft()',state);
@@ -95,6 +97,7 @@ test('bouton ouvrir semaine : uniquement insertions sans écraser les créneaux 
  const controls={bulkOpen:{disabled:false},bulkMsg:{textContent:''}};
  const ctx={
   profile:{slug:'my-pro'},weekDraft:()=>({rows}),
+  bulkText,
   '$':key=>controls[key],
   msg:(el,message)=>{el.textContent=message},
   db:{from:table=>{
